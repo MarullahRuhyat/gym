@@ -12,10 +12,8 @@ RUN apt-get update \
     # && pecl install redis \
     # && docker-php-ext-enable redis
 
-
 # cd direktory project
 WORKDIR /app
-
 
 # Copy only necessary files for Composer dependencies
 COPY composer.json composer.lock ./
@@ -29,15 +27,6 @@ COPY . .
 
 # Generate autoload files untuk efisiensi
 RUN composer dump-autoload --optimize
-
-# Copy environment file and generate application key
-# RUN cp .env.example .env
-
-# Set environment to local
-# RUN echo "APP_ENV=local" >> .env
-
-# Generate application key with --force to avoid prompts
-# RUN php artisan key:generate --force
 
 # Expose the port Laravel is running on
 EXPOSE 8000

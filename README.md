@@ -46,21 +46,3 @@ To run this application, you need:
 ```
 docker compose up
 ```
-
-## Hybrid WorkFlow
-This understand hybrid workflow, you can check few step below
-```mermaid
-graph TD;
-emet.enforcea.com-->webhookRegister;
-webhookRegister-->createAdminAccount-->hybridAdmin;
-hybridAdmin-->createStaffUser;
-hybridAdmin-->requestEmeteraiQuota-->emet.enforcea.com;
-hybridAdmin-->requestEsignQuota-->emet.enforcea.com;
-emet.enforcea.com-->approveQuota-->hybridAdmin;
-emet.enforcea.com-->rejectQuota-->hybridAdmin;
-hybridUser-->requestQuotaEsignUser-->hybridAdmin;
-hybridUser-->requestQuotaEmeteraiUser-->hybridAdmin;
-hybridAdmin-->approveQuotaUser-->hybridUser;
-hybridAdmin-->rejectQuotaUser-->hybridUser;
-hybridUser-->stampAndSign;
-```

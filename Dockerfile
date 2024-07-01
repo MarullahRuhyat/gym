@@ -1,6 +1,22 @@
-# Stage 1: Install dependencies using Composer 2.7.1
-FROM composer:2.7.1 as composer
+# Gunakan image PHP yang sesuai
+FROM php:8.2-cli
 
+# Install dependencies yang diperlukan
+RUN apt-get update \
+    && apt-get install -y \
+        git \
+        unzip \
+        libzip-dev \
+    && docker-php-ext-install zip pdo_mysql \
+    #jika butuh redis
+    # && pecl install redis \
+    # && docker-php-ext-enable redis
+
+
+# Unduh dan instal Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# cd direktory project
 WORKDIR /app
 
 # Copy only necessary files for Composer dependencies
@@ -15,19 +31,12 @@ COPY . .
 # Generate optimized autoload files
 RUN composer dump-autoload --optimize
 
-# Stage 2: Build the application
-FROM php:8.3-cli
+RUN cp .env.exampe .env
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql
-
-WORKDIR /app
-
-# Copy only necessary files from the composer stage
-COPY --from=composer /app /app
+RUN php artisan key:generate
 
 # Expose the port Laravel is running on
 EXPOSE 8000
 
 # Command to run the application
-# CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]

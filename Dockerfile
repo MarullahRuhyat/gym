@@ -7,36 +7,40 @@ RUN apt-get update \
         git \
         unzip \
         libzip-dev \
-    && docker-php-ext-install zip pdo_mysql \
-    #jika butuh redis
+    && docker-php-ext-install zip pdo_mysql
+    # jika butuh redis
     # && pecl install redis \
     # && docker-php-ext-enable redis
 
 
-# Unduh dan instal Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
 # cd direktory project
 WORKDIR /app
+
 
 # Copy only necessary files for Composer dependencies
 COPY composer.json composer.lock ./
 
-# Install all dependencies, including require-dev
-RUN composer install --ignore-platform-reqs --no-scripts --no-autoloader
+# Install dependencies menggunakan Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && composer install --ignore-platform-reqs --no-scripts --no-autoloader
 
 # Copy the rest of the application
 COPY . .
 
-# Generate optimized autoload files
+# Generate autoload files untuk efisiensi
 RUN composer dump-autoload --optimize
 
-RUN cp .env.exampe .env
+# Copy environment file and generate application key
+# RUN cp .env.example .env
 
-RUN php artisan key:generate
+# Set environment to local
+# RUN echo "APP_ENV=local" >> .env
+
+# Generate application key with --force to avoid prompts
+# RUN php artisan key:generate --force
 
 # Expose the port Laravel is running on
 EXPOSE 8000
 
 # Command to run the application
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# CMD ["php", "artisan", "php artisan serve --host=0.0.0.0 --port=8000"]

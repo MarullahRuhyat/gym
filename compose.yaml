@@ -30,4 +30,4 @@ services:
       MYSQL_PASSWORD: password_gym
       MYSQL_ROOT_PASSWORD: root_password
     volumes:
-      - ~/database/gym:/var/lib/mysql
+      - ../database/gym:/var/lib/mysql

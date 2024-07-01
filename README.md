@@ -1,7 +1,6 @@
 ## Requirements
 To run this application, you need:
--   PHP 8.2 or newer
--   **[Composer](https://getcomposer.org/)**
+-   Docker
 
 ## Installation
 1.  Clone this repository to your local machine using the command below:
@@ -12,12 +11,10 @@ To run this application, you need:
 	```
 	cd gym
 	```
-3.  
 4.  Create a copy of the `.env.example` file and name it `.env`:
 	```
 	cp .env.example .env
 	```
-5.  
 
 ## DEV
 ```

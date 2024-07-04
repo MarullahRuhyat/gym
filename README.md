@@ -20,6 +20,14 @@ To run this application, you need:
 ```
 docker compose up
 ```
+### if error docker compose up , you can run first
+```
+docker compose up --build
+```
+### and next you can run
+```
+docker compose up
+```
 ## PROD
 ```
 docker compose -f compose.prod.yaml up

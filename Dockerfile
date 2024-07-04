@@ -1,6 +1,10 @@
 # Gunakan image PHP yang sesuai
 FROM php:8.2-cli
 
+# Copy the wait-for-it.sh script into the container (untuk menunggu proses yg lain selesai)
+COPY scripts/wait-for-it.sh /usr/local/bin/wait-for-it.sh
+RUN chmod +x /usr/local/bin/wait-for-it.sh
+
 # Install dependencies yang diperlukan
 RUN apt-get update \
     && apt-get install -y \

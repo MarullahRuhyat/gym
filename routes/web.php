@@ -7,7 +7,7 @@ Route::get('/', function () {
 });
 
 // auth
-Route::group(['prefix' => 'auth'], function () {
+Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'loginIndex'])->name('auth.login');
     Route::post('/login', [AuthController::class, 'loginProcess'])->name('auth.login.process');
 
@@ -15,7 +15,6 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('auth.forgot_password');
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
-
 
 // member
 Route::prefix('member')->middleware('auth')->group(function () {

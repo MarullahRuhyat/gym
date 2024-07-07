@@ -18,17 +18,16 @@ Route::group(['prefix' => 'auth'], function () {
 
 
 // member
-Route::group(['prefix' => 'member', 'middleware' => 'auth'], function () {
-    // contoh
+Route::prefix('member')->middleware('auth')->group(function () {
     Route::get('/dashboard', [MemberController::class, 'dashboard'])->name('member.dashboard');
     Route::get('/profile', [MemberController::class, 'profile'])->name('member.profile');
     Route::get('/change-password', [MemberController::class, 'changePassword'])->name('member.change_password');
     Route::post('/change-password', [MemberController::class, 'changePasswordProcess'])->name('member.change_password.process');
 });
 
+
 // personal trainer
-Route::group(['prefix' => 'personal-trainer', 'middleware' => 'auth'], function () {
-    // contoh
+Route::prefix('personal-trainer')->middleware('auth')->group(function () {
     Route::get('/dashboard', [PersonalTrainerController::class, 'dashboard'])->name('personal_trainer.dashboard');
     Route::get('/profile', [PersonalTrainerController::class, 'profile'])->name('personal_trainer.profile');
     Route::get('/change-password', [PersonalTrainerController::class, 'changePassword'])->name('personal_trainer.change_password');

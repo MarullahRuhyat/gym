@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="blue-theme">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light-theme">
 
 <head>
     <meta charset="utf-8">
@@ -9,14 +9,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
 
-    @include('layouts.head-css')
+    @include('personal_training.layouts.head-css')
 </head>
 
 <body>
 
-    @include('layouts.topbar')
+    @include('personal_training.layouts.topbar')
 
-    @include('layouts.sidebar')
+    @include('personal_training.layouts.sidebar')
     
     <!--start main wrapper-->
     <main class="main-wrapper">
@@ -29,9 +29,9 @@
     <div class="overlay btn-toggle"></div>
     <!--end overlay-->
 
-    @include('layouts.extra')
+    @include('personal_training.layouts.extra')
 
-    @include('layouts.common-scripts')
+    @include('personal_training.layouts.common-scripts')
 </body>
 
 </html>

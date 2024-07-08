@@ -1,10 +1,8 @@
-@extends('layouts.app')
+@extends('personal_training.layouts.app')
 @section('title')
     starter Page
 @endsection
 @section('content')
-    <x-page-title title="Components" subtitle="Blank Page" />
-
     <div class="card rounded-4" style="height:800px;">
         <div class="card-body">
             <h4>Where does it come from?</h4>

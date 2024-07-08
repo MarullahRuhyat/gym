@@ -7,17 +7,21 @@ Route::get('/', function () {
 });
 
 Route::get('/starter-page', function () {
-    return view('pages-starter-page');
+    return view('personal_training.pages-starter-page');
 });
 
 // auth
 Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'loginIndex'])->name('auth.login');
     Route::post('/login', [AuthController::class, 'loginProcess'])->name('auth.login.process');
+    // otp
+    Route::get('/otp', [AuthController::class, 'otpIndex'])->name('auth.otp');
+    Route::post('/otp', [AuthController::class, 'otpProcess'])->name('auth.otp.process');
 
+
+    Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     // for personal trainer
     Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('auth.forgot_password');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
 // member

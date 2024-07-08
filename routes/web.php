@@ -3,5 +3,36 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing_page');
+});
+
+Route::get('/starter-page', function () {
+    return view('pages-starter-page');
+});
+
+// auth
+Route::prefix('auth')->group(function () {
+    Route::get('/login', [AuthController::class, 'loginIndex'])->name('auth.login');
+    Route::post('/login', [AuthController::class, 'loginProcess'])->name('auth.login.process');
+
+    // for personal trainer
+    Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('auth.forgot_password');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+});
+
+// member
+Route::prefix('member')->middleware('auth')->group(function () {
+    Route::get('/dashboard', [MemberController::class, 'dashboard'])->name('member.dashboard');
+    Route::get('/profile', [MemberController::class, 'profile'])->name('member.profile');
+    Route::get('/change-password', [MemberController::class, 'changePassword'])->name('member.change_password');
+    Route::post('/change-password', [MemberController::class, 'changePasswordProcess'])->name('member.change_password.process');
+});
+
+
+// personal trainer
+Route::prefix('personal-trainer')->middleware('auth')->group(function () {
+    Route::get('/dashboard', [PersonalTrainerController::class, 'dashboard'])->name('personal_trainer.dashboard');
+    Route::get('/profile', [PersonalTrainerController::class, 'profile'])->name('personal_trainer.profile');
+    Route::get('/change-password', [PersonalTrainerController::class, 'changePassword'])->name('personal_trainer.change_password');
+    Route::post('/change-password', [PersonalTrainerController::class, 'changePasswordProcess'])->name('personal_trainer.change_password.process');
 });

@@ -58,6 +58,7 @@
                         <li><a target="_blank" href="mailto:flozorsgym@gmail.com"><i class="fa fa-envelope-o"
                                     aria-hidden="true"></i></a></li>
                     </ul>
+                    <a href="" class="btn-login">Login</a>
                 </div>
             </div>
         </div>
@@ -765,7 +766,7 @@
                 </div>
             </div>
             <form class="subscribe-form">
-                <input class="inp-form" type="email" name="subscribe" placeholder="Your E-mail">
+                <input class="inp-form" type="email" name="subscribe" placeholder="Your Phone-Number">
                 <button type="submit" class="btn">Subscribe</button>
             </form>
         </div>
@@ -776,9 +777,9 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 col-lg-3 footer-item-logo">
+                <div class="col-sm-6 col-lg-4 footer-item-logo">
                     <a href="index.html" class="logo-footer"><img src="assets/img/footer-logo2.svg" alt="logo"></a>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
+                    <p>Flozors Gym, founded in 2002 by Frans Lee, offers top service and a welcoming atmosphere for fitness enthusiasts.</p>
                     <ul class="social-list">
                         <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
                                     aria-hidden="true"></i></a></li>
@@ -790,27 +791,17 @@
                                     aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
-                <div class="col-sm-6 col-lg-3 footer-item footer-item-list">
-                    <h3>Links</h3>
-                    <ul class="footer-link">
-                        <li><a href="#">Sed ut perspiciatis unde</a></li>
-                        <li><a href="#">Omnis iste natus error sit</a></li>
-                        <li><a href="#">Voluptatem accusantium</a></li>
-                        <li><a href="#">Doloremque laudantium</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-6 col-lg-3 footer-item">
+                <div class="col-sm-6 col-lg-4 footer-item">
                     <h3>Contact us</h3>
                     <ul class="footer-cont">
-                        <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:18004886040">1-800-488-6040</a>
+                        <li><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wa.me/+628170706999">08170706999</a>
                         </li>
                         <li><i class="fa fa-envelope" aria-hidden="true"></i><a
-                                href="mailto:crossFit@gmail.com">CrossFit@gmail.com</a></li>
-                        <li><i class="fa fa-map-marker" aria-hidden="true"></i><a href="contacts.html">London,Street
-                                225r.21</a></li>
+                                href="mailto:flozorsgym@gmail.com">flozorsgym@gmail.com</a></li>
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i><a href="https://maps.app.goo.gl/r6iY1YkYoXq7tNkt6">Jl. Puspowarno Tengah No.6, Salamanmloyo, Kec. Semarang Barat, Kota Semarang, Jawa Tengah 50149</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-6 col-lg-3 footer-item">
+                <div class="col-sm-6 col-lg-4 footer-item">
                     <h3>Blog</h3>
                     <ul class="footer-blog">
                         <li>
@@ -829,17 +820,6 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="copyright"><a href="#" target="_blank">Rovadex</a> © 2019. Fitmax. All Rights Reserved.
-                </div>
-                <ul class="footer-menu">
-                    <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="blog.html">News</a></li>
-                    <li><a href="contacts.html">Contacts</a></li>
-                </ul>
             </div>
         </div>
     </footer>

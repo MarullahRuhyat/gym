@@ -6,6 +6,10 @@ Route::get('/', function () {
     return view('landing_page');
 });
 
+Route::get('/starter-page', function () {
+    return view('pages-starter-page');
+});
+
 // auth
 Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'loginIndex'])->name('auth.login');

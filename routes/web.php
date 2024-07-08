@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\auth\AuthController;
 
 Route::get('/', function () {
     return view('landing_page');
@@ -12,8 +13,12 @@ Route::get('/starter-page', function () {
 
 // auth
 Route::prefix('auth')->group(function () {
-    Route::get('/login', [AuthController::class, 'loginIndex'])->name('auth.login');
-    Route::post('/login', [AuthController::class, 'loginProcess'])->name('auth.login.process');
+    // login member
+    Route::get('/login-member', [AuthController::class, 'loginAdminIndex'])->name('auth.login');
+    Route::post('/login-member', [AuthController::class, 'loginMemberProcess'])->name('auth.login_member.process');
+    // login admin dan personal trainer
+    Route::get('/login', [AuthController::class, 'loginAdminIndex'])->name('auth.login');
+    Route::post('/login', [AuthController::class, 'loginAdminProcess'])->name('auth.login.process');
     // otp
     Route::get('/otp', [AuthController::class, 'otpIndex'])->name('auth.otp');
     Route::post('/otp', [AuthController::class, 'otpProcess'])->name('auth.otp.process');

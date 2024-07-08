@@ -9,14 +9,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
 
-    @include('layouts.head-css')
+    @include('admin.layouts.head-css')
 </head>
 
 <body>
 
-    @include('layouts.topbar')
+    @include('admin.layouts.topbar')
 
-    @include('layouts.sidebar')
+    @include('admin.layouts.sidebar')
     
     <!--start main wrapper-->
     <main class="main-wrapper">
@@ -29,9 +29,9 @@
     <div class="overlay btn-toggle"></div>
     <!--end overlay-->
 
-    @include('layouts.extra')
+    @include('admin.layouts.extra')
 
-    @include('layouts.common-scripts')
+    @include('admin.layouts.common-scripts')
 </body>
 
 </html>

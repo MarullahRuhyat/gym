@@ -9,6 +9,7 @@ use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
 use App\Http\Middleware\Admin;
 use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
+use App\Http\Middleware\CheckPersonalTrainer;
 
 Route::get('/', function () {
     $appType = config('app.app_type');
@@ -50,7 +51,7 @@ Route::prefix('member')->middleware('auth')->group(function () {
 
 
 // personal trainer
-Route::prefix('personal-trainer')->group(function () {
+Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->group(function () {
     Route::get('/dashboard', [PersonalTrainerController::class, 'dashboard'])->name('personal_trainer.dashboard');
     Route::get('attendance-member', [PersonalTrainerController::class, 'attendanceMember'])->name('personal_trainer.attendance_member');
 });

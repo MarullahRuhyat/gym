@@ -12,15 +12,20 @@ class CheckPersonalTrainer
     /**
      * Handle an incoming request.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role === 'personal trainer') {
-            return $next($request);
-        }else if (Auth::check() == false){
+        if (!Auth::check()) {
             return redirect()->route('auth.login');
         }
+
+        if (Auth::user()->role === 'personal trainer') {
+            return $next($request);
+        }
+
         abort(403, 'Unauthorized action.');
     }
 }

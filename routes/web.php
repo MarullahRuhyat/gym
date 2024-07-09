@@ -53,7 +53,8 @@ Route::prefix('member')->middleware('auth')->group(function () {
 // personal trainer
 Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->group(function () {
     Route::get('/dashboard', [PersonalTrainerController::class, 'dashboard'])->name('personal_trainer.dashboard');
-    Route::get('attendance-member', [PersonalTrainerController::class, 'attendanceMember'])->name('personal_trainer.attendance_member');
+    Route::get('/attendance-member', [PersonalTrainerController::class, 'attendanceMember'])->name('personal_trainer.attendance_member');
+    Route::get('/payment', [PersonalTrainerController::class, 'payment'])->name('personal_trainer.payment');
 });
 
 

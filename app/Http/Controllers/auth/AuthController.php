@@ -21,11 +21,17 @@ class AuthController extends Controller
             if (Auth::user()->role == 'admin') {
                 return redirect()->route('admin_dashboard');
             } elseif (Auth::user()->role == 'personal trainer') {
-                return redirect()->intended('dashboard');
+                return redirect()->route('personal_trainer.attendance_member');
             }
         }
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('auth.login');
+    }  
 }

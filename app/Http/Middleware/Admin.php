@@ -18,6 +18,8 @@ class Admin
     {
         if (Auth::check() && Auth::user()->role === 'admin') {
             return $next($request);
+        }else if (Auth::check() == false) {
+            return redirect()->route('auth.login');
         }
         abort(403, 'Unauthorized action.');
     }

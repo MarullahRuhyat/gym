@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('password')->nullable();
+            // $table->string('email')->unique();
+            // $table->timestamp('email_verified_at')->nullable();
             $table->string('phone_number');
             $table->enum('role', ['admin', 'member', 'personal trainer'])->default('member');
             $table->enum('status', ['active', 'inactive','expired'])->default('active');

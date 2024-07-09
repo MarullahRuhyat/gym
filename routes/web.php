@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\AuthController;
+use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
 
 Route::get('/', function () {
     return view('landing_page');
@@ -14,7 +15,7 @@ Route::get('/starter-page', function () {
 // auth
 Route::prefix('auth')->group(function () {
     // login member
-    Route::get('/login-member', [AuthController::class, 'loginAdminIndex'])->name('auth.login');
+    Route::get('/login-member', [AuthController::class, 'loginAdminIndex'])->name('auth.login.member');
     Route::post('/login-member', [AuthController::class, 'loginMemberProcess'])->name('auth.login_member.process');
     // login admin dan personal trainer
     Route::get('/login', [AuthController::class, 'loginAdminIndex'])->name('auth.login');
@@ -39,9 +40,7 @@ Route::prefix('member')->middleware('auth')->group(function () {
 
 
 // personal trainer
-Route::prefix('personal-trainer')->middleware('auth')->group(function () {
+Route::prefix('personal-trainer')->group(function () {
     Route::get('/dashboard', [PersonalTrainerController::class, 'dashboard'])->name('personal_trainer.dashboard');
-    Route::get('/profile', [PersonalTrainerController::class, 'profile'])->name('personal_trainer.profile');
-    Route::get('/change-password', [PersonalTrainerController::class, 'changePassword'])->name('personal_trainer.change_password');
-    Route::post('/change-password', [PersonalTrainerController::class, 'changePasswordProcess'])->name('personal_trainer.change_password.process');
+    Route::get('attendance-member', [PersonalTrainerController::class, 'attendanceMember'])->name('personal_trainer.attendance_member');
 });

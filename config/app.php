@@ -12,7 +12,7 @@ return [
     | other UI elements where an application name needs to be displayed.
     |
     */
-
+    'app_type' => env('APP_TYPE', 'USER'),
     'name' => env('APP_NAME', 'Laravel'),
 
     /*

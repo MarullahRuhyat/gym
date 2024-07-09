@@ -1,10 +1,20 @@
 <?php
 
+use App\Http\Controllers\Admin\AbsenController;
+use App\Http\Controllers\Admin\DashboardAdminController;
+use App\Http\Controllers\Admin\GajiController;
+use App\Http\Controllers\Admin\MemberController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
+use App\Http\Middleware\Admin;
+use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
 
 Route::get('/', function () {
+    $appType = config('app.app_type');
+    if ($appType == 'ADMIN') {
+        return redirect()->route('auth.login');
+    }
     return view('landing_page');
 });
 
@@ -43,4 +53,14 @@ Route::prefix('member')->middleware('auth')->group(function () {
 Route::prefix('personal-trainer')->group(function () {
     Route::get('/dashboard', [PersonalTrainerController::class, 'dashboard'])->name('personal_trainer.dashboard');
     Route::get('attendance-member', [PersonalTrainerController::class, 'attendanceMember'])->name('personal_trainer.attendance_member');
+});
+
+
+// admin
+Route::prefix('admin')->middleware(Admin::class)->group(function () {
+    Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin_dashboard');
+    Route::get('/personal-trainer', [PersonalTrainerAdminController::class, 'index'])->name('admin_personal_trainer');
+    Route::get('/member', [MemberController::class, 'index'])->name('admin_member');
+    Route::get('/absen', [AbsenController::class, 'index'])->name('admin_absen');
+    Route::get('/gaji', [GajiController::class, 'index'])->name('admin_gaji');
 });

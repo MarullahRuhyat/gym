@@ -19,7 +19,7 @@ Login
                             @csrf
                             <div class="col-12">
                                 <label for="inputPhoneNumber" class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" name="phone_number" id="inputPhoneNumber" placeholder="Input Your Phone Number">
+                                <input type="text" class="form-control" name="phone_number" id="inputPhoneNumber" placeholder="Input Your Phone Number" oninput="this.value = this.value.replace(/\+62/, '0').replace(/[^0-9]/g, '');">
                             </div>
                             <div class="col-12">
                                 <label for="inputChoosePassword" class="form-label">Password</label>

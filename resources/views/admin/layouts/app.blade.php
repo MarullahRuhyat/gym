@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="blue-theme">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light-theme">
 
 <head>
     <meta charset="utf-8">
@@ -10,6 +10,11 @@
     <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
 
     @include('admin.layouts.head-css')
+    <style>
+        .gray-color {
+            color: #a2a2a2;
+        }
+    </style>
 </head>
 
 <body>
@@ -17,7 +22,7 @@
     @include('admin.layouts.topbar')
 
     @include('admin.layouts.sidebar')
-    
+
     <!--start main wrapper-->
     <main class="main-wrapper">
         <div class="main-content">

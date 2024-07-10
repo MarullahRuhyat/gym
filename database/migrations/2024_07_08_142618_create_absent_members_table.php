@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('member_id')->constrained('users');
             $table->foreignId('personal_trainer_id')->constrained('users')->nullable();
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->date('date');
             $table->string('qr_code');
             $table->string('path_qr_code');
             $table->string('jenis_latihan');

@@ -24,9 +24,7 @@ class AuthController extends Controller
                 return redirect()->route('personal_trainer.attendance_member');
             }
         }
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        return redirect()->back()->with('error', 'The provided credentials do not match our records.');
     }
 
     public function logout()

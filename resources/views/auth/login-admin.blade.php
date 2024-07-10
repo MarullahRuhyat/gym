@@ -4,9 +4,23 @@ Login
 @endsection
 @section('content')
 <!--authentication-->
+<style>
+    .fade-out {
+        transition: opacity 0.5s;
+        opacity: 0;
+    }
+
+</style>
 
 <div class="mx-3 mx-lg-0">
-
+    @if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show my-5 col-xl-9 col-xxl-8 mx-auto overflow-hidden p-4" role="alert">
+        <div>
+            <strong>Error!</strong> {{ session('error') }}
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <div class="card my-5 col-xl-9 col-xxl-8 mx-auto rounded-4 overflow-hidden p-4">
         <div class="row g-4">
             <div class="col-lg-6 d-flex">
@@ -19,13 +33,17 @@ Login
                             @csrf
                             <div class="col-12">
                                 <label for="inputPhoneNumber" class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" name="phone_number" id="inputPhoneNumber" placeholder="Input Your Phone Number" oninput="this.value = this.value.replace(/\+62/, '0').replace(/[^0-9]/g, '');">
+                                <input type="text" class="form-control" name="phone_number" id="inputPhoneNumber"
+                                    placeholder="Input Your Phone Number"
+                                    oninput="this.value = this.value.replace(/\+62/, '0').replace(/[^0-9]/g, '');">
                             </div>
                             <div class="col-12">
                                 <label for="inputChoosePassword" class="form-label">Password</label>
                                 <div class="input-group" id="show_hide_password">
-                                    <input type="password" class="form-control border-end-0" name="password" id="inputChoosePassword" placeholder="Enter Password">
-                                    <a href="javascript:;" class="input-group-text bg-transparent"><i class="bi bi-eye-slash-fill"></i></a>
+                                    <input type="password" class="form-control border-end-0" name="password"
+                                        id="inputChoosePassword" placeholder="Enter Password">
+                                    <a href="javascript:;" class="input-group-text bg-transparent"><i
+                                            class="bi bi-eye-slash-fill"></i></a>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -51,7 +69,8 @@ Login
                 </div>
             </div>
 
-        </div><!--end row-->
+        </div>
+        <!--end row-->
     </div>
 
 </div>
@@ -61,8 +80,8 @@ Login
 <script src="{{ URL::asset('build/js/jquery.min.js') }}"></script>
 
 <script>
-    $(document).ready(function() {
-        $("#show_hide_password a").on('click', function(event) {
+    $(document).ready(function () {
+        $("#show_hide_password a").on('click', function (event) {
             event.preventDefault();
             if ($('#show_hide_password input').attr("type") == "text") {
                 $('#show_hide_password input').attr('type', 'password');
@@ -75,5 +94,18 @@ Login
             }
         });
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const alert = document.querySelector('.alert');
+        if (alert) {
+            setTimeout(() => {
+                alert.classList.add('fade-out');
+                setTimeout(() => {
+                    alert.style.display = 'none';
+                }, 500); // Match this duration with the fade-out animation duration
+            }, 5000); // 5 seconds
+        }
+    });
+
 </script>
 @endpush

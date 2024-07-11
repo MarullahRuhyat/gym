@@ -41,65 +41,52 @@ Absensi Member
 
     <div class="col-md-6">
         <div class="card rounded-4">
+            <div class="card-header">
+                <h3>Heru Budi</h3>
+                <div class="test">
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown">
+                        <i class="bi bi-three-dots-vertical"></i>
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
+                        <a class="dropdown-item" href="javascript:;">Edit</a>
+                        <a class="dropdown-item" href="javascript:;">Delete</a>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
-                <table style="width: 100%;">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <h5 class="gray-color">Full Name</h5>
-                            </td>
-                            <td>
-                                <h5><b>Nama Member</b></h5>
-                            </td>
-                            <td rowspan="3" style="vertical-align: top; text-align: right;">
-                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown">
-                                    <i class="bi bi-three-dots-vertical"></i>
-                                    <span class="visually-hidden">Toggle Dropdown</span>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
-                                    <a class="dropdown-item" href="javascript:;">Edit</a>
-                                    <a class="dropdown-item" href="javascript:;">Delete</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5 class="gray-color">WA</h5>
-                            </td>
-                            <td>
-                                <h5><b>08994668927</b></h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5 class="gray-color">Jenis Latihan</h5>
-                            </td>
-                            <td>
-                                <h5>
-                                    <b>Kaki</b>
-                                </h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5 class="gray-color">Status</h5>
-                            </td>
-                            <td>
-                                <h5>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="ada">
-                                        <label class="form-check-label" for="ada"><b> Active</b></label>
-                                    </div>
-                                </h5>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
+                <div class="d-flex flex-column gap-3 me-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0">Nomor Whatsapp</h6>
+                        </div>
+                        <div class="">
+                            <h5 class="mb-0">08994668927</h5>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0">Jenis Latihan</h6>
+                        </div>
+                        <div class="">
+                            <h5 class="mb-0">Kaki</h5>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0">Status</h6>
+                        </div>
+                        <div class="">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="ada">
+                                <label class="form-check-label" for="ada"><b> Active</b></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
     <div class="col-md-6">
         <div class="card rounded-4">
             <div class="card-header">

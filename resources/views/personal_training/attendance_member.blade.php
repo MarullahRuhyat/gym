@@ -20,7 +20,13 @@ Absensi Member
     }
 
 </style>
-<h6 class="mb-0 text-uppercase">Absensi (nanti tanggal di sini)</h6>
+<h6 class="mb-0 text-uppercase">Absensi 
+    @if (request()->searchDate == null)
+        {{ date('d F Y') }}
+    @else 
+        {{ date('d F Y', strtotime(request()->searchDate)) }}
+    @endif
+</h6>
 <div class="d-flex flex-column flex-md-row justify-content-end align-items-center mb-2 mt-3">
     <form action="" method="get" class="form-inline d-flex flex-column flex-md-row w-100 mb-2 mb-md-0 me-md-1">
         <div class="input-group mb-2 mb-md-0 w-100 me-md-1">
@@ -52,7 +58,8 @@ Absensi Member
                         <span class="visually-hidden">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
-                        <a class="dropdown-item" href="javascript:;">Pilih Jenis Latihan</a>
+                        <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-id="{{ $item->id }}"
+                            data-bs-target="#addJenisLatihanModal">Pilih Jenis Latihan</button>
                     </div>
                 </div>
             </div>
@@ -72,11 +79,11 @@ Absensi Member
                         </div>
                         <div class="">
                             <h5 class="mb-0">
-                                {{-- condition jenis_latihan null --}}
                                 @if ($item->jenis_latihan == null)
-                                <span class="badge bg-danger">Belum Memilih</span>
+                                    <button type="button" class="badge bg-danger" style="border: none" data-id="{{ $item->id }}"
+                                        data-bs-toggle="modal" data-bs-target="#addJenisLatihanModal">Belum Memilih</button>
                                 @else
-                                {{$item->jenis_latihan}}
+                                    {{$item->jenis_latihan}}
                                 @endif
                             </h5>
                         </div>
@@ -88,9 +95,14 @@ Absensi Member
                         <div class="">
                             <h5 class="mb-0">
                                 @if ($item->start_time == null)
-                                <span class="badge bg-danger">Belum Masuk</span>
+                                    <span class="badge bg-danger">Belum Masuk</span>
                                 @else
-                                {{$item->start_time}}
+                                @php
+                                    $start_time_parts = explode('-', $item->start_time);
+                                    $formatted_start_time = $start_time_parts[0] . ':' . $start_time_parts[1] . ':' .
+                                    $start_time_parts[2];
+                                @endphp
+                                    {{ $formatted_start_time }}
                                 @endif
                             </h5>
                         </div>
@@ -102,20 +114,25 @@ Absensi Member
                         <div class="">
                             <h5 class="mb-0">
                                 @if ($item->end_time == null)
-                                <span class="badge bg-danger">Belum Pulang</span>
+                                    <span class="badge bg-danger">Belum Pulang</span>
                                 @else
-                                {{$item->end_time}}
+                                @php
+                                    $end_time_parts = explode('-', $item->end_time);
+                                    $formatted_end_time = $end_time_parts[0] . ':' . $end_time_parts[1] . ':' .
+                                    $end_time_parts[2];
+                                @endphp
+                                    {{ $formatted_end_time }}
                                 @endif
                             </h5>
                         </div>
                     </div>
+
                     <div class="d-flex align-items-center gap-3">
                         <div class="flex-grow-1">
                             <h6 class="mb-0">Status</h6>
                         </div>
                         <div class="disabled">
                             <div class="form-check form-switch">
-                                {{-- <input class="form-check-input" type="checkbox" role="switch" id="ada"> --}}
                                 <input class="form-check-input" type="checkbox" role="switch" id="ada" checked disabled>
                                 <label class="form-check-label" for="ada"><b> Active</b></label>
                             </div>
@@ -128,9 +145,51 @@ Absensi Member
     @endforeach
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="addJenisLatihanModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 py-2">
+                <h5 class="modal-title">Tambah Jenis Latihan</h5>
+                <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="modal">
+                    <i class="material-icons-outlined">close</i>
+                </a>
+            </div>
+            <form id="updateJenisLatihanForm" method="post">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group mb-3">
+                        <label for="exampleFormControlSelect1">Jenis Latihan</label>
+                        <select class="form-control" id="exampleFormControlSelect1" name="jenis_latihan">
+                            <option value="">Pilih Jenis Latihan</option>
+                            @foreach ($dataLatihan as $item)
+                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 
 @endsection
 @push('script')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('addJenisLatihanModal');
+    modal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const id = button.getAttribute('data-id');
+        const form = document.getElementById('updateJenisLatihanForm');
+        form.setAttribute('action', `/personal-trainer/attendance-member/${id}`);
+    });
+});
+</script>
 
 @endpush

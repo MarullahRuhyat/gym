@@ -1,17 +1,18 @@
 <?php
-use App\Http\Controllers\Admin\JenisLatihanController;
-use App\Http\Controllers\Admin\JenisMemberController;
+use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\AuthController;
+use App\Http\Middleware\CheckPersonalTrainer;
 use App\Http\Controllers\Admin\GajiController;
+use App\Http\Controllers\Admin\ScanController;
 use App\Http\Controllers\Admin\AbsenController;
 use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\Admin\JenisMemberController;
+use App\Http\Controllers\Admin\JenisLatihanController;
 use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
 use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
 use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
-use App\Http\Controllers\Admin\ScanController;
-use App\Http\Middleware\CheckPersonalTrainer;
 
 Route::get('/', function () {
     $appType = config('app.app_type');
@@ -58,7 +59,7 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
     // attendance member
     Route::prefix('attendance-member')->group(function () {
         Route::get('/', [AttendanceMemberController::class, 'index'])->name('personal_trainer.attendance_member');
-        // Route::post('/store', [AttendanceMemberController::class, 'store'])->name('personal_trainer.attendance_member.store');
+        Route::post('/{id}', [AttendanceMemberController::class, 'update'])->name('personal_trainer.update');
     });
 
     // payment

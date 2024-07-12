@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class GymMembershipPackage extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'price',
+        'duration_in_days',
+        'personal_trainer_quota',
+    ];
 }

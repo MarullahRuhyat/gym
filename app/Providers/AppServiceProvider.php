@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // run for ngrok css fix
         // if (config('app.env') === 'local') {
-        //     \URL::forceScheme('https');
+        //     URL::forceScheme('https');
         // }
     }
 }

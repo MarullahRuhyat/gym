@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class AbsenController extends Controller
 {
-    //
     function index(Request $request)
     {
         return view('admin.absen');

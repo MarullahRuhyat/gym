@@ -3,9 +3,7 @@
 starter Page
 @endsection
 @section('content')
-
-@section('content')
-<h3><b>Personal Trainer</b></h3>
+<h3><b>Gym Membership Packages</b></h3>
 <div class="row justify-content-start">
     <div class="col-md-2 mb-3 col-3">
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Add</button>
@@ -13,14 +11,13 @@ starter Page
 </div>
 
 <div class="row">
-    @foreach ($users as $user)
-
+    @foreach ($packages as $package)
     <div class="col-md-6">
         <div class="card rounded-4">
             <div class="card-header">
                 <div class="row">
                     <div class="col-10">
-                        <h3>{{ $user->name }}</h3>
+                        <h3>{{ $package->name }}</h3>
                     </div>
                     <div class="col-2 text-end">
                         <div class="test ">
@@ -29,8 +26,8 @@ starter Page
                                 <span class="visually-hidden">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
-                                <a class="dropdown-item button_edit" href="javascript:;" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ $user->id }}" data-name="{{ $user->name }}" data-phone="{{ $user->phone_number }}">Edit</a>
-                                <a class="dropdown-item button_delete" href="javascript:;" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $user->id }}" data-name="{{ $user->name }}">Delete</a>
+                                <a class="dropdown-item button_edit" href="javascript:;" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ $package->id }}" data-name="{{ $package->name }}" data-price="{{ $package->price }}" data-duration="{{ $package->duration_in_days }}" data-trainer="{{ $package->personal_trainer_quota }}">Edit</a>
+                                <a class="dropdown-item button_delete" href="javascript:;" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $package->id }}" data-name="{{ $package->name }}">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -40,23 +37,26 @@ starter Page
                 <div class="d-flex flex-column gap-3 me-3">
                     <div class="d-flex align-items-center gap-3">
                         <div class="flex-grow-1">
-                            <h6 class="mb-0">Phone Number</h6>
+                            <h6 class="mb-0">Price</h6>
                         </div>
                         <div class="">
-                            <h5 class="mb-0">{{ $user->phone_number }}</h5>
+                            <h5 class="mb-0">{{ $package->price }}</h5>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-3">
                         <div class="flex-grow-1">
-                            <h6 class="mb-0">Status</h6>
+                            <h6 class="mb-0">Duration (Days)</h6>
                         </div>
                         <div class="">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="ada" checked disabled>
-                                <label>
-                                    <h5> Active</h5>
-                                </label>
-                            </div>
+                            <h5 class="mb-0">{{ $package->duration_in_days }}</h5>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0">Personal Trainer</h6>
+                        </div>
+                        <div class="">
+                            <h5 class="mb-0">{{ $package->personal_trainer_quota }}</h5>
                         </div>
                     </div>
                 </div>
@@ -66,27 +66,31 @@ starter Page
     @endforeach
 </div>
 
-<!-- Modal Add User -->
+<!-- Modal Add -->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Add Personal Trainer</h5>
+                <h1 class="modal-title fs-5" id="addModalLabel">Add Package</h1>
             </div>
-            <form id="addUserForm" action="" method="POST">
-                @csrf
+            <form id="membershipFormAdd" method="POST" action="">
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="number" class="form-control" id="price" name="price" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="phone_number" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+                    <div class="form-group">
+                        <label for="duration_in_days">Duration (Days)</label>
+                        <input type="number" class="form-control" id="duration_in_days" name="duration_in_days" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="personal_trainer_quota">Personal Trainer</label>
+                        <input type="number" class="form-control" id="personal_trainer_quota" name="personal_trainer_quota" value="0" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -98,47 +102,54 @@ starter Page
     </div>
 </div>
 
-<!-- Modal Edit User -->
+<!-- Modal Edit -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Personal Trainer</h5>
+                <h1 class="modal-title fs-5" id="editModalLabel">Edit Package</h1>
             </div>
-            <form id="editUserForm" action="" method="POST">
-                @csrf
+            <form id="membershipFormEdit" method="POST" action="">
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="name_edit" class="form-label">Name</label>
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Name</label>
                         <input type="text" class="form-control" id="name_edit" name="name" required>
-                        <input type="hidden" id="id_edit" name="id">
+                        <input type="hidden" name="id" id="id_edit">
                         <input type="hidden" name="edit" value="1">
                     </div>
-                    <div class="mb-3">
-                        <label for="phone_edit" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" id="phone_edit" name="phone_number" required>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="number" class="form-control" id="price_edit" name="price" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration_in_days">Duration (Days)</label>
+                        <input type="number" class="form-control" id="duration_in_days_edit" name="duration_in_days" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="personal_trainer_quota_edit">Personal Trainer</label>
+                        <input type="number" class="form-control" id="personal_trainer_quota_edit" name="personal_trainer_quota" required>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<!-- Modal Delete User -->
+<!-- Modal Delete -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
-            <form id="deleteUserForm" action="" method="POST">
+            <form id="membershipFormDelete" method="POST" action="">
                 @csrf
-                <input type="hidden" id="id_delete" name="id">
-                <input type="hidden" name="delete" value="1">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Delete User</h5>
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Package</h1>
+                    <input type="hidden" name="id" id="id_delete">
+                    <input type="hidden" name="delete" value="1">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -148,7 +159,7 @@ starter Page
         </div>
     </div>
 </div>
-@endsection
+
 @endsection
 @push('script')
 <!--plugins-->
@@ -158,17 +169,20 @@ starter Page
 <script src="{{ URL::asset('build/js/main.js') }}"></script>
 <script>
     $(document).ready(function() {
-        // Populate Edit Modal
         $('.button_edit').click(function() {
             let id = $(this).data('id');
             let name = $(this).data('name');
-            let phone = $(this).data('phone');
+            let price = $(this).data('price');
+            let duration = $(this).data('duration');
+            let trainer = $(this).data('trainer');
+            console.log(trainer);
+
             $('#name_edit').val(name);
-            $('#phone_edit').val(phone);
+            $('#price_edit').val(price);
+            $('#duration_in_days_edit').val(duration);
+            $('#personal_trainer_quota_edit').val(trainer);
             $('#id_edit').val(id);
         });
-
-        // Populate Delete Modal
         $('.button_delete').click(function() {
             let id = $(this).data('id');
             let name = $(this).data('name');

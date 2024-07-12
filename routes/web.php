@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\Admin\AbsenController;
-use App\Http\Controllers\Admin\DashboardAdminController;
-use App\Http\Controllers\Admin\GajiController;
-use App\Http\Controllers\Admin\MemberController;
+use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\AuthController;
-use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
-use App\Http\Middleware\Admin;
-use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
 use App\Http\Middleware\CheckPersonalTrainer;
+use App\Http\Controllers\Admin\GajiController;
+use App\Http\Controllers\Admin\AbsenController;
+use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\Admin\DashboardAdminController;
+use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
+use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
+use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
 
 Route::get('/', function () {
     $appType = config('app.app_type');
@@ -53,8 +54,16 @@ Route::prefix('member')->middleware('auth')->group(function () {
 // personal trainer
 Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->group(function () {
     Route::get('/dashboard', [PersonalTrainerController::class, 'dashboard'])->name('personal_trainer.dashboard');
-    Route::get('/attendance-member', [PersonalTrainerController::class, 'attendanceMember'])->name('personal_trainer.attendance_member');
-    Route::get('/payment', [PersonalTrainerController::class, 'payment'])->name('personal_trainer.payment');
+    // attendance member
+    Route::prefix('attendance-member')->group(function () {
+        Route::get('/', [AttendanceMemberController::class, 'index'])->name('personal_trainer.attendance_member');
+        // Route::post('/store', [AttendanceMemberController::class, 'store'])->name('personal_trainer.attendance_member.store');
+    });
+
+    // payment
+    Route::prefix('payment')->group(function () {
+        Route::get('/', [PersonalTrainerController::class, 'payment'])->name('personal_trainer.payment');
+    });
 });
 
 

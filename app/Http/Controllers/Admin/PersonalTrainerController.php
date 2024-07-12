@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PersonalTrainerController extends Controller
 {
     //
-    function index(Request $request)
-    {
-        return view('admin.personal_trainer');
-    }
 }

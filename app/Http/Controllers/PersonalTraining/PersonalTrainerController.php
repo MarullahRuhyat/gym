@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\PersonalTraining;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PersonalTrainerController extends Controller
 {
@@ -16,7 +17,7 @@ class PersonalTrainerController extends Controller
     {
         return view('personal_training.attendance_member');
     }
-
+    
     public function payment() {
         return view('personal_training.payment');
     }

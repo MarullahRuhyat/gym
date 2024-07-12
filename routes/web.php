@@ -1,6 +1,11 @@
 <?php
 
-use App\Http\Middleware\Admin;
+use App\Http\Controllers\Admin\AbsenController;
+use App\Http\Controllers\Admin\DashboardAdminController;
+use App\Http\Controllers\Admin\GajiController;
+use App\Http\Controllers\Admin\JenisLatihanController;
+use App\Http\Controllers\Admin\JenisMemberController;
+use App\Http\Controllers\Admin\MemberController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Middleware\CheckPersonalTrainer;
@@ -11,6 +16,8 @@ use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
 use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
 use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
+use App\Http\Controllers\Admin\ScanController;
+use App\Http\Middleware\CheckPersonalTrainer;
 
 Route::get('/', function () {
     $appType = config('app.app_type');
@@ -70,8 +77,19 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
 // admin
 Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin_dashboard');
-    Route::get('/personal-trainer', [PersonalTrainerAdminController::class, 'index'])->name('admin_personal_trainer');
-    Route::get('/member', [MemberController::class, 'index'])->name('admin_member');
-    Route::get('/absen', [AbsenController::class, 'index'])->name('admin_absen');
-    Route::get('/gaji', [GajiController::class, 'index'])->name('admin_gaji');
+    // personal trainer page
+    Route::match(['get', 'post'], '/personal-trainer', [PersonalTrainerAdminController::class, 'index'])->name('admin_personal_trainer');
+    // member page
+    Route::match(['get', 'post'], '/member', [MemberController::class, 'index'])->name('admin_member');
+    // Attendance page
+    Route::get('/attendance', [AbsenController::class, 'index'])->name('admin_absen');
+    // salary page
+    Route::get('/salary', [GajiController::class, 'index'])->name('admin_gaji');
+    // scan page
+    Route::get('/scan', [ScanController::class, 'index'])->name('admin_scan');
+    Route::post('/ajax-post-attendance', [ScanController::class, 'post_attendance'])->name('admin_ajax_post_attendance');
+    // membership page
+    Route::match(['get', 'post'], '/membership-package', [JenisMemberController::class, 'index'])->name('admin_membership_package');
+    // membership page
+    Route::match(['get', 'post'], '/jenis-latihan', [JenisLatihanController::class, 'index'])->name('admin_jenis_latihan');
 });

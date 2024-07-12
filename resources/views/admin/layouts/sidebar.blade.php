@@ -23,10 +23,18 @@
 
             </li>
             <li>
+                <a href="{{ route('admin_scan')}}">
+                    <div class="parent-icon"><i class="material-icons-outlined">home</i>
+                    </div>
+                    <div class="menu-title">Scan</div>
+                </a>
+
+            </li>
+            <li>
                 <a href="{{ route('admin_absen')}}">
                     <div class="parent-icon"><i class="material-icons-outlined">home</i>
                     </div>
-                    <div class="menu-title">Absen</div>
+                    <div class="menu-title">Attendance</div>
                 </a>
 
             </li>
@@ -34,7 +42,7 @@
                 <a href="{{ route('admin_gaji')}}">
                     <div class="parent-icon"><i class="material-icons-outlined">home</i>
                     </div>
-                    <div class="menu-title">Gaji</div>
+                    <div class="menu-title">Salary</div>
                 </a>
 
             </li>
@@ -63,23 +71,10 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="#"><i class="material-icons-outlined">arrow_right</i>Jenis Latihan</a>
+                        <a href="{{ route('admin_jenis_latihan')}}"><i class="material-icons-outlined">arrow_right</i>Jenis Latihan</a>
                     </li>
                     <li>
-                        <a href="{{ url('/ecommerce-add-product') }}"><i class="material-icons-outlined">arrow_right</i>Jenis Member</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a class="has-arrow" href="javascript:;">
-                    <div class="parent-icon"><i class="material-icons-outlined">card_giftcard</i>
-                    </div>
-                    <div class="menu-title">Master</div>
-                </a>
-                <ul>
-                    <li><a href="{{ url('/component-alerts') }}"><i class="material-icons-outlined">arrow_right</i>Jenis Latihan</a>
-                    </li>
-                    <li><a href="{{ url('/component-accordions') }}"><i class="material-icons-outlined">arrow_right</i>Jenis Member</a>
+                        <a href="{{ route('admin_membership_package')}}"><i class="material-icons-outlined">arrow_right</i>Membership Packages</a>
                     </li>
                 </ul>
             </li>

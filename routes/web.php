@@ -1,14 +1,8 @@
 <?php
-
-use App\Http\Controllers\Admin\AbsenController;
-use App\Http\Controllers\Admin\DashboardAdminController;
-use App\Http\Controllers\Admin\GajiController;
 use App\Http\Controllers\Admin\JenisLatihanController;
 use App\Http\Controllers\Admin\JenisMemberController;
-use App\Http\Controllers\Admin\MemberController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\AuthController;
-use App\Http\Middleware\CheckPersonalTrainer;
 use App\Http\Controllers\Admin\GajiController;
 use App\Http\Controllers\Admin\AbsenController;
 use App\Http\Controllers\Admin\MemberController;

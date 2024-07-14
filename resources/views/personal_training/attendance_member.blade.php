@@ -2,6 +2,11 @@
 @section('title')
 Absensi Member
 @endsection
+@push('css')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+<link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
+@endpush
 @section('content')
 <style>
     .card-body {
@@ -20,11 +25,11 @@ Absensi Member
     }
 
 </style>
-<h6 class="mb-0 text-uppercase">Absensi 
+<h6 class="mb-0 text-uppercase">Absensi
     @if (request()->searchDate == null)
-        {{ date('d F Y') }}
-    @else 
-        {{ date('d F Y', strtotime(request()->searchDate)) }}
+    {{ date('d F Y') }}
+    @else
+    {{ date('d F Y', strtotime(request()->searchDate)) }}
     @endif
 </h6>
 <div class="d-flex flex-column flex-md-row justify-content-end align-items-center mb-2 mt-3">
@@ -80,10 +85,15 @@ Absensi Member
                         <div class="">
                             <h5 class="mb-0">
                                 @if ($item->jenis_latihan == null)
-                                    <button type="button" class="badge bg-danger" style="border: none" data-id="{{ $item->id }}"
-                                        data-bs-toggle="modal" data-bs-target="#addJenisLatihanModal">Belum Memilih</button>
+                                <button type="button" class="badge bg-danger" style="border: none"
+                                    data-id="{{ $item->id }}" data-bs-toggle="modal"
+                                    data-bs-target="#addJenisLatihanModal">Belum Memilih</button>
+                                @elseif (count(explode(',', $item->jenis_latihan)) > 2)
+                                <button type="button" class="badge bg-success open-multiple-jenis-latihan" style="border: none"
+                                    data-id="{{ $item->id }}" data-bs-toggle="modal"
+                                    data-bs-target="#openMultipleJenisLatihan">Multiple</button>
                                 @else
-                                    {{$item->jenis_latihan}}
+                                {{$item->jenis_latihan}}
                                 @endif
                             </h5>
                         </div>
@@ -95,14 +105,14 @@ Absensi Member
                         <div class="">
                             <h5 class="mb-0">
                                 @if ($item->start_time == null)
-                                    <span class="badge bg-danger">Belum Masuk</span>
+                                <span class="badge bg-danger">Belum Masuk</span>
                                 @else
                                 @php
-                                    $start_time_parts = explode('-', $item->start_time);
-                                    $formatted_start_time = $start_time_parts[0] . ':' . $start_time_parts[1] . ':' .
-                                    $start_time_parts[2];
+                                $start_time_parts = explode('-', $item->start_time);
+                                $formatted_start_time = $start_time_parts[0] . ':' . $start_time_parts[1] . ':' .
+                                $start_time_parts[2];
                                 @endphp
-                                    {{ $formatted_start_time }}
+                                {{ $formatted_start_time }}
                                 @endif
                             </h5>
                         </div>
@@ -114,14 +124,14 @@ Absensi Member
                         <div class="">
                             <h5 class="mb-0">
                                 @if ($item->end_time == null)
-                                    <span class="badge bg-danger">Belum Pulang</span>
+                                <span class="badge bg-danger">Belum Pulang</span>
                                 @else
                                 @php
-                                    $end_time_parts = explode('-', $item->end_time);
-                                    $formatted_end_time = $end_time_parts[0] . ':' . $end_time_parts[1] . ':' .
-                                    $end_time_parts[2];
+                                $end_time_parts = explode('-', $item->end_time);
+                                $formatted_end_time = $end_time_parts[0] . ':' . $end_time_parts[1] . ':' .
+                                $end_time_parts[2];
                                 @endphp
-                                    {{ $formatted_end_time }}
+                                {{ $formatted_end_time }}
                                 @endif
                             </h5>
                         </div>
@@ -159,8 +169,9 @@ Absensi Member
                 @csrf
                 <div class="modal-body">
                     <div class="form-group mb-3">
-                        <label for="exampleFormControlSelect1">Jenis Latihan</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="jenis_latihan">
+                        <label for="multiple-select-field" class="form-label">Jenis Latihan</label>
+                        <select class="form-select" id="multiple-select-field" name="jenis_latihan[]"
+                            data-placeholder="Pilih Jenis Latihan" multiple>
                             <option value="">Pilih Jenis Latihan</option>
                             @foreach ($dataLatihan as $item)
                             <option value="{{ $item->name }}">{{ $item->name }}</option>
@@ -175,6 +186,25 @@ Absensi Member
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="openMultipleJenisLatihan">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 py-2">
+                <h5 class="modal-title">Jenis Latihan</h5>
+                <a href="javascript:;" class="primary-menu-close" data-bs-dismiss="modal">
+                    <i class="material-icons-outlined">close</i>
+                </a>
+            </div>
+            <div class="modal-body" id="modal-body-content">
+                {{-- The content will be dynamically filled by JavaScript --}}
+            </div>
+            <div class="modal-footer border-top-0">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -182,14 +212,47 @@ Absensi Member
 @push('script')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    const modal = document.getElementById('addJenisLatihanModal');
-    modal.addEventListener('show.bs.modal', function (event) {
-        const button = event.relatedTarget;
-        const id = button.getAttribute('data-id');
-        const form = document.getElementById('updateJenisLatihanForm');
-        form.setAttribute('action', `/personal-trainer/attendance-member/${id}`);
+        const buttons = document.querySelectorAll('.open-multiple-jenis-latihan');
+        buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                const memberId = this.getAttribute('data-id');
+                const dataMember = @json($data_member); // Pass your data from PHP to JavaScript
+                const selectedMember = dataMember.find(member => member.id == memberId);
+                const modalBodyContent = document.getElementById('modal-body-content');
+
+                modalBodyContent.innerHTML = ''; // Clear previous content
+
+                if (selectedMember && selectedMember.jenis_latihan) {
+                    const jenisLatihanArray = selectedMember.jenis_latihan.split(',');
+
+                    if (jenisLatihanArray.length > 2) {
+                        const nameElement = document.createElement('h6');
+                        nameElement.textContent = selectedMember.name;
+                        modalBodyContent.appendChild(nameElement);
+
+                        const ulElement = document.createElement('ul');
+                        jenisLatihanArray.forEach(jenisLatihan => {
+                            const liElement = document.createElement('li');
+                            liElement.textContent = jenisLatihan;
+                            ulElement.appendChild(liElement);
+                        });
+                        modalBodyContent.appendChild(ulElement);
+                    }
+                }
+            });
+        });
     });
-});
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('addJenisLatihanModal');
+        modal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const id = button.getAttribute('data-id');
+            const form = document.getElementById('updateJenisLatihanForm');
+            form.setAttribute('action', `/personal-trainer/attendance-member/${id}`);
+        });
+    });
+
 </script>
 
 @endpush

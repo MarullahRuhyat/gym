@@ -32,18 +32,18 @@ Absensi Member
     {{ date('d F Y', strtotime(request()->searchDate)) }}
     @endif
 </h6>
+
 <div class="d-flex flex-column flex-md-row justify-content-end align-items-center mb-2 mt-3">
-    <form id="searchForm" class="form-inline d-flex flex-column flex-md-row w-100 mb-2 mb-md-0 me-md-1">
+    <form id="searchFormName" class="form-inline d-flex flex-column flex-md-row w-100 mb-2 mb-md-0 me-md-1">
         <div class="input-group mb-2 mb-md-0 w-100 me-md-1">
             <input type="text" class="form-control" id="searchName" name="searchName"
                 placeholder="Masukkan Nama Member">
             <button type="submit" class="btn btn-primary">Cari</button>
         </div>
     </form>
-    <form action="" method="get" class="form-inline d-flex flex-column flex-md-row w-100 mb-2 mb-md-0 ms-md-1">
+    <form id="searchFormDate" class="form-inline d-flex flex-column flex-md-row w-100 mb-2 mb-md-0 ms-md-1">
         <div class="input-group mb-2 mb-md-0 w-100 me-md-1">
-            <input type="date" class="form-control" id="searchDate" name="searchDate"
-                placeholder="Masukkan Nama Member">
+            <input type="date" class="form-control" id="searchDate" name="searchDate" placeholder="Masukkan Tanggal">
             <button type="submit" class="btn btn-primary">Cari</button>
         </div>
     </form>
@@ -89,8 +89,8 @@ Absensi Member
                                     data-id="{{ $item->id }}" data-bs-toggle="modal"
                                     data-bs-target="#addJenisLatihanModal">Belum Memilih</button>
                                 @elseif (count(explode(',', $item->jenis_latihan)) > 2)
-                                <button type="button" class="badge bg-success open-multiple-jenis-latihan" style="border: none"
-                                    data-id="{{ $item->id }}" data-bs-toggle="modal"
+                                <button type="button" class="badge bg-success open-multiple-jenis-latihan"
+                                    style="border: none" data-id="{{ $item->id }}" data-bs-toggle="modal"
                                     data-bs-target="#openMultipleJenisLatihan">Multiple</button>
                                 @else
                                 {{ $item->jenis_latihan }}
@@ -252,23 +252,23 @@ Absensi Member
         });
     });
 
-    document.getElementById('searchForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const searchName = document.getElementById('searchName').value;
+    document.getElementById('searchFormName').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const searchName = document.getElementById('searchName').value;
 
-    fetch('{{ route("personal_trainer.searchName") }}?searchName=' + searchName, {
-        method: 'GET',
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        const container = document.getElementById('memberContainer');
-        if (container) {
-            container.innerHTML = '';
-            data.forEach(item => {
-                const memberCard = `
+        fetch('{{ route("personal_trainer.searchName") }}?searchName=' + searchName, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('memberContainer');
+                if (container) {
+                    container.innerHTML = '';
+                    data.forEach(item => {
+                        const memberCard = `
                     <div class="col-md-6">
                         <div class="card rounded-4">
                             <div class="card-header">
@@ -300,7 +300,7 @@ Absensi Member
                                         </div>
                                         <div class="">
                                             <h5 class="mb-0">
-                                                ${item.jenis_latihan === null ? `
+                                                ${item.jenis_latihan == null ? `
                                                 <button type="button" class="badge bg-danger" style="border: none"
                                                     data-id="${item.id}" data-bs-toggle="modal"
                                                     data-bs-target="#addJenisLatihanModal">Belum Memilih</button>
@@ -348,12 +348,116 @@ Absensi Member
                         </div>
                     </div>
                 `;
-                container.innerHTML += memberCard;
-            });
-        }
-    })
-    .catch(error => console.error('Error:', error));
-});
+                        container.innerHTML += memberCard;
+                    });
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    document.getElementById('searchFormDate').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const searchDate = document.getElementById('searchDate').value;
+
+        fetch(`{{ route("personal_trainer.searchDate") }}?searchDate=` + searchDate, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('memberContainer');
+                if (container) {
+                    container.innerHTML = '';
+                    data.forEach(item => {
+                        const memberCard = `
+                <div class="col-md-6">
+                    <div class="card rounded-4">
+                        <div class="card-header">
+                            <h3>${item.name}</h3>
+                            <div class="test">
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
+                                    <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-id="${item.id}"
+                                        data-bs-target="#addJenisLatihanModal">Pilih Jenis Latihan</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex flex-column gap-3 me-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Nomor Whatsapp</h6>
+                                    </div>
+                                    <div class="">
+                                        <h5 class="mb-0">${item.phone_number}</h5>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Jenis Latihan</h6>
+                                    </div>
+                                    <div class="">
+                                        <h5 class="mb-0">
+                                            ${item.jenis_latihan === null ? `
+                                            <button type="button" class="badge bg-danger" style="border: none"
+                                                data-id="${item.id}" data-bs-toggle="modal"
+                                                data-bs-target="#addJenisLatihanModal">Belum Memilih</button>
+                                            ` : item.jenis_latihan.split(',').length > 2 ? `
+                                            <button type="button" class="badge bg-success open-multiple-jenis-latihan" style="border: none"
+                                                data-id="${item.id}" data-bs-toggle="modal"
+                                                data-bs-target="#openMultipleJenisLatihan">Multiple</button>
+                                            ` : item.jenis_latihan}
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Absen Masuk</h6>
+                                    </div>
+                                    <div class="">
+                                        <h5 class="mb-0">
+                                            ${item.start_time === null ? '<span class="badge bg-danger">Belum Masuk</span>' : item.start_time.split('-').join(':')}
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Absen Pulang</h6>
+                                    </div>
+                                    <div class="">
+                                        <h5 class="mb-0">
+                                            ${item.end_time === null ? '<span class="badge bg-danger">Belum Pulang</span>' : item.end_time.split('-').join(':')}
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Status</h6>
+                                    </div>
+                                    <div class="disabled">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="ada" checked disabled>
+                                            <label class="form-check-label" for="ada"><b> Active</b></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+                        container.innerHTML += memberCard;
+                    });
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
 </script>
 
 

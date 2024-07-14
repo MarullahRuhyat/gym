@@ -36,4 +36,24 @@ class AttendanceMemberController extends Controller
         $latihan->save();
         return redirect()->back()->with('success', 'Jenis Latihan berhasil diperbarui');
     }
+
+    public function searchName(Request $request)
+    {
+        $today = Carbon::today()->toDateString();
+        $dataLatihan = JenisLatihan::all();
+        $data_member = AbsentMember::
+            join('users', 'absent_members.member_id', '=', 'users.id')
+            ->where('personal_trainer_id', auth()->user()->id)
+            ->whereDate('absent_members.date', $today)
+            ->where('users.name', 'like', '%' . $request->searchName . '%')
+            ->select('users.name', 'users.phone_number', 'absent_members.*')
+            ->get();
+    
+        if ($request->ajax()) {
+            return response()->json($data_member);
+        }
+    
+        return view('personal_training.attendance_member', compact('data_member', 'dataLatihan'));
+    }
+    
 }

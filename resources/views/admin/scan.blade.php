@@ -29,22 +29,23 @@ starter Page
     </div>
 </div><!--end row-->
 
-
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn_close">Close</button>
-                <button type="button" class="btn btn-primary" id="btn_simpan">ok</button>
+<form action="" method="post">
+    @csrf
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn_close">Close</button>
+                    <button type="subkmit" class="btn btn-primary" id="btn_simpan">Ok</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+</form>
 @endsection
 @push('script')
 <!--plugins-->
@@ -102,35 +103,54 @@ starter Page
                 type: 'POST',
                 data: formData,
                 success: function(response) {
-                    console.log('aaa', response);
                     if (response.status == true) {
 
                         let data = response.absen.end_time;
-                        let h3 = data ? 'Terimakasih' : 'Selamat Datang';
+                        let greating = data ? 'Terimakasih' : 'Selamat Datang';
                         let nilai_end_time = data ? data : '-';
+                        let pt_disabled = '';
+                        let option = `<option value=''>--select--</option>`
+                        personalTrainers.forEach(e => {
+                            if (e.id == response.absen.personal_trainer_id) {
+                                option += `<option value='${e.id}' selected>${e.name}</option>`
+                            } else {
+                                option += `<option value='${e.id}'>${e.name}</option>`
+                            }
+                        });
+                        if (response.absen.member.available_personal_trainer_quota < 1 || nilai_end_time != '-') {
+                            pt_disabled = 'disabled';
+                        }
+                        console.log(response.absen.personal_trainer_id);
 
 
                         let html = `
-                                <h3>${h3}</h3>
+                                <h3>${greating}</h3>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" readonly value="${response.absen.member.name}">
+                                    <input type="hidden" class="form-control" name="id"  value="${response.absen.id}">
+                                    <input type="text" class="form-control" id="name" name="name" disabled value="${response.absen.member.name}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Date</label>
-                                    <input type="text" class="form-control" id="name" name="name" readonly value="${response.absen.date}">
+                                    <input type="text" class="form-control" id="name" name="name" disabled value="${response.absen.date}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="start_time" class="form-label">Start Time</label>
-                                    <input type="text" class="form-control" id="start_time" name="start_time" readonly value="${response.absen.start_time}">
+                                    <input type="text" class="form-control" id="start_time" name="start_time" disabled value="${response.absen.start_time}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="start_time" class="form-label">End Time</label>
-                                    <input type="text" class="form-control" id="start_time" name="start_time" readonly value="${nilai_end_time}">
+                                    <input type="text" class="form-control" id="start_time" name="start_time" disabled value="${nilai_end_time}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="start_time" class="form-label">Available PT</label>
-                                    <input type="text" class="form-control" id="start_time" name="start_time" readonly value="${response.absen.member.available_personal_trainer_quota}">
+                                    <input type="text" class="form-control" id="start_time" name="start_time" disabled value="${response.absen.member.available_personal_trainer_quota}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="start_time" class="form-label">PT</label>
+                                    <select class="form-select" aria-label="Default select example" name="pt" ${pt_disabled}>
+                                        ${option}
+                                    </select>
                                 </div>
                         `
                         $('.modal-body').html(html)
@@ -146,7 +166,6 @@ starter Page
                 }
             });
         }
-
 
         // Render the QR code scanner
         htmlscanner.render(onScanSuccess);
@@ -173,8 +192,6 @@ starter Page
                 mirrorCamera();
             }
         });
-
-
     });
 </script>
 @endsection

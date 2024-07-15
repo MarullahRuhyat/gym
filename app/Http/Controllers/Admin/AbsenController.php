@@ -7,6 +7,7 @@ use App\Models\AbsentMember;
 use App\Models\JenisLatihan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class AbsenController extends Controller
 {
@@ -14,13 +15,12 @@ class AbsenController extends Controller
     {
         $today = Carbon::today()->toDateString();
         $dataLatihan = JenisLatihan::all();
-        $data_member = AbsentMember::
-            join('users', 'absent_members.member_id', '=', 'users.id')
+        $data_member = AbsentMember::join('users', 'absent_members.member_id', '=', 'users.id')
             // ->where('personal_trainer_id', auth()->user()->id)
             ->whereDate('absent_members.date', $today)
             ->select('users.name',  'users.phone_number', 'absent_members.*')
-            ->get(); 
-        return view('admin.absen',compact('data_member','dataLatihan'));
+            ->get();
+        return view('admin.absen', compact('data_member', 'dataLatihan'));
     }
     public function search(Request $request)
     {
@@ -44,7 +44,7 @@ class AbsenController extends Controller
         if ($request->ajax()) {
             return response()->json($data_member);
         }
-        
+
 
         $dataLatihan = JenisLatihan::all();
         return view('admin.absen', compact('data_member', 'dataLatihan'));

@@ -10,7 +10,7 @@ starter Page
                 <div class="d-flex flex-column gap-3">
                     <div class="d-flex align-items-start justify-content-between">
                         <div class="">
-                            <h5 class="mb-0">Device Type</h5>
+                            <h5 class="mb-0">Member</h5>
                         </div>
                         <div class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle-nocaret options dropdown-toggle" data-bs-toggle="dropdown">
@@ -25,28 +25,22 @@ starter Page
                     </div>
                     <div class="position-relative">
                         <div class="piechart-legend">
-                            <h2 class="mb-1">68%</h2>
-                            <h6 class="mb-0">Total Views</h6>
+                            <h2 class="mb-1" id="total_member"></h2>
+                            <h6 class="mb-0">Total Member</h6>
                         </div>
-                        <div id="chart7"></div>
+                        <div id="member"></div>
                     </div>
                     <div class="d-flex flex-column gap-3">
                         <div class="d-flex align-items-center justify-content-between">
-                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-primary">desktop_windows</span>Desktop</p>
+                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-primary">desktop_windows</span>Active</p>
                             <div class="">
-                                <p class="mb-0">35%</p>
+                                <p class="mb-0" id="active_member"></p>
                             </div>
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
-                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-danger">tablet_mac</span>Tablet</p>
+                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-danger">tablet_mac</span>Inactive</p>
                             <div class="">
-                                <p class="mb-0">48%</p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between">
-                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-success">phone_android</span>Mobile</p>
-                            <div class="">
-                                <p class="mb-0">27%</p>
+                                <p class="mb-0" id="inactive_member"></p>
                             </div>
                         </div>
                     </div>
@@ -60,7 +54,7 @@ starter Page
                 <div class="d-flex flex-column gap-3">
                     <div class="d-flex align-items-start justify-content-between">
                         <div class="">
-                            <h5 class="mb-0">Device Type</h5>
+                            <h5 class="mb-0">Personal Trainer</h5>
                         </div>
                         <div class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle-nocaret options dropdown-toggle" data-bs-toggle="dropdown">
@@ -75,28 +69,22 @@ starter Page
                     </div>
                     <div class="position-relative">
                         <div class="piechart-legend">
-                            <h2 class="mb-1">68%</h2>
-                            <h6 class="mb-0">Total Views</h6>
+                            <h2 class="mb-1" id="total_pt"></h2>
+                            <h6 class="mb-0">Total PT</h6>
                         </div>
-                        <div id="chart6"></div>
+                        <div id="pt"></div>
                     </div>
                     <div class="d-flex flex-column gap-3">
                         <div class="d-flex align-items-center justify-content-between">
-                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-primary">desktop_windows</span>Desktop</p>
+                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-success">desktop_windows</span>Active</p>
                             <div class="">
-                                <p class="mb-0">35%</p>
+                                <p class="mb-0" id="active_pt"></p>
                             </div>
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
-                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-danger">tablet_mac</span>Tablet</p>
+                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-danger">tablet_mac</span>Inactive</p>
                             <div class="">
-                                <p class="mb-0">48%</p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between">
-                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-success">phone_android</span>Mobile</p>
-                            <div class="">
-                                <p class="mb-0">27%</p>
+                                <p class="mb-0" id="inactive_pt"></p>
                             </div>
                         </div>
                     </div>
@@ -108,19 +96,9 @@ starter Page
         <div class="card w-100 rounded-4">
             <div class="card-body">
                 <div class="text-center">
-                    <h6 class="mb-0">Monthly Revenue</h6>
+                    <h6 class="mb-0">Absent Member</h6>
                 </div>
-                <div class="mt-4" id="chart5"></div>
-                <p>Avrage monthly sale for every author</p>
-                <div class="d-flex align-items-center gap-3 mt-4">
-                    <div class="">
-                        <h1 class="mb-0 text-primary">68.9%</h1>
-                    </div>
-                    <div class="d-flex align-items-center align-self-end">
-                        <p class="mb-0 text-success">34.5%</p>
-                        <span class="material-icons-outlined text-success">expand_less</span>
-                    </div>
-                </div>
+                <div class="mt-4" id="absent"></div>
             </div>
         </div>
     </div>
@@ -144,178 +122,207 @@ starter Page
 </script>
 <script>
     $(document).ready(function() {
-
-        // chart 7
-        var options = {
-            series: [58, 25, 25],
-            chart: {
-                height: 290,
-                type: 'donut',
-            },
-            legend: {
-                position: 'bottom',
-                show: !1
-            },
-            fill: {
-                type: 'gradient',
-                gradient: {
-                    shade: 'dark',
-                    gradientToColors: ['#ee0979', '#17ad37', '#ec6ead'],
-                    shadeIntensity: 1,
-                    type: 'vertical',
-                    opacityFrom: 1,
-                    opacityTo: 1,
-                    //stops: [0, 100, 100, 100]
-                },
-            },
-            colors: ["#ff6a00", "#98ec2d", "#3494e6"],
-            dataLabels: {
-                enabled: !1
-            },
-            plotOptions: {
-                pie: {
-                    donut: {
-                        size: "85%"
-                    }
-                }
-            },
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        height: 270
-                    },
-                    legend: {
-                        position: 'bottom',
-                        show: !1
-                    }
-                }
-            }]
+        var formData = {
+            _token: '{{ csrf_token() }}' // Ensure you include the CSRF token
         };
 
-        var chart = new ApexCharts(document.querySelector("#chart7"), options);
-        chart.render();
-
-
-        // chart 6
-        var options = {
-            series: [58, 25, 25],
-            chart: {
-                height: 290,
-                type: 'donut',
+        $.ajax({
+            url: `{{ route('admin_ajax_dashboard')}}`, // The route to your controller
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                chart_member(parseInt(response['memberStatus']['active']), parseInt(response['memberStatus']['inactive']));
+                chart_pt(parseInt(response['trainerStatus']['active']), parseInt(response['trainerStatus']['inactive']));
+                chart_absent(response['absent'])
             },
-            legend: {
-                position: 'bottom',
-                show: !1
-            },
-            fill: {
-                type: 'gradient',
-                gradient: {
-                    shade: 'dark',
-                    gradientToColors: ['#ee0979', '#17ad37', '#ec6ead'],
-                    shadeIntensity: 1,
-                    type: 'vertical',
-                    opacityFrom: 1,
-                    opacityTo: 1,
-                    //stops: [0, 100, 100, 100]
+            error: function(xhr, status, error) {
+                console.log('error');
+            }
+        });
+
+        function chart_member(active, inactive) {
+            $('#total_member').html(active + inactive);
+            $('#active_member').html(active);
+            $('#inactive_member').html(inactive)
+            var options = {
+                series: [active, inactive],
+                chart: {
+                    height: 290,
+                    type: 'donut',
                 },
-            },
-            colors: ["#ff6a00", "#98ec2d", "#3494e6"],
-            dataLabels: {
-                enabled: !1
-            },
-            plotOptions: {
-                pie: {
-                    donut: {
-                        size: "85%"
-                    }
-                }
-            },
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        height: 270
-                    },
-                    legend: {
-                        position: 'bottom',
-                        show: !1
-                    }
-                }
-            }]
-        };
-
-        var chart = new ApexCharts(document.querySelector("#chart6"), options);
-        chart.render();
-
-
-        // chart 5
-
-        var options = {
-            series: [{
-                name: "Desktops",
-                data: [14, 41, 35, 51, 25, 18, 21, 35, 15]
-            }],
-            chart: {
-                foreColor: "#9ba7b2",
-                height: 280,
-                type: 'bar',
-                toolbar: {
+                legend: {
+                    position: 'bottom',
                     show: !1
                 },
-                sparkline: {
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shade: 'dark',
+                        gradientToColors: ['#ee0979', '#17ad37', '#ec6ead'],
+                        shadeIntensity: 1,
+                        type: 'vertical',
+                        opacityFrom: 1,
+                        opacityTo: 1,
+                    },
+                },
+                colors: ["#ff6a00", "#98ec2d", "#3494e6"],
+                dataLabels: {
                     enabled: !1
                 },
-                zoom: {
-                    enabled: false
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                width: 1,
-                curve: 'smooth'
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    borderRadius: 4,
-                    borderRadiusApplication: 'around',
-                    borderRadiusWhenStacked: 'last',
-                    columnWidth: '45%',
-                }
-            },
-            fill: {
-                type: 'gradient',
-                gradient: {
-                    shade: 'dark',
-                    gradientToColors: ['#009efd'],
-                    shadeIntensity: 1,
-                    type: 'vertical',
-                    opacityFrom: 1,
-                    opacityTo: 1,
-                    stops: [0, 100, 100, 100]
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            size: "75%"
+                        }
+                    }
                 },
-            },
-            colors: ["#2af598"],
-            grid: {
-                show: true,
-                borderColor: 'rgba(255, 255, 255, 0.1)',
-            },
-            xaxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-            },
-            tooltip: {
-                theme: "dark",
-                marker: {
-                    show: !1
-                }
-            },
-        };
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            height: 270
+                        },
+                        legend: {
+                            position: 'bottom',
+                            show: !1
+                        }
+                    }
+                }]
+            };
 
-        var chart = new ApexCharts(document.querySelector("#chart5"), options);
-        chart.render();
-    })
+            var chart = new ApexCharts(document.querySelector("#member"), options);
+            chart.render();
+        }
+
+        function chart_pt(active, inactive) {
+            $('#total_pt').html(active + inactive);
+            $('#active_pt').html(active);
+            $('#inactive_pt').html(inactive)
+            var options = {
+                series: [active, inactive],
+                chart: {
+                    height: 290,
+                    type: 'donut',
+                },
+                legend: {
+                    position: 'bottom',
+                    show: !1
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shade: 'dark',
+                        gradientToColors: ['#ee0979', '#17ad37', '#ec6ead'],
+                        shadeIntensity: 1,
+                        type: 'vertical',
+                        opacityFrom: 1,
+                        opacityTo: 1,
+                    },
+                },
+                colors: ["#ff6a00", "#98ec2d", "#3494e6"],
+                dataLabels: {
+                    enabled: !1
+                },
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            size: "75%"
+                        }
+                    }
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            height: 270
+                        },
+                        legend: {
+                            position: 'bottom',
+                            show: !1
+                        }
+                    }
+                }]
+            };
+
+            var chart = new ApexCharts(document.querySelector("#pt"), options);
+            chart.render();
+        }
+
+        function chart_absent(results) {
+            let bulan = []
+            let data = []
+            results.forEach(row => {
+                bulan.push(row['bulan']);
+                data.push(row['jumlah_latihan']);
+            });
+            // chart 5
+            var options = {
+                series: [{
+                    name: "Total",
+                    data: data
+                }],
+                chart: {
+                    foreColor: "#9ba7b2",
+                    height: 280,
+                    type: 'bar',
+                    toolbar: {
+                        show: !1
+                    },
+                    sparkline: {
+                        enabled: !1
+                    },
+                    zoom: {
+                        enabled: false
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    width: 1,
+                    curve: 'smooth'
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        borderRadius: 4,
+                        borderRadiusApplication: 'around',
+                        borderRadiusWhenStacked: 'last',
+                        columnWidth: '45%',
+                    }
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shade: 'dark',
+                        gradientToColors: ['#009efd'],
+                        shadeIntensity: 1,
+                        type: 'vertical',
+                        opacityFrom: 1,
+                        opacityTo: 1,
+                        stops: [0, 100, 100, 100]
+                    },
+                },
+                colors: ["#2af598"],
+                grid: {
+                    show: true,
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                },
+                xaxis: {
+                    categories: bulan,
+                },
+                tooltip: {
+                    theme: "dark",
+                    marker: {
+                        show: !1
+                    }
+                },
+            };
+
+            var chart = new ApexCharts(document.querySelector("#absent"), options);
+            chart.render();
+        }
+
+    });
 </script>
 @endpush

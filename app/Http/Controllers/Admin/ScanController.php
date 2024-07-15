@@ -12,6 +12,23 @@ class ScanController extends Controller
 {
     function index(Request $request)
     {
+        if ($request->isMethod('post')) {
+            try {
+                $pt = $request->input('pt', null);
+                $absent = AbsentMember::findOrFail($request->id);
+                if ($absent->end_time == null && $pt != null) {
+                    $absent->personal_trainer_id = $pt;
+                    $absent->save();
+                    $user = User::find($absent->member_id);
+                    $user->available_personal_trainer_quota = $user->available_personal_trainer_quota - 1;
+                    $user->save();
+                }
+                return redirect()->route('admin_scan')->with('success', 'Data berhasil disimpan!');
+            } catch (\Throwable $th) {
+                //throw $th;
+                return redirect()->route('admin_scan')->with('error', 'Gagal menambah personal trainer!');
+            }
+        }
         $personal_trainers = User::where('role', 'personal trainer')->where('status', 'active')->get();
         return view('admin.scan', compact('personal_trainers'));
     }

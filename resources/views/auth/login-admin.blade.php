@@ -34,13 +34,13 @@ Login
                             <div class="col-12">
                                 <label for="inputPhoneNumber" class="form-label">Phone Number</label>
                                 <input type="text" class="form-control" name="phone_number" id="inputPhoneNumber"
-                                    placeholder="Input Your Phone Number"
+                                    placeholder="Input Your Phone Number" value="{{ $phone_number ?? '' }}"
                                     oninput="this.value = this.value.replace(/\+62/, '0').replace(/[^0-9]/g, '');">
                             </div>
                             <div class="col-12">
                                 <label for="inputChoosePassword" class="form-label">Password</label>
                                 <div class="input-group" id="show_hide_password">
-                                    <input type="password" class="form-control border-end-0" name="password"
+                                    <input type="password" class="form-control border-end-0" name="password" value="{{ $password ?? '' }}"
                                         id="inputChoosePassword" placeholder="Enter Password">
                                     <a href="javascript:;" class="input-group-text bg-transparent"><i
                                             class="bi bi-eye-slash-fill"></i></a>
@@ -48,7 +48,9 @@ Login
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                                    {{-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="{{$remember ?? ''}}" checked name="remember_me"> --}}
+                                    {{-- cehck box if checked value 1 if not value 0 --}}
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="1" name="remember_me">
                                     <label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
                                 </div>
                             </div>

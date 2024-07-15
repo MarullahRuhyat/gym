@@ -61,8 +61,7 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
         Route::get('/', [AttendanceMemberController::class, 'index'])->name('personal_trainer.attendance_member');
         Route::post('/{id}', [AttendanceMemberController::class, 'update'])->name('personal_trainer.update');
         // search member with name
-        Route::get('/searchName', [AttendanceMemberController::class, 'searchName'])->name('personal_trainer.searchName');
-        Route::get('/searchDate', [AttendanceMemberController::class, 'searchDate'])->name('personal_trainer.searchDate');
+        Route::get('/search', [AttendanceMemberController::class, 'search'])->name('personal_trainer.search');
     });
 
     // payment
@@ -81,7 +80,10 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     // member page
     Route::match(['get', 'post'], '/member', [MemberController::class, 'index'])->name('admin_member');
     // Attendance page
-    Route::get('/attendance', [AbsenController::class, 'index'])->name('admin_absen');
+    Route::prefix('attendance-member')->group(function () {
+        Route::get('/', [AbsenController::class, 'index'])->name('admin_absen');
+        Route::get('/search', [AbsenController::class, 'search'])->name('admin_search');
+    });
     // salary page
     Route::get('/salary', [GajiController::class, 'index'])->name('admin_gaji');
     // scan page

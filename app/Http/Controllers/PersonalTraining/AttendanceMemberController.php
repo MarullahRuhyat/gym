@@ -16,7 +16,6 @@ class AttendanceMemberController extends Controller
     function index(Request $request)
     {
         $today = Carbon::today()->toDateString();
-        // dd($today);
         $dataLatihan = JenisLatihan::all();
         $data_member = AbsentMember::
             join('users', 'absent_members.member_id', '=', 'users.id')
@@ -64,11 +63,10 @@ class AttendanceMemberController extends Controller
         join('users', 'absent_members.member_id', '=', 'users.id')
         ->where('personal_trainer_id', auth()->user()->id)
         ->whereDate('date', $searchDate)
-        ->where('users.name', 'like', '%' . $request->searchName . '%')
         ->select('users.name', 'users.phone_number', 'absent_members.*')
         ->get();
 
-        dd($data_member);
+        // dd($data_member);
     
         return response()->json($data_member);
     }

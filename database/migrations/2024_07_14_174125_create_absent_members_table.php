@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('date');
             $table->string('qr_code');
             $table->string('path_qr_code');
-            $table->string('jenis_latihan');
+            $table->string('jenis_latihan')->nullable();
             // $table->foreignId('jenis_latihan')->nullable()->constrained('jenis_latihans');
             $table->timestamps();
         });

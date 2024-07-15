@@ -90,7 +90,7 @@ Absensi Member
                                     data-bs-target="#addJenisLatihanModal">Belum Memilih</button>
                                 @elseif (count(explode(',', $item->jenis_latihan)) > 2)
                                 <button type="button" class="badge bg-success open-multiple-jenis-latihan"
-                                    style="border: none" data-id="{{ $item->id }}" data-bs-toggle="modal"
+                                    style="border: none" data-id="{{ $item->id }}" data data-bs-toggle="modal" data-namaMember="{{$item->name}}" data-jenisLatihan="{{$item->jenis_latihan}}" 
                                     data-bs-target="#openMultipleJenisLatihan">Multiple</button>
                                 @else
                                 {{ $item->jenis_latihan }}
@@ -210,37 +210,36 @@ Absensi Member
 @endsection
 @push('script')
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const buttons = document.querySelectorAll('.open-multiple-jenis-latihan');
-        buttons.forEach(button => {
-            button.addEventListener('click', function () {
-                const memberId = this.getAttribute('data-id');
-                const dataMember = @json($data_member); // Pass your data from PHP to JavaScript
-                const selectedMember = dataMember.find(member => member.id == memberId);
-                const modalBodyContent = document.getElementById('modal-body-content');
+    $('#memberContainer').on('click', '.open-multiple-jenis-latihan', function () {
+    const memberId = $(this).data('id');
+    const jenisLatihan = $(this).data('jenislatihan');
+    const dataMember = @json($data_member); // Pass your data from PHP to JavaScript
+    const selectedMember = $(this).data('namamember');
+    const modalBodyContent = document.getElementById('modal-body-content');
+    modalBodyContent.innerHTML = ''; // Clear previous content
 
-                modalBodyContent.innerHTML = ''; // Clear previous content
 
-                if (selectedMember && selectedMember.jenis_latihan) {
-                    const jenisLatihanArray = selectedMember.jenis_latihan.split(',');
+    if (jenisLatihan) {
+        const jenisLatihanArray = jenisLatihan.split(',');
 
-                    if (jenisLatihanArray.length > 2) {
-                        const nameElement = document.createElement('h6');
-                        nameElement.textContent = selectedMember.name;
-                        modalBodyContent.appendChild(nameElement);
+        if (jenisLatihanArray.length > 2) {
+            const nameElement = document.createElement('h6');
+            nameElement.textContent = selectedMember;
+            modalBodyContent.appendChild(nameElement);
 
-                        const ulElement = document.createElement('ul');
-                        jenisLatihanArray.forEach(jenisLatihan => {
-                            const liElement = document.createElement('li');
-                            liElement.textContent = jenisLatihan;
-                            ulElement.appendChild(liElement);
-                        });
-                        modalBodyContent.appendChild(ulElement);
-                    }
-                }
+            const ulElement = document.createElement('ul');
+            jenisLatihanArray.forEach(jenisLatihan => {
+                const liElement = document.createElement('li');
+                liElement.textContent = jenisLatihan;
+                ulElement.appendChild(liElement);
             });
-        });
-    });
+            modalBodyContent.appendChild(ulElement);
+        }
+    } else {
+        console.error('jenisLatihan is undefined');
+    }
+});
+
 
     document.addEventListener('DOMContentLoaded', function () {
         const modal = document.getElementById('addJenisLatihanModal');
@@ -306,8 +305,8 @@ Absensi Member
                                                     data-bs-target="#addJenisLatihanModal">Belum Memilih</button>
                                                 ` : item.jenis_latihan.split(',').length > 2 ? `
                                                 <button type="button" class="badge bg-success open-multiple-jenis-latihan" style="border: none"
-                                                    data-id="${item.id}" data-bs-toggle="modal"
-                                                    data-bs-target="#openMultipleJenisLatihan">Multiple</button>
+                                                            data-id="${item.id}" data-jenisLatihan="${item.jenis_latihan}" data-namaMember="${item.name}" data-bs-toggle="modal"
+                                                            data-bs-target="#openMultipleJenisLatihan">Multiple</button>
                                                 ` : item.jenis_latihan}
                                             </h5>
                                         </div>
@@ -367,90 +366,91 @@ Absensi Member
             })
             .then(response => response.json())
             .then(data => {
+                console.log("test =", data);
                 const container = document.getElementById('memberContainer');
                 if (container) {
                     container.innerHTML = '';
                     data.forEach(item => {
                         const memberCard = `
-                <div class="col-md-6">
-                    <div class="card rounded-4">
-                        <div class="card-header">
-                            <h3>${item.name}</h3>
-                            <div class="test">
-                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown">
-                                    <i class="bi bi-three-dots-vertical"></i>
-                                    <span class="visually-hidden">Toggle Dropdown</span>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
-                                    <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-id="${item.id}"
-                                        data-bs-target="#addJenisLatihanModal">Pilih Jenis Latihan</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex flex-column gap-3 me-3">
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-0">Nomor Whatsapp</h6>
-                                    </div>
-                                    <div class="">
-                                        <h5 class="mb-0">${item.phone_number}</h5>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-0">Jenis Latihan</h6>
-                                    </div>
-                                    <div class="">
-                                        <h5 class="mb-0">
-                                            ${item.jenis_latihan === null ? `
-                                            <button type="button" class="badge bg-danger" style="border: none"
-                                                data-id="${item.id}" data-bs-toggle="modal"
-                                                data-bs-target="#addJenisLatihanModal">Belum Memilih</button>
-                                            ` : item.jenis_latihan.split(',').length > 2 ? `
-                                            <button type="button" class="badge bg-success open-multiple-jenis-latihan" style="border: none"
-                                                data-id="${item.id}" data-bs-toggle="modal"
-                                                data-bs-target="#openMultipleJenisLatihan">Multiple</button>
-                                            ` : item.jenis_latihan}
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-0">Absen Masuk</h6>
-                                    </div>
-                                    <div class="">
-                                        <h5 class="mb-0">
-                                            ${item.start_time === null ? '<span class="badge bg-danger">Belum Masuk</span>' : item.start_time.split('-').join(':')}
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-0">Absen Pulang</h6>
-                                    </div>
-                                    <div class="">
-                                        <h5 class="mb-0">
-                                            ${item.end_time === null ? '<span class="badge bg-danger">Belum Pulang</span>' : item.end_time.split('-').join(':')}
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-0">Status</h6>
-                                    </div>
-                                    <div class="disabled">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch" id="ada" checked disabled>
-                                            <label class="form-check-label" for="ada"><b> Active</b></label>
+                                <div class="col-md-6">
+                                    <div class="card rounded-4">
+                                        <div class="card-header">
+                                            <h3>${item.name}</h3>
+                                            <div class="test">
+                                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown">
+                                                    <i class="bi bi-three-dots-vertical"></i>
+                                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
+                                                    <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-id="${item.id}"
+                                                        data-bs-target="#addJenisLatihanModal">Pilih Jenis Latihan</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="d-flex flex-column gap-3 me-3">
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Nomor Whatsapp</h6>
+                                                    </div>
+                                                    <div class="">
+                                                        <h5 class="mb-0">${item.phone_number}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jenis Latihan</h6>
+                                                    </div>
+                                                    <div class="">
+                                                        <h5 class="mb-0">
+                                                            ${item.jenis_latihan == null ? `
+                                                        <button type="button" class="badge bg-danger" style="border: none"
+                                                            data-id="${item.id}" data-bs-toggle="modal"
+                                                            data-bs-target="#addJenisLatihanModal">Belum Memilih</button>
+                                                        ` : item.jenis_latihan.split(',').length > 2 ? `
+                                                        <button type="button" class="badge bg-success open-multiple-jenis-latihan" style="border: none"
+                                                            data-id="${item.id}" data-jenisLatihan="${item.jenis_latihan}" data-namaMember="${item.name}" data-bs-toggle="modal"
+                                                            data-bs-target="#openMultipleJenisLatihan">Multiple</button>
+                                                        ` : item.jenis_latihan}
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Absen Masuk</h6>
+                                                    </div>
+                                                    <div class="">
+                                                        <h5 class="mb-0">
+                                                            ${item.start_time === null ? '<span class="badge bg-danger">Belum Masuk</span>' : item.start_time.split('-').join(':')}
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Absen Pulang</h6>
+                                                    </div>
+                                                    <div class="">
+                                                        <h5 class="mb-0">
+                                                            ${item.end_time === null ? '<span class="badge bg-danger">Belum Pulang</span>' : item.end_time.split('-').join(':')}
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Status</h6>
+                                                    </div>
+                                                    <div class="disabled">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="ada" checked disabled>
+                                                            <label class="form-check-label" for="ada"><b> Active</b></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
+                            `;
                         container.innerHTML += memberCard;
                     });
                 }

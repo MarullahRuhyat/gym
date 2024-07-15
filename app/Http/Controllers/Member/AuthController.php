@@ -8,8 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Classes\sendWA;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -102,7 +101,6 @@ class AuthController extends Controller
     public function register()
     {
         $package = DB::table('packages')->get();
-        $session = Session::get('session');
         return view('member.auth.register', compact('package'));
     }
 
@@ -119,29 +117,6 @@ class AuthController extends Controller
         ];
         return response()->json($data);
     }
-
-    // public function register2($id)
-    // {
-    //     $package = DB::table('packages')->where('id', $id)->first();
-    //     $session = Session::all();
-    //     return view('member.auth.register', compact('package', 'session'));
-
-    // }
-
-    // public function store2(Request $request)
-    // {
-    //     dd($request->session()->all());
-    //     $request->session()->put('package', $request->all());
-    //     $id = $request->session()->get('package_id', $request->id);
-    //     return redirect()->route('member.register', $id);
-    // }
-
-    // public function register3()
-    // {
-    //     $package = DB::table('packages')->get();
-    //     $session = Session::all();
-    //     return view('member.auth.register', compact('package', 'session'));
-    // }
 
     public function register_submit(Request $request)
     {

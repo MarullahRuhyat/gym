@@ -225,6 +225,7 @@
            </div>
          </div>
        </li>
+       @if(auth()->user())
        <li class="nav-item dropdown">
          <a href="javascript:void(0);" class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
            <img src="https://placehold.co/110x110/png" class="rounded-circle p-1 border" width="45" height="45" alt="">
@@ -248,6 +249,7 @@
            @csrf
            </form> --}}
          </div>
+         @endif
        </li>
      </ul>
 

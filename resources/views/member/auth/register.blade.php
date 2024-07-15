@@ -7,268 +7,349 @@ starter Page
 <h6 class="text-uppercase">Non Linear</h6>
 <hr>
 <div id="stepper1" class="bs-stepper">
-   <div class="card">
-      <div class="card-header">
-         <div class="d-lg-flex flex-lg-row align-items-lg-center justify-content-lg-between" role="tablist">
-            <div class="step" data-target="#test-l-1">
-               <div class="step-trigger" role="tab" id="stepper1trigger1" aria-controls="test-l-1">
-                  <div class="bs-stepper-circle">1</div>
-                  <div class="">
-                     <h5 class="mb-0 steper-title">Package Member</h5>
-                     <p class="mb-0 steper-sub-title">Select your package membership</p>
-                  </div>
-               </div>
-            </div>
-            <div class="bs-stepper-line"></div>
-            <div class="step" data-target="#test-l-2">
-               <div class="step-trigger" role="tab" id="stepper1trigger2" aria-controls="test-l-2">
-                  <div class="bs-stepper-circle">2</div>
-                  <div class="">
-                     <h5 class="mb-0 steper-title">Details Package</h5>
-                     <p class="mb-0 steper-sub-title">This is details package</p>
-                  </div>
-               </div>
-            </div>
-            <div class="bs-stepper-line"></div>
-            <div class="step" data-target="#test-l-3">
-               <div class="step-trigger" role="tab" id="stepper1trigger2" aria-controls="test-l-3">
-                  <div class="bs-stepper-circle">3</div>
-                  <div class="">
-                     <h5 class="mb-0 steper-title">Account Details</h5>
-                     <p class="mb-0 steper-sub-title">Register your account</p>
-                  </div>
-               </div>
-            </div>
-            <div class="bs-stepper-line"></div>
-            <div class="step" data-target="#test-l-4">
-               <div class="step-trigger" role="tab" id="stepper1trigger4" aria-controls="test-l-4">
-                  <div class="bs-stepper-circle">4</div>
-                  <div class="">
-                     <h5 class="mb-0 steper-title">Payment</h5>
-                     <p class="mb-0 steper-sub-title">Payment Details</p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="card-body">
-         <div class="bs-stepper-content">
-            <form onSubmit="return false">
-               <div id="test-l-1" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger1">
-                  <h5 class="mb-1">Package Information</h5>
-                  <p class="mb-4">Select your package membership</p>
-                    <div class="row g-3">
-                        <div class="row row-cols-1 row-cols-lg-3 g-4">
-
-                        @foreach($package as $pkg)
-                            <div class="col-12 col-lg-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
-                                        <p class="card-text">{{ $pkg->description }}</p>
-                                        <h5>Price: ${{ $pkg->price }}</h5>
-                                        <div class="ratings text-warning mt-3">
-                                            <i class="material-icons-outlined">star</i>
-                                        </div>
-                                        <div class="mt-3 d-flex align-items-center justify-content-between">
-                                            <button
-                                                class="btn btn-grd bg-grd-success border-0 d-flex gap-2 px-3"
-                                                onclick="SelectPackage('{{ $pkg->id }}')">
-                                                <i class="material-icons-outlined">shopping_cart</i>
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-
+    <div class="card">
+        <div class="card-header">
+            <div class="d-lg-flex flex-lg-row align-items-lg-center justify-content-lg-between" role="tablist">
+                <div class="step" data-target="#test-l-1">
+                    <div class="step-trigger" role="tab" id="stepper1trigger1" aria-controls="test-l-1">
+                        <div class="bs-stepper-circle">1</div>
+                        <div class="">
+                            <h5 class="mb-0 steper-title">Package Member</h5>
+                            <p class="mb-0 steper-sub-title">Select your package membership</p>
+                        </div>
                     </div>
-                     <!-- <div class="col-12 col-lg-6">
-                        <button class="btn btn-grd-primary px-4" onclick="stepper1.next()">Next<i class='bx bx-right-arrow-alt ms-2'></i></button>
-                     </div> -->
-                  </div>
-                  <!---end row-->
-               </div>
-               <div id="test-l-2" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger2">
-                  <h5 class="mb-1">Package Details</h5>
-                  <p class="mb-4">This is details package</p>
-                  <div class="row g-3">
-                    <div class="col">
-                        <div class="card">
-                            <div class="row g-0">
-                                <div class="col-md-4 border-end">
-                                <div class="p-3">
-                                    <img src="{{ URL::asset('build/images/02.png') }}" class="w-100 rounded h-100" alt="...">
-                                </div>
-                                </div>
-                                <div class="col-md-8">
+                </div>
+                <div class="bs-stepper-line"></div>
+                <div class="step" data-target="#test-l-2">
+                    <div class="step-trigger" role="tab" id="stepper1trigger2" aria-controls="test-l-2">
+                        <div class="bs-stepper-circle">2</div>
+                        <div class="">
+                            <h5 class="mb-0 steper-title">Details Package</h5>
+                            <p class="mb-0 steper-sub-title">This is details package</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bs-stepper-line"></div>
+                <div class="step" data-target="#test-l-3">
+                    <div class="step-trigger" role="tab" id="stepper1trigger2" aria-controls="test-l-3">
+                        <div class="bs-stepper-circle">3</div>
+                        <div class="">
+                            <h5 class="mb-0 steper-title">Account Details</h5>
+                            <p class="mb-0 steper-sub-title">Register your account</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bs-stepper-line"></div>
+                <div class="step" data-target="#test-l-4">
+                    <div class="step-trigger" role="tab" id="stepper1trigger4" aria-controls="test-l-4">
+                        <div class="bs-stepper-circle">4</div>
+                        <div class="">
+                            <h5 class="mb-0 steper-title">Payment</h5>
+                            <p class="mb-0 steper-sub-title">Payment Details</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="bs-stepper-content">
+                <form onSubmit="return false">
+                    <div id="test-l-1" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger1">
+                        <div class="col">
+                            <hr>
+                            <div class="card">
                                 <div class="card-body">
-                                    <input type="text" name="package_id" id="package_id" value="">
-                                    <h5 name="stepper2_package_name" id="stepper2_package_name" class="card-title mb-3" value=""></h5>
-                                    <p class="card-text">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks
-                                        as necessary model.
-                                    </p>
-                                    <h5>Price : $149</h5>
-                                    <div class="ratings text-warning mt-3">
-                                        <i class="material-icons-outlined">star</i>
-                                        <i class="material-icons-outlined">star</i>
-                                        <i class="material-icons-outlined">star</i>
-                                        <i class="material-icons-outlined">star</i>
-                                        <i class="material-icons-outlined">star</i>
+                                    <ul class="nav nav-tabs nav-primary" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab" aria-selected="true">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="tab-icon"><i class="bi bi-person me-1 fs-6"></i>
+                                                    </div>
+                                                    <div class="tab-title">Harian</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile" role="tab" aria-selected="false">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="tab-icon"><i class="bi bi-person me-1 fs-6"></i>
+                                                    </div>
+                                                    <div class="tab-title">Mandiri</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#primarycontact" role="tab" aria-selected="false">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="tab-icon"><i class='bi bi-person me-1 fs-6'></i>
+                                                    </div>
+                                                    <div class="tab-title">PT</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content py-3">
+                                        <div class="tab-pane fade show active" id="primaryhome" role="tabpanel">
+                                            <div class="row g-3">
+                                                <div class="row row-cols-1 row-cols-lg-3 g-4">
+                                                    @foreach($package as $pkg)
+                                                    @if($pkg->tipe == 'harian')
+                                                    <div class="col-12 col-lg-4">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
+                                                                <p class="card-text">{{ $pkg->description }}</p>
+                                                                <h5>Price: ${{ $pkg->price }}</h5>
+                                                                <div class="mt-3 d-flex align-items-center justify-content-between">
+                                                                    <button class="btn btn-grd bg-grd-success border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
+                                                                        <!-- <i class="material-icons-outlined">shopping_cart</i> -->
+                                                                        Select Package
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
+                                            <div class="row g-3">
+                                                <div class="row row-cols-1 row-cols-lg-3 g-4">
+                                                    @foreach($package as $pkg)
+                                                    @if($pkg->tipe == 'mandiri')
+                                                    <div class="col-12 col-lg-4">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
+                                                                <p class="card-text">{{ $pkg->description }}</p>
+                                                                <h5>Price: ${{ $pkg->price }}</h5>
+                                                                <div class="mt-3 d-flex align-items-center justify-content-between">
+                                                                    <button class="btn btn-grd bg-grd-success border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
+                                                                        <!-- <i class="material-icons-outlined">shopping_cart</i> -->
+                                                                        Select Package
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                    @endforeach
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="primarycontact" role="tabpanel">
+                                            <div class="row g-3">
+                                                <div class="row row-cols-1 row-cols-lg-3 g-4">
+                                                    @foreach($package as $pkg)
+                                                    @if($pkg->tipe == 'pt')
+                                                    <div class="col-12 col-lg-4">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
+                                                                <p class="card-text">{{ $pkg->description }}</p>
+                                                                <h5>Price: ${{ $pkg->price }}</h5>
+                                                                <div class="mt-3 d-flex align-items-center justify-content-between">
+                                                                    <button class="btn btn-grd bg-grd-success border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
+                                                                        <!-- <i class="material-icons-outlined">shopping_cart</i> -->
+                                                                        Select Package
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                    @endforeach
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mt-3 d-flex align-items-center justify-content-between">
-                                        <button class="btn btn-grd bg-grd-success border-0 d-flex gap-2 px-3"><i
-                                            class="material-icons-outlined">shopping_cart</i>Add to Cart</button>
-                                    </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                     <div class="col-12">
-                        <div class="d-flex align-items-center gap-3">
-                           <button class="btn btn-grd-info px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
-                           <button class="btn btn-grd-primary px-4" onclick="stepper1.next()">Next<i class='bx bx-right-arrow-alt ms-2'></i></button>
-                           <!-- <button class="btn btn-grd-primary px-4" onclick="Stepper3Account()">Next<i class='bx bx-right-arrow-alt ms-2'></i></button> -->
+                    <div id="test-l-2" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger2">
+                        <h5 class="mb-1">Package Details</h5>
+                        <p class="mb-4">This is details package</p>
+                        <div class="row g-3">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-md-4 border-end">
+                                            <div class="p-3">
+                                                <img src="{{ URL::asset('build/images/02.png') }}" class="w-100 rounded h-100" alt="...">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <input type="text" name="package_id" id="package_id" value="">
+                                                <h5 name="stepper2_package_name" id="stepper2_package_name" class="card-title mb-3" value=""></h5>
+                                                <p class="card-text">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks
+                                                    as necessary model.
+                                                </p>
+                                                <h5>Price : $149</h5>
+                                                <div class="ratings text-warning mt-3">
+                                                    <i class="material-icons-outlined">star</i>
+                                                    <i class="material-icons-outlined">star</i>
+                                                    <i class="material-icons-outlined">star</i>
+                                                    <i class="material-icons-outlined">star</i>
+                                                    <i class="material-icons-outlined">star</i>
+                                                </div>
+                                                <div class="mt-3 d-flex align-items-center justify-content-between">
+                                                    <button class="btn btn-grd bg-grd-success border-0 d-flex gap-2 px-3"><i class="material-icons-outlined">shopping_cart</i>Add to Cart</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center gap-3">
+                                    <button class="btn btn-grd-info px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
+                                    <button class="btn btn-grd-primary px-4" onclick="stepper1.next()">Next<i class='bx bx-right-arrow-alt ms-2'></i></button>
+                                    <!-- <button class="btn btn-grd-primary px-4" onclick="Stepper3Account()">Next<i class='bx bx-right-arrow-alt ms-2'></i></button> -->
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <!---end row-->
-               </div>
-               <div id="test-l-3" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger3">
-                  <h5 class="mb-1">Account Details</h5>
-                  <p class="mb-4">Enter Your Account Details.</p>
-                  <div class="row g-3">
-                    <div class="col">
-                        <div class="card">
-							<div class="card-body p-4">
-								<form class="row g-3 needs-validation" novalidate>
-                                    <input type="text" name="stepper3_package_id" id="stepper3_package_id" value="" disabled>
-									<div class="col-md-6">
-										<label for="bsValidation1" class="form-label">Name</label>
-										<input type="text" class="form-control" id="bsValidation1" placeholder="First Name" value="Jhon" required>
-										<div class="valid-feedback">
-											Looks good!
-										  </div>
-									</div>
-									<div class="col-md-12">
-										<label for="bsValidation2" class="form-label">Phone Number</label>
-										<input type="text" class="form-control" id="bsValidation2" placeholder="Phone" required>
-										<div class="invalid-feedback">
-											Please choose a username.
-										  </div>
-									</div>
-									<div class="col-md-12">
-										<div class="d-flex align-items-center gap-3">
-                                            <label for="bsValidation3" class="form-label">Gender</label>
-											<div class="form-check">
-												<input type="radio" class="form-check-input" id="bsValidation3" name="radio-stacked" required>
-												<label class="form-check-label" for="bsValidation6">Male</label>
-											  </div>
-											  <div class="form-check">
-												<input type="radio" class="form-check-input" id="bsValidation3" name="radio-stacked" required>
-												<label class="form-check-label" for="bsValidation7">Female</label>
-											  </div>
-										</div>
-									</div>
-									<div class="col-md-12">
-										<label for="bsValidation4" class="form-label">Address</label>
-										<textarea class="form-control" id="bsValidation4" placeholder="Address ..." rows="3" required></textarea>
-										<div class="invalid-feedback">
-											Please enter a valid address.
-										</div>
-									</div>
-                                    <div class="col-md-12">
-                                        <label for="bsValidation5" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="bsValidation5" placeholder="Password" required>
-                                        <div class="invalid-feedback">
-                                            Please fill your password.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label for="bsValidation6" class="form-label">Confirm Password</label>
-                                        <input type="password" class="form-control" id="bsValidation6" placeholder="Confirm Password" required>
-                                        <div class="invalid-feedback">
-                                            Please confirm your password.
-                                        </div>
-                                    </div>
-									<div class="col-md-12">
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" id="bsValidation7" required>
-											<label class="form-check-label" for="bsValidation7">Agree to terms and conditions</label>
-											<div class="invalid-feedback">
-												You must agree before submitting.
-											  </div>
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="d-md-flex d-grid align-items-center gap-3">
-                                            <button class="btn btn-grd-info px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
-											<button id="register_submit" type="submit" class="btn btn-grd-primary px-4">Submit</button>
-											<!-- <button type="reset" class="btn btn-grd-info px-4">Reset</button> -->
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
+                        <!---end row-->
                     </div>
-                     <!-- <div class="col-12">
+                    <div id="test-l-3" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger3">
+                        <h5 class="mb-1">Account Details</h5>
+                        <p class="mb-4">Enter Your Account Details.</p>
+                        <div class="row g-3">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body p-4">
+                                        <form class="row g-3 needs-validation" novalidate>
+                                            <input type="text" name="stepper3_package_id" id="stepper3_package_id" value="" disabled>
+                                            <div class="col-md-6">
+                                                <label for="bsValidation1" class="form-label">Name</label>
+                                                <input type="text" class="form-control" id="bsValidation1" placeholder="First Name" value="Jhon" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label for="bsValidation2" class="form-label">Phone Number</label>
+                                                <input type="text" class="form-control" id="bsValidation2" placeholder="Phone" required>
+                                                <div class="invalid-feedback">
+                                                    Please choose a username.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <label for="bsValidation3" class="form-label">Gender</label>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="bsValidation3" name="radio-stacked" required>
+                                                        <label class="form-check-label" for="bsValidation6">Male</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="bsValidation3" name="radio-stacked" required>
+                                                        <label class="form-check-label" for="bsValidation7">Female</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label for="bsValidation4" class="form-label">Address</label>
+                                                <textarea class="form-control" id="bsValidation4" placeholder="Address ..." rows="3" required></textarea>
+                                                <div class="invalid-feedback">
+                                                    Please enter a valid address.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label for="bsValidation5" class="form-label">Password</label>
+                                                <input type="password" class="form-control" id="bsValidation5" placeholder="Password" required>
+                                                <div class="invalid-feedback">
+                                                    Please fill your password.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label for="bsValidation6" class="form-label">Confirm Password</label>
+                                                <input type="password" class="form-control" id="bsValidation6" placeholder="Confirm Password" required>
+                                                <div class="invalid-feedback">
+                                                    Please confirm your password.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="bsValidation7" required>
+                                                    <label class="form-check-label" for="bsValidation7">Agree to terms and conditions</label>
+                                                    <div class="invalid-feedback">
+                                                        You must agree before submitting.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="d-md-flex d-grid align-items-center gap-3">
+                                                    <button class="btn btn-grd-info px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
+                                                    <button id="register_submit" type="submit" class="btn btn-grd-primary px-4">Submit</button>
+                                                    <!-- <button type="reset" class="btn btn-grd-info px-4">Reset</button> -->
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-12">
                         <div class="d-flex align-items-center gap-3">
                            <button class="btn btn-grd-info px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
                            <button class="btn btn-grd-primary px-4" onclick="stepper1.next()">Next<i class='bx bx-right-arrow-alt ms-2'></i></button>
                         </div>
                      </div> -->
-                  </div>
-                  <!---end row-->
-               </div>
-               <div id="test-l-4" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger4">
-                  <h5 class="mb-1">Payment</h5>
-                  <p class="mb-4">Payment Details</p>
-                  <div class="row g-3">
-                  <form action="{{ route('member.payment') }}" method="GET">
-                     @csrf
-                    <input type="text" name="submit_user_id" id="submit_user_id" value="">
-                    <input type="text" name="submit_package_id" id="submit_package_id" value="">
-                     <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                            <h4 class="card-title mb-4 fw-bold">Summary</h4>
-                            <div>
-                                <div class="d-flex justify-content-between">
-                                <p class="fw-semi-bold">Items subtotal :</p>
-                                <p id="payment-item-total" class="fw-semi-bold">$891</p>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                <p class="fw-semi-bold">Discount :</p>
-                                <p id="payment-discount" class="text-danger fw-semi-bold">-$48</p>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                <p class="fw-semi-bold">Tax :</p>
-                                <p id="payment-tax" class="fw-semi-bold">$156.70</p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between border-top pt-4">
-                                <h5 class="mb-0 fw-bold">Total :</h5>
-                                <h5 id="payment-total" class="mb-0 fw-bold">$925.44</h5>
-                            </div>
-                            </div>
                         </div>
+                        <!---end row-->
                     </div>
-                     <div class="col-12">
-                        <div class="d-flex align-items-center gap-3">
-                           <button class="btn btn-grd-info px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
-                           <!-- <a type="submit" class="btn btn-grd-primary px-4">Pay<i class='bx bx-right-arrow-alt ms-2'></i></a> -->
-                            <button type="submit" class="btn btn-grd-primary px-4">Pay<i class='bx bx-right-arrow-alt ms-2'></i></button>
+                    <div id="test-l-4" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger4">
+                        <h5 class="mb-1">Payment</h5>
+                        <p class="mb-4">Payment Details</p>
+                        <div class="row g-3">
+                            <form action="{{ route('member.payment') }}" method="GET">
+                                @csrf
+                                <input type="text" name="submit_user_id" id="submit_user_id" value="">
+                                <input type="text" name="submit_package_id" id="submit_package_id" value="">
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title mb-4 fw-bold">Summary</h4>
+                                            <div>
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="fw-semi-bold">Items subtotal :</p>
+                                                    <p id="payment-item-total" class="fw-semi-bold">$891</p>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="fw-semi-bold">Discount :</p>
+                                                    <p id="payment-discount" class="text-danger fw-semi-bold">-$48</p>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="fw-semi-bold">Tax :</p>
+                                                    <p id="payment-tax" class="fw-semi-bold">$156.70</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between border-top pt-4">
+                                                <h5 class="mb-0 fw-bold">Total :</h5>
+                                                <h5 id="payment-total" class="mb-0 fw-bold">$925.44</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <button class="btn btn-grd-info px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
+                                        <!-- <a type="submit" class="btn btn-grd-primary px-4">Pay<i class='bx bx-right-arrow-alt ms-2'></i></a> -->
+                                        <button type="submit" class="btn btn-grd-primary px-4">Pay<i class='bx bx-right-arrow-alt ms-2'></i></button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                     </div>
-                    </form>
-                  </div>
-                  <!---end row-->
-               </div>
-         </div>
-      </div>
-   </div>
+                        <!---end row-->
+                    </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!--end stepper one-->
 @endsection
@@ -325,7 +406,7 @@ starter Page
                     package_id: package_id,
                     name: name,
                     phone_number: phone_number,
-                    sex : sex,
+                    sex: sex,
                     address: address,
                     password: password,
                     password_confirmation: password_confirmation,
@@ -343,7 +424,6 @@ starter Page
             });
         });
     });
-
 </script>
 <!--bootstrap js-->
 <script src="{{ URL::asset('build/js/bootstrap.bundle.min.js') }}"></script>

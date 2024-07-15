@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Member;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Member\Notification;
+use App\Models\Donation; // Add this line to import the Donation model if it's not already imported.
 
 class PaymentController extends Controller
 {
@@ -48,72 +50,4 @@ class PaymentController extends Controller
         }
     }
 
-    /**
-     * Midtrans notification handler.
-     *
-     * @param Request $request
-     *
-     * @return void
-     */
-    public function notification(Request $request)
-    {
-        $notif = new Notification();
-
-          $transaction = $notif->transaction_status;
-          $type = $notif->payment_type;
-          $orderId = $notif->order_id;
-          $fraud = $notif->fraud_status;
-          $donation = Donation::findOrFail($orderId);
-
-          if ($transaction == 'capture') {
-
-            // For credit card transaction, we need to check whether transaction is challenge by FDS or not
-            if ($type == 'credit_card') {
-
-              if($fraud == 'challenge') {
-                // TODO set payment status in merchant's database to 'Challenge by FDS'
-                // TODO merchant should decide whether this transaction is authorized or not in MAP
-                // $donation->addUpdate("Transaction order_id: " . $orderId ." is challenged by FDS");
-                $donation->setPending();
-              } else {
-                // TODO set payment status in merchant's database to 'Success'
-                // $donation->addUpdate("Transaction order_id: " . $orderId ." successfully captured using " . $type);
-                $donation->setSuccess();
-              }
-
-            }
-
-          } elseif ($transaction == 'settlement') {
-
-            // TODO set payment status in merchant's database to 'Settlement'
-            // $donation->addUpdate("Transaction order_id: " . $orderId ." successfully transfered using " . $type);
-            $donation->setSuccess();
-
-          } elseif($transaction == 'pending'){
-
-            // TODO set payment status in merchant's database to 'Pending'
-            // $donation->addUpdate("Waiting customer to finish transaction order_id: " . $orderId . " using " . $type);
-            $donation->setPending();
-
-          } elseif ($transaction == 'deny') {
-
-            // TODO set payment status in merchant's database to 'Failed'
-            // $donation->addUpdate("Payment using " . $type . " for transaction order_id: " . $orderId . " is Failed.");
-            $donation->setFailed();
-
-          } elseif ($transaction == 'expire') {
-
-            // TODO set payment status in merchant's database to 'expire'
-            // $donation->addUpdate("Payment using " . $type . " for transaction order_id: " . $orderId . " is expired.");
-            $donation->setExpired();
-
-          } elseif ($transaction == 'cancel') {
-
-            // TODO set payment status in merchant's database to 'Failed'
-            // $donation->addUpdate("Payment using " . $type . " for transaction order_id: " . $orderId . " is canceled.");
-            $donation->setFailed();
-
-          }
-
-    }
 }

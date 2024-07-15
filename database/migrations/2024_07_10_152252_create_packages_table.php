@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description');
             $table->integer('price');
             $table->integer('duration');
+            $table->enum('tipe', ['harian', 'mandiri', 'pt']);
             $table->timestamps();
         });
     }

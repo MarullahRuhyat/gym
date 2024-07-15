@@ -36,7 +36,7 @@ Absensi Member
 <div class="d-flex flex-column flex-md-row justify-content-end align-items-center mb-2 mt-3">
     <form id="searchForm" class="form-inline d-flex flex-column flex-md-row w-100 mb-2 mb-md-0 me-md-1">
         <div class="input-group mb-2 mb-md-0 w-100 me-md-1">
-            <input type="text" class="form-control" id="searchName" name="searchName" placeholder="Masukkan Nama Member">
+            <input type="text" class="form-control" id="searchName" name="searchName" placeholder="Enter Member Name">
         </div>
         <div class="input-group mb-2 mb-md-0 w-100 me-md-1">
             <input type="date" class="form-control" id="searchDate" name="searchDate" placeholder="Masukkan Tanggal">

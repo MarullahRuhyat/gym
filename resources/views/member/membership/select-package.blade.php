@@ -83,37 +83,28 @@ body {
 
 </style>
 @endsection
-
 @section('content')
 <div class="card rounded-4">
     <div class="card-body" style="height: 100%;">
         <div class="mt-5">
             <div class="text-center" style="padding-bottom:30px;">
-                <h5 class="mb-3" style="padding-bottom:20px;">Explore top services</h5>
-                <div class="wrapper option-1 option-1-1">
-                    <ol class="c-stepper">
-                        <li class="c-stepper__item">
-                        <h3 class="c-stepper__title">Step 1</h3>
-                        <p class="c-stepper__desc">Some desc text</p>
-                        </li>
-                        <li class="c-stepper__item">
-                        <h3 class="c-stepper__title">Step 2</h3>
-                        <p class="c-stepper__desc">Some desc text</p>
-                        </li>
-                        <li class="c-stepper__item">
-                        <h3 class="c-stepper__title">Step 3</h3>
-                        <p class="c-stepper__desc">Some desc text</p>
-                        </li>
-                    </ol>
-                </div>
+                <h5 class="mb-3" style="padding-bottom:20px;">Select Packages</h5>
             </div>
             <div class="row row-cols-1 row-cols-lg-3 g-4">
-                <div class="col">
+                @foreach($package as $package)
+                <div class="col" style="padding-bottom:10px">
                     <div class="text-center">
-                        <img src="https://placehold.co/400x300/png" class="img-fluid rounded" alt="">
-                        <h5 class="mb-0 mt-3">Logo Design</h5>
+                        <div class="card rounded-4 border-0 shadow-sm " style="height:300px; background-color:#adb5bd">
+                            <div class="card-body" style="display: flex; flex-direction: column; justify-content: flex-end;">
+                                <h5 class="mb-3">{{$package->name}}</h5>
+                                <h1 class="mb-3">{{$package->price}}</h1>
+                                <p class="gray-color mb-3">{{$package->description}}</p>
+                                 <a href="{{route('member.selected_package_detail', $package->id)}}" class="btn btn-primary">Select</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                @endforeach
             </div><!--end row-->
         </div>
 

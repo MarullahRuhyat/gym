@@ -18,8 +18,9 @@ return new class extends Migration
             // $table->string('email')->unique();
             // $table->timestamp('email_verified_at')->nullable();
             $table->string('phone_number');
+            $table->string('address');
             $table->enum('role', ['admin', 'member', 'personal trainer'])->default('member');
-            $table->enum('status', ['active', 'inactive','expired'])->default('active');
+            $table->enum('status', ['active', 'inactive','expired'])->default('inactive');
             $table->integer('available_personal_trainer_quota')->default(0);
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();

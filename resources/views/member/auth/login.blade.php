@@ -63,7 +63,7 @@
                     },
                     success: function (response) {
                         if (response.status == true) {
-                            window.location.href = "/member/dashboard";
+                            window.location.href = "{{ route('member.dashboard') }}";
                         }
                     },
                     error: function (xhr, status, error) {

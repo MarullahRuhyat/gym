@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'testing',
             'phone_number' => '081234567890',
             // 'date_of_birth' => '2000-01-01',
-            // 'address' => 'Jl. Jalan No. 1, Jakarta',
+            'address' => 'Jl. Jalan No. 1, Jakarta',
             'password' => bcrypt('password'),
         ]);
     }

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Classes\sendWA;
-// use Session;
+use Session;
 
 class AuthController extends Controller
 {
@@ -97,10 +97,91 @@ class AuthController extends Controller
         }
     }
 
+    // register
+
+    public function register()
+    {
+        $package = DB::table('packages')->get();
+        $session = Session::get('session');
+        return view('member.auth.register', compact('package'));
+    }
+
+    public function store1(Request $request)
+    {
+        $package_id = $request->package_id;
+        $package = DB::table('packages')->where('id', $package_id)->get();
+        $data = [
+            'status' => true,
+            'message' => 'Package has been selected.',
+            'data' => [
+                'package' => $package
+            ],
+        ];
+        return response()->json($data);
+    }
+
+    // public function register2($id)
+    // {
+    //     $package = DB::table('packages')->where('id', $id)->first();
+    //     $session = Session::all();
+    //     return view('member.auth.register', compact('package', 'session'));
+
+    // }
+
+    // public function store2(Request $request)
+    // {
+    //     dd($request->session()->all());
+    //     $request->session()->put('package', $request->all());
+    //     $id = $request->session()->get('package_id', $request->id);
+    //     return redirect()->route('member.register', $id);
+    // }
+
+    // public function register3()
+    // {
+    //     $package = DB::table('packages')->get();
+    //     $session = Session::all();
+    //     return view('member.auth.register', compact('package', 'session'));
+    // }
+
+    public function register_submit(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'min:3', 'max:255'],
+            // 'email' => ['required', 'email', 'unique:users,email'],
+            'phone_number' => ['required', 'string', 'min:10', 'unique:users,phone_number'],
+            'address' => ['required', 'string', 'min:3', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'max:255'],
+            'password_confirmation' => ['required', 'same:password'],
+            ''
+        ]);
+
+        if ($validator->fails()) {
+            $status = false;
+            $message = $validator->errors()->all();
+        } else {
+            $user = User::create($request->all());
+            $status = true;
+            $message = 'Register success.';
+        }
+
+        $data = [
+            'status' => $status,
+            'message' => $message,
+            'data' => [
+                'user' => $user ?? null,
+                'package_id' => $request->package_id ?? null,
+            ]
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    // end register
+
     public function logout()
     {
         // Session::flush();
         Auth::logout();
-        return redirect()->route('auth.login');
+        return redirect()->route('member.send-otp');
     }
 }

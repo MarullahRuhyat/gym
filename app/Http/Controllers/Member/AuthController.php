@@ -135,6 +135,7 @@ class AuthController extends Controller
             $message = $validator->errors()->all();
         } else {
             $user = User::create($request->all());
+            $user_membership_packages =
             $status = true;
             $message = 'Register success.';
         }

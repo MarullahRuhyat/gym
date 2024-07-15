@@ -48,9 +48,6 @@ Route::prefix('auth')->group(function () {
 Route::prefix('member')->group(function () {
     Route::get('/register', [MemberAuthController::class, 'register'])->name('member.register');
     Route::post('/register/process', [MemberAuthController::class, 'store1'])->name('member.register.process');
-    // Route::get('/register-2', [MemberAuthController::class, 'register2'])->name('member.register-2');
-    // Route::post('/register-2/process', [MemberAuthController::class, 'store2'])->name('member.register-2.process');
-    // Route::get('/register-3', [MemberAuthController::class, 'register3'])->name('member.register-3');
     Route::post('/register-submit', [MemberAuthController::class, 'register_submit'])->name('member.register.submit');
 
     Route::get('/send-otp', [MemberAuthController::class, 'send_otp'])->name('member.send-otp');
@@ -73,20 +70,21 @@ Route::prefix('member')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [ProfileController::class, 'dashboard'])->name('member.dashboard');
         Route::prefix('profile')->group(function () {
+            Route::get('/', [ProfileController::class, 'profile'])->name('member.profile');
             Route::get('/edit-profile', [ProfileController::class, 'edit_profile'])->name('member.edit_profile');
-            Route::post('/edit-profile', [ProfileController::class, 'edit_profile_process'])->name('member.edit-profile.process');
-            Route::get('/change-password', [ProfileController::class, 'change_password'])->name('member.change_password');
-            Route::post('/change-password', [ProfileController::class, 'change_password_process'])->name('member.change-password.process');
+            Route::post('/edit-profile/{id}', [ProfileController::class, 'edit_profile_process'])->name('member.edit-profile.process');
+            // Route::get('/change-password', [ProfileController::class, 'change_password'])->name('member.change_password');
+            // Route::post('/change-password', [ProfileController::class, 'change_password_process'])->name('member.change-password.process');
         });
         Route::prefix('membership')->group(function () {
-            Route::post('/subscribe-membership', [MembershipController::class, 'subscribe_membership'])->name('member.subscribe_membership');
-            Route::get('/history-membership', [MembershipController::class, 'history_membership'])->name('member.history-membership');
-            Route::get('/detail-membership/{id}', [MembershipController::class, 'detail_membership'])->name('member.detail-membership');
+            // Route::post('/subscribe-membership', [MembershipController::class, 'subscribe_membership'])->name('member.subscribe_membership');
+            // Route::get('/history-membership', [MembershipController::class, 'history_membership'])->name('member.history-membership');
+            // Route::get('/detail-membership/{id}', [MembershipController::class, 'detail_membership'])->name('member.detail-membership');
         });
         Route::prefix('attendance')->group(function () {
-            Route::post('/check-in', [AttendanceController::class, 'check_in'])->name('member.check_in');
-            Route::post('/check-out', [AttendanceController::class, 'check_out'])->name('member.check_out');
-            Route::get('/history-attendance', [AttendanceController::class, 'history_attendance'])->name('member.history-attendance');
+            // Route::post('/check-in', [AttendanceController::class, 'check_in'])->name('member.check_in');
+            // Route::post('/check-out', [AttendanceController::class, 'check_out'])->name('member.check_out');
+            // Route::get('/history-attendance', [AttendanceController::class, 'history_attendance'])->name('member.history-attendance');
         });
     });
 });

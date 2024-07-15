@@ -29,7 +29,7 @@ starter Page
                                 <span class="visually-hidden">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
-                                <a class="dropdown-item button_edit" href="javascript:;" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ $user->id }}" data-name="{{ $user->name }}" data-phone="{{ $user->phone_number }}">Edit</a>
+                                <a class="dropdown-item button_edit" href="javascript:;" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ $user->id }}" data-name="{{ $user->name }}" data-phone="{{ $user->phone_number }}" data-status="{{ $user->status }}">Edit</a>
                                 <a class="dropdown-item button_delete" href="javascript:;" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $user->id }}" data-name="{{ $user->name }}">Delete</a>
                             </div>
                         </div>
@@ -52,9 +52,14 @@ starter Page
                         </div>
                         <div class="">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="ada" checked disabled>
                                 <label>
+                                    @if($user->status == 'active')
+                                    <input class="form-check-input" type="checkbox" role="switch" id="ada" checked disabled>
                                     <h5> Active</h5>
+                                    @else
+                                    <input class="form-check-input" type="checkbox" role="switch" id="ada" disabled>
+                                    <h5> InActive</h5>
+                                    @endif
                                 </label>
                             </div>
                         </div>
@@ -88,6 +93,15 @@ starter Page
                         <label for="phone_number" class="form-label">Phone Number</label>
                         <input type="text" class="form-control" id="phone_number" name="phone_number" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" aria-label="Default select example" required name="status">
+                            <option value="" selected>-- select --</option>
+                            <option value="active">active</option>
+                            <option value="inactive">inactive</option>
+                        </select>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -118,10 +132,18 @@ starter Page
                         <label for="phone_edit" class="form-label">Phone Number</label>
                         <input type="text" class="form-control" id="phone_edit" name="phone_number" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" aria-label="Default select example" required name="status" id="status_edit">
+                            <option value="" selected>-- select --</option>
+                            <option value="active">active</option>
+                            <option value="inactive">inactive</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
         </div>
@@ -163,9 +185,12 @@ starter Page
             let id = $(this).data('id');
             let name = $(this).data('name');
             let phone = $(this).data('phone');
+            let status = $(this).data('status');
             $('#name_edit').val(name);
             $('#phone_edit').val(phone);
             $('#id_edit').val(id);
+            console.log(status);
+            $('#status_edit').val(status);
         });
 
         // Populate Delete Modal

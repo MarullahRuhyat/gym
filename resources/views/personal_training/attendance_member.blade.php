@@ -90,7 +90,8 @@ Absensi Member
                                     data-bs-target="#addJenisLatihanModal">Belum Memilih</button>
                                 @elseif (count(explode(',', $item->jenis_latihan)) > 2)
                                 <button type="button" class="badge bg-success open-multiple-jenis-latihan"
-                                    style="border: none" data-id="{{ $item->id }}" data data-bs-toggle="modal" data-namaMember="{{$item->name}}" data-jenisLatihan="{{$item->jenis_latihan}}" 
+                                    style="border: none" data-id="{{ $item->id }}" data data-bs-toggle="modal"
+                                    data-namaMember="{{$item->name}}" data-jenisLatihan="{{$item->jenis_latihan}}"
                                     data-bs-target="#openMultipleJenisLatihan">Multiple</button>
                                 @else
                                 {{ $item->jenis_latihan }}
@@ -211,34 +212,34 @@ Absensi Member
 @push('script')
 <script>
     $('#memberContainer').on('click', '.open-multiple-jenis-latihan', function () {
-    const memberId = $(this).data('id');
-    const jenisLatihan = $(this).data('jenislatihan');
-    const dataMember = @json($data_member); // Pass your data from PHP to JavaScript
-    const selectedMember = $(this).data('namamember');
-    const modalBodyContent = document.getElementById('modal-body-content');
-    modalBodyContent.innerHTML = ''; // Clear previous content
+        const memberId = $(this).data('id');
+        const jenisLatihan = $(this).data('jenislatihan');
+        const dataMember = @json($data_member); // Pass your data from PHP to JavaScript
+        const selectedMember = $(this).data('namamember');
+        const modalBodyContent = document.getElementById('modal-body-content');
+        modalBodyContent.innerHTML = ''; // Clear previous content
 
 
-    if (jenisLatihan) {
-        const jenisLatihanArray = jenisLatihan.split(',');
+        if (jenisLatihan) {
+            const jenisLatihanArray = jenisLatihan.split(',');
 
-        if (jenisLatihanArray.length > 2) {
-            const nameElement = document.createElement('h6');
-            nameElement.textContent = selectedMember;
-            modalBodyContent.appendChild(nameElement);
+            if (jenisLatihanArray.length > 2) {
+                const nameElement = document.createElement('h6');
+                nameElement.textContent = selectedMember;
+                modalBodyContent.appendChild(nameElement);
 
-            const ulElement = document.createElement('ul');
-            jenisLatihanArray.forEach(jenisLatihan => {
-                const liElement = document.createElement('li');
-                liElement.textContent = jenisLatihan;
-                ulElement.appendChild(liElement);
-            });
-            modalBodyContent.appendChild(ulElement);
+                const ulElement = document.createElement('ul');
+                jenisLatihanArray.forEach(jenisLatihan => {
+                    const liElement = document.createElement('li');
+                    liElement.textContent = jenisLatihan;
+                    ulElement.appendChild(liElement);
+                });
+                modalBodyContent.appendChild(ulElement);
+            }
+        } else {
+            console.error('jenisLatihan is undefined');
         }
-    } else {
-        console.error('jenisLatihan is undefined');
-    }
-});
+    });
 
 
     document.addEventListener('DOMContentLoaded', function () {

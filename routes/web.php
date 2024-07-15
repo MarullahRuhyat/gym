@@ -61,8 +61,7 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
         Route::get('/', [AttendanceMemberController::class, 'index'])->name('personal_trainer.attendance_member');
         Route::post('/{id}', [AttendanceMemberController::class, 'update'])->name('personal_trainer.update');
         // search member with name
-        Route::get('/searchName', [AttendanceMemberController::class, 'searchName'])->name('personal_trainer.searchName');
-        Route::get('/searchDate', [AttendanceMemberController::class, 'searchDate'])->name('personal_trainer.searchDate');
+        Route::get('/search', [AttendanceMemberController::class, 'search'])->name('personal_trainer.search');
     });
 
     // payment

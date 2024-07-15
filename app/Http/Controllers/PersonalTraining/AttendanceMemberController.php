@@ -36,38 +36,32 @@ class AttendanceMemberController extends Controller
         return redirect()->back()->with('success', 'Jenis Latihan berhasil diperbarui');
     }
 
-    public function searchName(Request $request)
+    public function search(Request $request)
     {
-        $today = Carbon::today()->toDateString();
-        $dataLatihan = JenisLatihan::all();
-        $data_member = AbsentMember::
-            join('users', 'absent_members.member_id', '=', 'users.id')
-            ->where('personal_trainer_id', auth()->user()->id)
-            ->whereDate('absent_members.date', $today)
-            ->where('users.name', 'like', '%' . $request->searchName . '%')
-            ->select('users.name', 'users.phone_number', 'absent_members.*')
-            ->get();
-    
+        $searchName = $request->input('searchName');
+        $searchDate = $request->input('searchDate');
+        $query = AbsentMember::join('users', 'absent_members.member_id', '=', 'users.id')
+            ->where('personal_trainer_id', auth()->user()->id);
+
+        if ($searchName) {
+            $query->where('users.name', 'like', '%' . $searchName . '%');
+        }
+
+        if ($searchDate) {
+            $query->whereDate('date', $searchDate);
+        } else {
+            $today = Carbon::today()->toDateString();
+            $query->whereDate('date', $today);
+        }
+
+        $data_member = $query->select('users.name', 'users.phone_number', 'absent_members.*')->get();
+
         if ($request->ajax()) {
             return response()->json($data_member);
         }
-    
+
+        $dataLatihan = JenisLatihan::all();
         return view('personal_training.attendance_member', compact('data_member', 'dataLatihan'));
     }
-    
-    public function searchDate(Request $request)
-    {
-        $searchDate = $request->input('searchDate');
-        
-        $data_member = AbsentMember::
-        join('users', 'absent_members.member_id', '=', 'users.id')
-        ->where('personal_trainer_id', auth()->user()->id)
-        ->whereDate('date', $searchDate)
-        ->select('users.name', 'users.phone_number', 'absent_members.*')
-        ->get();
 
-        // dd($data_member);
-    
-        return response()->json($data_member);
-    }
 }

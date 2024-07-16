@@ -16,6 +16,9 @@
 <!-- stepper  -->
 <link href="{{ URL::asset('build/plugins/bs-stepper/css/bs-stepper.css') }}" rel="stylesheet">
 
+<!-- data-tables  -->
+<link href="{{ URL::asset('build/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+
 @stack('css')
 
 <!--main css-->

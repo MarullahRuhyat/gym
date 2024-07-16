@@ -13,6 +13,7 @@ use App\Http\Controllers\Member\AuthController as MemberAuthController;
 use App\Http\Controllers\Member\ProfileController;
 use App\Http\Controllers\Member\PackageController;
 use App\Http\Controllers\Member\PaymentController;
+use App\Http\Controllers\Member\AttendanceController;
 
 Route::get('/', function () {
     $appType = config('app.app_type');
@@ -84,7 +85,7 @@ Route::prefix('member')->group(function () {
         Route::prefix('attendance')->group(function () {
             // Route::post('/check-in', [AttendanceController::class, 'check_in'])->name('member.check_in');
             // Route::post('/check-out', [AttendanceController::class, 'check_out'])->name('member.check_out');
-            // Route::get('/history-attendance', [AttendanceController::class, 'history_attendance'])->name('member.history-attendance');
+            Route::get('/history-attendance', [AttendanceController::class, 'history_attendance'])->name('member.history-attendance');
         });
     });
 });

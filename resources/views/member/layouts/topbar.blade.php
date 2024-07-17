@@ -238,6 +238,7 @@
              </div>
            </a>
            <hr class="dropdown-divider">
+           <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{route('member.dashboard')}}"><i class="material-icons-outlined">home</i>Dashboard</a>
            <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{route('member.profile')}}"><i class="material-icons-outlined">person_outline</i>Profile</a>
            <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{ route('member.history-attendance') }}"><i class="material-icons-outlined">dashboard</i>Attendance</a>
            <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i class="material-icons-outlined">account_balance</i>Subscription Packages</a>

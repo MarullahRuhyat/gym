@@ -14,16 +14,15 @@ class AttendanceController extends Controller
 {
     public function history_attendance()
     {
-        $user = auth()->user();
         $today = Carbon::today()->toDateString();
         $dataLatihan = JenisLatihan::all();
         $data_member = AbsentMember::
             join('users', 'absent_members.member_id', '=', 'users.id')
-            ->where('personal_trainer_id', auth()->user()->id)
+            ->where('member_id', auth()->user()->id)
             ->whereDate('absent_members.date', $today)
             ->select('users.name',  'users.phone_number', 'absent_members.*')
             ->get(); 
 
-        return view('member.attendance.history_attendance', compact('data_member','dataLatihan'));
+        return view('member.attendance.history-attendance', compact('data_member','dataLatihan'));
     }
 }

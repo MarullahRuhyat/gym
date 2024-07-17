@@ -69,7 +69,10 @@
                     error: function (xhr, status, error) {
                         // alert (xhr.responseText);
                         $('.alert').addClass('alert alert-danger border-0 bg-grd-danger alert-dismissible fade show');
-                        $('.alert').html('<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' + xhr.responseText);
+                        // $('.alert').html('<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' + xhr.responseText);
+                        let response = JSON.parse(xhr.responseText);
+                        let message = response.message;
+                        $('.alert').html('<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' + message);
                     },
                 })
             }

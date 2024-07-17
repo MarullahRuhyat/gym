@@ -243,10 +243,12 @@
            <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i class="material-icons-outlined">account_balance</i>Subscription Packages</a>
            <!-- <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i class="material-icons-outlined">account_balance</i>Subscription Packages</a> -->
            <hr class="dropdown-divider">
-           <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:void(0);" onclick="document.getElementById('logout-form').submit()"><i class="material-icons-outlined">power_settings_new</i>Logout</a>
-           {{-- <form action="{{ route('logout') }}" method="POST" id="logout-form">
-           @csrf
-           </form> --}}
+          <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{ route('member.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <i class="material-icons-outlined">logout</i>Logout
+          </a>
+          <form id="logout-form" action="{{ route('member.logout') }}" method="POST" style="display: none;">
+            @csrf
+          </form>
          </div>
          @endif
        </li>

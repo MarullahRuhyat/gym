@@ -34,10 +34,9 @@ class AuthController extends Controller
         } else {
             $otp = rand(1000, 9999);
             $expired_at = now()->addMinutes(5);
-            $insert_otp = DB::table('otp')->insert([
-                'user_id' => $user_id,
+            $insert_otp = DB::table('users')->where('id', $user_id)->update([
                 'otp' => $otp,
-                'expired_at' => $expired_at,
+                'otp_expired_at' => $expired_at,
             ]);
             // $send = new sendWA();
             // $curl = $send->send($phone_number, $otp);
@@ -73,10 +72,9 @@ class AuthController extends Controller
         }
 
         $user_id = User::where('phone_number', $phone_number)->pluck('id')->first();
-        $otp_exists = DB::table('otp')
-            ->where('otp', $otp)
-            ->where('user_id', $user_id)
-            // ->where('expired_at', '>=', now())
+        $otp_exists = User::where('otp', $otp)
+            ->where('id', $user_id)
+            ->where('otp_expired_at', '>=', now())
             ->first();
 
         if ($otp_exists == null) {
@@ -100,14 +98,14 @@ class AuthController extends Controller
 
     public function register()
     {
-        $package = DB::table('packages')->get();
+        $package = DB::table('gym_membership_packages')->get();
         return view('member.auth.register', compact('package'));
     }
 
     public function store1(Request $request)
     {
         $package_id = $request->package_id;
-        $package = DB::table('packages')->where('id', $package_id)->get();
+        $package = DB::table('gym_membership_packages')->where('id', $package_id)->get();
         $data = [
             'status' => true,
             'message' => 'Package has been selected.',
@@ -125,6 +123,7 @@ class AuthController extends Controller
             // 'email' => ['required', 'email', 'unique:users,email'],
             'phone_number' => ['required', 'string', 'min:10', 'unique:users,phone_number'],
             'address' => ['required', 'string', 'min:3', 'max:255'],
+            'start_date' => ['required', 'date'],
             'password' => ['required', 'string', 'min:8', 'max:255'],
             'password_confirmation' => ['required', 'same:password'],
             ''
@@ -134,8 +133,16 @@ class AuthController extends Controller
             $status = false;
             $message = $validator->errors()->all();
         } else {
+            $duration = DB::table('gym_membership_packages')->where('id', $request->package_id)->get('duration_in_days');
+            $end_date = date('Y-m-d', strtotime($request->start_date . ' + ' . $duration . ' days'));
             $user = User::create($request->all());
-            $user_membership_packages =
+            $user_membership_packages = DB::table('memberships')->insert([
+                'user_id' => $user->id,
+                'gym_membership_packages' => $request->package_id,
+                'start_date' => $request->start_date,
+                'end_date' => $end_date,
+                'is_active' => false,              
+            ]);
             $status = true;
             $message = 'Register success.';
         }
@@ -145,7 +152,7 @@ class AuthController extends Controller
             'message' => $message,
             'data' => [
                 'user' => $user ?? null,
-                'package_id' => $request->package_id ?? null,
+                'gym_membership_packages_id' => $request->package_id ?? null,
             ]
         ];
 
@@ -156,7 +163,6 @@ class AuthController extends Controller
 
     public function logout()
     {
-        // Session::flush();
         Auth::logout();
         return redirect()->route('member.send-otp');
     }

@@ -93,7 +93,7 @@ starter Page
                                             <div class="row g-3">
                                                 <div class="row row-cols-1 row-cols-lg-3 g-4">
                                                     @foreach($package as $pkg)
-                                                    @if($pkg->tipe == 'harian')
+                                                    @if($pkg->type == 'harian')
                                                     <div class="col-12 col-lg-4">
                                                         <div class="card">
                                                             <div class="card-body">
@@ -101,7 +101,7 @@ starter Page
                                                                 <p class="card-text">{{ $pkg->description }}</p>
                                                                 <h5>Price: ${{ $pkg->price }}</h5>
                                                                 <div class="mt-3 d-flex align-items-center justify-content-between">
-                                                                    <button class="btn btn-grd bg-grd-success border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
+                                                                    <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
                                                                         <!-- <i class="material-icons-outlined">shopping_cart</i> -->
                                                                         Select Package
                                                                     </button>
@@ -118,7 +118,7 @@ starter Page
                                             <div class="row g-3">
                                                 <div class="row row-cols-1 row-cols-lg-3 g-4">
                                                     @foreach($package as $pkg)
-                                                    @if($pkg->tipe == 'mandiri')
+                                                    @if($pkg->type == 'mandiri')
                                                     <div class="col-12 col-lg-4">
                                                         <div class="card">
                                                             <div class="card-body">
@@ -126,7 +126,7 @@ starter Page
                                                                 <p class="card-text">{{ $pkg->description }}</p>
                                                                 <h5>Price: ${{ $pkg->price }}</h5>
                                                                 <div class="mt-3 d-flex align-items-center justify-content-between">
-                                                                    <button class="btn btn-grd bg-grd-success border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
+                                                                    <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
                                                                         <!-- <i class="material-icons-outlined">shopping_cart</i> -->
                                                                         Select Package
                                                                     </button>
@@ -144,7 +144,7 @@ starter Page
                                             <div class="row g-3">
                                                 <div class="row row-cols-1 row-cols-lg-3 g-4">
                                                     @foreach($package as $pkg)
-                                                    @if($pkg->tipe == 'pt')
+                                                    @if($pkg->type == 'pt')
                                                     <div class="col-12 col-lg-4">
                                                         <div class="card">
                                                             <div class="card-body">
@@ -152,7 +152,7 @@ starter Page
                                                                 <p class="card-text">{{ $pkg->description }}</p>
                                                                 <h5>Price: ${{ $pkg->price }}</h5>
                                                                 <div class="mt-3 d-flex align-items-center justify-content-between">
-                                                                    <button class="btn btn-grd bg-grd-success border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
+                                                                    <button style="color:white;" class="btn btn-primary border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
                                                                         <!-- <i class="material-icons-outlined">shopping_cart</i> -->
                                                                         Select Package
                                                                     </button>
@@ -186,22 +186,10 @@ starter Page
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body">
-                                                <input type="text" name="package_id" id="package_id" value="">
-                                                <h5 name="stepper2_package_name" id="stepper2_package_name" class="card-title mb-3" value=""></h5>
-                                                <p class="card-text">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks
-                                                    as necessary model.
-                                                </p>
+                                                <input type="hidden" name="package_id" id="package_id" value="">
+                                                <h5 name="stepper2_package_name" id="stepper2_package_name" class="card-title mb-3" value="package_name"></h5>
+                                                <p name="stepper2_package_description" id="stepper2_package_description" class="card-text" value="package_description"></p>
                                                 <h5>Price : $149</h5>
-                                                <div class="ratings text-warning mt-3">
-                                                    <i class="material-icons-outlined">star</i>
-                                                    <i class="material-icons-outlined">star</i>
-                                                    <i class="material-icons-outlined">star</i>
-                                                    <i class="material-icons-outlined">star</i>
-                                                    <i class="material-icons-outlined">star</i>
-                                                </div>
-                                                <div class="mt-3 d-flex align-items-center justify-content-between">
-                                                    <button class="btn btn-grd bg-grd-success border-0 d-flex gap-2 px-3"><i class="material-icons-outlined">shopping_cart</i>Add to Cart</button>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -209,8 +197,8 @@ starter Page
                             </div>
                             <div class="col-12">
                                 <div class="d-flex align-items-center gap-3">
-                                    <button class="btn btn-grd-info px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
-                                    <button class="btn btn-grd-primary px-4" onclick="stepper1.next()">Next<i class='bx bx-right-arrow-alt ms-2'></i></button>
+                                    <button class="btn btn-grey px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
+                                    <button class="btn btn-primary px-4" onclick="stepper1.next()">Next<i class='bx bx-right-arrow-alt ms-2'></i></button>
                                     <!-- <button class="btn btn-grd-primary px-4" onclick="Stepper3Account()">Next<i class='bx bx-right-arrow-alt ms-2'></i></button> -->
                                 </div>
                             </div>
@@ -225,7 +213,7 @@ starter Page
                                 <div class="card">
                                     <div class="card-body p-4">
                                         <form class="row g-3 needs-validation" novalidate>
-                                            <input type="text" name="stepper3_package_id" id="stepper3_package_id" value="" disabled>
+                                            <input type="hidden" name="stepper3_package_id" id="stepper3_package_id" value="" disabled>
                                             <div class="col-md-6">
                                                 <label for="bsValidation1" class="form-label">Name</label>
                                                 <input type="text" class="form-control" id="bsValidation1" placeholder="First Name" value="Jhon" required>
@@ -260,16 +248,24 @@ starter Page
                                                     Please enter a valid address.
                                                 </div>
                                             </div>
+                                            <!-- insert start date  -->
+                                             <div class="col-md-12">
+                                                <label for="bsValidation5" class="form-label">Start Date</label>
+                                                <input type="date" class="form-control" id="bsValidation5" placeholder="Start Date" required>
+                                                <div class="invalid-feedback">
+                                                    Please fill your start date.
+                                                </div>
+                                            </div>
                                             <div class="col-md-12">
-                                                <label for="bsValidation5" class="form-label">Password</label>
-                                                <input type="password" class="form-control" id="bsValidation5" placeholder="Password" required>
+                                                <label for="bsValidation6" class="form-label">Password</label>
+                                                <input type="password" class="form-control" id="bsValidation6" placeholder="Password" required>
                                                 <div class="invalid-feedback">
                                                     Please fill your password.
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
-                                                <label for="bsValidation6" class="form-label">Confirm Password</label>
-                                                <input type="password" class="form-control" id="bsValidation6" placeholder="Confirm Password" required>
+                                                <label for="bsValidation7" class="form-label">Confirm Password</label>
+                                                <input type="password" class="form-control" id="bsValidation7" placeholder="Confirm Password" required>
                                                 <div class="invalid-feedback">
                                                     Please confirm your password.
                                                 </div>
@@ -285,8 +281,8 @@ starter Page
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                                    <button class="btn btn-grd-info px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
-                                                    <button id="register_submit" type="submit" class="btn btn-grd-primary px-4">Submit</button>
+                                                    <button class="btn btn-grey px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
+                                                    <button id="register_submit" type="submit" class="btn btn-primary px-4">Submit</button>
                                                     <!-- <button type="reset" class="btn btn-grd-info px-4">Reset</button> -->
                                                 </div>
                                             </div>
@@ -309,8 +305,8 @@ starter Page
                         <div class="row g-3">
                             <form action="{{ route('member.payment') }}" method="GET">
                                 @csrf
-                                <input type="text" name="submit_user_id" id="submit_user_id" value="">
-                                <input type="text" name="submit_package_id" id="submit_package_id" value="">
+                                <input type="hidden" name="submit_user_id" id="submit_user_id" value="">
+                                <input type="hidden" name="submit_package_id" id="submit_package_id" value="">
                                 <div class="col">
                                     <div class="card">
                                         <div class="card-body">
@@ -338,9 +334,9 @@ starter Page
                                 </div>
                                 <div class="col-12">
                                     <div class="d-flex align-items-center gap-3">
-                                        <button class="btn btn-grd-info px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
+                                        <button class="btn btn-grey px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
                                         <!-- <a type="submit" class="btn btn-grd-primary px-4">Pay<i class='bx bx-right-arrow-alt ms-2'></i></a> -->
-                                        <button type="submit" class="btn btn-grd-primary px-4">Pay<i class='bx bx-right-arrow-alt ms-2'></i></button>
+                                        <button type="submit" class="btn btn-primary px-4">Pay<i class='bx bx-right-arrow-alt ms-2'></i></button>
                                     </div>
                                 </div>
                             </form>
@@ -376,10 +372,12 @@ starter Page
     function Stepper2DetailsPackage(data) {
         var package_id = data.package[0].id;
         var package_name = data.package[0].name;
+        var package_description = data.package[0].description;
         console.log('oke');
         console.log(package_name);
-        $('#stepper2_package_name').text(package_name);
         $('#package_id').val(package_id);
+        $('#stepper2_package_name').text(package_name);
+        $('#stepper2_package_description').val(package_description);
         $('#stepper3_package_id').val(package_id);
     }
 
@@ -390,9 +388,10 @@ starter Page
             var phone_number = $('#bsValidation2').val();
             var sex = $('#bsValidation3').val();
             var address = $('#bsValidation4').val();
-            var password = $('#bsValidation5').val();
-            var password_confirmation = $('#bsValidation6').val();
-            var bsValidation7 = $('#bsValidation7').prop('checked');
+            var start_date = $('#bsValidation5').val();
+            var password = $('#bsValidation6').val();
+            var password_confirmation = $('#bsValidation7').val();
+            var bsValidation7 = $('#bsValidation8').prop('checked');
 
             if (bsValidation7 == false) {
                 alert('Please agree to terms and conditions');
@@ -408,6 +407,7 @@ starter Page
                     phone_number: phone_number,
                     sex: sex,
                     address: address,
+                    start_date: start_date,
                     password: password,
                     password_confirmation: password_confirmation,
                     _token: "{{ csrf_token() }}"
@@ -416,7 +416,7 @@ starter Page
                     if (data.status == true) {
                         stepper1.next();
                         $('#submit_user_id').val(data.data.user.id);
-                        $('#submit_package_id').val(data.data.package_id);
+                        $('#submit_package_id').val(data.data.gym_membership_packages_id);
                     } else {
                         alert(data.message);
                     }

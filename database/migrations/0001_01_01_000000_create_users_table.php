@@ -25,6 +25,8 @@ return new class extends Migration
             $table->integer('available_personal_trainer_quota')->default(0);
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->string('otp')->nullable();
+            $table->timestamp('otp_expired_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -2,6 +2,7 @@
 @section('title')
 starter Page
 @endsection
+
 @section('content')
 <div class="card rounded-4" style="height:800px;">
     <div class="card-body">

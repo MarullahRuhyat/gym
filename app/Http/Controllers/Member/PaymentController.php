@@ -20,7 +20,7 @@ class PaymentController extends Controller
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
 
-        $amount = DB::table('packages')->where('id', $request->submit_package_id)->pluck('price')->first();
+        $amount = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('price')->first();
         $user = DB::table('users')->where('id', $request->submit_user_id)->first();
         $params = array(
             'transaction_details' => array(

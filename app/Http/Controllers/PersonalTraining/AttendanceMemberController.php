@@ -1,32 +1,47 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\PersonalTraining;
 
-use Carbon\Carbon;
-use App\Models\AbsentMember;
-use App\Models\JenisLatihan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use App\Models\AbsentMember;
+use App\Models\JenisLatihan;
+use Carbon\Carbon;
 
-class AbsenController extends Controller
+
+class AttendanceMemberController extends Controller
 {
+
     function index(Request $request)
     {
         $today = Carbon::today()->toDateString();
         $dataLatihan = JenisLatihan::all();
-        $data_member = AbsentMember::join('users', 'absent_members.member_id', '=', 'users.id')
-            // ->where('personal_trainer_id', auth()->user()->id)
+        $data_member = AbsentMember::
+            join('users', 'absent_members.member_id', '=', 'users.id')
+            ->where('personal_trainer_id', auth()->user()->id)
             ->whereDate('absent_members.date', $today)
             ->select('users.name',  'users.phone_number', 'absent_members.*')
-            ->get();
-        return view('admin.absen', compact('data_member', 'dataLatihan'));
+            ->get(); 
+
+        return view('personal_training.attendance_member', compact('data_member','dataLatihan'));
+        
     }
+
+    public function update(Request $request, $id)
+    {
+        $latihan = AbsentMember::find($id);
+        $latihan->jenis_latihan = implode(", ", $request->jenis_latihan);
+        $latihan->save();
+        return redirect()->back()->with('success', 'Jenis Latihan berhasil diperbarui');
+    }
+
     public function search(Request $request)
     {
         $searchName = $request->input('searchName');
         $searchDate = $request->input('searchDate');
-        $query = AbsentMember::join('users', 'absent_members.member_id', '=', 'users.id');
+        $query = AbsentMember::join('users', 'absent_members.member_id', '=', 'users.id')
+            ->where('personal_trainer_id', auth()->user()->id);
 
         if ($searchName) {
             $query->where('users.name', 'like', '%' . $searchName . '%');
@@ -45,8 +60,8 @@ class AbsenController extends Controller
             return response()->json($data_member);
         }
 
-
         $dataLatihan = JenisLatihan::all();
-        return view('admin.absen', compact('data_member', 'dataLatihan'));
+        return view('personal_training.attendance_member', compact('data_member', 'dataLatihan'));
     }
+
 }

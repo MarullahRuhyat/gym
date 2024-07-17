@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title') | Laravel 11 & Bootstrap 5 Admin Dashboard Template</title>
+    <title>@yield('title') | Flozor's Gym</title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
@@ -17,7 +17,7 @@
     @include('personal_training.layouts.topbar')
 
     @include('personal_training.layouts.sidebar')
-    
+
     <!--start main wrapper-->
     <main class="main-wrapper">
         <div class="main-content">
@@ -33,5 +33,13 @@
 
     @include('personal_training.layouts.common-scripts')
 </body>
+
+<!--plugins-->
+<script src="{{ URL::asset('build/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+<script src="{{ URL::asset('build/plugins/metismenu/metisMenu.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{{ URL::asset('build/plugins/select2/js/select2-custom.js') }}"></script>
+<script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>
+<script src="{{ URL::asset('build/js/main.js') }}"></script>
 
 </html>

@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('otp', function (Blueprint $table) {
+        Schema::create('jenis_latihans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->contrained()->onDelete('cascade');
-            $table->string('otp');
-            $table->dateTime('expired_at');
-            $table->enum('status', ['available', 'used', 'expired'])->default('available');
-            $table->softDeletes();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('otp');
+        Schema::dropIfExists('jenis_latihans');
     }
 };

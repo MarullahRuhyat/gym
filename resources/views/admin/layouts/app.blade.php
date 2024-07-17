@@ -26,6 +26,16 @@
     <!--start main wrapper-->
     <main class="main-wrapper">
         <div class="main-content">
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
+            @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
             @yield('content')
         </div>
     </main>
@@ -37,6 +47,7 @@
     @include('admin.layouts.extra')
 
     @include('admin.layouts.common-scripts')
+    @yield('javascript')
 </body>
 
 </html>

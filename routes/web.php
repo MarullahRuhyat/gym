@@ -20,6 +20,7 @@ use App\Http\Controllers\Member\PaymentController;
 use App\Http\Controllers\Member\AttendanceController;
 use App\Http\Controllers\PersonalTraining\ProfilePersonalTraining;
 use App\Http\Middleware\Member;
+use App\Http\Controllers\Member\QRController;
 
 Route::get('/', function () {
     $appType = config('app.app_type');

@@ -10,7 +10,13 @@ class ProfileController extends Controller
 {
     public function dashboard()
     {
-        return view('member.profile.dashboard');
+        $user = auth()->user();
+        // join table memberships and gym_membership_packages 
+        $membership = DB::table('memberships')
+            ->join('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+            ->where('memberships.user_id', $user->id)
+            ->get();
+        return view('member.profile.dashboard', compact('membership'));
     }
 
     public function profile()

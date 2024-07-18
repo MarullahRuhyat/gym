@@ -228,13 +228,13 @@
        @if(auth()->user())
        <li class="nav-item dropdown">
          <a href="javascript:void(0);" class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
-           <img src="{{ URL::asset('build/images/member/photo_profile/'.$user->photo_profile) }}" class="rounded-circle p-1 border" width="45" height="45" alt="">
+           <img src="{{ URL::asset('build/images/member/photo_profile/'.auth()->user()->photo_profile) }}" class="rounded-circle p-1 border" width="45" height="45" alt="">
          </a>
          <div class="dropdown-menu dropdown-user dropdown-menu-end shadow">
            <a class="dropdown-item  gap-2 py-2" href="javascript:;">
              <div class="text-center">
-               <img src="{{ URL::asset('build/images/member/photo_profile/'.$user->photo_profile) }}" class="rounded-circle p-1 shadow mb-3" width="90" height="90" alt="">
-               {{-- <h5 class="user-name mb-0 fw-bold">Hello, {{ Auth::user()->name }}</h5> --}}
+                <img src="{{ URL::asset('build/images/member/photo_profile/'.auth()->user()->photo_profile) }}" class="rounded-circle p-1 shadow mb-3" width="90" height="90" alt="">
+                <h5 class="user-name mb-0 fw-bold">Hello, {{ auth()->user()->name }}</h5>
              </div>
            </a>
            <hr class="dropdown-divider">

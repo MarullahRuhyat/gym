@@ -39,21 +39,46 @@ class ProfileController extends Controller
         $user = DB::table('users')->where('id', $user->id)->get();
         $validate = $request->validate([
             'user_name' => ['required'],
-            'user_phone_number' => ['required', 'numeric', 'min:10', 'unique:users,phone_number,' . $user[0]->id],            
+            'user_phone_number' => ['required', 'min:10', 'unique:users,phone_number,' . $user[0]->id],            
         ]);
 
         if(!$validate) {
             return response()->json(['status' => 'error', 'message' => 'Data tidak valid']);
         }
 
-        $update = DB::table('users')->where('id', $user[0]->id)->update([
-            'name' => $request->user_name,
-            'address'=> $request->user_address,
-            'phone_number' => $request->user_phone_number,
-            'email' => $request->user_email,
-            'date_of_birth' => $request->user_date_of_birthm,
-            'password' => bcrypt($request->user_password),
-        ]);
+        // $update = DB::table('users')->where('id', $user[0]->id)->update([
+        //     'name' => $request->user_name,
+        //     'address'=> $request->user_address,
+        //     'phone_number' => $request->user_phone_number,
+        //     'email' => $request->user_email,
+        //     'date_of_birth' => $request->user_date_of_birthm,
+        //     'password' => bcrypt($request->user_password),
+        // ]);
+
+        // if has photo_profile save photo then store to public/build/images/member/photo_profile 
+        if($request->hasFile('photo_profile')) {
+            $file = $request->file('photo_profile');
+            $file_name = time() . "_" . $file->getClientOriginalName();
+            $file->move('build/images/member/photo_profile', $file_name);
+            $update = DB::table('users')->where('id', $user[0]->id)->update([
+                'name' => $request->user_name,
+                'address'=> $request->user_address,
+                'phone_number' => $request->user_phone_number,
+                'email' => $request->user_email,
+                'date_of_birth' => $request->user_date_of_birth,
+                'password' => bcrypt($request->user_password),
+                'photo_profile' => $file_name,
+            ]);
+        } else {
+            $update = DB::table('users')->where('id', $user[0]->id)->update([
+                'name' => $request->user_name,
+                'address'=> $request->user_address,
+                'phone_number' => $request->user_phone_number,
+                'email' => $request->user_email,
+                'date_of_birth' => $request->user_date_of_birth,
+                'password' => bcrypt($request->user_password),
+            ]);
+        }
 
         if($update) {
             return response()->json(['status' => 'success', 'message' => 'Data berhasil diupdate']);

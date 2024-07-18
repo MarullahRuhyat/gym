@@ -33,7 +33,8 @@ class AuthController extends Controller
             $message = 'Phone number not found.';
         } else {
             $otp = rand(1000, 9999);
-            $expired_at = now()->addMinutes(5);
+            // $expired_at = now()->addMinutes(5);
+            $expired_at = now()->addMinutes(5)->setTimezone('Asia/Jakarta');
             $insert_otp = DB::table('users')->where('id', $user_id)->update([
                 'otp' => $otp,
                 'otp_expired_at' => $expired_at,
@@ -74,13 +75,13 @@ class AuthController extends Controller
         $user_id = User::where('phone_number', $phone_number)->pluck('id')->first();
         $otp_exists = User::where('otp', $otp)
             ->where('id', $user_id)
-            ->where('otp_expired_at', '>=', now())
+            ->where('otp_expired_at', '>=', now()->setTimeZone('Asia/Jakarta'))
             ->first();
 
         if ($otp_exists == null) {
             return response()->json([
                 'status' => false,
-                'message' => 'OTP not found.'
+                'message' => 'OTP not found or expired.',
             ], 404);
         }
 

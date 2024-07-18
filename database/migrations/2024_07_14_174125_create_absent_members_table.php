@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('path_qr_code');
             $table->string('jenis_latihan')->nullable();
             // $table->foreignId('jenis_latihan')->nullable()->constrained('jenis_latihans');
+            $table->boolean('is_using_pt')->default(false);
             $table->timestamps();
         });
     }

@@ -46,6 +46,13 @@ Absensi Member
 <hr>
 
 <div class="row" id="memberContainer">
+    @if (count($data_member) == 0)
+    <div class="col-md-12">
+        <div class="alert alert-danger" role="alert">
+            Data member tidak ditemukan
+        </div>
+    </div>
+    @else
     @foreach ($data_member as $item)
     <div class="col-md-6">
         <div class="card rounded-4">
@@ -132,6 +139,7 @@ Absensi Member
         </div>
     </div>
     @endforeach
+    @endif
 </div>
 @endsection
 @push('script')

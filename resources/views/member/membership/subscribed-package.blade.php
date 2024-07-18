@@ -3,9 +3,13 @@
 Subscribed Package
 @endsection
 @section('content')
-@foreach($membership as $membership)
 <div class="row">
     <div class="col-md-4">
+        @if(count($membership) == 0)
+        <p>No Subscribed Package</p>
+        <a href="{{ route('member.package') }}" class="btn btn-primary">Buy Membership</a>
+        @else
+        @foreach($membership as $membership)
         <div class="card rounded-4">
             <div class="card-header">
                 <h5 style="margin-top:10px;" class="card-title mb-3">{{ ucwords($membership->name) }}</h5>
@@ -37,9 +41,10 @@ Subscribed Package
 
             </div>
         </div>
+        @endforeach
+        @endif
     </div>
 </div>
-@endforeach
 @endsection
 @push('script')
 <!--plugins-->

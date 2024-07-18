@@ -99,7 +99,7 @@ starter Page
                                                             <div class="card-body">
                                                                 <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
                                                                 <p class="card-text">{{ $pkg->description }}</p>
-                                                                <h5>Price: ${{ $pkg->price }}</h5>
+                                                                <h5>Price: Rp.{{ $pkg->price }}</h5>
                                                                 <div class="mt-3 d-flex align-items-center justify-content-between">
                                                                     <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
                                                                         <!-- <i class="material-icons-outlined">shopping_cart</i> -->

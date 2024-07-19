@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\AuthController;
@@ -84,7 +85,7 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
         Route::get('/', [AbsenController::class, 'index'])->name('admin_absen');
         Route::get('/search', [AbsenController::class, 'search'])->name('admin_search');
     });
-    // salary page
+    // salary page belum anjing
     Route::get('/salary', [GajiController::class, 'index'])->name('admin_gaji');
     // scan page
     Route::match(['get', 'post'], '/scan', [ScanController::class, 'index'])->name('admin_scan');

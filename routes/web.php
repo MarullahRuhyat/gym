@@ -13,7 +13,14 @@ use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
 use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
 use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
+use App\Http\Controllers\Member\AuthController as MemberAuthController;
+use App\Http\Controllers\Member\ProfileController;
+use App\Http\Controllers\Member\PackageController;
+use App\Http\Controllers\Member\PaymentController;
+use App\Http\Controllers\Member\AttendanceController;
 use App\Http\Controllers\PersonalTraining\ProfilePersonalTraining;
+use App\Http\Middleware\Member;
+use App\Http\Controllers\Member\QRController;
 
 Route::get('/', function () {
     $appType = config('app.app_type');
@@ -46,12 +53,51 @@ Route::prefix('auth')->group(function () {
 });
 
 // member
-Route::prefix('member')->middleware('auth')->group(function () {
-    Route::get('/dashboard', [MemberController::class, 'dashboard'])->name('member.dashboard');
-    Route::get('/profile', [MemberController::class, 'profile'])->name('member.profile');
-    Route::get('/change-password', [MemberController::class, 'changePassword'])->name('member.change_password');
-    Route::post('/change-password', [MemberController::class, 'changePasswordProcess'])->name('member.change_password.process');
+Route::prefix('member')->group(function () {
+    Route::get('/register', [MemberAuthController::class, 'register'])->name('member.register');
+    Route::post('/register/process', [MemberAuthController::class, 'store1'])->name('member.register.process');
+    Route::post('/register-submit', [MemberAuthController::class, 'register_submit'])->name('member.register.submit');
+
+    Route::get('/send-otp', [MemberAuthController::class, 'send_otp'])->name('member.send-otp');
+    Route::post('/get-otp', [MemberAuthController::class, 'get_otp'])->name('member.get-otp');
+    Route::get('/verify-otp/{phone_number}', [MemberAuthController::class, 'verify_otp'])->name('member.verify-otp');
+    Route::post('/login', [MemberAuthController::class, 'login'])->name('member.login');
+    Route::post('/logout', [MemberAuthController::class, 'logout'])->name('member.logout')->middleware(Member::class);
+
+    Route::prefix('package')->group(function () {
+        Route::get('/', [PackageController::class, 'package'])->name('member.package');
+        // Route::post('/package', [PackageController::class, 'package_post'])->name('member.package.post');
+        // Route::get('/selected-package-detail/{id}', [PackageController::class, 'selected_package_detail'])->name('member.selected-package-detail');
+        Route::get('/subscribed-package', [PackageController::class, 'subscribed_package'])->name('member.subscribed-package');
+    });
+
+    Route::prefix('payment')->group(function () {
+        Route::get('/', [PaymentController::class, 'payment'])->name('member.payment');
+        Route::post('/payment-callback', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
+    });
+
+    Route::middleware(Member::class)->group(function () {
+        Route::get('/dashboard', [ProfileController::class, 'dashboard'])->name('member.dashboard');
+        Route::prefix('profile')->group(function () {
+            Route::get('/', [ProfileController::class, 'profile'])->name('member.profile');
+            Route::get('/edit-profile', [ProfileController::class, 'edit_profile'])->name('member.edit_profile');
+            Route::post('/edit-profile/{id}', [ProfileController::class, 'edit_profile_process'])->name('member.edit-profile.process');
+            // Route::get('/change-password', [ProfileController::class, 'change_password'])->name('member.change_password');
+            // Route::post('/change-password', [ProfileController::class, 'change_password_process'])->name('member.change-password.process');
+        });
+        Route::prefix('membership')->group(function () {
+            // Route::post('/subscribe-membership', [MembershipController::class, 'subscribe_membership'])->name('member.subscribe_membership');
+            // Route::get('/history-membership', [MembershipController::class, 'history_membership'])->name('member.history-membership');
+            // Route::get('/detail-membership/{id}', [MembershipController::class, 'detail_membership'])->name('member.detail-membership');
+        });
+        Route::prefix('attendance')->group(function () {
+            // Route::post('/check-in', [AttendanceController::class, 'check_in'])->name('member.check_in');
+            // Route::post('/check-out', [AttendanceController::class, 'check_out'])->name('member.check_out');
+            Route::get('/history-attendance', [AttendanceController::class, 'history_attendance'])->name('member.history-attendance');
+        });
+    });
 });
+// end member
 
 
 // personal trainer

@@ -58,7 +58,7 @@ starter Page
             <div class="modal-body">
                 <div class="order-summary">
                     <div class="card mb-0">
-                        <div class="card-body">
+                        <div class="card-body d-flex justify-content-center align-items-center">
                         @if ($membership->isEmpty())
                             <p>Membership not found</p>
                             @else

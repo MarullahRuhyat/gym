@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
 use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
 use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
+use App\Http\Controllers\PersonalTraining\ProfilePersonalTraining;
 
 Route::get('/', function () {
     $appType = config('app.app_type');
@@ -65,6 +66,11 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
         Route::get('/search', [AttendanceMemberController::class, 'search'])->name('personal_trainer.search');
     });
 
+    // profile
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfilePersonalTraining::class, 'index'])->name('personal_trainer.profile');
+        Route::post('/', [ProfilePersonalTraining::class, 'updateProfile'])->name('personal_trainer.update_profile');
+    });
     // payment
     Route::prefix('payment')->group(function () {
         Route::get('/', [PersonalTrainerController::class, 'payment'])->name('personal_trainer.payment');

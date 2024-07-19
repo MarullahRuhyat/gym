@@ -65,7 +65,7 @@ starter Page
                             <div class="card border bg-transparent shadow-none mb-3" style="width: fit-content;">
                                 <div class="card-body">
                                     @foreach ($membership as $member)
-                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data={{ 'user_id:'.$member->user_id.'membership_id:'.$member->gym_membership_packages.'is_using_pt:'.'false' }}" alt="">
+                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ 'user_id:'.$member->user_id.'membership_id:'.$member->gym_membership_packages.'is_using_pt:'.'false' }}" alt="">
                                     @endforeach
                                 </div>
                             </div>

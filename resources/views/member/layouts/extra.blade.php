@@ -22,7 +22,6 @@
                       <a class="order-delete"><span class="material-icons-outlined">visibility</span></a>
                   </div>
               </div>
-
               <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
                   <div class="order-img">
                       <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75"

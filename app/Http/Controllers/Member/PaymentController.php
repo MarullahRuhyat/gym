@@ -29,13 +29,22 @@ class PaymentController extends Controller
             ),
             'customer_details' => array(
                 'name' => $user->name,
-                'email' => 'budi.pra@example.com',
+                'email' => $user->email,
                 'phone' => $user->phone_number,
             ),
         );
+
+        DB::table('payments')->insert([
+            'order_id' => $params['transaction_details']['order_id'],
+            'user_id' => $request->submit_user_id,
+            'gym_membership_packages' => $request->submit_package_id,
+            'amount' => $amount,
+            'payment_method' => 'midtrans',
+            'status' => 'pending',
+        ]);
+
         $snapToken = \Midtrans\Snap::getSnapToken($params);
-        // dd($snapToken);
-        // return response()->json($this->response);
+
         return view('member.payment.payment_details', compact('snapToken'));
     }
 

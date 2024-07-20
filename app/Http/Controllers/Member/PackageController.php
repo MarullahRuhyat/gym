@@ -12,7 +12,6 @@ class PackageController extends Controller
     public function package()
     {
         $package = DB::table('gym_membership_packages')->get();
-        // $session = Session::all();
         return view('member.membership.select-package', compact('package'));
     }
 
@@ -24,6 +23,17 @@ class PackageController extends Controller
             ->where('memberships.user_id', $user->id)
             ->get();
         return view('member.membership.subscribed-package', compact('membership'));
+    }
+
+    public function select_package(Request $request)
+    {
+        dd ('oke');
+    }
+
+    public function selected_package_detail($id)
+    {
+        $package = DB::table('gym_membership_packages')->where('id', $id)->first();
+        return response()->json($package);
     }
 
 }

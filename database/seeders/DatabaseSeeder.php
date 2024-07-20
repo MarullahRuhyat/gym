@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\HistoryMember;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Database\Seeders\HistoryMembersSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,8 +24,9 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            // PackageSeeder::class,
-            UsersTableSeeder::class
+            PackageSeeder::class,
+            UsersTableSeeder::class,
+            HistoryMembersSeeder::class,
         ]);
     }
 }

@@ -124,7 +124,7 @@ starter Page
                                                             <div class="card-body">
                                                                 <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
                                                                 <p class="card-text">{{ $pkg->description }}</p>
-                                                                <h5>Price: ${{ $pkg->price }}</h5>
+                                                                <h5>Price: Rp.{{ $pkg->price }}</h5>
                                                                 <div class="mt-3 d-flex align-items-center justify-content-between">
                                                                     <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
                                                                         <!-- <i class="material-icons-outlined">shopping_cart</i> -->
@@ -150,7 +150,7 @@ starter Page
                                                             <div class="card-body">
                                                                 <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
                                                                 <p class="card-text">{{ $pkg->description }}</p>
-                                                                <h5>Price: ${{ $pkg->price }}</h5>
+                                                                <h5>Price: Rp.{{ $pkg->price }}</h5>
                                                                 <div class="mt-3 d-flex align-items-center justify-content-between">
                                                                     <button style="color:white;" class="btn btn-primary border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
                                                                         <!-- <i class="material-icons-outlined">shopping_cart</i> -->
@@ -189,7 +189,7 @@ starter Page
                                                 <input type="hidden" name="package_id" id="package_id" value="">
                                                 <h5 name="stepper2_package_name" id="stepper2_package_name" class="card-title mb-3" value="package_name"></h5>
                                                 <p name="stepper2_package_description" id="stepper2_package_description" class="card-text" value="package_description"></p>
-                                                <h5>Price : $149</h5>
+                                                <h5 name="stepper2_package_price"></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -249,7 +249,7 @@ starter Page
                                                 </div>
                                             </div>
                                             <!-- insert start date  -->
-                                             <div class="col-md-12">
+                                            <div class="col-md-12">
                                                 <label for="bsValidation5" class="form-label">Start Date</label>
                                                 <input type="date" class="form-control" id="bsValidation5" placeholder="Start Date" required>
                                                 <div class="invalid-feedback">
@@ -305,8 +305,8 @@ starter Page
                         <div class="row g-3">
                             <form action="{{ route('member.payment') }}" method="GET">
                                 @csrf
-                                <input type="hidden" name="submit_user_id" id="submit_user_id" value="">
-                                <input type="hidden" name="submit_package_id" id="submit_package_id" value="">
+                                <input type="text" name="submit_user_id" id="submit_user_id" value="">
+                                <input type="text" name="submit_package_id" id="submit_package_id" value="">
                                 <div class="col">
                                     <div class="card">
                                         <div class="card-body">
@@ -314,20 +314,20 @@ starter Page
                                             <div>
                                                 <div class="d-flex justify-content-between">
                                                     <p class="fw-semi-bold">Items subtotal :</p>
-                                                    <p id="payment-item-total" class="fw-semi-bold">$891</p>
+                                                    <p id="payment-item-total" class="fw-semi-bold"></p>
                                                 </div>
                                                 <div class="d-flex justify-content-between">
                                                     <p class="fw-semi-bold">Discount :</p>
-                                                    <p id="payment-discount" class="text-danger fw-semi-bold">-$48</p>
+                                                    <p id="payment-discount" class="text-danger fw-semi-bold">Rp.-</p>
                                                 </div>
                                                 <div class="d-flex justify-content-between">
                                                     <p class="fw-semi-bold">Tax :</p>
-                                                    <p id="payment-tax" class="fw-semi-bold">$156.70</p>
+                                                    <p id="payment-tax" class="fw-semi-bold">Rp.-</p>
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-between border-top pt-4">
                                                 <h5 class="mb-0 fw-bold">Total :</h5>
-                                                <h5 id="payment-total" class="mb-0 fw-bold">$925.44</h5>
+                                                <h5 id="payment-total" class="mb-0 fw-bold"></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -378,6 +378,7 @@ starter Page
         $('#package_id').val(package_id);
         $('#stepper2_package_name').text(package_name);
         $('#stepper2_package_description').val(package_description);
+        $('#stepper2_package_price').val('Price: Rp.' + data.package[0].price);
         $('#stepper3_package_id').val(package_id);
     }
 
@@ -417,6 +418,8 @@ starter Page
                         stepper1.next();
                         $('#submit_user_id').val(data.data.user.id);
                         $('#submit_package_id').val(data.data.gym_membership_packages_id);
+                        $('#payment-item-total').text('Rp.' + data.data.price);
+                        $('#payment-total').text('Rp.' + data.data.price);
                     } else {
                         alert(data.message);
                     }

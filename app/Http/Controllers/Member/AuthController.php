@@ -88,6 +88,10 @@ class AuthController extends Controller
         if ($otp_exists != null && $user_id != null) {
             $user = User::find($user_id);
             Auth::login($user);
+            DB::table('users')->where('id', $user_id)->update([
+                'otp' => null,
+                'otp_expired_at' => null,
+            ]);
             return response()->json([
                 'status' => true,
                 'message' => 'Login success.',
@@ -127,7 +131,6 @@ class AuthController extends Controller
             'start_date' => ['required', 'date'],
             'password' => ['required', 'string', 'min:8', 'max:255'],
             'password_confirmation' => ['required', 'same:password'],
-            ''
         ]);
 
         if ($validator->fails()) {
@@ -142,11 +145,13 @@ class AuthController extends Controller
                 'gym_membership_packages' => $request->package_id,
                 'start_date' => $request->start_date,
                 'end_date' => $end_date,
-                'is_active' => false,              
+                'is_active' => false,
             ]);
             $status = true;
             $message = 'Register success.';
         }
+
+        $price = DB::table('gym_membership_packages')->where('id', $request->package_id)->pluck('price')->first();
 
         $data = [
             'status' => $status,
@@ -154,6 +159,7 @@ class AuthController extends Controller
             'data' => [
                 'user' => $user ?? null,
                 'gym_membership_packages_id' => $request->package_id ?? null,
+                'price' => $price ?? null,
             ]
         ];
 

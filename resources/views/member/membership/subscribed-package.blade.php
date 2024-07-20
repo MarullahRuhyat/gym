@@ -29,7 +29,7 @@ Subscribed Package
                             <p class="card-text">Starting: {{ $membership->start_date }}</p>
                             <p class="card-text">Ending: {{ $membership->end_date }}</p>
                             <p class="card-text">Personal Trainer Qouta: {{ $membership->personal_trainer_quota }} / {{ $membership->personal_trainer_quota }}</p>
-                            <p class="card-text">Price: {{ $membership->price }}</p>
+                            <p class="card-text">Price: Rp.{{ $membership->price }}</p>
                             @if($membership->is_active)
                                 <button class="btn btn-primary" disabled>Active</button>
                             @else

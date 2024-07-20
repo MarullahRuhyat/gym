@@ -5,12 +5,9 @@ starter Page
 @section('content')
 <div class="card">
     <div class="card-body">
-        <div class="col row-cols-auto g-3 justify" style="color:aquamarine">
-            <h1>Welcome, </h1>
-            <h1 style="padding-bottom:50px; font-size:60px">{{ ucwords(auth()->user()->name) }} </h1>
-            <div class="bottom-0 position-absolute m-3">
-                <a href="javascript:;" class="btn text-dark px-3 bg-white d-flex gap-2">Read More<span class="material-icons-outlined">east</span></a>
-            </div>
+        <div class="col row-cols-auto g-3 justify">
+            <h1>Welcome, {{ ucwords(auth()->user()->name) }}</h1>
+            <!-- <h1 style="padding-bottom:50px; font-size:60px"> </h1> -->
             <div class="justify-content-center text-center">
                 <div class="col" style="margin-bottom:30px;">
                     <button id="" type="button" class="btn btn-grd btn-grd-primary px-5" data-bs-toggle="modal" data-bs-target="#ScrollableModal">Show QR Member</button>
@@ -69,8 +66,8 @@ starter Page
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="card border bg-transparent shadow-none">                                
-                            </div>                           
+                            <div class="card border bg-transparent shadow-none">
+                            </div>
                         </div>
                         @endif
                     </div>

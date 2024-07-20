@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\AuthController;
@@ -126,7 +127,7 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
 // admin
 Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin_dashboard');
-    Route::post('/ajax-dashboard', [DashboardAdminController::class, 'ajax_dashboard_admin'])->name('admin_ajax_dashboard');
+    Route::post('/ajax-get-dashboard', [DashboardAdminController::class, 'ajax_dashboard_admin'])->name('admin_ajax_dashboard');
     // personal trainer page
     Route::match(['get', 'post'], '/personal-trainer', [PersonalTrainerAdminController::class, 'index'])->name('admin_personal_trainer');
     // member page
@@ -136,7 +137,7 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
         Route::get('/', [AbsenController::class, 'index'])->name('admin_absen');
         Route::get('/search', [AbsenController::class, 'search'])->name('admin_search');
     });
-    // salary page
+    // salary page belum anjing
     Route::get('/salary', [GajiController::class, 'index'])->name('admin_gaji');
     // scan page
     Route::match(['get', 'post'], '/scan', [ScanController::class, 'index'])->name('admin_scan');

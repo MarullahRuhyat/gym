@@ -88,6 +88,10 @@ class AuthController extends Controller
         if ($otp_exists != null && $user_id != null) {
             $user = User::find($user_id);
             Auth::login($user);
+            DB::table('users')->where('id', $user_id)->update([
+                'otp' => null,
+                'otp_expired_at' => null,
+            ]);
             return response()->json([
                 'status' => true,
                 'message' => 'Login success.',

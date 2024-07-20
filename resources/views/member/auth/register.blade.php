@@ -249,7 +249,7 @@ starter Page
                                                 </div>
                                             </div>
                                             <!-- insert start date  -->
-                                             <div class="col-md-12">
+                                            <div class="col-md-12">
                                                 <label for="bsValidation5" class="form-label">Start Date</label>
                                                 <input type="date" class="form-control" id="bsValidation5" placeholder="Start Date" required>
                                                 <div class="invalid-feedback">

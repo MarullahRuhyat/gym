@@ -31,12 +31,11 @@
 
     <!--start overlay-->
     <div class="overlay btn-toggle"></div>
-    <!--end overlay-->
-
-    @include('member.layouts.extra')
+    <!--end overlay-->    
 
     @include('member.layouts.common-scripts')
     @include('member.layouts.footer')
+    @include('member.layouts.extra')
 </body>
 
 </html>

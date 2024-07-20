@@ -66,7 +66,7 @@ Route::prefix('member')->group(function () {
 
     Route::prefix('package')->group(function () {
         Route::get('/', [PackageController::class, 'package'])->name('member.package');
-        // Route::post('/package', [PackageController::class, 'package_post'])->name('member.package.post');
+        Route::post('/select-package', [PackageController::class, 'select_package'])->name('member.select.package');
         // Route::get('/selected-package-detail/{id}', [PackageController::class, 'selected_package_detail'])->name('member.selected-package-detail');
         Route::get('/subscribed-package', [PackageController::class, 'subscribed_package'])->name('member.subscribed-package');
     });

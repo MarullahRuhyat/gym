@@ -116,6 +116,8 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
     Route::prefix('profile')->group(function () {
         Route::get('/', [ProfilePersonalTraining::class, 'index'])->name('personal_trainer.profile');
         Route::post('/', [ProfilePersonalTraining::class, 'updateProfile'])->name('personal_trainer.update_profile');
+        Route::post('/change-password', [ProfilePersonalTraining::class, 'changePassword'])->name('personal_trainer.change_password');
+        Route::post('/edit-profile', [ProfilePersonalTraining::class, 'editProfile'])->name('personal_trainer.edit_profile');
     });
     // payment
     Route::prefix('payment')->group(function () {

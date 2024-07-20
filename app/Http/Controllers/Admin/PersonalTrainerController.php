@@ -21,17 +21,20 @@ class PersonalTrainerController extends Controller
                     'name' => 'required|string|max:255',
                     'phone_number' => 'nullable|string|max:20',
                     'status' => 'required|string',
+                    'salary_pt' => 'required|string',
                 ]);
             }
 
-            $data = $request->only('name', 'password', 'phone_number', 'status');
+            $data = $request->only('name', 'password', 'phone_number', 'status', 'salary_pt');
 
 
             try {
                 $id = $request->input('id', 0);
 
+
                 if ($edit == 1 && $id) {
                     $user = User::findOrFail($id);
+
                     if ($user->phone_number != $request->phone_number) {
                         $cek_phone = User::where('phone_number', $request->phone_number)->first();
                         if ($cek_phone) {
@@ -42,6 +45,7 @@ class PersonalTrainerController extends Controller
                         'name' => $request->name,
                         'phone_number' => $request->phone_number,
                         'status' => $request->status,
+                        'salary_pt' => $request->salary_pt
                     ]);
 
                     return redirect()->route('admin_personal_trainer')->with('success', 'Data berhasil diperbarui!');
@@ -63,8 +67,19 @@ class PersonalTrainerController extends Controller
                 return redirect()->route('admin_personal_trainer')->with('error', 'Data gagal disimpan!');
             }
         }
+        $perPage = 10;
+        $users = User::where('role', 'personal trainer');
+        $page = $request->query('page', 1);
+        $name = $request->query('name', '');
+        if ($name != '') {
+            $users->where('name', 'LIKE', '%' . $name . '%');
+        }
+        $results = $users->paginate($perPage, ['*'], 'page', $page);
+        $total_page = intval(ceil($results->total() / $results->perPage()));
 
-        $users = User::where('role', 'personal trainer')->get();
-        return view('admin.personal_trainer', compact('users'));
+        if ($request->ajax()) {
+            return view('admin.personal_trainer.data', compact('results', 'total_page'))->render();
+        }
+        return view('admin.personal_trainer.index', compact('results', 'total_page'));
     }
 }

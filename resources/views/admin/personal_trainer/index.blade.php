@@ -12,12 +12,13 @@ starter Page
     </div>
 </div>
 <div class="row mb-2 justify-content-end">
-    <div class="col-md-4">
-        <input type="text" class="form-control" id="search_name">
+    <div class="col-md-4 d-flex justify-content-end align-items-center">
+        <input type="text" class="form-control me-2" id="search_name" placeholder="Search Name">
     </div>
 </div>
+
 <div id="data_pt">
-    @include('admin.data_personal_trainer')
+    @include('admin.personal_trainer.data')
 </div>
 
 <!-- Modal Add User -->
@@ -41,6 +42,10 @@ starter Page
                     <div class="mb-3">
                         <label for="phone_number" class="form-label">Phone Number</label>
                         <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="salary" class="form-label">Salary</label>
+                        <input type="number" class="form-control" id="salary" name="salary_pt" required>
                     </div>
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
@@ -80,6 +85,10 @@ starter Page
                     <div class="mb-3">
                         <label for="phone_edit" class="form-label">Phone Number</label>
                         <input type="text" class="form-control" id="phone_edit" name="phone_number" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="salary_edit" class="form-label">Salary</label>
+                        <input type="number" class="form-control" id="salary_edit" name="salary_pt" required>
                     </div>
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
@@ -135,11 +144,12 @@ starter Page
             let name = $(this).data('name');
             let phone = $(this).data('phone');
             let status = $(this).data('status');
+            let salary = $(this).data('salary');
             $('#name_edit').val(name);
             $('#phone_edit').val(phone);
             $('#id_edit').val(id);
-            console.log(status);
             $('#status_edit').val(status);
+            $('#salary_edit').val(salary);
         });
 
         // Populate Delete Modal

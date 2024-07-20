@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PersonalTraining;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,10 +21,31 @@ class ProfilePersonalTraining extends Controller
             'email' => 'required|email',
             'phone' => 'required',
         ]);
-        $data_user = auth()->user();
-        $data_user->update($request->all());
+    
+        $data_user = User::find(Auth::user()->id);
+    
+        // Handle the file upload
+        if ($request->hasFile('photo_profile')) {
+            $file = $request->file('photo_profile');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('assets/images/avatars'), $fileName);
+    
+            // Delete the old photo if it exists
+            if ($data_user->photo_profile && file_exists(public_path('assets/images/avatars/' . $data_user->photo_profile))) {
+                unlink(public_path('assets/images/avatars/' . $data_user->photo_profile));
+            }    
+            $data_user->photo_profile = $fileName;
+        }
+    
+        // Update the rest of the user's profile
+        $data_user->name = $request->name;
+        $data_user->email = $request->email;
+        $data_user->phone_number = $request->phone;
+        $data_user->save();
+    
         return redirect()->back()->with('success', 'Profile berhasil diupdate');
     }
+    
 
     public function changePassword(Request $request) {
         $request->validate([

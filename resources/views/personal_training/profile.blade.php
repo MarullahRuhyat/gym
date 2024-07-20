@@ -17,8 +17,8 @@ User Profile
         <div class="position-relative mb-5">
             <div class="profile-avatar position-absolute top-100 start-50 translate-middle">
                 <img src="
-                    @if($data_user->profile_photo_path)
-                        {{asset($data_user->profile_photo_path)}}
+                    @if($data_user->photo_profile)
+                        {{asset('assets/images/avatars/'.$data_user->photo_profile)}}
                     @else
                         {{asset('assets/images/avatars/avatars.jpg')}}
                     @endif
@@ -43,19 +43,25 @@ User Profile
                         <h5 class="mb-0 fw-bold">Edit Profile</h5>
                     </div>
                 </div>
-                <form action="{{route('personal_trainer.edit_profile')}}" class="row g-4" method="post">
+                <form action="{{route('personal_trainer.edit_profile')}}" class="row g-4" method="post" 
+                {{-- acc untuk form --}}
+                enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-12">
                         <label for="inputName" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name" id="inputName" required placeholder="Name">
+                        <input type="text" class="form-control" name="name" id="inputName" value="{{$data_user->name}}" required placeholder="Name">
                     </div>
                     <div class="col-md-12">
                         <label for="inputPhone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" name="phone" id="inputPhone" required placeholder="Phone" oninput="this.value = this.value.replace(/\+62/, '0').replace(/[^0-9]/g, '');">
+                        <input type="text" class="form-control" name="phone" id="inputPhone" value="{{$data_user->phone_number}}" required placeholder="Phone" oninput="this.value = this.value.replace(/\+62/, '0').replace(/[^0-9]/g, '');">
                     </div>
                     <div class="col-md-12">
                         <label for="inputEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email" id="inputEmail" required placeholder="Email">
+                        <input type="email" class="form-control" name="email" id="inputEmail" value="{{$data_user->email}}" required placeholder="Email">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="inputPhotoProfile" class="form-label">Photo Profile</label>
+                        <input type="file" class="form-control" name="photo_profile" id="inputPhotoProfile" accept="image/*">
                     </div>
                     <div class="col-md-12">
                         <div class="d-md-flex d-grid align-items-center gap-3 float-end">

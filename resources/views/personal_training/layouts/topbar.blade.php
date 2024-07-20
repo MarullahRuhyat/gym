@@ -149,12 +149,12 @@
                                 <div class="d-flex align-items-center gap-3">
                                     <div class="">
                                         <img src="
-											@if($data_user->profile_photo_path)
-												{{asset($data_user->profile_photo_path)}}
-											@else
-												{{asset('assets/images/avatars/avatars.jpg')}}
-											@endif
-										" class="rounded-circle" width="45" height="45" alt="">
+                                        @if(auth()->user()->photo_profile)
+                                        {{asset('assets/images/avatars/'.auth()->user()->photo_profile)}}
+                                        @else
+                                            {{ asset('assets/images/avatars/avatars.jpg') }}
+                                        @endif
+                                    " class="rounded-circle" width="45" height="45" alt="Profile Picture">
                                     </div>
                                     <div class="">
                                         <h5 class="notify-title">Congratulations Jhon</h5>
@@ -260,8 +260,8 @@
             </li>
             <li class="nav-item dropdown">
                 <a href="javascript:void(0);" class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
-                    <img src=" @if($data_user->profile_photo_path)
-                        {{asset($data_user->profile_photo_path)}}
+                    <img src=" @if(auth()->user()->photo_profile)
+                        {{asset('assets/images/avatars/'.auth()->user()->photo_profile)}}
                     @else
                         {{asset('assets/images/avatars/avatars.jpg')}}
                     @endif" class="rounded-circle p-1 border" width="45" height="45"
@@ -270,8 +270,8 @@
                 <div class="dropdown-menu dropdown-user dropdown-menu-end shadow">
                     <a class="dropdown-item  gap-2 py-2" href="javascript:;">
                         <div class="text-center">
-                            <img src=" @if($data_user->profile_photo_path)
-                        {{asset($data_user->profile_photo_path)}}
+                            <img src=" @if(auth()->user()->photo_profile)
+                        {{asset('assets/images/avatars/'.auth()->user()->photo_profile)}}
                     @else
                         {{asset('assets/images/avatars/avatars.jpg')}}
                     @endif" class="rounded-circle p-1 shadow mb-3"

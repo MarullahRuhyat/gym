@@ -30,4 +30,10 @@ class PackageController extends Controller
         dd ('oke');
     }
 
+    public function selected_package_detail($id)
+    {
+        $package = DB::table('gym_membership_packages')->where('id', $id)->first();
+        return response()->json($package);
+    }
+
 }

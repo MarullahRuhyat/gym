@@ -46,7 +46,7 @@ starter Page
                                 <div class="card-body">
                                     <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
                                     <p class="card-text">{{ $pkg->description }}</p>
-                                    <h5>Price: ${{ $pkg->price }}</h5>
+                                    <h5>Price: Rp.{{ $pkg->price }}</h5>
                                     <div class="mt-3 d-flex align-items-center justify-content-between">
                                         <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
                                             <!-- <i class="material-icons-outlined">shopping_cart</i> -->
@@ -71,7 +71,7 @@ starter Page
                                 <div class="card-body">
                                     <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
                                     <p class="card-text">{{ $pkg->description }}</p>
-                                    <h5>Price: ${{ $pkg->price }}</h5>
+                                    <h5>Price: Rp.{{ $pkg->price }}</h5>
                                     <div class="mt-3 d-flex align-items-center justify-content-between">
                                         <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
                                             <!-- <i class="material-icons-outlined">shopping_cart</i> -->
@@ -121,7 +121,7 @@ starter Page
 <div class="modal fade" id="ScrollableModal">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-            <div class="modal-header border-bottom-0 bg-grd-primary py-2">
+            <div class="modal-header border-bottom-0 bg-primary py-2">
                 <h5 class="modal-title">Detail Payment</h5>
                 <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="modal">
                     <i class="material-icons-outlined">close</i>
@@ -130,37 +130,36 @@ starter Page
             <div class="modal-body">
                 <form action="{{ route('member.payment') }}" method="GET">
                     @csrf
-                    <input type="hidden" name="submit_user_id" id="submit_user_id" value="">
                     <input type="hidden" name="submit_package_id" id="submit_package_id" value="">
+                    <input type="hidden" name="submit_user_id" id="submit_user_id" value="{{ Auth::user()->id }}">
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <input type="text" name="package_id" id="package_id" value="">
                                 <h4 class="card-title mb-4 fw-bold">Summary</h4>
                                 <div>
                                     <div class="d-flex justify-content-between">
                                         <p class="fw-semi-bold">Items subtotal :</p>
-                                        <p id="payment-item-total" class="fw-semi-bold">$891</p>
+                                        <p id="payment-item-total" class="fw-semi-bold"></p>
                                     </div>
                                     <div class="d-flex justify-content-between">
                                         <p class="fw-semi-bold">Discount :</p>
-                                        <p id="payment-discount" class="text-danger fw-semi-bold">-$48</p>
+                                        <p id="payment-discount" class="text-danger fw-semi-bold">Rp.-</p>
                                     </div>
                                     <div class="d-flex justify-content-between">
                                         <p class="fw-semi-bold">Tax :</p>
-                                        <p id="payment-tax" class="fw-semi-bold">$156.70</p>
+                                        <p id="payment-tax" class="fw-semi-bold">Rp.-</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between border-top pt-4">
                                     <h5 class="mb-0 fw-bold">Total :</h5>
-                                    <h5 id="payment-total" class="mb-0 fw-bold">$925.44</h5>
+                                    <h5 id="payment-total" class="mb-0 fw-bold"></h5>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="d-flex justify-content-end mt-4">
-                            <button type="submit" class="btn btn-primary px-4" onclick="Pay()">Pay</button>
+                            <button type="submit" class="btn btn-primary px-4">Pay</button>
                         </div>
                     </div>
                 </form>
@@ -173,20 +172,21 @@ starter Page
 <script>
     function SelectPackage(id) {
         $('#ScrollableModal').modal('show');
-        $('#package_id').val(id);
-    }
-
-    function Pay() {
-        var user_id = '{{ Auth::user()->id }}';
-        var package_id = $('#package_id').val();
+        $('#submit_package_id').val(id);
         $.ajax({
-            type: 'POST',
-            url: "{{ route('member.select.package') }}",
+            type: 'GET',
+            url: "/member/package/selected-package-detail/" + id,
             data: {
-                user_id: user_id,
-                package_id: package_id,
-                _token: '{{ csrf_token() }}'
+                id: id,
             },
+            success: function(response) {
+                console.log(response);
+                $('#payment-item-total').text('Rp.' + response.price);
+                $('#payment-total').text('Rp.' + response.price);
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
         });
     }
 </script>

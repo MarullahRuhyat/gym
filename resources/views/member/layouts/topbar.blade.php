@@ -1,6 +1,6 @@
  <!--start header-->
  <header class="top-header">
-   <nav class="navbar navbar-expand align-items-center" style="left: 0; right: 0; background-color:#585CE5;">
+   <nav class="navbar navbar-expand align-items-center" style="left: 0; right: 0;">
      <!-- <div class="btn-toggle">
        <a href="javascript:;"><i class="material-icons-outlined">menu</i></a>
      </div> -->

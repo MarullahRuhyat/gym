@@ -4,19 +4,23 @@ starter Page
 @endsection
 @section('content')
 @foreach($user as $user)
-<div class="card rounded-4">
-    <div class="card-body p-4">
-        <div class="position-relative mb-5">
-            <img src="assets/images/gallery/profile-cover.png" class="img-fluid rounded-4 shadow" alt="">
-            <div class="profile-avatar position-absolute top-100 start-50 translate-middle">
-                <!-- <img src="assets/images/avatars/01.png" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="170" height="170" alt=""> -->
-                <img src="{{ URL::asset('build/images/member/photo_profile/'.$user->photo_profile) }}" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="170" height="170" alt="">
-            </div>
-        </div>
-        <div class="profile-info pt-5 d-flex align-items-center justify-content-between">
-            <div class="">
-                <h3>{{ $user->name }}</h3>
-                <p class="mb-0">{{ $user->address }}</p>
+<div class="row justify-content-center">
+    <div class="col-12 col-xl-4">
+        <div class="card rounded-4">
+            <div class="card-body p-4">
+                <div class="position-relative mb-5">
+                    <img src="assets/images/gallery/profile-cover.png" class="img-fluid rounded-4 shadow" alt="">
+                    <div class="profile-avatar position-absolute top-100 start-50 translate-middle">
+                        <!-- <img src="assets/images/avatars/01.png" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="170" height="170" alt=""> -->
+                        <img src="{{ URL::asset('build/images/member/photo_profile/'.$user->photo_profile) }}" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="170" height="170" alt="">
+                    </div>
+                </div>
+                <div class="profile-info pt-5 d-flex align-items-center justify-content-between">
+                    <div class="">
+                        <h3>{{ $user->name }}</h3>
+                        <p class="mb-0">{{ $user->address }}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

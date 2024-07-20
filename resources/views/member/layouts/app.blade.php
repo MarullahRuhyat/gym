@@ -31,10 +31,9 @@
 
     <!--start overlay-->
     <div class="overlay btn-toggle"></div>
-    <!--end overlay-->    
+    <!--end overlay-->
 
     @include('member.layouts.common-scripts')
-    @include('member.layouts.footer')
     @include('member.layouts.extra')
 </body>
 

@@ -4,12 +4,12 @@ services:
       context: .
     depends_on:
       - db
+      - redis
     volumes: 
       - .:/app
       - /app/vendor
     ports:
       - "${APP_PORT:-8001}:8000"
-    command: ["sh", "-c", "/usr/local/bin/wait-for-it.sh db:3306 -- php artisan key:generate --force && php artisan migrate && php artisan serve --host=0.0.0.0 --port=8000"]
     environment:
       APP_ENV: local
       DB_CONNECTION: mysql
@@ -18,8 +18,7 @@ services:
       DB_DATABASE: gym
       DB_USERNAME: user_gym
       DB_PASSWORD: password_gym
-
-
+    command: ["sh", "-c", "/usr/local/bin/wait-for-it.sh db:3306 --  /usr/local/bin/start_dev.sh"]
   db:
     image: mysql:8.0.37
     ports:
@@ -31,3 +30,9 @@ services:
       MYSQL_ROOT_PASSWORD: root_password
     volumes:
       - ../database/gym:/var/lib/mysql
+  redis:
+    image: redis:alpine
+    container_name: gym-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"

@@ -32,13 +32,13 @@ starter Page
                     </div>
                     <div class="d-flex flex-column gap-3">
                         <div class="d-flex align-items-center justify-content-between">
-                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-primary">desktop_windows</span>Active</p>
+                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-success">fiber_manual_record</span>Active</p>
                             <div class="">
                                 <p class="mb-0" id="active_member"></p>
                             </div>
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
-                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-danger">tablet_mac</span>Inactive</p>
+                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-danger">fiber_manual_record</span>Inactive</p>
                             <div class="">
                                 <p class="mb-0" id="inactive_member"></p>
                             </div>
@@ -76,13 +76,13 @@ starter Page
                     </div>
                     <div class="d-flex flex-column gap-3">
                         <div class="d-flex align-items-center justify-content-between">
-                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-success">desktop_windows</span>Active</p>
+                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-success">fiber_manual_record</span>Active</p>
                             <div class="">
                                 <p class="mb-0" id="active_pt"></p>
                             </div>
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
-                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-danger">tablet_mac</span>Inactive</p>
+                            <p class="mb-0 d-flex align-items-center gap-2 w-25"><span class="material-icons-outlined fs-6 text-danger">fiber_manual_record</span>Inactive</p>
                             <div class="">
                                 <p class="mb-0" id="inactive_pt"></p>
                             </div>
@@ -158,14 +158,14 @@ starter Page
                     type: 'gradient',
                     gradient: {
                         shade: 'dark',
-                        gradientToColors: ['#ee0979', '#17ad37', '#ec6ead'],
+                        gradientToColors: ['#17ad37', '#ee0979', '#ec6ead'],
                         shadeIntensity: 1,
                         type: 'vertical',
                         opacityFrom: 1,
                         opacityTo: 1,
                     },
                 },
-                colors: ["#ff6a00", "#98ec2d", "#3494e6"],
+                colors: ["#98ec2d", "#ff6a00", "#3494e6"],
                 dataLabels: {
                     enabled: !1
                 },
@@ -175,6 +175,15 @@ starter Page
                             size: "75%"
                         }
                     }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(value, {
+                            seriesIndex
+                        }) {
+                            return seriesIndex === 0 ? 'Active: ' + value : 'Inactive: ' + value;
+                        }
+                    },
                 },
                 responsive: [{
                     breakpoint: 480,
@@ -197,7 +206,7 @@ starter Page
         function chart_pt(active, inactive) {
             $('#total_pt').html(active + inactive);
             $('#active_pt').html(active);
-            $('#inactive_pt').html(inactive)
+            $('#inactive_pt').html(inactive);
             var options = {
                 series: [active, inactive],
                 chart: {
@@ -212,14 +221,14 @@ starter Page
                     type: 'gradient',
                     gradient: {
                         shade: 'dark',
-                        gradientToColors: ['#ee0979', '#17ad37', '#ec6ead'],
+                        gradientToColors: ['#17ad37', '#ee0979', '#ec6ead'],
                         shadeIntensity: 1,
                         type: 'vertical',
                         opacityFrom: 1,
                         opacityTo: 1,
                     },
                 },
-                colors: ["#ff6a00", "#98ec2d", "#3494e6"],
+                colors: ["#98ec2d", "#ff6a00", "#3494e6"],
                 dataLabels: {
                     enabled: !1
                 },
@@ -229,6 +238,15 @@ starter Page
                             size: "75%"
                         }
                     }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(value, {
+                            seriesIndex
+                        }) {
+                            return seriesIndex === 0 ? 'Active: ' + value : 'Inactive: ' + value;
+                        }
+                    },
                 },
                 responsive: [{
                     breakpoint: 480,
@@ -247,6 +265,7 @@ starter Page
             var chart = new ApexCharts(document.querySelector("#pt"), options);
             chart.render();
         }
+
 
         function chart_absent(results) {
             let bulan = []

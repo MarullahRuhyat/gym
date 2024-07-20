@@ -26,6 +26,7 @@ class User extends Authenticatable
         'status',
         'role',
         'start_date',
+        'salary_pt'
     ];
 
     /**

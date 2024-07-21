@@ -5,11 +5,11 @@ Subscribed Package
 @section('content')
 <div class="row">
     <div class="col-md-4">
-        @if(count($membership) == 0)
+        @if(count($membership_payments) == 0)
         <p>No Subscribed Package</p>
         <a href="{{ route('member.package') }}" class="btn btn-primary">Buy Membership</a>
         @else
-        @foreach($membership as $membership)
+        @foreach($membership_payments as $membership)
         <div class="card rounded-4">
             <div class="card-header">
                 <h5 style="margin-top:10px;" class="card-title mb-3">{{ ucwords($membership->name) }}</h5>
@@ -34,6 +34,9 @@ Subscribed Package
                                 <button class="btn btn-primary" disabled>Active</button>
                             @else
                                 <button class="btn btn-secondary" disabled>Inactive</button>
+                            @endif
+                            @if($membership->status == 'pending')
+                                <button class="btn btn-warning" style="color:white">Check Payment</button>
                             @endif
                         </div>
                     </div>

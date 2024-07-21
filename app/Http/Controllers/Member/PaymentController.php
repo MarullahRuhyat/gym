@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Member\Notification;
-use App\Models\Donation; // Add this line to import the Donation model if it's not already imported.
 
 class PaymentController extends Controller
 {

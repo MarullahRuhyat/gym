@@ -68,7 +68,6 @@ starter Page
 @endsection
 @section('content')
 @foreach($user as $user)
-
 <div class="row justify-content-center">
     <div class="col-12 col-xl-8">
         <div class="card rounded-4">
@@ -79,7 +78,7 @@ starter Page
                         <!-- <img src="assets/images/avatars/01.png" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="170" height="170" alt=""> -->
                         <div class="container">
                             <div class="outer">
-                                <img src="{{ URL::asset('build/images/member/photo_profile/'.$user->photo_profile) }}" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="150" height="150" alt="">
+                                <img src="{{ URL::asset('build/images/member/photo_profile/'.$user->photo_profile ?? 'default.JPEG') }}" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="150" height="150" alt="">
                                 <div class="inner">
                                     <input class="inputfile" type="file" name="pic" accept="image/*">
                                     <label><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
@@ -109,29 +108,19 @@ starter Page
                     <div class="">
                         <h5 class="mb-0 fw-bold">Edit Profile</h5>
                     </div>
-                    <div class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle-nocaret options dropdown-toggle" data-bs-toggle="dropdown">
-                            <span class="material-icons-outlined fs-5">more_vert</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="javascript:;">Action</a></li>
-                            <li><a class="dropdown-item" href="javascript:;">Another action</a></li>
-                            <li><a class="dropdown-item" href="javascript:;">Something else here</a></li>
-                        </ul>
-                    </div>
                 </div>
                 <form class="row g-4">
                     <input type="hidden" id="user_id" name="user_id" value="{{ $user->id }}">
                     <div class="col-md-12">
-                        <label for="input1" class="form-label">Name</label>
+                        <label for="input1" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Full Name" value="{{ $user->name }}">
                     </div>
                     <div class="col-md-12">
-                        <label for="input2" class="form-label">Address</label>
+                        <label for="input2" class="form-label">Alamat</label>
                         <input type="text" class="form-control" id="user_address" name="user_address" placeholder="Address" value="{{ $user->address }}">
                     </div>
                     <div class="col-md-12">
-                        <label for="input3" class="form-label">Phone Number</label>
+                        <label for="input3" class="form-label">Nomor HP</label>
                         <input type="text" class="form-control" id="user_phone_number" name="user_phone_number" placeholder="Phone Number" value="{{ $user->phone_number }}">
                     </div>
                     <div class="col-md-12">
@@ -139,7 +128,7 @@ starter Page
                         <input type="email" class="form-control" id="user_email" name="user_email" placeholder="Email" value="{{ $user->email }}">
                     </div>
                     <div class="col-md-12">
-                        <label for="input5" class="form-label">Date of Birth</label>
+                        <label for="input5" class="form-label">Tanggal Lahir</label>
                         <input type="date" class="form-control" id="user_date_of_birth" name="user_date_of_birth" value="{{ $user->date_of_birth }}">
                     </div>
                     <div class="col-md-12">
@@ -150,17 +139,71 @@ starter Page
                         <label for="input7" class="form-label">Confirm Password</label>
                         <input type="password" class="form-control" id="user_password_confirmation" name="user_password_confirmation" placeholder="Confirm Password">
                     </div>
-                    <div class="col-md-12">
+                    <!-- <div class="col-md-12">
                         <div class="d-md-flex d-grid align-items-center gap-3">
                             <button id="submit-update-profile" type="submit" class="btn btn-primary px-4">Update Profile</button>
                             <button type="reset" class="btn btn-light px-4">Reset</button>
                         </div>
+                    </div> -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!--end row-->
+@endforeach
+
+@foreach($informasi_fisik as $informasi_fisik)
+<div class="row justify-content-center">
+    <div class="col-12 col-xl-8">
+        <div class="card rounded-4 border-top border-4 border-primary border-gradient-1">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-start justify-content-between mb-3">
+                    <div class="">
+                        <h5 class="mb-0 fw-bold">Edit Profile</h5>
+                    </div>
+                </div>
+                <form class="row g-4">
+                    <div class="col-md-12">
+                        <label for="tinggi_badan" class="form-label">Tinggi Badan</label>
+                        <input type="text" class="form-control" id="tinggi_badan" name="tinggi_badan" placeholder="Tinggi Badan" value="{{ $informasi_fisik->tinggi_badan }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="berat_badan" class="form-label">Berat Badan</label>
+                        <input type="text" class="form-control" id="berat_badan" name="berat_badan" placeholder="Berat Badan" value="{{ $informasi_fisik->berat_badan }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="massa_otot" class="form-label">Massa Otot</label>
+                        <input type="text" class="form-control" id="massa_otot" name="massa_otot" placeholder="Massa Otot" value="{{ $informasi_fisik->massa_otot }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="massa_tulang" class="form-label">Massa Tulang</label>
+                        <input type="text" class="form-control" id="massa_tulang" name="massa_tulang" placeholder="Massa Tulang" value="{{ $informasi_fisik->massa_tulang }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="persentase_lemak_tubuh" class="form-label">Persentase Lemak Tubuh</label>
+                        <input type="text" class="form-control" id="persentase_lemak_tubuh" name="persentase_lemak_tubuh" value="{{ $informasi_fisik->persentase_lemak_tubuh }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="intoleransi_latihan_atau_alergi" class="form-label">Intoleransi Latihan atau Alergi</label>
+                        <input type="text" class="form-control" id="intoleransi_latihan_atau_alergi" name="intoleransi_latihan_atau_alergi" value="{{ $informasi_fisik->intoleransi_latihan_atau_alergi }}">
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div><!--end row-->
+
+
+<div class="row justify-content-center">
+    <div class="col-12 col-xl-8">
+        <div class="col-md-12">
+            <div class="d-md-flex d-grid align-items-center gap-3">
+                <button id="submit-update-profile" type="submit" class="btn btn-primary px-4">Update Profile</button>
+                 <button type="reset" class="btn btn-light btn-outline-primary px-4">Reset</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endforeach
 @endsection
 @push('script')
@@ -169,26 +212,22 @@ starter Page
     $(document).ready(function() {
         $('#submit-update-profile').click(function(e) {
             e.preventDefault();
-            // Get the selected file
-            var photo_profile = $('.inputfile')[0].files[0];
-            var user_id = $('#user_id').val();
-            var user_name = $('#user_name').val();
-            var user_address = $('#user_address').val();
-            var user_phone_number = $('#user_phone_number').val();
-            var user_email = $('#user_email').val();
-            var user_date_of_birth = $('#user_date_of_birth').val();
-            var user_password = $('#user_password').val();
-            // Create a FormData object to store the file and other form data
             var formData = new FormData();
-            formData.append('photo_profile', photo_profile);
             formData.append('_token', "{{ csrf_token() }}");
-            formData.append('user_id', user_id);
-            formData.append('user_name', user_name);
-            formData.append('user_address', user_address);
-            formData.append('user_phone_number', user_phone_number);
-            formData.append('user_email', user_email);
-            formData.append('user_date_of_birth', user_date_of_birth);
-            formData.append('user_password', user_password);
+            formData.append('photo_profile', $('.inputfile')[0].files[0]);
+            formData.append('user_id', $('#user_id').val());
+            formData.append('user_name', $('#user_name').val());
+            formData.append('user_address', $('#user_address').val());
+            formData.append('user_phone_number', $('#user_phone_number').val());
+            formData.append('user_email', $('#user_email').val());
+            formData.append('user_date_of_birth', $('#user_date_of_birth').val());
+            formData.append('user_password', $('#user_password').val());
+            formData.append('tinggi_badan', $('#tinggi_badan').val());
+            formData.append('berat_badan', $('#berat_badan').val());
+            formData.append('massa_otot', $('#massa_otot').val());
+            formData.append('massa_tulang', $('#massa_tulang').val());
+            formData.append('persentase_lemak_tubuh', $('#persentase_lemak_tubuh').val());
+            formData.append('intoleransi_latihan_atau_alergi', $('#intoleransi_latihan_atau_alergi').val());
 
             // Send the AJAX request with the updated form data
             $.ajax({
@@ -206,42 +245,6 @@ starter Page
                     }
                 }
             });
-
-            // var user_id = $('#user_id').val();
-            // var user_name = $('#user_name').val();
-            // var user_address = $('#user_address').val();
-            // var user_phone_number = $('#user_phone_number').val();
-            // var user_email = $('#user_email').val();
-            // var user_date_of_birth = $('#user_date_of_birth').val();
-            // var user_password = $('#user_password').val();
-            // var user_password_confirmation = $('#user_password_confirmation').val();
-
-            // if (user_password != user_password_confirmation) {
-            //     alert('Password and Confirm Password must be the same');
-            //     return;
-            // }
-
-            // $.ajax({
-            //     type: "POST",
-            //     url: "{{ route('member.edit-profile.process', $user->id) }}",
-            //     data: {
-            //         _token: "{{ csrf_token() }}",
-            //         user_name: user_name,
-            //         user_address: user_address,
-            //         user_phone_number: user_phone_number,
-            //         user_email: user_email,
-            //         user_date_of_birth: user_date_of_birth,
-            //         user_password: user_password,
-            //     },
-            //     success: function(response) {
-            //         if (response.status) {
-            //             alert(response.message);
-            //             window.location.href = "{{ route('member.profile') }}";
-            //         } else {
-            //             alert(response.message);
-            //         }
-            //     }
-            // })
         })
 
     })

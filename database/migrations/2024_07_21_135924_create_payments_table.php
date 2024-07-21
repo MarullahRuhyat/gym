@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('order_id');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('gym_membership_packages')->constrained()->onDelete('cascade');
+            $table->foreignId('membership_id')->constrained()->onDelete('cascade');
             $table->decimal('amount', 8, 2);
             $table->string('payment_method');
             $table->enum('status', ['pending', 'paid', 'expired']);

@@ -65,13 +65,6 @@ Route::prefix('member')->group(function () {
     Route::post('/login', [MemberAuthController::class, 'login'])->name('member.login');
     Route::post('/logout', [MemberAuthController::class, 'logout'])->name('member.logout')->middleware(Member::class);
 
-    Route::prefix('package')->group(function () {
-        Route::get('/', [PackageController::class, 'package'])->name('member.package');
-        Route::post('/select-package', [PackageController::class, 'select_package'])->name('member.select.package');
-        Route::get('/selected-package-detail/{id}', [PackageController::class, 'selected_package_detail'])->name('member.selected-package-detail');
-        Route::get('/subscribed-package', [PackageController::class, 'subscribed_package'])->name('member.subscribed-package');
-    });
-
     Route::prefix('payment')->group(function () {
         Route::get('/', [PaymentController::class, 'payment'])->name('member.payment');
         Route::post('/payment-callback', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
@@ -85,6 +78,12 @@ Route::prefix('member')->group(function () {
             Route::post('/edit-profile/{id}', [ProfileController::class, 'edit_profile_process'])->name('member.edit-profile.process');
             // Route::get('/change-password', [ProfileController::class, 'change_password'])->name('member.change_password');
             // Route::post('/change-password', [ProfileController::class, 'change_password_process'])->name('member.change-password.process');
+        });
+        Route::prefix('package')->group(function () {
+            Route::get('/', [PackageController::class, 'package'])->name('member.package');
+            Route::post('/select-package', [PackageController::class, 'select_package'])->name('member.select.package');
+            Route::get('/selected-package-detail/{id}', [PackageController::class, 'selected_package_detail'])->name('member.selected-package-detail');
+            Route::get('/subscribed-package', [PackageController::class, 'subscribed_package'])->name('member.subscribed-package');
         });
         Route::prefix('membership')->group(function () {
             // Route::post('/subscribe-membership', [MembershipController::class, 'subscribe_membership'])->name('member.subscribe_membership');

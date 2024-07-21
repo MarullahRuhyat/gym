@@ -25,11 +25,6 @@ class PackageController extends Controller
         return view('member.membership.subscribed-package', compact('membership'));
     }
 
-    public function select_package(Request $request)
-    {
-        dd ('oke');
-    }
-
     public function selected_package_detail($id)
     {
         $package = DB::table('gym_membership_packages')->where('id', $id)->first();

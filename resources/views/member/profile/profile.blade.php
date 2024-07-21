@@ -113,7 +113,7 @@ starter Page
 <!-- button  -->
 <div class="row justify-content-center">
     <div class="col-12 col-xl-4">
-        <div class="col-md-12" style="">
+        <div class="col-md-12">
             <div class="d-grid align-items-center">
                 <a href="{{ route('member.edit_profile') }}" type="button" class="btn btn-primary px-4">Update Profile</a>
             </div>

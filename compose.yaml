@@ -18,6 +18,7 @@ services:
       DB_DATABASE: gym
       DB_USERNAME: user_gym
       DB_PASSWORD: password_gym
+    command: ["sh", "-c", "/usr/local/bin/wait-for-it.sh db:3306 --  /usr/local/bin/start_dev.sh"]
   db:
     image: mysql:8.0.37
     ports:

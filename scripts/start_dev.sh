@@ -1,10 +1,14 @@
 #!/bin/sh
 
+# Create log directory for supervisor and set permissions
+mkdir -p /app/storage/logs/supervisor
+chmod -R 777 /app/storage/logs/supervisor
+
 # Wait for Redis to be ready
-/usr/local/bin/wait-for-it.sh db:3306
+# /usr/local/bin/wait-for-it.sh db:3306
 
 # Run Laravel artisan commands
-if [ ! -L /var/www/app/public/storage ]; then
+if [ ! -L /app/public/storage ]; then
     php artisan storage:link
 fi
 
@@ -15,7 +19,5 @@ php artisan route:clear
 php artisan route:cache
 
 
-# Start php-artisan
-php artisan schedule:work &
-php artisan queue:work --tries=3 &
-php artisan serve --host=0.0.0.0 --port=8000 
+# Start supervisord to manage queue worker and Laravel server
+exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

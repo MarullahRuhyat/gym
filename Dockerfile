@@ -14,10 +14,15 @@ RUN apt-get update \
         git \
         unzip \
         libzip-dev \
+        supervisor \
     && docker-php-ext-install zip pdo_mysql\
     # jika butuh redis
     && pecl install redis \
     && docker-php-ext-enable redis
+
+
+# Copy the supervisor configuration file
+COPY supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # cd direktory project
 WORKDIR /app
@@ -37,6 +42,6 @@ RUN composer dump-autoload --optimize
 
 # Expose the port Laravel is running on
 EXPOSE 8000
-CMD ["/usr/local/bin/start_dev.sh"]
+# CMD ["/usr/local/bin/start_dev.sh"]
 # Command to run the application
 # CMD ["php", "artisan", "php artisan serve --host=0.0.0.0 --port=8000"]

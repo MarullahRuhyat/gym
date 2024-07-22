@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Middleware\Member;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
 class PackageController extends Controller
 {
@@ -17,11 +16,11 @@ class PackageController extends Controller
 
     public function subscribed_package()
     {
+        // cari user yang login
         $user = auth()->user();
-        // $membership = DB::table('memberships')
-        //     ->join('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
-        //     ->where('memberships.user_id', $user->id)
-        //     ->get();
+        if (!$user) {
+            return redirect()->route('member.send-otp');
+        }
 
         $membership_payments = DB::table('payments')
             ->join('memberships', 'payments.membership_id', '=', 'memberships.id')

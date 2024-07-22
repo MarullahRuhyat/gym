@@ -64,6 +64,7 @@ class AuthController extends Controller
     {
         $phone_number = $request->phone_number;
         $otp = $request->otp;
+
         $validator = Validator::make($request->only('otp'), [
             'otp' => ['required', 'numeric', 'digits:4']
         ]);

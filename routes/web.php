@@ -65,11 +65,6 @@ Route::prefix('member')->group(function () {
     Route::post('/login', [MemberAuthController::class, 'login'])->name('member.login');
     Route::post('/logout', [MemberAuthController::class, 'logout'])->name('member.logout')->middleware(Member::class);
 
-    Route::prefix('payment')->group(function () {
-        Route::get('/', [PaymentController::class, 'payment'])->name('member.payment');
-        Route::post('/payment-callback', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
-    });
-
     Route::middleware(Member::class)->group(function () {
         Route::get('/dashboard', [ProfileController::class, 'dashboard'])->name('member.dashboard');
         Route::prefix('profile')->group(function () {
@@ -79,6 +74,19 @@ Route::prefix('member')->group(function () {
             // Route::get('/change-password', [ProfileController::class, 'change_password'])->name('member.change_password');
             // Route::post('/change-password', [ProfileController::class, 'change_password_process'])->name('member.change-password.process');
         });
+        Route::prefix('payment')->group(function () {
+            Route::get('/', [PaymentController::class, 'payment'])->name('member.payment');
+            //             Route::post('/payment-callback', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
+
+            Route::prefix('payment-callback')->group(function () {
+                Route::post('/', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
+                Route::get('/payment-success', [PaymentController::class, 'payment_success'])->name('member.payment.success');
+                Route::get('/payment-failed', [PaymentController::class, 'payment_failed'])->name('member.payment.failed');
+                Route::get('/payment-pending', [PaymentController::class, 'payment_pending'])->name('member.payment.pending');
+            });
+            
+        });
+
         Route::prefix('package')->group(function () {
             Route::get('/', [PackageController::class, 'package'])->name('member.package');
             Route::post('/select-package', [PackageController::class, 'select_package'])->name('member.select.package');

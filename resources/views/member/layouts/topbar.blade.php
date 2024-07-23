@@ -230,7 +230,7 @@
          <a href="javascript:void(0);" class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
           @if(auth()->user()->gender == 'P')
             <img src="{{ URL::asset('build/images/member/photo_profile/'.(auth()->user()->photo_profile ?? 'default-user-women.jpg')) }}" class="rounded-circle p-1 border" width="45" height="45" alt="">
-          @else 
+          @else
             <img src="{{ URL::asset('build/images/member/photo_profile/'.(auth()->user()->photo_profile ?? 'default-user-male.jpg'))   }}" class="rounded-circle p-1 border" width="45" height="45" alt="">
           @endif
          </a>
@@ -239,7 +239,7 @@
              <div class="text-center">
               @if(auth()->user()->gender == 'P')
                 <img src="{{ URL::asset('build/images/member/photo_profile/'.(auth()->user()->photo_profile ?? 'default-user-women.jpg')) }}" class="rounded-circle p-1 border" width="45" height="45" alt="">
-              @else 
+              @else
                 <img src="{{ URL::asset('build/images/member/photo_profile/'.(auth()->user()->photo_profile ?? 'default-user-male.jpg'))   }}" class="rounded-circle p-1 border" width="45" height="45" alt="">
               @endif
              <h5 class="user-name mb-0 fw-bold">Hello, {{ auth()->user()->name }}</h5>

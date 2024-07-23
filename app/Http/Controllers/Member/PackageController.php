@@ -23,8 +23,8 @@ class PackageController extends Controller
         }
 
         $membership_payments = DB::table('payments')
-            ->join('memberships', 'payments.membership_id', '=', 'memberships.id')
-            ->join('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+            ->leftjoin('memberships', 'payments.membership_id', '=', 'memberships.id')
+            ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
             ->where('payments.user_id', $user->id)
             ->get();
 

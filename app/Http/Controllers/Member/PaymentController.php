@@ -23,7 +23,9 @@ class PaymentController extends Controller
     }
     public function payment(Request $request)
     {
-
+        $start_date = $request->submit_start_date;
+        $gym_membership_packages = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('duration_in_days')->first();
+        $end_date = date('Y-m-d', strtotime($start_date . ' + ' . $gym_membership_packages . ' days'));
         $amount = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('price')->first();
         $user = DB::table('users')->where('id', $request->submit_user_id)->first();
         $params = array(
@@ -37,6 +39,13 @@ class PaymentController extends Controller
                 'phone' => $user->phone_number,
             ),
         );
+
+        DB::table('memberships')->insert([
+            'user_id' => $request->submit_user_id,
+            'gym_membership_packages' => $request->submit_package_id,
+            'start_date' => date('Y-m-d'),
+            'end_date' => date('Y-m-d', strtotime('+1 month')),
+        ]);
 
         DB::table('payments')->insert([
             'order_id' => $params['transaction_details']['order_id'],

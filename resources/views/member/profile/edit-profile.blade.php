@@ -67,7 +67,7 @@ starter Page
 </style>
 @endsection
 @section('content')
-@foreach($user as $user)
+@foreach($profile as $profile)
 <div class="row justify-content-center">
     <div class="col-12 col-xl-8">
         <div class="card rounded-4">
@@ -78,7 +78,7 @@ starter Page
                         <!-- <img src="assets/images/avatars/01.png" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="170" height="170" alt=""> -->
                         <div class="container">
                             <div class="outer">
-                                <img src="{{ URL::asset('build/images/member/photo_profile/'.$user->photo_profile ?? 'default.JPEG') }}" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="150" height="150" alt="">
+                                <img src="{{ URL::asset('build/images/member/photo_profile/'.$profile->photo_profile ?? 'default.JPEG') }}" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="150" height="150" alt="">
                                 <div class="inner">
                                     <input class="inputfile" type="file" name="pic" accept="image/*">
                                     <label><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
@@ -91,8 +91,8 @@ starter Page
                 </div>
                 <div class="profile-info pt-5 d-flex align-items-center justify-content-between">
                     <div class="">
-                        <h3>{{ $user->name }}</h3>
-                        <p class="mb-0">{{ $user->address }}</p>
+                        <h3>{{ $profile->name }}</h3>
+                        <p class="mb-0">{{ $profile->address }}</p>
                     </div>
                 </div>
             </div>
@@ -110,26 +110,26 @@ starter Page
                     </div>
                 </div>
                 <form class="row g-4">
-                    <input type="hidden" id="user_id" name="user_id" value="{{ $user->id }}">
+                    <input type="hidden" id="user_id" name="user_id" value="{{ $profile->id }}">
                     <div class="col-md-12">
                         <label for="input1" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Full Name" value="{{ $user->name }}">
+                        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Full Name" value="{{ $profile->name }}">
                     </div>
                     <div class="col-md-12">
                         <label for="input2" class="form-label">Alamat</label>
-                        <input type="text" class="form-control" id="user_address" name="user_address" placeholder="Address" value="{{ $user->address }}">
+                        <input type="text" class="form-control" id="user_address" name="user_address" placeholder="Address" value="{{ $profile->address }}">
                     </div>
                     <div class="col-md-12">
                         <label for="input3" class="form-label">Nomor HP</label>
-                        <input type="text" class="form-control" id="user_phone_number" name="user_phone_number" placeholder="Phone Number" value="{{ $user->phone_number }}">
+                        <input type="text" class="form-control" id="user_phone_number" name="user_phone_number" placeholder="Phone Number" value="{{ $profile->phone_number }}">
                     </div>
                     <div class="col-md-12">
                         <label for="input4" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="user_email" name="user_email" placeholder="Email" value="{{ $user->email }}">
+                        <input type="email" class="form-control" id="user_email" name="user_email" placeholder="Email" value="{{ $profile->email }}">
                     </div>
                     <div class="col-md-12">
                         <label for="input5" class="form-label">Tanggal Lahir</label>
-                        <input type="date" class="form-control" id="user_date_of_birth" name="user_date_of_birth" value="{{ $user->date_of_birth }}">
+                        <input type="date" class="form-control" id="user_date_of_birth" name="user_date_of_birth" value="{{ $profile->date_of_birth }}">
                     </div>
                     <div class="col-md-12">
                         <label for="input6" class="form-label">Password</label>
@@ -150,9 +150,8 @@ starter Page
         </div>
     </div>
 </div><!--end row-->
-@endforeach
 
-@foreach($informasi_fisik as $informasi_fisik)
+
 <div class="row justify-content-center">
     <div class="col-12 col-xl-8">
         <div class="card rounded-4 border-top border-4 border-primary border-gradient-1">
@@ -163,29 +162,30 @@ starter Page
                     </div>
                 </div>
                 <form class="row g-4">
+                    <!-- handle null with ternary operator  -->
                     <div class="col-md-12">
                         <label for="tinggi_badan" class="form-label">Tinggi Badan</label>
-                        <input type="text" class="form-control" id="tinggi_badan" name="tinggi_badan" placeholder="Tinggi Badan" value="{{ $informasi_fisik->tinggi_badan }}">
+                        <input type="text" class="form-control" id="tinggi_badan" name="tinggi_badan" placeholder="Tinggi Badan" value="{{ $profile->tinggi_badan ?? '' }}">
                     </div>
                     <div class="col-md-12">
                         <label for="berat_badan" class="form-label">Berat Badan</label>
-                        <input type="text" class="form-control" id="berat_badan" name="berat_badan" placeholder="Berat Badan" value="{{ $informasi_fisik->berat_badan }}">
+                        <input type="text" class="form-control" id="berat_badan" name="berat_badan" placeholder="Berat Badan" value="{{ $profile->berat_badan ?? '' }}">
                     </div>
                     <div class="col-md-12">
                         <label for="massa_otot" class="form-label">Massa Otot</label>
-                        <input type="text" class="form-control" id="massa_otot" name="massa_otot" placeholder="Massa Otot" value="{{ $informasi_fisik->massa_otot }}">
+                        <input type="text" class="form-control" id="massa_otot" name="massa_otot" placeholder="Massa Otot" value="{{ $profile->massa_otot ?? '' }}">
                     </div>
                     <div class="col-md-12">
                         <label for="massa_tulang" class="form-label">Massa Tulang</label>
-                        <input type="text" class="form-control" id="massa_tulang" name="massa_tulang" placeholder="Massa Tulang" value="{{ $informasi_fisik->massa_tulang }}">
+                        <input type="text" class="form-control" id="massa_tulang" name="massa_tulang" placeholder="Massa Tulang" value="{{ $profile->massa_tulang ?? '' }}">
                     </div>
                     <div class="col-md-12">
                         <label for="persentase_lemak_tubuh" class="form-label">Persentase Lemak Tubuh</label>
-                        <input type="text" class="form-control" id="persentase_lemak_tubuh" name="persentase_lemak_tubuh" value="{{ $informasi_fisik->persentase_lemak_tubuh }}">
+                        <input type="text" class="form-control" id="persentase_lemak_tubuh" name="persentase_lemak_tubuh" value="{{ $profile->persentase_lemak_tubuh ?? '' }}">
                     </div>
                     <div class="col-md-12">
                         <label for="intoleransi_latihan_atau_alergi" class="form-label">Intoleransi Latihan atau Alergi</label>
-                        <input type="text" class="form-control" id="intoleransi_latihan_atau_alergi" name="intoleransi_latihan_atau_alergi" value="{{ $informasi_fisik->intoleransi_latihan_atau_alergi }}">
+                        <input type="text" class="form-control" id="intoleransi_latihan_atau_alergi" name="intoleransi_latihan_atau_alergi" value="{{ $profile->intoleransi_latihan_atau_alergi ?? '' }}">
                     </div>
                 </form>
             </div>
@@ -198,7 +198,7 @@ starter Page
     <div class="col-12 col-xl-8">
         <div class="col-md-12">
             <div class="d-md-flex d-grid align-items-center gap-3">
-                <button id="submit-update-profile" type="submit" class="btn btn-primary px-4">Update Profile</button>
+                <button id="submit-update-profile" type="submit" class="btn btn-grd-deep-blue px-4">Update Profile</button>
                  <button type="reset" class="btn btn-light btn-outline-primary px-4">Reset</button>
             </div>
         </div>
@@ -232,7 +232,7 @@ starter Page
             // Send the AJAX request with the updated form data
             $.ajax({
                 type: "POST",
-                url: "{{ route('member.edit-profile.process', $user->id) }}",
+                url: "{{ route('member.edit-profile.process', $profile->id) }}",
                 data: formData,
                 processData: false,
                 contentType: false,

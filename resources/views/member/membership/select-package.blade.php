@@ -46,9 +46,10 @@ starter Page
                                 <div class="card-body">
                                     <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
                                     <p class="card-text">{{ $pkg->description }}</p>
+                                    <p class="card-text">Duration: {{ $pkg->duration_in_days }} Days</p>
                                     <h5>Price: Rp.{{ $pkg->price }}</h5>
                                     <div class="mt-3 d-flex align-items-center justify-content-between">
-                                        <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
+                                        <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SetStartDate('{{ $pkg->id }}')">
                                             <!-- <i class="material-icons-outlined">shopping_cart</i> -->
                                             Select Package
                                         </button>
@@ -71,9 +72,10 @@ starter Page
                                 <div class="card-body">
                                     <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
                                     <p class="card-text">{{ $pkg->description }}</p>
+                                    <p class="card-text">Duration: {{ $pkg->duration_in_days }} Days</p>
                                     <h5>Price: Rp.{{ $pkg->price }}</h5>
                                     <div class="mt-3 d-flex align-items-center justify-content-between">
-                                        <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
+                                        <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SetStartDate('{{ $pkg->id }}')">
                                             <!-- <i class="material-icons-outlined">shopping_cart</i> -->
                                             Select Package
                                         </button>
@@ -97,9 +99,10 @@ starter Page
                                 <div class="card-body">
                                     <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
                                     <p class="card-text">{{ $pkg->description }}</p>
+                                    <p class="card-text">Duration: {{ $pkg->duration_in_days }} Days</p>
                                     <h5>Price: Rp.{{ $pkg->price }}</h5>
                                     <div class="mt-3 d-flex align-items-center justify-content-between">
-                                        <button style="color:white;" class="btn btn-primary border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
+                                        <button style="color:white;" class="btn btn-grd-deep-blue border-0 d-flex gap-2 px-3" onclick="SetStartDate('{{ $pkg->id }}')">
                                             <!-- <i class="material-icons-outlined">shopping_cart</i> -->
                                             Select Package
                                         </button>
@@ -117,12 +120,43 @@ starter Page
     </div>
 </div>
 
+<!-- modal start input start_date  if click submit redirect to next modal -->
+ <div class="modal fade" id="SetStartDate">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 bg-primary py-2">
+                <h5 class="modal-title" style="color:white">Set Start Date</h5>
+                <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="modal">
+                    <i class="material-icons-outlined">close</i>
+                </a>
+            </div> 
+            <div class="modal-body">
+                <input type="hidden" name="pkg_id" id="pkg_id">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="start_date">Start Date</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date" required>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex justify-content-end mt-4">
+                            <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SelectPackage('{{ $pkg->id }}')">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Modal -->
 <div class="modal fade" id="ScrollableModal">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header border-bottom-0 bg-primary py-2">
-                <h5 class="modal-title">Detail Payment</h5>
+                <h5 class="modal-title" style="color:white">Detail Payment</h5>
                 <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="modal">
                     <i class="material-icons-outlined">close</i>
                 </a>
@@ -132,6 +166,7 @@ starter Page
                     @csrf
                     <input type="hidden" name="submit_package_id" id="submit_package_id" value="">
                     <input type="hidden" name="submit_user_id" id="submit_user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="submit_start_date" id="submit_start_date" value="">
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
@@ -159,7 +194,7 @@ starter Page
                     </div>
                     <div class="col-12">
                         <div class="d-flex justify-content-end mt-4">
-                            <button type="submit" class="btn btn-primary px-4">Pay</button>
+                            <button type="submit" class="btn btn-grd-deep-blue px-4">Pay</button>
                         </div>
                     </div>
                 </form>
@@ -170,9 +205,19 @@ starter Page
 @endsection
 @push('script')
 <script>
-    function SelectPackage(id) {
+    function SetStartDate(id) {
+        $('#pkg_id').val(id);
+        $('#SetStartDate').modal('show');
+    }
+
+    function SelectPackage() {
+        var start_date = $('#start_date').val();
+        var id = $('#pkg_id').val();
+
+        $('#SetStartDate').modal('hide');
         $('#ScrollableModal').modal('show');
         $('#submit_package_id').val(id);
+        $('#submit_start_date').val(start_date);
         $.ajax({
             type: 'GET',
             url: "/member/package/selected-package-detail/" + id,

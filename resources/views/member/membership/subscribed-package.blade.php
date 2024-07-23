@@ -3,13 +3,17 @@
 Subscribed Package
 @endsection
 @section('content')
+<div class="row justify-content-center" style="margin-bottom:20px;">
+    <div class="col-12 col">
+        <a href="{{ route('member.package') }}" class="btn btn-grd-deep-blue">Buy Membership</a>
+    </div>
+</div>
 <div class="row">
     @if(count($membership_payments) == null)
     <div class="col-md-12">
         <p>No Subscribed Package</p>
-        <a href="{{ route('member.package') }}" class="btn btn-primary">Buy Membership</a>
     </div>
-    @else
+    @else    
         @foreach($membership_payments as $membership)
         <div class="col-md-4">
             <div class="card rounded-4">
@@ -33,12 +37,12 @@ Subscribed Package
                                 <p class="card-text">Personal Trainer Quota: {{ $membership->personal_trainer_quota }} / {{ $membership->personal_trainer_quota }}</p>
                                 <p class="card-text">Price: Rp.{{ $membership->price }}</p>
                                 @if($membership->is_active)
-                                    <button class="btn btn-primary" disabled>Active</button>
+                                    <button class="btn btn-grd-deep-blue" disabled>Active</button>
                                 @else
                                     <button class="btn btn-secondary" disabled>Inactive</button>
                                 @endif
                                 @if($membership->status == 'pending')
-                                    <button class="btn btn-warning" style="color:white">Check Payment</button>
+                                    <button class="btn btn-grd-warning" style="color:white">Check Payment</button>
                                 @endif
                             </div>
                         </div>

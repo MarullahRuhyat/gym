@@ -61,7 +61,7 @@ starter Page
                             @else
                             <div class="card border bg-transparent shadow-none mb-3" style="width: fit-content;">
                                 <div class="card-body">
-                                    <img src="" alt="QR Code" class="img-fluid">
+                                    <img src="{{ URL::asset($qr_code) }}" class="w-150 rounded h-150" alt="...">
                                 </div>
                             </div>
                             <div class="card border bg-transparent shadow-none">

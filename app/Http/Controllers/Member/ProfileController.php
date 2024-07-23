@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Member;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-// use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ProfileController extends Controller
 {
@@ -27,43 +27,35 @@ class ProfileController extends Controller
     public function dashboard()
     {
         $user = auth()->user();
+        $qr_code = DB::table('qr_code')->where('user_id', $user->id)->pluck('path_qr_code')->first();
         $membership = DB::table('memberships')
-            ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
-            ->where('memberships.user_id', $user->id)
-            ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as id', 'gym_membership_packages.id as gym_membership_packages_id')
-            ->get();
+        ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+        ->where('memberships.user_id', $user->id)
+        ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as id', 'gym_membership_packages.id as gym_membership_packages_id')
+        ->get();
 
-        $qr_code = DB::table('qr_code')->where('user_id', $user->id)->first();
-
-        if ($qr_code) {
-            $qr_code->path_qr_code = '/build/images/member/qr_code/'. $qr_code->path_qr_code;
-        } if ($membership->isEmpty()) {
-            return view('member.profile.dashboard', compact('membership'));
-        }
-        else {
+        if ($membership != null) {
             $image_name = 'qr_code_' . $user->id . '_' . $membership[0]->id . '.png';
-            $insert_data_qr_code= DB::table('qr_code')->insert([
-                'user_id' => $user->id,
-                'qr_code' => $image_name,
-                'path_qr_code' => '/build/images/member/qr_code/' . $image_name,
-                'status' => 'active',
-                'expired_at' => date('Y-m-d', strtotime($membership[0]->start_date . '+' . $membership[0]->duration_in_days . ' days')),
-            ]);
-            // move image to storage
-            // $save_image = file_get_contents('https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' . $insert_data_qr_code);
-            // file_put_contents(public_path('build/images/member/qr_code/' . $image_name), $save_image);
-
-
-            // generate qr code and save to public path
-            // $qr_code = QrCode::size(200)->generate('https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' . $insert_data_qr_code);
-            // $qr_code->save(public_path('build/images/member/qr_code/' . $image_name));
-
-
-            $save_qr_code = (object) ['path_qr_code' => $image_name];
-            dd($save_qr_code);
+            $user_exist = DB::table('qr_code')->where('user_id', $user->id)->first();
+            if(!$user_exist) {
+                $insert_data_qr_code= DB::table('qr_code')->insert([
+                    'user_id' => $user->id,
+                    'qr_code' => $image_name,
+                    'path_qr_code' => 'build/images/member/qr_code/' . $image_name,
+                    'status' => 'active',
+                    'expired_at' => date('Y-m-d', strtotime($membership[0]->start_date . '+' . $membership[0]->duration_in_days . ' days')),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ]);
+            }
         }
 
-        // return view('member.profile.dashboard', compact('membership'));
+        // generate path_qr_code value to qr_code image and save to public/build/images/member/qr_code
+        $qr_code = DB::table('qr_code')->where('user_id', $user->id)->pluck('path_qr_code')->first();
+        // $barcode = QrCode::format('png')->size(200)->generate($qr_code);
+
+
+        return view('member.profile.dashboard', compact('membership', 'qr_code'));
     }
 
     public function profile()

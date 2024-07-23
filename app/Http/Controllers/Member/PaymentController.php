@@ -44,16 +44,21 @@ class PaymentController extends Controller
             'user_id' => $request->submit_user_id,
             'gym_membership_packages' => $request->submit_package_id,
             'start_date' => date('Y-m-d'),
-            'end_date' => date('Y-m-d', strtotime('+1 month')),
+            'end_date' => $end_date,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('payments')->insert([
             'order_id' => $params['transaction_details']['order_id'],
+            'membership_id' => DB::table('memberships')->latest()->first()->id,
             'user_id' => $request->submit_user_id,
             'gym_membership_packages' => $request->submit_package_id,
             'amount' => $amount,
             'payment_method' => 'midtrans',
             'status' => 'pending',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);

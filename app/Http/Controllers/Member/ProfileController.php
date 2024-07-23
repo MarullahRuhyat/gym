@@ -15,12 +15,10 @@ class ProfileController extends Controller
         $gender = DB::table('users')->where('id', $auth->id)->pluck('gender')->first();
         $photo_profile = DB::table('users')->where('id', $auth->id)->pluck('photo_profile')->first();
         $photo_profile = null;
-        if ($gender == 'L') {
-            $photo_profile = 'default-user-male.jpg';
-        } else if ($gender == 'P') {
+        if ($gender == 'P') {
             $photo_profile = 'default-user-women.jpg';
         } else {
-            $photo_profile = 'default.jpg';
+            $photo_profile = 'default-user-male.jpg';
         }
         return $photo_profile;
     }
@@ -60,9 +58,9 @@ class ProfileController extends Controller
             // $qr_code = QrCode::size(200)->generate('https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' . $insert_data_qr_code);
             // $qr_code->save(public_path('build/images/member/qr_code/' . $image_name));
 
-        
-            $save_qr_code = (object) ['path_qr_code' => $image_name];   
-            dd($save_qr_code);     
+
+            $save_qr_code = (object) ['path_qr_code' => $image_name];
+            dd($save_qr_code);
         }
 
         // return view('member.profile.dashboard', compact('membership'));
@@ -71,7 +69,7 @@ class ProfileController extends Controller
     public function profile()
     {
         $auth = auth()->user();
-        $photo_profile = $this->photo_profile();      
+        $photo_profile = $this->photo_profile();
 
         $profile = DB::table('users')
             ->leftJoin('informasi_fisik', 'users.id', '=', 'informasi_fisik.user_id')
@@ -81,7 +79,7 @@ class ProfileController extends Controller
 
         // insert photo_profile to profile array
         $profile[0]->photo_profile = $photo_profile;
-            
+
         return view('member.profile.profile', compact('profile'));
     }
 
@@ -95,7 +93,7 @@ class ProfileController extends Controller
             ->select('users.*', 'informasi_fisik.*', 'users.id as id')
             ->get();
         $profile[0]->photo_profile = $photo_profile;
-            
+
         return view('member.profile.edit-profile', compact('profile'));
     }
 

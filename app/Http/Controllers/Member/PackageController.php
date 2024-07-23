@@ -22,13 +22,14 @@ class PackageController extends Controller
             return redirect()->route('member.send-otp');
         }
 
-        $membership_payments = DB::table('payments')
+        $packages_membership_payments = DB::table('payments')
+            ->leftjoin('gym_membership_packages', 'payments.gym_membership_packages', '=', 'gym_membership_packages.id')
             ->leftjoin('memberships', 'payments.membership_id', '=', 'memberships.id')
-            ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
             ->where('payments.user_id', $user->id)
+            ->orderBy('payments.created_at', 'desc')
             ->get();
 
-        return view('member.membership.subscribed-package', compact('membership_payments'));
+        return view('member.membership.subscribed-package', compact('packages_membership_payments'));
     }
 
     public function selected_package_detail($id)

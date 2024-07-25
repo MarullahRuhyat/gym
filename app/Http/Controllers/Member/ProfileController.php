@@ -50,10 +50,9 @@ class ProfileController extends Controller
             }
         }
 
-        // generate path_qr_code value to qr_code image and save to public/build/images/member/qr_code
         $qr_code = DB::table('qr_code')->where('user_id', $user->id)->pluck('path_qr_code')->first();
-        // $barcode = QrCode::format('png')->size(200)->generate($qr_code);
-
+        $generate_image_from_qr_code = QrCode::format('png')->size(200)->generate($qr_code);
+        file_put_contents(public_path('build/images/member/qr_code/' . $image_name), $generate_image_from_qr_code);
 
         return view('member.profile.dashboard', compact('membership', 'qr_code'));
     }

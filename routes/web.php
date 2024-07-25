@@ -23,6 +23,7 @@ use App\Http\Controllers\PersonalTraining\ProfilePersonalTraining;
 use App\Http\Middleware\Member;
 use App\Http\Controllers\Member\QRController;
 
+Route::get('test', fn () => phpinfo());
 Route::get('/', function () {
     $appType = config('app.app_type');
     if ($appType == 'ADMIN') {
@@ -84,7 +85,7 @@ Route::prefix('member')->group(function () {
                 Route::get('/payment-failed', [PaymentController::class, 'payment_failed'])->name('member.payment.failed');
                 Route::get('/payment-pending', [PaymentController::class, 'payment_pending'])->name('member.payment.pending');
             });
-            
+
         });
 
         Route::prefix('package')->group(function () {

@@ -58,6 +58,9 @@ starter Page
                         <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">call</span>
                             <p class="mb-0">Nomor HP: {{ $profile->phone_number }}</p>
                         </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">call</span>
+                            <p class="mb-0">Jenis Kelamin: @if($profile->gender == 'L') Laki-laki @else Perempuan @endif</p>
+                        </div>
                     </div>
                     <!-- <div class="col-md-12" style="padding-top:20px;">
                         <div class="d-md-flex d-grid align-items-center gap-3">

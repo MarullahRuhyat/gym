@@ -131,12 +131,21 @@ starter Page
                         <label for="input5" class="form-label">Tanggal Lahir</label>
                         <input type="date" class="form-control" id="user_date_of_birth" name="user_date_of_birth" value="{{ $profile->date_of_birth }}">
                     </div>
+                    <!-- form select jenis kelamin  -->
                     <div class="col-md-12">
-                        <label for="input6" class="form-label">Password</label>
+                        <label for="input6" class="form-label">Jenis Kelamin</label>
+                        <select class="form-select" id="user_gender" name="user-gender">
+                            <option selected>Pilih Jenis Kelamin</option>
+                            <option value="L" {{ $profile->gender == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                            <option value="P" {{ $profile->gender == 'P' ? 'selected' : '' }}>Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="input7" class="form-label">Password</label>
                         <input type="password" class="form-control" id="user_password" name="user_password" placeholder="Password">
                     </div>
                     <div class="col-md-12">
-                        <label for="input7" class="form-label">Confirm Password</label>
+                        <label for="input8" class="form-label">Confirm Password</label>
                         <input type="password" class="form-control" id="user_password_confirmation" name="user_password_confirmation" placeholder="Confirm Password">
                     </div>
                     <!-- <div class="col-md-12">
@@ -221,6 +230,7 @@ starter Page
             formData.append('user_phone_number', $('#user_phone_number').val());
             formData.append('user_email', $('#user_email').val());
             formData.append('user_date_of_birth', $('#user_date_of_birth').val());
+            formData.append('user_gender', $('#user_gender').val());
             formData.append('user_password', $('#user_password').val());
             formData.append('tinggi_badan', $('#tinggi_badan').val());
             formData.append('berat_badan', $('#berat_badan').val());

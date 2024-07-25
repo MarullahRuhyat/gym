@@ -115,6 +115,7 @@ class ProfileController extends Controller
             'phone_number' => $request->user_phone_number,
             'email' => $request->user_email,
             'date_of_birth' => $request->user_date_of_birth,
+            'gender' => $request->user_gender,
             'password' => bcrypt($request->user_password),
         ]);
 

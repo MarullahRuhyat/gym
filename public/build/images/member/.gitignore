@@ -1,2 +1,2 @@
-# Ignore all files and directories inside public/images/member
-public/images/member/*
+*
+!.gitignore

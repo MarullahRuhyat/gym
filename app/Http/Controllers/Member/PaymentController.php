@@ -45,8 +45,8 @@ class PaymentController extends Controller
             'gym_membership_packages' => $request->submit_package_id,
             'start_date' => date('Y-m-d'),
             'end_date' => $end_date,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         DB::table('payments')->insert([
@@ -57,68 +57,145 @@ class PaymentController extends Controller
             'amount' => $amount,
             'payment_method' => 'midtrans',
             'status' => 'pending',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        // menambahkan snap token ke table payment
+        DB::table('payments')->where('order_id', $params['transaction_details']['order_id'])->update([
+            'snap_token' => $snapToken
+        ]);
 
         return view('member.payment.payment_details', compact('snapToken'));
     }
 
     public function payment_callback(Request $request)
-{
-    try {
-        $notif = new Notification();
+    {
+        try {
+            // Log request payload untuk debugging
+            Log::info('Request Payload: ', $request->all());
 
-        $transaction = $notif->transaction_status;
-        $type = $notif->payment_type;
-        $orderId = $notif->order_id;
-        $fraud = $notif->fraud_status;
+            // Ambil data dari request
+            $orderId = $request->input('order_id');
+            $data = Payment::where('order_id', $orderId)->first();
+            $transaction = $request->input('transaction_status');
+            $type = $data->payment_method;
+            $fraud = $data->status;
 
-        // Log untuk debugging
-        Log::info('Payment Notification: ', [
-            'Order ID' => $orderId,
-            'STATUS TRANSACTION' => $transaction,
-            'Payment Type' => $type,
-            'Fraud Status' => $fraud
-        ]);
+            // Log untuk pengecekan nilai yang diterima
 
-        $data = Payment::where('order_id', $orderId)->first();
+            Log::info('Extracted Notification Data: ', [
+                'transaction' => $transaction,
+                'payment_type' => $type,
+                'order_id' => $orderId,
+                'fraud_status' => $fraud
+            ]);
 
-        // Pastikan data tersedia sebelum proses lebih lanjut
-        if (!$data) {
-            return response()->json(['status' => 'error', 'message' => 'Order not found'], 404);
+            // Verifikasi semua data yang dibutuhkan ada
+            if (is_null($transaction) || is_null($type) || is_null($orderId)) {
+                Log::error('Null data received from notification: ', [
+                    'transaction' => $transaction,
+                    'payment_type' => $type,
+                    'order_id' => $orderId,
+                    'fraud_status' => $fraud
+                ]);
+                return response()->json(['status' => 'error', 'message' => 'Invalid notification data'], 400);
+            }
+
+            // Cari data pembayaran berdasarkan order_id
+
+            // Pastikan data tersedia sebelum proses lebih lanjut
+            if (!$data) {
+                Log::error('Order not found: ', ['order_id' => $orderId]);
+                return response()->json(['status' => 'error', 'message' => 'Order not found'], 404);
+            }
+
+            // Perbarui status pembayaran
+            if ($transaction == 'settlement') {
+                $data->status = 'paid';
+            } elseif ($transaction == 'cancel' || $transaction == 'deny') {
+                $data->status = 'failed';
+            } elseif ($transaction == 'pending') {
+                $data->status = 'pending';
+            } elseif ($transaction == 'expire') {
+                $data->status = 'expired';
+            }
+
+            $data->save();
+
+            // update status membership
+            $membership = DB::table('memberships')->where('id', $data->membership_id)->first();
+            if ($transaction == 'settlement') {
+                DB::table('memberships')->where('id', $data->membership_id)->update([
+                    'is_active' => 1
+                ]);
+            } elseif ($transaction == 'cancel' || $transaction == 'deny') {
+                DB::table('memberships')->where('id', $data->membership_id)->update([
+                    'is_active' => 0
+                ]);
+            } elseif ($transaction == 'pending') {
+                DB::table('memberships')->where('id', $data->membership_id)->update([
+                    'is_active' => 0
+                ]);
+            } elseif ($transaction == 'expire') {
+                DB::table('memberships')->where('id', $data->membership_id)->update([
+                    'is_active' => 0
+                ]);
+            }
+
+            return response()->json(['status' => 'success', 'message' => 'Notification processed']);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
         }
-
-        $payment = Payment::firstOrCreate(
-            ['order_id' => $orderId],
-            [
-                'user_id' => $data->user_id,
-                'gym_membership_packages' => $data->gym_membership_packages,
-                'membership_id' => $data->membership_id,
-                'amount' => $data->gross_amount,
-                'payment_method' => $type,
-                'status' => 'pending'
-            ]
-        );
-
-        if ($transaction == 'settlement') {
-            $payment->status = 'paid';
-        } elseif ($transaction == 'cancel' || $transaction == 'deny') {
-            $payment->status = 'failed';
-        } elseif ($transaction == 'pending') {
-            $payment->status = 'pending';
-        } elseif ($transaction == 'expire') {
-            $payment->status = 'expired';
-        }
-
-        $payment->save();
-        return response()->json(['status' => 'success', 'message' => 'Notification processed']);
-    } catch (\Exception $e) {
-        return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
     }
-}
+
+
+    public function check_payment_status(Request $request)
+    {
+        $orderId = $request->input('order_id');
+
+        if (!$orderId) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Order ID tidak tersedia.'
+            ]);
+        }
+
+        try {
+            // Mengecek status transaksi di database Anda
+            $payment = Payment::where('order_id', $orderId)->first();
+            if (!$payment) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Order ID not found.'
+                ]);
+            }
+
+            $transactionStatus = Payment::where('order_id', $orderId)->first();
+
+            if ($transactionStatus->status === 'pending') {
+                return response()->json([
+                    'status' => 'pending',
+                    'token' => $payment->snap_token
+                ]);
+            } else {
+                // Perbarui status pembayaran di database Anda
+                $payment->status = $transactionStatus->status;
+                $payment->save();
+
+                return response()->json([
+                    'status' => $transactionStatus->status
+                ]);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 
     public function payment_success()
     {

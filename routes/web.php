@@ -80,10 +80,12 @@ Route::prefix('member')->group(function () {
             //             Route::post('/payment-callback', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
 
             Route::prefix('payment-callback')->group(function () {
-                Route::post('/', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
+                Route::match(['get', 'post'], '/', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
                 Route::get('/payment-success', [PaymentController::class, 'payment_success'])->name('member.payment.success');
                 Route::get('/payment-failed', [PaymentController::class, 'payment_failed'])->name('member.payment.failed');
                 Route::get('/payment-pending', [PaymentController::class, 'payment_pending'])->name('member.payment.pending');
+                Route::post('/check-payment-status', [PaymentController::class, 'check_payment_status'])->name('member.check_payment_status');
+
             });
 
         });

@@ -23,7 +23,9 @@ class PaymentController extends Controller
     }
     public function payment(Request $request)
     {
-
+        $start_date = $request->submit_start_date;
+        $gym_membership_packages = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('duration_in_days')->first();
+        $end_date = date('Y-m-d', strtotime($start_date . ' + ' . $gym_membership_packages . ' days'));
         $amount = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('price')->first();
         $user = DB::table('users')->where('id', $request->submit_user_id)->first();
         $params = array(
@@ -38,13 +40,25 @@ class PaymentController extends Controller
             ),
         );
 
+        DB::table('memberships')->insert([
+            'user_id' => $request->submit_user_id,
+            'gym_membership_packages' => $request->submit_package_id,
+            'start_date' => date('Y-m-d'),
+            'end_date' => $end_date,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
         DB::table('payments')->insert([
             'order_id' => $params['transaction_details']['order_id'],
+            'membership_id' => DB::table('memberships')->latest()->first()->id,
             'user_id' => $request->submit_user_id,
             'gym_membership_packages' => $request->submit_package_id,
             'amount' => $amount,
             'payment_method' => 'midtrans',
             'status' => 'pending',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);

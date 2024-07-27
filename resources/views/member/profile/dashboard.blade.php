@@ -9,8 +9,8 @@ starter Page
             <h1>Welcome, {{ ucwords(auth()->user()->name) }}</h1>
             <!-- <h1 style="padding-bottom:50px; font-size:60px"> </h1> -->
             <div class="justify-content-center text-center">
-                <div class="col" style="margin-bottom:30px;">
-                    <button id="" type="button" class="btn btn-grd btn-grd-primary px-5" data-bs-toggle="modal" data-bs-target="#ScrollableModal">Show QR Member</button>
+                <div class="col" style="margin-top:30px;">
+                    <button id="" type="button" class="btn btn-grd btn-grd-deep-blue px-5" data-bs-toggle="modal" data-bs-target="#ScrollableModal">Show QR Member</button>
                 </div>
                 <div class="card" style="margin:auto; padding-bottom:50px; padding:30px;">
                     <h4 style="padding-bottom:30px;" class="card-title mb-4 fw-bold justify-content-between border-bottom pt-4">Membership Details</h4>
@@ -46,7 +46,7 @@ starter Page
 <div class="modal fade" id="ScrollableModal">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-            <div class="modal-header border-bottom-0 bg-grd-primary py-2">
+            <div class="modal-header border-bottom-0 bg-grd-deep-blue py-2">
                 <h5 class="modal-title">QR Member</h5>
                 <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="modal">
                     <i class="material-icons-outlined">close</i>
@@ -61,9 +61,7 @@ starter Page
                             @else
                             <div class="card border bg-transparent shadow-none mb-3" style="width: fit-content;">
                                 <div class="card-body">
-                                    @foreach ($membership as $member)
-                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ 'user_id:'.$member->user_id.'membership_id:'.$member->gym_membership_packages.'is_using_pt:'.'false' }}" alt="">
-                                    @endforeach
+                                    <img src="{{ URL::asset($qr_code) }}" class="w-150 rounded h-150" alt="...">
                                 </div>
                             </div>
                             <div class="card border bg-transparent shadow-none">

@@ -3,14 +3,18 @@
 Subscribed Package
 @endsection
 @section('content')
+<div class="row justify-content-center" style="margin-bottom:20px;">
+    <div class="col-12 col">
+        <a href="{{ route('member.package') }}" class="btn btn-grd-deep-blue">Buy Membership</a>
+    </div>
+</div>
 <div class="row">
-    @if(count($membership_payments) == null)
+    @if(count($packages_membership_payments) == null)
     <div class="col-md-12">
         <p>No Subscribed Package</p>
-        <a href="{{ route('member.package') }}" class="btn btn-primary">Buy Membership</a>
     </div>
     @else
-        @foreach($membership_payments as $membership)
+        @foreach($packages_membership_payments as $membership)
         <div class="col-md-4">
             <div class="card rounded-4">
                 <div class="card-header">
@@ -32,13 +36,13 @@ Subscribed Package
                                 <p class="card-text">Ending: {{ $membership->end_date }}</p>
                                 <p class="card-text">Personal Trainer Quota: {{ $membership->personal_trainer_quota }} / {{ $membership->personal_trainer_quota }}</p>
                                 <p class="card-text">Price: Rp.{{ $membership->price }}</p>
-                                @if($membership->is_active)
-                                    <button class="btn btn-primary" disabled>Active</button>
+                                @if($membership->is_active == 1)
+                                    <button class="btn btn-outline-info px-5" disabled>Active</button>
                                 @else
-                                    <button class="btn btn-secondary" disabled>Inactive</button>
+                                    <button class="btn btn-outline-secondary px-5" disabled>Inactive</button>
                                 @endif
                                 @if($membership->status == 'pending')
-                                    <button class="btn btn-warning" style="color:white">Check Payment</button>
+                                    <button class="btn btn-grd-warning" style="color:white">Check Payment</button>
                                 @endif
                             </div>
                         </div>

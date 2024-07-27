@@ -1,4 +1,4 @@
-@extends('auth.layouts.guest')
+@extends('member.layouts.guest')
 @section('title')
 Login
 @endsection
@@ -68,7 +68,7 @@ Login
                             </div>
                             <div class="col-12">
                                 <div class="d-grid">
-                                    <button id="submit-otp-code" type="submit" class="btn btn-primary ">Login</button>
+                                    <button id="submit-otp-code" type="submit" class="btn btn-grd-deep-blue ">Login</button>
                                 </div>
                             </div>
 

@@ -5,34 +5,87 @@ namespace App\Http\Controllers\Member;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ProfileController extends Controller
 {
+    private function photo_profile()
+    {
+        $auth = auth()->user();
+        $gender = DB::table('users')->where('id', $auth->id)->pluck('gender')->first();
+        $photo_profile = DB::table('users')->where('id', $auth->id)->pluck('photo_profile')->first();
+        $photo_profile = null;
+        if ($gender == 'P') {
+            $photo_profile = 'default-user-women.jpg';
+        } else {
+            $photo_profile = 'default-user-male.jpg';
+        }
+        return $photo_profile;
+    }
+
+
     public function dashboard()
     {
         $user = auth()->user();
-        // join table memberships and gym_membership_packages
+        $qr_code = DB::table('qr_code')->where('user_id', $user->id)->pluck('path_qr_code')->first();
         $membership = DB::table('memberships')
-            ->join('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
-            ->where('memberships.user_id', $user->id)
-            ->get();
-        return view('member.profile.dashboard', compact('membership'));
+        ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+        ->where('memberships.user_id', $user->id)
+        ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as id', 'gym_membership_packages.id as gym_membership_packages_id')
+        ->get();
+
+        if ($membership != null) {
+            $image_name = 'qr_code_' . $user->id . '_' . $membership[0]->id . '.png';
+            $user_exist = DB::table('qr_code')->where('user_id', $user->id)->first();
+            if(!$user_exist) {
+                $insert_data_qr_code= DB::table('qr_code')->insert([
+                    'user_id' => $user->id,
+                    'qr_code' => $image_name,
+                    'path_qr_code' => 'build/images/member/qr_code/' . $image_name,
+                    'status' => 'active',
+                    'expired_at' => date('Y-m-d', strtotime($membership[0]->start_date . '+' . $membership[0]->duration_in_days . ' days')),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ]);
+            }
+        }
+
+        $qr_code = DB::table('qr_code')->where('user_id', $user->id)->pluck('path_qr_code')->first();
+        $generate_image_from_qr_code = QrCode::format('png')->size(200)->generate($qr_code);
+        file_put_contents(public_path('build/images/member/qr_code/' . $image_name), $generate_image_from_qr_code);
+
+        return view('member.profile.dashboard', compact('membership', 'qr_code'));
     }
 
     public function profile()
     {
         $auth = auth()->user();
-        $user = DB::table('users')->where('id', $auth->id)->get();
-        $informasi_fisik = DB::table('informasi_fisik')->where('user_id', $auth->id)->get();
-        return view('member.profile.profile', compact('user', 'informasi_fisik'));
+        $photo_profile = $this->photo_profile();
+
+        $profile = DB::table('users')
+            ->leftJoin('informasi_fisik', 'users.id', '=', 'informasi_fisik.user_id')
+            ->where('users.id', $auth->id)
+            ->select('users.*', 'informasi_fisik.*', 'users.id as id')
+            ->get();
+
+        // insert photo_profile to profile array
+        $profile[0]->photo_profile = $photo_profile;
+
+        return view('member.profile.profile', compact('profile'));
     }
 
     public function edit_profile()
     {
         $auth = auth()->user();
-        $user = DB::table('users')->where('id', $auth->id)->get();
-        $informasi_fisik = DB::table('informasi_fisik')->where('user_id', $auth->id)->get();
-        return view('member.profile.edit-profile', compact('user', 'informasi_fisik'));
+        $photo_profile = $this->photo_profile();
+        $profile = DB::table('users')
+            ->leftjoin('informasi_fisik', 'users.id', '=', 'informasi_fisik.user_id')
+            ->where('users.id', $auth->id)
+            ->select('users.*', 'informasi_fisik.*', 'users.id as id')
+            ->get();
+        $profile[0]->photo_profile = $photo_profile;
+
+        return view('member.profile.edit-profile', compact('profile'));
     }
 
     public function edit_profile_process(Request $request)
@@ -61,6 +114,7 @@ class ProfileController extends Controller
             'phone_number' => $request->user_phone_number,
             'email' => $request->user_email,
             'date_of_birth' => $request->user_date_of_birth,
+            'gender' => $request->user_gender,
             'password' => bcrypt($request->user_password),
         ]);
 

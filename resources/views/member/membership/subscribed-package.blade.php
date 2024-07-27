@@ -42,7 +42,7 @@ Subscribed Package
                                     <button class="btn btn-outline-secondary px-5" disabled>Inactive</button>
                                 @endif
                                 @if($membership->status == 'pending')
-                                    <button class="btn btn-grd-warning" style="color:white">Check Payment</button>
+                                <button class="btn btn-warning" id="checkPaymentBtn" style="color:white">Check Payment</button>
                                 @endif
                             </div>
                         </div>
@@ -56,6 +56,35 @@ Subscribed Package
 
 @endsection
 @push('script')
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="YOUR_CLIENT_KEY"></script>
+<script>
+    document.getElementById('checkPaymentBtn').addEventListener('click', function() {
+        const orderId = '{{ $membership->order_id ?? '' }}';
+
+        if (!orderId) {
+            alert('Order ID tidak tersedia.');
+            return;
+        }
+
+        fetch('{{ route("member.check_payment_status") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ order_id: orderId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'pending') {
+                window.snap.pay(data.token);
+            } else {
+                alert('Payment status: ' + data.status);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
 <!--plugins-->
 <script src="{{ URL::asset('build/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
 <script src="{{ URL::asset('build/plugins/metismenu/metisMenu.min.js') }}"></script>

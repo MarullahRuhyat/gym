@@ -84,6 +84,8 @@ Route::prefix('member')->group(function () {
                 Route::get('/payment-success', [PaymentController::class, 'payment_success'])->name('member.payment.success');
                 Route::get('/payment-failed', [PaymentController::class, 'payment_failed'])->name('member.payment.failed');
                 Route::get('/payment-pending', [PaymentController::class, 'payment_pending'])->name('member.payment.pending');
+                Route::post('/check-payment-status', [PaymentController::class, 'check_payment_status'])->name('member.check_payment_status');
+
             });
 
         });

@@ -9,12 +9,12 @@ Subscribed Package
     </div>
 </div>
 <div class="row">
-    @if(count($packages_membership_payments) == null)
-    <div class="col-md-12">
+    {{-- @if(count($membership_payments) == null) --}}
+    <div class="col-md-12 mb-5">
         <p>No Subscribed Package</p>
     </div>
-    @else
-        @foreach($packages_membership_payments as $membership)
+    {{-- @else --}}
+        @foreach($membership_payments as $membership)
         <div class="col-md-4">
             <div class="card rounded-4">
                 <div class="card-header">
@@ -51,7 +51,7 @@ Subscribed Package
             </div>
         </div>
         @endforeach
-    @endif
+    {{-- @endif --}}
 </div>
 
 @endsection

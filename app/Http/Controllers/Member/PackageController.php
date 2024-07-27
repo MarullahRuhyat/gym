@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Middleware\Member;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
 class PackageController extends Controller
 {
@@ -17,17 +16,20 @@ class PackageController extends Controller
 
     public function subscribed_package()
     {
+        // cari user yang login
         $user = auth()->user();
-        $membership = DB::table('memberships')
-            ->join('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
-            ->where('memberships.user_id', $user->id)
-            ->get();
-        return view('member.membership.subscribed-package', compact('membership'));
-    }
+        if (!$user) {
+            return redirect()->route('member.send-otp');
+        }
 
-    public function select_package(Request $request)
-    {
-        dd ('oke');
+        $packages_membership_payments = DB::table('payments')
+            ->leftjoin('gym_membership_packages', 'payments.gym_membership_packages', '=', 'gym_membership_packages.id')
+            ->leftjoin('memberships', 'payments.membership_id', '=', 'memberships.id')
+            ->where('payments.user_id', $user->id)
+            ->orderBy('payments.created_at', 'desc')
+            ->get();
+
+        return view('member.membership.subscribed-package', compact('packages_membership_payments'));
     }
 
     public function selected_package_detail($id)

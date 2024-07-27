@@ -11,64 +11,13 @@ starter Page
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Add</button>
     </div>
 </div>
-
-<div class="row">
-    @foreach ($users as $user)
-
-    <div class="col-md-6">
-        <div class="card rounded-4">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-10">
-                        <h3>{{ $user->name }}</h3>
-                    </div>
-                    <div class="col-2 text-end">
-                        <div class="test ">
-                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown">
-                                <i class="bi bi-three-dots-vertical"></i>
-                                <span class="visually-hidden">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
-                                <a class="dropdown-item button_edit" href="javascript:;" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ $user->id }}" data-name="{{ $user->name }}" data-phone="{{ $user->phone_number }}" data-status="{{ $user->status }}">Edit</a>
-                                <a class="dropdown-item button_delete" href="javascript:;" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $user->id }}" data-name="{{ $user->name }}">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="d-flex flex-column gap-3 me-3">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="flex-grow-1">
-                            <h6 class="mb-0">Phone Number</h6>
-                        </div>
-                        <div class="">
-                            <h5 class="mb-0">{{ $user->phone_number }}</h5>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="flex-grow-1">
-                            <h6 class="mb-0">Status</h6>
-                        </div>
-                        <div class="">
-                            <div class="form-check form-switch">
-                                <label>
-                                    @if($user->status == 'active')
-                                    <input class="form-check-input" type="checkbox" role="switch" id="ada" checked disabled>
-                                    <h5> Active</h5>
-                                    @else
-                                    <input class="form-check-input" type="checkbox" role="switch" id="ada" disabled>
-                                    <h5> InActive</h5>
-                                    @endif
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="row mb-2 justify-content-end">
+    <div class="col-md-4">
+        <input type="text" class="form-control" id="search_name">
     </div>
-    @endforeach
+</div>
+<div id="data_pt">
+    @include('admin.data_personal_trainer')
 </div>
 
 <!-- Modal Add User -->
@@ -181,7 +130,7 @@ starter Page
 <script>
     $(document).ready(function() {
         // Populate Edit Modal
-        $('.button_edit').click(function() {
+        $(document).on('click', '.button_edit', function(event) {
             let id = $(this).data('id');
             let name = $(this).data('name');
             let phone = $(this).data('phone');
@@ -194,12 +143,39 @@ starter Page
         });
 
         // Populate Delete Modal
-        $('.button_delete').click(function() {
+        $(document).on('click', '.button_delete', function(event) {
             let id = $(this).data('id');
             let name = $(this).data('name');
             $('#id_delete').val(id);
             $('#deleteModalLabel').html(`Apakah anda ingin mnghapus ${name}?`);
         });
+
+        // fetch data
+        function fetch_data(page, query) {
+            console.log(query);
+            $.ajax({
+                url: `{{ route('admin_personal_trainer')}}?page=` + page + "&name=" + query,
+                success: function(data) {
+                    console.log(data);
+                    $('#data_pt').html(data);
+                }
+            });
+        }
+
+        // Handle input event
+        $('#search_name').on('input', function() {
+            let searchQuery = $(this).val();
+            fetch_data(1, searchQuery); // Fetch data for the first page with search query
+        });
+
+        $(document).on('click', '.pagination a', function(event) {
+            event.preventDefault();
+            let page = $(this).attr('href').split('page=')[1];
+            let searchQuery = $('#search_name').val();
+            fetch_data(page, searchQuery);
+        });
+
+
     });
 </script>
 @endpush

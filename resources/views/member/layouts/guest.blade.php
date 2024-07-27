@@ -9,14 +9,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
 
-    @include('layouts.head-css')
+    @include('member.layouts.head-css')
 </head>
 
 <body class="{{ isset($bodyClass) ? $bodyClass : '' }}">
 
     @yield('content')
 
-    @include('layouts.common-scripts')
+    @include('member.layouts.common-scripts')
 </body>
 
 </html>

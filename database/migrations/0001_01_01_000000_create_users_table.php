@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('otp')->nullable();
             $table->timestamp('otp_expired_at')->nullable();
             $table->string('photo_profile')->nullable();
+            $table->enum('gender', ['L', 'P'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

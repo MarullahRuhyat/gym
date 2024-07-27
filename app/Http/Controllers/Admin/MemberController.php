@@ -33,7 +33,20 @@ class MemberController extends Controller
                 return redirect()->route('admin_member')->with('error', 'Data gagal disimpan!');
             }
         }
+        $perPage = 10;
+        $users = User::where('role', 'member');
+        $page = $request->query('page', 1);
+        $name = $request->query('name', '');
+        if ($name != '') {
+            $users->where('name', 'LIKE', '%' . $name . '%');
+        }
+        $results = $users->paginate($perPage, ['*'], 'page', $page);
+        $total_page = intval(ceil($results->total() / $results->perPage()));
+
+        if ($request->ajax()) {
+            return view('admin.member.data', compact('results', 'total_page'))->render();
+        }
         $users = User::where('role', 'member')->get();
-        return view('admin.member', compact('users'));
+        return view('admin.member.index', compact('results', 'total_page'));
     }
 }

@@ -15,6 +15,8 @@ class AttendanceMemberController extends Controller
 
     function index(Request $request)
     {
+        $data_user = new ProfilePersonalTraining();
+        $data_user->index();
         $today = Carbon::today()->toDateString();
         $dataLatihan = JenisLatihan::all();
         $data_member = AbsentMember::
@@ -24,7 +26,7 @@ class AttendanceMemberController extends Controller
             ->select('users.name',  'users.phone_number', 'absent_members.*')
             ->get(); 
 
-        return view('personal_training.attendance_member', compact('data_member','dataLatihan'));
+        return view('personal_training.attendance_member', compact('data_member','dataLatihan', 'data_user'));
         
     }
 

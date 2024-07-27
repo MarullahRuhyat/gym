@@ -13,9 +13,6 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('salary_pt')->nullable();
-    
-            // Jika Anda ingin menambahkan foreign key constraint
-            $table->foreign('salary_pt')->references('id')->on('gaji_personal_trainers')->onDelete('set null');
         });
     }
 

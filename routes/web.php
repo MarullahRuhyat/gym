@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\AuthController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\PersonalTraining\ProfilePersonalTraining;
 use App\Http\Middleware\Member;
 use App\Http\Controllers\Member\QRController;
 
+Route::get('test', fn () => phpinfo());
 Route::get('/', function () {
     $appType = config('app.app_type');
     if ($appType == 'ADMIN') {
@@ -64,18 +66,6 @@ Route::prefix('member')->group(function () {
     Route::post('/login', [MemberAuthController::class, 'login'])->name('member.login');
     Route::post('/logout', [MemberAuthController::class, 'logout'])->name('member.logout')->middleware(Member::class);
 
-    Route::prefix('package')->group(function () {
-        Route::get('/', [PackageController::class, 'package'])->name('member.package');
-        Route::post('/select-package', [PackageController::class, 'select_package'])->name('member.select.package');
-        Route::get('/selected-package-detail/{id}', [PackageController::class, 'selected_package_detail'])->name('member.selected-package-detail');
-        Route::get('/subscribed-package', [PackageController::class, 'subscribed_package'])->name('member.subscribed-package');
-    });
-
-    Route::prefix('payment')->group(function () {
-        Route::get('/', [PaymentController::class, 'payment'])->name('member.payment');
-        Route::post('/payment-callback', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
-    });
-
     Route::middleware(Member::class)->group(function () {
         Route::get('/dashboard', [ProfileController::class, 'dashboard'])->name('member.dashboard');
         Route::prefix('profile')->group(function () {
@@ -84,6 +74,25 @@ Route::prefix('member')->group(function () {
             Route::post('/edit-profile/{id}', [ProfileController::class, 'edit_profile_process'])->name('member.edit-profile.process');
             // Route::get('/change-password', [ProfileController::class, 'change_password'])->name('member.change_password');
             // Route::post('/change-password', [ProfileController::class, 'change_password_process'])->name('member.change-password.process');
+        });
+        Route::prefix('payment')->group(function () {
+            Route::get('/', [PaymentController::class, 'payment'])->name('member.payment');
+            //             Route::post('/payment-callback', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
+
+            Route::prefix('payment-callback')->group(function () {
+                Route::post('/', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
+                Route::get('/payment-success', [PaymentController::class, 'payment_success'])->name('member.payment.success');
+                Route::get('/payment-failed', [PaymentController::class, 'payment_failed'])->name('member.payment.failed');
+                Route::get('/payment-pending', [PaymentController::class, 'payment_pending'])->name('member.payment.pending');
+            });
+
+        });
+
+        Route::prefix('package')->group(function () {
+            Route::get('/', [PackageController::class, 'package'])->name('member.package');
+            Route::post('/select-package', [PackageController::class, 'select_package'])->name('member.select.package');
+            Route::get('/selected-package-detail/{id}', [PackageController::class, 'selected_package_detail'])->name('member.selected-package-detail');
+            Route::get('/subscribed-package', [PackageController::class, 'subscribed_package'])->name('member.subscribed-package');
         });
         Route::prefix('membership')->group(function () {
             // Route::post('/subscribe-membership', [MembershipController::class, 'subscribe_membership'])->name('member.subscribe_membership');
@@ -115,6 +124,8 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
     Route::prefix('profile')->group(function () {
         Route::get('/', [ProfilePersonalTraining::class, 'index'])->name('personal_trainer.profile');
         Route::post('/', [ProfilePersonalTraining::class, 'updateProfile'])->name('personal_trainer.update_profile');
+        Route::post('/change-password', [ProfilePersonalTraining::class, 'changePassword'])->name('personal_trainer.change_password');
+        Route::post('/edit-profile', [ProfilePersonalTraining::class, 'editProfile'])->name('personal_trainer.edit_profile');
     });
     // payment
     Route::prefix('payment')->group(function () {
@@ -126,7 +137,7 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
 // admin
 Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin_dashboard');
-    Route::post('/ajax-dashboard', [DashboardAdminController::class, 'ajax_dashboard_admin'])->name('admin_ajax_dashboard');
+    Route::post('/ajax-get-dashboard', [DashboardAdminController::class, 'ajax_dashboard_admin'])->name('admin_ajax_dashboard');
     // personal trainer page
     Route::match(['get', 'post'], '/personal-trainer', [PersonalTrainerAdminController::class, 'index'])->name('admin_personal_trainer');
     // member page
@@ -136,7 +147,7 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
         Route::get('/', [AbsenController::class, 'index'])->name('admin_absen');
         Route::get('/search', [AbsenController::class, 'search'])->name('admin_search');
     });
-    // salary page
+    // salary page belum anjing
     Route::get('/salary', [GajiController::class, 'index'])->name('admin_gaji');
     // scan page
     Route::match(['get', 'post'], '/scan', [ScanController::class, 'index'])->name('admin_scan');

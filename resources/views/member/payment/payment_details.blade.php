@@ -31,7 +31,7 @@ starter Page
         },
         onPending: function (result) {
             // Handle payment pending
-            alert('Payment pending');
+            // alert('Payment pending');
             fetch('{{ route('member.payment.callback') }}', {
                 method: 'POST',
                 headers: {
@@ -45,7 +45,7 @@ starter Page
         },
         onError: function (result) {
             // Handle payment error
-            alert('Payment failed');
+            // alert('Payment failed');
             fetch('{{ route('member.payment.callback') }}', {
                 method: 'POST',
                 headers: {
@@ -58,7 +58,7 @@ starter Page
 
         },
         onClose: function () {
-            alert('Payment closed');
+            // alert('Payment closed');
             // Redirect when the Snap modal is closed
             window.location.href = '/member/package/subscribed-package';
         }

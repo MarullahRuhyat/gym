@@ -26,6 +26,7 @@ class PackageController extends Controller
             ->join('memberships', 'payments.membership_id', '=', 'memberships.id')
             ->join('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
             ->where('payments.user_id', $user->id)
+            ->orderBy('payments.id', 'desc')
             ->get();
 
         return view('member.membership.subscribed-package', compact('membership_payments'));

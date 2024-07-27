@@ -4,12 +4,12 @@ Subscribed Package
 @endsection
 @section('content')
 <div class="row">
-    @if(count($membership_payments) == null)
-    <div class="col-md-12">
+    {{-- @if(count($membership_payments) == null) --}}
+    <div class="col-md-12 mb-5">
         <p>No Subscribed Package</p>
         <a href="{{ route('member.package') }}" class="btn btn-primary">Buy Membership</a>
     </div>
-    @else
+    {{-- @else --}}
         @foreach($membership_payments as $membership)
         <div class="col-md-4">
             <div class="card rounded-4">
@@ -47,7 +47,7 @@ Subscribed Package
             </div>
         </div>
         @endforeach
-    @endif
+    {{-- @endif --}}
 </div>
 
 @endsection

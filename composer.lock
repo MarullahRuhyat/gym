@@ -1119,6 +1119,7 @@
             "time": "2023-12-03T19:50:20+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "intervention/gif",
             "version": "4.1.0",
             "source": {
@@ -1258,6 +1259,17 @@
             },
             "dist": {
                 "type": "zip",
+=======
+            "name": "laravel/framework",
+            "version": "v11.18.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "b19ba518c56852567e99fbae9321bc436c2cc5a8"
+            },
+            "dist": {
+                "type": "zip",
+>>>>>>> 9886ebd (upd: generate code - 2 barcode)
                 "url": "https://api.github.com/repos/laravel/framework/zipball/b19ba518c56852567e99fbae9321bc436c2cc5a8",
                 "reference": "b19ba518c56852567e99fbae9321bc436c2cc5a8",
                 "shasum": ""

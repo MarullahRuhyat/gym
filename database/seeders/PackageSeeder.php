@@ -4,49 +4,28 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class PackageSeeder extends Seeder
 {
-    public function run(): void
+    public function run()
     {
-        DB::table('packages')->insert([
-            'name' => 'Basic',
-            'description' => 'Basic Package',
-            'price' => 325000,
-            'duration' => 30,
-            'tipe' => 'harian',
-        ]);
+        $faker = Faker::create();
+        $numberOfRecords = 20; // Jumlah record yang ingin Anda buat
 
-        DB::table('packages')->insert([
-            'name' => 'Premium',
-            'description' => 'Premium Package',
-            'price' => 550000,
-            'duration' => 60,
-            'tipe' => 'mandiri',
-        ]);
+        $types = ['harian', 'mandiri', 'pt'];
 
-        DB::table('packages')->insert([
-            'name' => 'Platinum',
-            'description' => 'Platinum Package',
-            'price' => 750000,
-            'duration' => 90,
-            'tipe' => 'pt',
-        ]);
-
-        DB::table('packages')->insert([
-            'name' => 'Elite',
-            'description' => 'Elite Package',
-            'price' => 1250000,
-            'duration' => 120,
-            'tipe' => 'pt',
-        ]);
-
-        DB::table('packages')->insert([
-            'name' => 'Ultimate',
-            'description' => 'Ultimate Package',
-            'price' => 2000000,
-            'duration' => 360,
-            'tipe' => 'pt',
-        ]);
+        for ($i = 0; $i < $numberOfRecords; $i++) {
+            DB::table('gym_membership_packages')->insert([
+                'name' => $faker->words(3, true),
+                'price' => $faker->numberBetween(50000, 1000000),
+                'duration_in_days' => $faker->numberBetween(1, 365),
+                'personal_trainer_quota' => $faker->numberBetween(0, 50),
+                'description' => $faker->sentence,
+                'type' => $faker->randomElement($types),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

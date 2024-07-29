@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light-theme">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="blue-theme">
 
 <head>
     <meta charset="utf-8">
@@ -34,7 +34,6 @@
     <!--end overlay-->
 
     @include('member.layouts.common-scripts')
-    @include('member.layouts.extra')
 </body>
 
 </html>

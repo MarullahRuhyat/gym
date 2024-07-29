@@ -14,43 +14,46 @@ Subscribed Package
         <p>No Subscribed Package</p>
     </div>
     {{-- @else --}}
-        @foreach($membership_payments as $membership)
-        <div class="col-md-4">
-            <div class="card rounded-4">
-                <div class="card-header">
-                    <h5 style="margin-top:10px;" class="card-title mb-3">{{ ucwords($membership->name) }}</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row g-0">
-                        <div class="col-md-4 border-end">
-                            <div class="p-3">
-                                <img src="{{ URL::asset('build/images/02.png') }}" class="w-100 rounded h-100" alt="...">
-                            </div>
+    @foreach($packages_membership_payments as $membership)
+    <div class="col-md-4">
+        <div class="card rounded-4">
+            <div class="card-header">
+                <h5 style="margin-top:10px;" class="card-title mb-3">{{ ucwords($membership->name) }}</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-0">
+                    <div class="col-md-4 border-end">
+                        <div class="p-3">
+                            <img src="{{ URL::asset('build/images/02.png') }}" class="w-100 rounded h-100" alt="...">
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <input type="hidden" name="package_id" id="package_id" value="">
-                                <p class="card-text">{{ $membership->description }}</p>
-                                <p class="card-text">Duration: {{ $membership->duration_in_days }} Days</p>
-                                <p class="card-text">Starting: {{ $membership->start_date }}</p>
-                                <p class="card-text">Ending: {{ $membership->end_date }}</p>
-                                <p class="card-text">Personal Trainer Quota: {{ $membership->personal_trainer_quota }} / {{ $membership->personal_trainer_quota }}</p>
-                                <p class="card-text">Price: Rp.{{ $membership->price }}</p>
-                                @if($membership->is_active == 1)
-                                    <button class="btn btn-outline-info px-5" disabled>Active</button>
-                                @else
-                                    <button class="btn btn-outline-secondary px-5" disabled>Inactive</button>
-                                @endif
-                                @if($membership->status == 'pending')
-                                <button class="btn btn-warning" id="checkPaymentBtn" style="color:white">Check Payment</button>
-                                @endif
-                            </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <input type="hidden" name="package_id" id="package_id" value="">
+                            <p class="card-text">{{ $membership->description }}</p>
+                            <p class="card-text">Duration: {{ $membership->duration_in_days }} Days</p>
+                            <p class="card-text">Starting: {{ $membership->start_date }}</p>
+                            <p class="card-text">Ending: {{ $membership->end_date }}</p>
+                            <p class="card-text">Personal Trainer Quota: {{ $membership->personal_trainer_quota }} /
+                                {{ $membership->personal_trainer_quota }}</p>
+                            <p class="card-text">Price: Rp.{{ $membership->price }}</p>
+                            @if($membership->is_active == 1)
+                            <button class="btn btn-outline-info" disabled>Active</button>
+                            @else
+                            <button class="btn btn-outline-secondary" disabled>Inactive</button>
+                            @endif
+                            @if($membership->status == 'pending')
+                            <button class="btn btn-warning checkPaymentBtn" data-id="{{ $membership->order_id }}" style="color:white">Check Payment</button>
+
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @endforeach
+    </div>
+    @endforeach
     {{-- @endif --}}
 </div>
 
@@ -58,31 +61,31 @@ Subscribed Package
 @push('script')
 <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="YOUR_CLIENT_KEY"></script>
 <script type="text/javascript">
-    document.getElementById('checkPaymentBtn').addEventListener('click', function() {
-        const orderId = '{{ $membership->order_id ?? '' }}';
+    document.querySelectorAll('.checkPaymentBtn').forEach(button => {
+        button.addEventListener('click', function () {
 
-        if (!orderId) {
-            alert('Order ID tidak tersedia.');
-            return;
-        }
+            const orderId = this.getAttribute('data-id');
+            alert(orderId);
 
-        fetch('{{ route("member.check_payment_status") }}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({ order_id: orderId })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'pending') {
-                pay(data.token);
-            } else {
-                alert('Payment status: ' + data.status);
-            }
-        })
-        .catch(error => console.error('Error:', error));
+            fetch('{{ route("member.check_payment_status") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ order_id: orderId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'pending') {
+                    pay(data.token);
+                } else {
+                    alert('Payment status: ' + data.status);
+                    location.reload();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
     });
 
     function pay(snapToken) {
@@ -135,6 +138,7 @@ Subscribed Package
             }
         });
     }
+
 </script>
 <!--plugins-->
 <script src="{{ URL::asset('build/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>

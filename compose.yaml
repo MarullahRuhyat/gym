@@ -35,4 +35,4 @@ services:
     container_name: gym-redis
     restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "6378:6379"

@@ -43,7 +43,19 @@ class JenisMemberController extends Controller
             }
         }
 
-        $packages = GymMembershipPackage::all();
-        return view('admin.membership', compact('packages'));
+        $perPage = 10;
+        $membership = GymMembershipPackage::query();
+        $page = $request->query('page', 1);
+        $name = $request->query('name', '');
+        if ($name != '') {
+            $membership->where('name', 'LIKE', '%' . $name . '%');
+        }
+        $results = $membership->paginate($perPage, ['*'], 'page', $page);
+        $total_page = intval(ceil($results->total() / $results->perPage()));
+
+        if ($request->ajax()) {
+            return view('admin.membership.data', compact('results', 'total_page'))->render();
+        }
+        return view('admin.membership.index', compact('results', 'total_page'));
     }
 }

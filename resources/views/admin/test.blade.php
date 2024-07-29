@@ -1,53 +1,92 @@
-@extends('admin.layouts.app')
-@section('title')
-starter Page
-@endsection
-@section('content')
-<h1>Speech to Text Demo</h1>
-<button id="start-btn">Start Listening</button>
-<div id="result"></div>
-@endsection
-@section('javascript')
-<script>
-    // Check for browser support
-    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+<!DOCTYPE html>
+<html lang="en">
 
-    if ('SpeechRecognition' in window) {
-        const recognition = new SpeechRecognition();
-        recognition.interimResults = true;
-        recognition.lang = 'en-US';
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic JSON Tree with jsTree</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/themes/default/style.min.css">
+    <style>
+        #tree {
+            margin-top: 20px;
+        }
 
-        const startButton = document.getElementById('start-btn');
-        const resultDiv = document.getElementById('result');
+        #json-input {
+            margin-bottom: 20px;
+            width: 100%;
+            height: 150px;
+        }
+    </style>
+</head>
 
-        startButton.addEventListener('click', () => {
-            recognition.start();
-            startButton.disabled = true;
-            startButton.textContent = 'Listening...';
-        });
+<body>
 
-        recognition.addEventListener('result', (event) => {
-            let transcript = '';
-            for (const result of event.results) {
-                transcript += result[0].transcript;
+    <h1>Dynamic JSON Tree Viewer</h1>
+
+    <textarea id="json-input" placeholder='Masukkan data JSON di sini...'></textarea>
+    <button onclick="updateTree()">Update Tree</button>
+
+    <div id="tree"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"></script>
+    <script>
+        // Initialize jsTree with empty data
+        $('#tree').jstree({
+            'core': {
+                'data': []
             }
-            resultDiv.textContent = transcript;
         });
 
-        recognition.addEventListener('end', () => {
-            startButton.disabled = false;
-            startButton.textContent = 'Start Listening';
-        });
+        // Function to convert JSON to jsTree format
+        function convertToJsTreeFormat(data) {
+            return data.map(item => {
+                const children = Object.entries(item).map(([key, value]) => {
+                    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+                        return {
+                            text: key,
+                            children: convertToJsTreeFormat([value])
+                        };
+                    } else {
+                        return {
+                            text: `${key}: ${value}`
+                        };
+                    }
+                });
 
-    } else {
-        alert('Your browser does not support Speech Recognition.');
-    }
-</script>
-@endsection
-@push('script')
-<!--plugins-->
-<script src="{{ URL::asset('build/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
-<script src="{{ URL::asset('build/plugins/metismenu/metisMenu.min.js') }}"></script>
-<script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>
-<script src="{{ URL::asset('build/js/main.js') }}"></script>
-@endpush
+                return {
+                    text: item.nama,
+                    children: children
+                };
+            });
+        }
+
+        // Function to update the tree with JSON data from textarea
+        function updateTree() {
+            try {
+                // Get JSON data from textarea
+                const jsonData = JSON.parse(document.getElementById('json-input').value);
+
+                // Convert JSON data to jsTree format
+                const jsTreeData = convertToJsTreeFormat(jsonData);
+
+                // Update jsTree with new data
+                const treeInstance = $('#tree').jstree(true);
+                treeInstance.settings.core.data = jsTreeData;
+                treeInstance.refresh();
+
+                // Open all nodes after tree is refreshed
+                $('#tree').on('loaded.jstree', function() {
+                    $('#tree').jstree(true).open_all(); // Automatically open all nodes
+                });
+
+            } catch (e) {
+                alert('Invalid JSON data. Please check your input.');
+                console.error(e); // Print error to console for debugging
+            }
+        }
+    </script>
+
+</body>
+
+</html>

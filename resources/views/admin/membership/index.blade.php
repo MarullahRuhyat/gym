@@ -3,54 +3,48 @@
 starter Page
 @endsection
 @section('content')
-
-@section('content')
-<h3><b>Personal Trainer</b></h3>
+<h3><b>Gym Membership Packages</b></h3>
 <div class="row justify-content-start">
     <div class="col-md-2 mb-3 col-3">
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Add</button>
     </div>
 </div>
 <div class="row mb-2 justify-content-end">
-    <div class="col-md-4">
-        <input type="text" class="form-control" id="search_name">
+    <div class="col-md-4 d-flex justify-content-end align-items-center">
+        <input type="text" class="form-control me-2" id="search_name" placeholder="Search Name">
     </div>
 </div>
-<div id="data_pt">
-    @include('admin.data_personal_trainer')
+
+<div id="data_member">
+    @include('admin.membership.data')
 </div>
 
-<!-- Modal Add User -->
+<!-- Modal Add -->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Add Personal Trainer</h5>
+                <h1 class="modal-title fs-5" id="addModalLabel">Add Package</h1>
             </div>
-            <form id="addUserForm" action="" method="POST">
-                @csrf
+            <form id="membershipFormAdd" method="POST" action="">
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="number" class="form-control" id="price" name="price" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="phone_number" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+                    <div class="form-group">
+                        <label for="duration_in_days">Duration (Days)</label>
+                        <input type="number" class="form-control" id="duration_in_days" name="duration_in_days" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select class="form-select" aria-label="Default select example" required name="status">
-                            <option value="" selected>-- select --</option>
-                            <option value="active">active</option>
-                            <option value="inactive">inactive</option>
-                        </select>
+                    <div class="form-group">
+                        <label for="personal_trainer_quota">Personal Trainer</label>
+                        <input type="number" class="form-control" id="personal_trainer_quota" name="personal_trainer_quota" value="0" required>
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -61,33 +55,33 @@ starter Page
     </div>
 </div>
 
-<!-- Modal Edit User -->
+<!-- Modal Edit -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Personal Trainer</h5>
+                <h1 class="modal-title fs-5" id="editModalLabel">Edit Package</h1>
             </div>
-            <form id="editUserForm" action="" method="POST">
-                @csrf
+            <form id="membershipFormEdit" method="POST" action="">
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="name_edit" class="form-label">Name</label>
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Name</label>
                         <input type="text" class="form-control" id="name_edit" name="name" required>
-                        <input type="hidden" id="id_edit" name="id">
+                        <input type="hidden" name="id" id="id_edit">
                         <input type="hidden" name="edit" value="1">
                     </div>
-                    <div class="mb-3">
-                        <label for="phone_edit" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" id="phone_edit" name="phone_number" required>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="number" class="form-control" id="price_edit" name="price" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select class="form-select" aria-label="Default select example" required name="status" id="status_edit">
-                            <option value="" selected>-- select --</option>
-                            <option value="active">active</option>
-                            <option value="inactive">inactive</option>
-                        </select>
+                    <div class="form-group">
+                        <label for="duration_in_days">Duration (Days)</label>
+                        <input type="number" class="form-control" id="duration_in_days_edit" name="duration_in_days" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="personal_trainer_quota_edit">Personal Trainer</label>
+                        <input type="number" class="form-control" id="personal_trainer_quota_edit" name="personal_trainer_quota" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -99,17 +93,16 @@ starter Page
     </div>
 </div>
 
-<!-- Modal Delete User -->
+<!-- Modal Delete -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
-            <form id="deleteUserForm" action="" method="POST">
+            <form id="membershipFormDelete" method="POST" action="">
                 @csrf
-                <input type="hidden" id="id_delete" name="id">
-                <input type="hidden" name="delete" value="1">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Delete User</h5>
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Package</h1>
+                    <input type="hidden" name="id" id="id_delete">
+                    <input type="hidden" name="delete" value="1">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -119,7 +112,7 @@ starter Page
         </div>
     </div>
 </div>
-@endsection
+
 @endsection
 @push('script')
 <!--plugins-->
@@ -129,21 +122,21 @@ starter Page
 <script src="{{ URL::asset('build/js/main.js') }}"></script>
 <script>
     $(document).ready(function() {
-        // Populate Edit Modal
-        $(document).on('click', '.button_edit', function(event) {
+        $('.button_edit').click(function() {
             let id = $(this).data('id');
             let name = $(this).data('name');
-            let phone = $(this).data('phone');
-            let status = $(this).data('status');
-            $('#name_edit').val(name);
-            $('#phone_edit').val(phone);
-            $('#id_edit').val(id);
-            console.log(status);
-            $('#status_edit').val(status);
-        });
+            let price = $(this).data('price');
+            let duration = $(this).data('duration');
+            let trainer = $(this).data('trainer');
+            console.log(trainer);
 
-        // Populate Delete Modal
-        $(document).on('click', '.button_delete', function(event) {
+            $('#name_edit').val(name);
+            $('#price_edit').val(price);
+            $('#duration_in_days_edit').val(duration);
+            $('#personal_trainer_quota_edit').val(trainer);
+            $('#id_edit').val(id);
+        });
+        $('.button_delete').click(function() {
             let id = $(this).data('id');
             let name = $(this).data('name');
             $('#id_delete').val(id);
@@ -154,10 +147,10 @@ starter Page
         function fetch_data(page, query) {
             console.log(query);
             $.ajax({
-                url: `{{ route('admin_personal_trainer')}}?page=` + page + "&name=" + query,
+                url: `{{ route('admin_membership_package')}}?page=` + page + "&name=" + query,
                 success: function(data) {
                     console.log(data);
-                    $('#data_pt').html(data);
+                    $('#data_member').html(data);
                 }
             });
         }
@@ -174,8 +167,6 @@ starter Page
             let searchQuery = $('#search_name').val();
             fetch_data(page, searchQuery);
         });
-
-
     });
 </script>
 @endpush

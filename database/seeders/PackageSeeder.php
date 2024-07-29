@@ -13,7 +13,7 @@ class PackageSeeder extends Seeder
         $faker = Faker::create();
         $numberOfRecords = 20; // Jumlah record yang ingin Anda buat
 
-        $types = ['harian', 'mandiri', 'pt'];
+        // $types = ['harian', 'mandiri', 'pt'];
 
         for ($i = 0; $i < $numberOfRecords; $i++) {
             DB::table('gym_membership_packages')->insert([
@@ -22,7 +22,7 @@ class PackageSeeder extends Seeder
                 'duration_in_days' => $faker->numberBetween(1, 365),
                 'personal_trainer_quota' => $faker->numberBetween(0, 50),
                 'description' => $faker->sentence,
-                'type' => $faker->randomElement($types),
+                // 'type' => $faker->randomElement($types),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

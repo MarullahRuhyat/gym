@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Member;
 use Midtrans\Config;
 use App\Models\Payment;
 use Midtrans\Notification;
+use Midtrans\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;

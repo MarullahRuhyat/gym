@@ -11,6 +11,8 @@ Subscribed Package
 <div class="row">
     {{-- @if(count($membership_payments) == null) --}}
     <div class="col-md-12 mb-5">
+    {{-- @if(count($membership_payments) == null) --}}
+    <div class="col-md-12 mb-5">
         <p>No Subscribed Package</p>
     </div>
     {{-- @else --}}

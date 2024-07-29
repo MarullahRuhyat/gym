@@ -164,7 +164,7 @@ class PaymentController extends Controller
         }
 
         try {
-            // Mengecek status transaksi di database Anda
+            // Mengecek status transaksi
             $payment = Payment::where('order_id', $orderId)->first();
             if (!$payment) {
                 return response()->json([
@@ -181,7 +181,7 @@ class PaymentController extends Controller
                     'token' => $payment->snap_token
                 ]);
             } else {
-                // Perbarui status pembayaran di database Anda
+                // Perbarui status pembayaran
                 $payment->status = $transactionStatus->status;
                 $payment->save();
 

@@ -14,7 +14,7 @@ Subscribed Package
         <p>No Subscribed Package</p>
     </div>
     {{-- @else --}}
-        @foreach($membership_payments as $membership)
+        @foreach($packages_membership_payments as $membership)
         <div class="col-md-4">
             <div class="card rounded-4">
                 <div class="card-header">
@@ -37,9 +37,9 @@ Subscribed Package
                                 <p class="card-text">Personal Trainer Quota: {{ $membership->personal_trainer_quota }} / {{ $membership->personal_trainer_quota }}</p>
                                 <p class="card-text">Price: Rp.{{ $membership->price }}</p>
                                 @if($membership->is_active == 1)
-                                    <button class="btn btn-outline-info px-5" disabled>Active</button>
+                                    <button class="btn btn-outline-info" disabled>Active</button>
                                 @else
-                                    <button class="btn btn-outline-secondary px-5" disabled>Inactive</button>
+                                    <button class="btn btn-outline-secondary" disabled>Inactive</button>
                                 @endif
                                 @if($membership->status == 'pending')
                                 <button class="btn btn-warning" id="checkPaymentBtn" style="color:white">Check Payment</button>

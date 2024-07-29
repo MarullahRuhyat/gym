@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('membership_id')->nullable()->constrained()->onDelete('cascade');
             $table->decimal('amount', 8, 2);
             $table->string('payment_method');
+            $table->string('snap_token')->nullable();
             $table->enum('status', ['pending', 'paid', 'expired']);
             $table->timestamps();
         });

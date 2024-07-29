@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('path_qr_code');
             $table->enum('status', ['active', 'expired'])->default('expired');
             $table->timestamp('expired_at')->nullable();
+            $table->boolean('is_using_pt')->default(0);
             $table->timestamps();
         });
     }

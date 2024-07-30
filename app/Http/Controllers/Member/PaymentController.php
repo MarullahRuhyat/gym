@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Member;
 use Midtrans\Config;
 use App\Models\Payment;
 use Midtrans\Notification;
+use Midtrans\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -164,7 +165,7 @@ class PaymentController extends Controller
         }
 
         try {
-            // Mengecek status transaksi di database Anda
+            // Mengecek status transaksi
             $payment = Payment::where('order_id', $orderId)->first();
             if (!$payment) {
                 return response()->json([
@@ -181,7 +182,7 @@ class PaymentController extends Controller
                     'token' => $payment->snap_token
                 ]);
             } else {
-                // Perbarui status pembayaran di database Anda
+                // Perbarui status pembayaran
                 $payment->status = $transactionStatus->status;
                 $payment->save();
 

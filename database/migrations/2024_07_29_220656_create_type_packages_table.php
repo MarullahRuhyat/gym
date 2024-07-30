@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gym_membership_packages', function (Blueprint $table) {
+        Schema::create('type_packages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('price');
-            $table->integer('duration_in_days');
-            $table->integer('personal_trainer_quota')->default(0);
-            $table->string('description')->nullable();
-            // $table->foreignId('type_pakages_id')->constrained('type_packages');
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gym_membership_packages');
+        Schema::dropIfExists('type_packages');
     }
 };

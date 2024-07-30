@@ -5,12 +5,12 @@ starter Page
 @section('content')
 <div class="card">
     <div class="card-body">
-        <div class="col row-cols-auto g-3 justify">
-            <h1>Welcome, {{ ucwords(auth()->user()->name) }}</h1>
+        <div class="col row-cols-auto g-3 justify-content-center">
+            <h1 class="text-center">Welcome, {{ ucwords(auth()->user()->name) }}</h1>
             <!-- <h1 style="padding-bottom:50px; font-size:60px"> </h1> -->
             @if ($membership->isEmpty())
             <div class="justify-content-center text-center">
-                <div class="col" style = "margin-top:30px;">
+                <div class="col my-5">
                     <a href="{{ route('member.package') }}" class="btn btn-grd btn-grd-deep-blue px-5">Buy Membership</a>
                 </div>
             </div>
@@ -18,9 +18,9 @@ starter Page
                 {{-- @foreach ($membership as $membership) --}}
                 <div class="card" style="margin:auto; padding-bottom:50px; padding:30px;">
                     <h4 style="padding-bottom:30px;" class="card-title mb-4 fw-bold justify-content-between border-bottom pt-4">Membership Details</h4>
-                        <h5 id="" class="mb-0 fw-bold">
+                        <p id="" class="mb-0 fw-bold">
                             You don't have any membership yet
-                        </h5>
+                        </p>
                 </div>
                 {{-- @endforeach --}}
             </div>

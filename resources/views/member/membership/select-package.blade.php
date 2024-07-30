@@ -40,7 +40,7 @@ starter Page
                 <div class="row g-3">
                     <div class="row row-cols-1 row-cols-lg-3 g-4">
                         @foreach($package as $pkg)
-                        @if($pkg->type == 'harian')
+                        {{-- @if($pkg->type == 'harian') --}}
                         <div class="col-12 col-lg-4">
                             <div class="card">
                                 <div class="card-body">
@@ -57,7 +57,7 @@ starter Page
                                 </div>
                             </div>
                         </div>
-                        @endif
+                        {{-- @endif --}}
                         @endforeach
                     </div>
                 </div>
@@ -66,7 +66,7 @@ starter Page
                 <div class="row g-3">
                     <div class="row row-cols-1 row-cols-lg-3 g-4">
                         @foreach($package as $pkg)
-                        @if($pkg->type == 'mandiri')
+                        {{-- @if($pkg->type == 'mandiri') --}}
                         <div class="col-12 col-lg-4">
                             <div class="card">
                                 <div class="card-body">
@@ -83,7 +83,7 @@ starter Page
                                 </div>
                             </div>
                         </div>
-                        @endif
+                        {{-- @endif --}}
                         @endforeach
 
                     </div>
@@ -93,7 +93,7 @@ starter Page
                 <div class="row g-3">
                     <div class="row row-cols-1 row-cols-lg-3 g-4">
                         @foreach($package as $pkg)
-                        @if($pkg->type == 'pt')
+                        {{-- @if($pkg->type == 'pt') --}}
                         <div class="col-12 col-lg-4">
                             <div class="card">
                                 <div class="card-body">
@@ -110,7 +110,7 @@ starter Page
                                 </div>
                             </div>
                         </div>
-                        @endif
+                        {{-- @endif --}}
                         @endforeach
 
                     </div>

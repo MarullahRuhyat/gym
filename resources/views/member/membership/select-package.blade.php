@@ -7,115 +7,43 @@ starter Page
 <div class="card">
     <div class="card-body">
         <ul class="nav nav-tabs nav-primary" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab" aria-selected="true">
-                    <div class="d-flex align-items-center">
-                        <div class="tab-icon"><i class="bi bi-person me-1 fs-6"></i>
+            @foreach($groupedPackages as $typeName => $packages)
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link @if($loop->first) active @endif" data-bs-toggle="tab" href="#tab{{ $loop->index }}" role="tab" aria-selected="{{ $loop->first ? 'true' : 'false' }}">
+                        <div class="d-flex align-items-center">
+                            <div class="tab-icon"><i class="bi bi-person me-1 fs-6"></i></div>
+                            <div class="tab-title">{{ $typeName }}</div>
                         </div>
-                        <div class="tab-title">Harian</div>
-                    </div>
-                </a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile" role="tab" aria-selected="false">
-                    <div class="d-flex align-items-center">
-                        <div class="tab-icon"><i class="bi bi-person me-1 fs-6"></i>
-                        </div>
-                        <div class="tab-title">Mandiri</div>
-                    </div>
-                </a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" data-bs-toggle="tab" href="#primarycontact" role="tab" aria-selected="false">
-                    <div class="d-flex align-items-center">
-                        <div class="tab-icon"><i class='bi bi-person me-1 fs-6'></i>
-                        </div>
-                        <div class="tab-title">PT</div>
-                    </div>
-                </a>
-            </li>
+                    </a>
+                </li>
+            @endforeach
         </ul>
         <div class="tab-content py-3">
-            <div class="tab-pane fade show active" id="primaryhome" role="tabpanel">
-                <div class="row g-3">
-                    <div class="row row-cols-1 row-cols-lg-3 g-4">
-                        @foreach($package as $pkg)
-                        {{-- @if($pkg->type == 'harian') --}}
-                        <div class="col-12 col-lg-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
-                                    <p class="card-text">{{ $pkg->description }}</p>
-                                    <p class="card-text">Duration: {{ $pkg->duration_in_days }} Days</p>
-                                    <h5>Price: Rp.{{ $pkg->price }}</h5>
-                                    <div class="mt-3 d-flex align-items-center justify-content-between">
-                                        <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SetStartDate('{{ $pkg->id }}')">
-                                            <!-- <i class="material-icons-outlined">shopping_cart</i> -->
-                                            Select Package
-                                        </button>
+            @foreach($groupedPackages as $typeName => $packages)
+                <div class="tab-pane fade @if($loop->first) show active @endif" id="tab{{ $loop->index }}" role="tabpanel">
+                    <div class="row g-3">
+                        <div class="row row-cols-1 row-cols-lg-3 g-4">
+                            @foreach($packages as $pkg)
+                                <div class="col-12 col-lg-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
+                                            <p class="card-text">{{ $pkg->description }}</p>
+                                            <p class="card-text">Duration: {{ $pkg->duration_in_days }} Days</p>
+                                            <h5>Price: Rp.{{ $pkg->price }}</h5>
+                                            <div class="mt-3 d-flex align-items-center justify-content-between">
+                                                <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SetStartDate('{{ $pkg->id }}')">
+                                                    Select Package
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
-                        {{-- @endif --}}
-                        @endforeach
                     </div>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
-                <div class="row g-3">
-                    <div class="row row-cols-1 row-cols-lg-3 g-4">
-                        @foreach($package as $pkg)
-                        {{-- @if($pkg->type == 'mandiri') --}}
-                        <div class="col-12 col-lg-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
-                                    <p class="card-text">{{ $pkg->description }}</p>
-                                    <p class="card-text">Duration: {{ $pkg->duration_in_days }} Days</p>
-                                    <h5>Price: Rp.{{ $pkg->price }}</h5>
-                                    <div class="mt-3 d-flex align-items-center justify-content-between">
-                                        <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SetStartDate('{{ $pkg->id }}')">
-                                            <!-- <i class="material-icons-outlined">shopping_cart</i> -->
-                                            Select Package
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- @endif --}}
-                        @endforeach
-
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="primarycontact" role="tabpanel">
-                <div class="row g-3">
-                    <div class="row row-cols-1 row-cols-lg-3 g-4">
-                        @foreach($package as $pkg)
-                        {{-- @if($pkg->type == 'pt') --}}
-                        <div class="col-12 col-lg-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
-                                    <p class="card-text">{{ $pkg->description }}</p>
-                                    <p class="card-text">Duration: {{ $pkg->duration_in_days }} Days</p>
-                                    <h5>Price: Rp.{{ $pkg->price }}</h5>
-                                    <div class="mt-3 d-flex align-items-center justify-content-between">
-                                        <button style="color:white;" class="btn btn-grd-deep-blue border-0 d-flex gap-2 px-3" onclick="SetStartDate('{{ $pkg->id }}')">
-                                            <!-- <i class="material-icons-outlined">shopping_cart</i> -->
-                                            Select Package
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- @endif --}}
-                        @endforeach
-
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
@@ -202,6 +130,8 @@ starter Page
         </div>
     </div>
 </div>
+
+
 @endsection
 @push('script')
 <script>
@@ -225,7 +155,6 @@ starter Page
                 id: id,
             },
             success: function(response) {
-                console.log(response);
                 $('#payment-item-total').text('Rp.' + response.price);
                 $('#payment-total').text('Rp.' + response.price);
             },

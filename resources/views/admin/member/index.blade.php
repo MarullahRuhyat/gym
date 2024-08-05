@@ -75,11 +75,9 @@ starter Page
 
         // fetch data
         function fetch_data(page, query) {
-            console.log(query);
             $.ajax({
                 url: `{{ route('admin_member')}}?page=` + page + "&name=" + query,
                 success: function(data) {
-                    console.log(data);
                     $('#data_member').html(data);
                 }
             });

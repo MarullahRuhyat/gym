@@ -21,6 +21,14 @@ class ProcessNotifMemberExpired implements ShouldQueue
      */
     public function __construct()
     {
+        // 
+    }
+
+    /**
+     * Execute the job.
+     */
+    public function handle(): void
+    {
         $tanggal_berakhir = Carbon::today()->addDays(4)->format('Y-m-d');
         // Mendapatkan tanggal 1 tahun yang lalu dari hari ini, kemudian menambah 4 hari
         $targetDate = Carbon::today()->subYear()->addDays(4);
@@ -49,13 +57,5 @@ class ProcessNotifMemberExpired implements ShouldQueue
                 ],
             ]);
         }
-    }
-
-    /**
-     * Execute the job.
-     */
-    public function handle(): void
-    {
-        //
     }
 }

@@ -17,10 +17,14 @@ class JenisMemberController extends Controller
             $edit = intval($request->input('edit', 0));
             $delete = intval($request->input('delete', 0));
             $data = $request->only('name', 'price', 'duration_in_days', 'personal_trainer_quota', 'type_packages_id');
+            // Memperbaiki format price
+            if (isset($data['price'])) {
+                $data['price'] = str_replace('.', '', $data['price']);
+            }
             if ($delete == 0) {
                 $request->validate([
                     'name' => 'required|string|max:255',
-                    'price' => 'required|numeric',
+                    'price' => 'required|string',
                     'duration_in_days' => 'required|integer',
                     'personal_trainer_quota' => 'required|integer',
                     'type_packages_id' => 'required|integer',
@@ -52,7 +56,7 @@ class JenisMemberController extends Controller
         $page = $request->query('page', 1);
         $name = $request->query('name', '');
         if ($name != '') {
-            $membership->where('name', 'LIKE', '%' . $name . '%');
+            $membership->where('gym_membership_packages.name', 'LIKE', '%' . $name . '%');
         }
         $results = $membership->paginate($perPage, ['*'], 'page', $page);
         $total_page = intval(ceil($results->total() / $results->perPage()));

@@ -22,19 +22,38 @@ class GajiController extends Controller
                 return redirect()->route('admin_gaji')->with('success', 'Gagal dikirim');
             }
         }
+
+        $years = DB::table('gaji_personal_trainers')
+            ->select(DB::raw('DATE_FORMAT(bulan_gaji, "%Y") as formatted_tahun_gaji'))
+            ->distinct()
+            ->orderBy(DB::raw('DATE_FORMAT(bulan_gaji, "%Y")'), 'desc')
+            ->limit(5)
+            ->get();
+
+        $latestYear = DB::table('gaji_personal_trainers')
+            ->select(DB::raw('DATE_FORMAT(bulan_gaji, "%Y") as formatted_tahun_gaji'))
+            ->orderBy('bulan_gaji', 'desc')
+            ->limit(1)
+            ->pluck('formatted_tahun_gaji')
+            ->first();
+
+        $year = $request->query('year', $latestYear);
+
         $months = DB::table('gaji_personal_trainers')
             ->select(DB::raw('DATE_FORMAT(bulan_gaji, "%Y-%m") as formatted_bulan_gaji'))
+            ->where(DB::raw('DATE_FORMAT(bulan_gaji, "%Y")'), $year)
             ->distinct()
             ->orderBy(DB::raw('DATE_FORMAT(bulan_gaji, "%Y-%m")'), 'desc')
-            ->limit(5)
             ->get();
 
         $latestMonth = DB::table('gaji_personal_trainers')
             ->select(DB::raw('DATE_FORMAT(bulan_gaji, "%Y-%m") as formatted_bulan_gaji'))
+            ->where(DB::raw('DATE_FORMAT(bulan_gaji, "%Y")'), $year)
             ->orderBy('bulan_gaji', 'desc')
             ->limit(1)
             ->pluck('formatted_bulan_gaji')
             ->first();
+
         $perPage = 10;
         $page = $request->query('page', 1);
         $month = $request->query('month', $latestMonth);
@@ -61,7 +80,7 @@ class GajiController extends Controller
             return view('admin.gaji.data', compact('results', 'total_page', 'month', 'months'))->render();
         }
 
-        return view('admin.gaji.index', compact('results', 'total_page', 'month', 'months'));
+        return view('admin.gaji.index', compact('results', 'total_page', 'month', 'months', 'year', 'years'));
     }
 
     function ajax_get_bonus(Request $request)
@@ -93,21 +112,28 @@ class GajiController extends Controller
         $amounts = $request->amounts;
         $descriptions = $request->descriptions;
         $bonuses = PersonalTrainingBonus::where('gaji_personal_trainers_id', $gaji_id)->get();
-
         try {
             foreach ($bonuses as $row) {
-                $row->amount = $request->input('amount_' . $row->id);
+                // Memperbaiki format amount
+                $amount = $request->input('amount_' . $row->id);
+                $amount = str_replace('.', '', $amount);
+                $row->amount = $amount;
                 $row->save();
             }
             $i = 0;
-            foreach ($amounts as $row) {
-                $bonus = new PersonalTrainingBonus();
-                $bonus->gaji_personal_trainers_id = $gaji_id;
-                $bonus->amount = $row;
-                $bonus->description = $descriptions[$i];
-                $bonus->save();
-                $i++;
+            if ($amounts != null) {
+                foreach ($amounts as $row) {
+                    // Memperbaiki format amount
+                    $row = str_replace('.', '', $row);
+                    $bonus = new PersonalTrainingBonus();
+                    $bonus->gaji_personal_trainers_id = $gaji_id;
+                    $bonus->amount = $row;
+                    $bonus->description = $descriptions[$i];
+                    $bonus->save();
+                    $i++;
+                }
             }
+
             return redirect()->route('admin_gaji')->with('success', 'Data berhasil disimpan');
         } catch (\Throwable $th) {
             return redirect()->route('admin_gaji')->with('error', 'Data gagal disimpan!');

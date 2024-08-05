@@ -28,7 +28,7 @@
                             <h6 class="mb-0">Gaji</h6>
                         </div>
                         <div class="">
-                            <h5 class="mb-0">{{ $gaji->salary }}</h5>
+                            <h5 class="mb-0 rupiah">{{ $gaji->salary }}</h5>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-3">
@@ -36,7 +36,7 @@
                             <h6 class="mb-0">Bonus</h6>
                         </div>
                         <div class="">
-                            <h5 class="mb-0">{{ $gaji->total_bonus }}</h5>
+                            <h5 class="mb-0 rupiah">{{ $gaji->total_bonus }}</h5>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-3">
@@ -47,7 +47,7 @@
                             @php
                             $total = $gaji->salary + $gaji->total_bonus;
                             @endphp
-                            <h5 class="mb-0"><b>{{ $total }}</b></h5>
+                            <h5 class="mb-0 rupiah"><b>{{ $total }}</b></h5>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-3">

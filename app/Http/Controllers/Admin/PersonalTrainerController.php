@@ -26,7 +26,10 @@ class PersonalTrainerController extends Controller
             }
 
             $data = $request->only('name', 'password', 'phone_number', 'status', 'salary_pt');
-
+            // Memperbaiki format price
+            if (isset($data['salary_pt'])) {
+                $data['salary_pt'] = str_replace('.', '', $data['salary_pt']);
+            }
 
             try {
                 $id = $request->input('id', 0);
@@ -45,7 +48,7 @@ class PersonalTrainerController extends Controller
                         'name' => $request->name,
                         'phone_number' => $request->phone_number,
                         'status' => $request->status,
-                        'salary_pt' => $request->salary_pt
+                        'salary_pt' => $data['salary_pt']
                     ]);
 
                     return redirect()->route('admin_personal_trainer')->with('success', 'Data berhasil diperbarui!');

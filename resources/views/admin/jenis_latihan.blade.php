@@ -7,7 +7,7 @@ Starter Page
 @section('content')
 <h3><b> Jenis Latihan</b></h3>
 <div class="row justify-content-start">
-    <div class="col-md-2 mb-3 col-3">
+    <div class="col-md-2 mb-2 col-3">
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
     </div>
 </div>

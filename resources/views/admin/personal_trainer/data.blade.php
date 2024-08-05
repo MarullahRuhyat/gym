@@ -36,7 +36,7 @@
                             <h6 class="mb-0">Salary</h6>
                         </div>
                         <div class="">
-                            <h5 class="mb-0">{{ $user->salary_pt }}</h5>
+                            <h5 class="mb-0 rupiah">{{ $user->salary_pt }}</h5>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-3">

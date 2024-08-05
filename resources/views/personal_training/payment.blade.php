@@ -45,7 +45,9 @@ Gaji Trainer
                 <div class="">
                     <small>to</small>
                     <address class="m-t-5 m-b-5">
-                        <strong class="text-inverse">Name PTnya</strong><br>
+                        <strong class="text-inverse">
+                            {{ $user->name }}    
+                        </strong><br>
                     </address>
                 </div>
             </div>
@@ -54,8 +56,8 @@ Gaji Trainer
                     <small>Invoice / July period</small>
                     <div class=""><b>August 3,2012</b></div>
                     <div class="invoice-detail">
-                        #0000123DSS<br>
-                        Services Product
+                        Invoice #<br>
+                        Gaji Trainer
                     </div>
                 </div>
             </div>
@@ -75,9 +77,7 @@ Gaji Trainer
                 <tbody>
                     <tr>
                         <td>
-                            <span class="text-inverse">Website design &amp; development</span><br>
-                            <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis
-                                arcu.</small>
+                            <span class="text-inverse">Gaji Pokok</span><br>
                         </td>
                         <td class="text-center">Rp.50.00</td>
                         <td class="text-center">50</td>
@@ -112,18 +112,15 @@ Gaji Trainer
                 <p class="mb-0">SUBTOTAL</p>
                 <h4 class="mb-0">Rp.4,500.00</h4>
             </div>
-            <div class="col col-auto p-4">
-                <i class="bi bi-plus-lg text-muted"></i>
-            </div>
-            <div class="col col-auto me-auto p-4">
-                <p class="mb-0">PAYPAL FEE (5.4%)</p>
-                <h4 class="mb-0">Rp.108.00</h4>
-            </div>
-            <div class="col bg-primary col-auto p-4">
+        
+            <div class="col"></div> <!-- Ini adalah kolom kosong untuk mendorong kolom total ke kanan -->
+        
+            <div class="col bg-primary col-auto p-4" style="margin-left:auto;">
                 <p class="mb-0 text-white">TOTAL</p>
                 <h4 class="mb-0 text-white">Rp.4508.00</h4>
             </div>
         </div><!--end row-->
+        
 
         <hr>
     </div>

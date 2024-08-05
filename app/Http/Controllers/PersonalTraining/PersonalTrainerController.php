@@ -13,7 +13,5 @@ class PersonalTrainerController extends Controller
         return view('personal_training.dashboard');
     }
     
-    public function payment() {
-        return view('personal_training.payment');
-    }
+    
 }

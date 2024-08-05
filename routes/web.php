@@ -1,28 +1,29 @@
 <?php
 
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\Member;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\AuthController;
+use App\Http\Controllers\Member\QRController;
 use App\Http\Middleware\CheckPersonalTrainer;
 use App\Http\Controllers\Admin\GajiController;
 use App\Http\Controllers\Admin\ScanController;
 use App\Http\Controllers\Admin\AbsenController;
 use App\Http\Controllers\Admin\MemberController;
-use App\Http\Controllers\Admin\JenisMemberController;
-use App\Http\Controllers\Admin\JenisLatihanController;
-use App\Http\Controllers\Admin\DashboardAdminController;
-use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
-use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
-use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
-use App\Http\Controllers\Admin\TypePackageController;
-use App\Http\Controllers\Member\AuthController as MemberAuthController;
-use App\Http\Controllers\Member\ProfileController;
 use App\Http\Controllers\Member\PackageController;
 use App\Http\Controllers\Member\PaymentController;
+use App\Http\Controllers\Member\ProfileController;
+use App\Http\Controllers\Admin\JenisMemberController;
+use App\Http\Controllers\Admin\TypePackageController;
 use App\Http\Controllers\Member\AttendanceController;
+use App\Http\Controllers\Admin\JenisLatihanController;
+use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\PersonalTraining\ProfilePersonalTraining;
-use App\Http\Middleware\Member;
-use App\Http\Controllers\Member\QRController;
+use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
+use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
+use App\Http\Controllers\Member\AuthController as MemberAuthController;
+use App\Http\Controllers\PersonalTraining\GajiPersonalTrainerController;
+use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
 
 Route::get('test', fn () => phpinfo());
 Route::get('/', function () {
@@ -140,7 +141,7 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
     });
     // payment
     Route::prefix('payment')->group(function () {
-        Route::get('/', [PersonalTrainerController::class, 'payment'])->name('personal_trainer.payment');
+        Route::get('/', [GajiPersonalTrainerController::class, 'index'])->name('personal_trainer.payment.index');
     });
 });
 

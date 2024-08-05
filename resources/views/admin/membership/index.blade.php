@@ -9,61 +9,14 @@ starter Page
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Add</button>
     </div>
 </div>
-
-<div class="row">
-    @foreach ($packages as $package)
-    <div class="col-md-6">
-        <div class="card rounded-4">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-10">
-                        <h3>{{ $package->name }}</h3>
-                    </div>
-                    <div class="col-2 text-end">
-                        <div class="test ">
-                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown">
-                                <i class="bi bi-three-dots-vertical"></i>
-                                <span class="visually-hidden">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
-                                <a class="dropdown-item button_edit" href="javascript:;" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ $package->id }}" data-name="{{ $package->name }}" data-price="{{ $package->price }}" data-duration="{{ $package->duration_in_days }}" data-trainer="{{ $package->personal_trainer_quota }}">Edit</a>
-                                <a class="dropdown-item button_delete" href="javascript:;" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $package->id }}" data-name="{{ $package->name }}">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="d-flex flex-column gap-3 me-3">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="flex-grow-1">
-                            <h6 class="mb-0">Price</h6>
-                        </div>
-                        <div class="">
-                            <h5 class="mb-0">{{ $package->price }}</h5>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="flex-grow-1">
-                            <h6 class="mb-0">Duration (Days)</h6>
-                        </div>
-                        <div class="">
-                            <h5 class="mb-0">{{ $package->duration_in_days }}</h5>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="flex-grow-1">
-                            <h6 class="mb-0">Personal Trainer</h6>
-                        </div>
-                        <div class="">
-                            <h5 class="mb-0">{{ $package->personal_trainer_quota }}</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="row mb-2 justify-content-end">
+    <div class="col-md-4 d-flex justify-content-end align-items-center">
+        <input type="text" class="form-control " id="search_name" placeholder="Search Name">
     </div>
-    @endforeach
+</div>
+
+<div id="data_member">
+    @include('admin.membership.data')
 </div>
 
 <!-- Modal Add -->
@@ -92,6 +45,16 @@ starter Page
                         <label for="personal_trainer_quota">Personal Trainer</label>
                         <input type="number" class="form-control" id="personal_trainer_quota" name="personal_trainer_quota" value="0" required>
                     </div>
+                    <div class="form-group">
+                        <label for="personal_trainer_quota">Personal Trainer</label>
+                        <select class="form-select" aria-label="Default select example" required name="type_packages_id">
+                            <option value="">-- pilih tipe paket --</option>
+                            @foreach($type_packages as $row)
+                            <option value="{{$row->id}}">{{$row->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -129,6 +92,15 @@ starter Page
                     <div class="form-group">
                         <label for="personal_trainer_quota_edit">Personal Trainer</label>
                         <input type="number" class="form-control" id="personal_trainer_quota_edit" name="personal_trainer_quota" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="personal_trainer_quota">Personal Trainer</label>
+                        <select class="form-select" aria-label="Default select example" required name="type_packages_id" id="type_edit">
+                            <option value="">-- pilih tipe paket --</option>
+                            @foreach($type_packages as $row)
+                            <option value="{{$row->id}}">{{$row->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -175,19 +147,45 @@ starter Page
             let price = $(this).data('price');
             let duration = $(this).data('duration');
             let trainer = $(this).data('trainer');
-            console.log(trainer);
+            let type = $(this).data('type');
 
             $('#name_edit').val(name);
             $('#price_edit').val(price);
             $('#duration_in_days_edit').val(duration);
             $('#personal_trainer_quota_edit').val(trainer);
             $('#id_edit').val(id);
+            $('#type_edit').val(type);
         });
         $('.button_delete').click(function() {
             let id = $(this).data('id');
             let name = $(this).data('name');
             $('#id_delete').val(id);
             $('#deleteModalLabel').html(`Apakah anda ingin mnghapus ${name}?`);
+        });
+
+        // fetch data
+        function fetch_data(page, query) {
+            console.log(query);
+            $.ajax({
+                url: `{{ route('admin_membership_package')}}?page=` + page + "&name=" + query,
+                success: function(data) {
+                    console.log(data);
+                    $('#data_member').html(data);
+                }
+            });
+        }
+
+        // Handle input event
+        $('#search_name').on('input', function() {
+            let searchQuery = $(this).val();
+            fetch_data(1, searchQuery); // Fetch data for the first page with search query
+        });
+
+        $(document).on('click', '.pagination a', function(event) {
+            event.preventDefault();
+            let page = $(this).attr('href').split('page=')[1];
+            let searchQuery = $('#search_name').val();
+            fetch_data(page, searchQuery);
         });
     });
 </script>

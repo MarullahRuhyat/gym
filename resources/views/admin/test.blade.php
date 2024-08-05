@@ -1,53 +1,28 @@
-@extends('admin.layouts.app')
-@section('title')
-starter Page
-@endsection
-@section('content')
-<h1>Speech to Text Demo</h1>
-<button id="start-btn">Start Listening</button>
-<div id="result"></div>
-@endsection
-@section('javascript')
-<script>
-    // Check for browser support
-    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+<!DOCTYPE html>
+<html lang="en">
 
-    if ('SpeechRecognition' in window) {
-        const recognition = new SpeechRecognition();
-        recognition.interimResults = true;
-        recognition.lang = 'en-US';
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic JSON Tree with jsTree</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/themes/default/style.min.css">
+    <style>
+        #tree {
+            margin-top: 20px;
+        }
 
-        const startButton = document.getElementById('start-btn');
-        const resultDiv = document.getElementById('result');
+        #json-input {
+            margin-bottom: 20px;
+            width: 100%;
+            height: 150px;
+        }
+    </style>
+</head>
 
-        startButton.addEventListener('click', () => {
-            recognition.start();
-            startButton.disabled = true;
-            startButton.textContent = 'Listening...';
-        });
+<body>
 
-        recognition.addEventListener('result', (event) => {
-            let transcript = '';
-            for (const result of event.results) {
-                transcript += result[0].transcript;
-            }
-            resultDiv.textContent = transcript;
-        });
+    <iframe title="sales" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=da6b84d4-d9bc-4580-827e-8b5a2492df4e&autoAuth=true&ctid=20258bc7-726c-465a-a694-fb2207815411" frameborder="0" allowFullScreen="true"></iframe>
 
-        recognition.addEventListener('end', () => {
-            startButton.disabled = false;
-            startButton.textContent = 'Start Listening';
-        });
+</body>
 
-    } else {
-        alert('Your browser does not support Speech Recognition.');
-    }
-</script>
-@endsection
-@push('script')
-<!--plugins-->
-<script src="{{ URL::asset('build/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
-<script src="{{ URL::asset('build/plugins/metismenu/metisMenu.min.js') }}"></script>
-<script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>
-<script src="{{ URL::asset('build/js/main.js') }}"></script>
-@endpush
+</html>

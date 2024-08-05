@@ -110,6 +110,7 @@ class GajiController extends Controller
 
     function bonus(Request $request)
     {
+        $month = $request->month;
         $gaji_id = $request->gaji_personal_trainers_id;
         $amounts = $request->amounts;
         $descriptions = $request->descriptions;
@@ -136,7 +137,10 @@ class GajiController extends Controller
                 }
             }
 
-            return redirect()->route('admin_gaji')->with('success', 'Data berhasil disimpan');
+            return redirect()->route('admin_gaji', [
+                'month' => $month,
+                'year' => explode("-", $month)[0],
+            ])->with('success', 'Data berhasil disimpan');
         } catch (\Throwable $th) {
             return redirect()->route('admin_gaji')->with('error', 'Data gagal disimpan!');
         }

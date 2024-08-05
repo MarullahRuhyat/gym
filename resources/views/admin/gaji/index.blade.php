@@ -109,6 +109,7 @@ starter Page
                 @csrf
                 <div class="modal-body">
                     <input type="hidden" name="gaji_personal_trainers_id" id="gaji_id">
+                    <input type="hidden" name="month" id="input_month" value="{{$month}}">
                     <div class="row" id="input_bonus">
 
                     </div>
@@ -217,6 +218,7 @@ starter Page
             let searchQuery = $('#search_name').val();
             let month = $(this).val();
             $('#bulan_gaji').val(month);
+            $('#input_month').val(month);
             fetch_data(1, searchQuery, month); // Fetch data for the first page with search query
         });
 

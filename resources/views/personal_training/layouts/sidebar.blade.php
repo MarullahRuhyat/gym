@@ -23,7 +23,7 @@
 
         </li>
         <li>
-            <a href="{{ route('personal_trainer.payment')}}">
+            <a href="{{ route('personal_trainer.payment.index')}}">
                 <div class="parent-icon"><i class="material-icons-outlined">payments</i>
                 </div>
                 <div class="menu-title">Gaji</div>

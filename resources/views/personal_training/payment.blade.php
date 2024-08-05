@@ -69,9 +69,7 @@ Gaji Trainer
                 <thead>
                     <tr>
                         <th>Gaji Description</th>
-                        <th class="text-center" style="width: 10%;">RATE</th>
-                        <th class="text-center" style="width: 10%;">HOURS</th>
-                        <th class="text-right" style="width: 10%;">LINE TOTAL</th>
+                        <th class="text-center" style="width: 10%;">Jumlah</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,45 +77,28 @@ Gaji Trainer
                         <td>
                             <span class="text-inverse">Gaji Pokok</span><br>
                         </td>
-                        <td class="text-center">Rp.50.00</td>
-                        <td class="text-center">50</td>
-                        <td class="text-right">Rp.2,500.00</td>
+                        <td class="text-center">
+                            Rp.{{ $gaji_pokok->salary }}
+                        </td>
                     </tr>
+                    @foreach ($bonus as $bonusItem)
                     <tr>
                         <td>
-                            <span class="text-inverse">Branding</span><br>
-                            <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis
-                                arcu.</small>
+                            <span class="text-inverse">{{ $bonusItem->description }}</span><br>
                         </td>
-                        <td class="text-center">Rp.50.00</td>
-                        <td class="text-center">40</td>
-                        <td class="text-right">Rp.2,000.00</td>
+                        <td class="text-center">Rp.{{ $bonusItem->amount }}</td>
                     </tr>
-                    <tr>
-                        <td>
-                            <span class="text-inverse">Redesign Service</span><br>
-                            <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis
-                                arcu.</small>
-                        </td>
-                        <td class="text-center">Rp.50.00</td>
-                        <td class="text-center">50</td>
-                        <td class="text-right">Rp.2,500.00</td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
 
         <div class="row bg-light align-items-center m-0">
-            <div class="col col-auto p-4">
-                <p class="mb-0">SUBTOTAL</p>
-                <h4 class="mb-0">Rp.4,500.00</h4>
-            </div>
-        
-            <div class="col"></div> <!-- Ini adalah kolom kosong untuk mendorong kolom total ke kanan -->
-        
             <div class="col bg-primary col-auto p-4" style="margin-left:auto;">
                 <p class="mb-0 text-white">TOTAL</p>
-                <h4 class="mb-0 text-white">Rp.4508.00</h4>
+                <h4 class="mb-0 text-white">
+                    Rp.{{ $total }}
+                </h4>
             </div>
         </div><!--end row-->
         

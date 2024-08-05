@@ -4,16 +4,24 @@ starter Page
 @endsection
 @section('content')
 <h3><b>Gym Membership Packages</b></h3>
-<div class="row justify-content-start">
-    <div class="col-md-2 mb-3 col-3">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Add</button>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="row justify-content-start">
+            <div class="col-md-2 mb-2 col-3">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row mb-2 justify-content-end">
+            <div class="col-md-8 d-flex justify-content-end align-items-center">
+                <input type="text" class="form-control " id="search_name" placeholder="Search Name">
+            </div>
+        </div>
     </div>
 </div>
-<div class="row mb-2 justify-content-end">
-    <div class="col-md-4 d-flex justify-content-end align-items-center">
-        <input type="text" class="form-control " id="search_name" placeholder="Search Name">
-    </div>
-</div>
+
 
 <div id="data_member">
     @include('admin.membership.data')
@@ -35,7 +43,7 @@ starter Page
                     </div>
                     <div class="form-group">
                         <label for="price">Price</label>
-                        <input type="number" class="form-control" id="price" name="price" required>
+                        <input type="text" class="form-control angka-rupiah" id="price" name="price" required>
                     </div>
                     <div class="form-group">
                         <label for="duration_in_days">Duration (Days)</label>
@@ -83,7 +91,7 @@ starter Page
                     </div>
                     <div class="form-group">
                         <label for="price">Price</label>
-                        <input type="number" class="form-control" id="price_edit" name="price" required>
+                        <input type="text" class="form-control angka-rupiah" id="price_edit" name="price" required>
                     </div>
                     <div class="form-group">
                         <label for="duration_in_days">Duration (Days)</label>
@@ -148,6 +156,7 @@ starter Page
             let duration = $(this).data('duration');
             let trainer = $(this).data('trainer');
             let type = $(this).data('type');
+            price = formatRupiah(`${price}`, false)
 
             $('#name_edit').val(name);
             $('#price_edit').val(price);
@@ -169,8 +178,8 @@ starter Page
             $.ajax({
                 url: `{{ route('admin_membership_package')}}?page=` + page + "&name=" + query,
                 success: function(data) {
-                    console.log(data);
                     $('#data_member').html(data);
+                    updateRupiahElements();
                 }
             });
         }
@@ -187,6 +196,7 @@ starter Page
             let searchQuery = $('#search_name').val();
             fetch_data(page, searchQuery);
         });
+
     });
 </script>
 @endpush

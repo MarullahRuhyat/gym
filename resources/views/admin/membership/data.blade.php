@@ -37,7 +37,7 @@
                             <h6 class="mb-0">Price</h6>
                         </div>
                         <div class="">
-                            <h5 class="mb-0">{{ $package->price }}</h5>
+                            <h5 class="mb-0 rupiah">{{ $package->price }}</h5>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-3">

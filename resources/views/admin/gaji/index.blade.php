@@ -2,32 +2,64 @@
 @section('title')
 starter Page
 @endsection
+@section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+@endsection
 @section('content')
 <h3><b>Gaji</b></h3>
-<div class="row">
-    <div class="col-md-6">
-        <form action="" method="post">
-            @csrf
-            <input type="hidden" name="bulan_gaji" id="bulan_gaji" value="{{$month}}">
-            <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Kirim
-            </button>
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Apakah anda yakin ingin mengirim gaji?</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </div>
+<!-- form kirim gaji ke pt -->
+<form action="" method="post">
+    @csrf
+    <input type="hidden" name="bulan_gaji" id="bulan_gaji" value="{{$month}}">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Apakah anda yakin ingin mengirim gaji?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </div>
-        </form>
+        </div>
+    </div>
+</form>
+
+<form action="{{ route('admin_generate_gaji')}}" method="post">
+    @csrf
+    <!-- Modal -->
+    <div class="modal fade" id="generateModal" tabindex="-1" aria-labelledby="generateModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="generateModalLabel">Generate Gaji</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="datepicker" name="date" class="form-control" placeholder="Select Year and Month">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Kirim
+        </button>
+        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#generateModal">
+            Generate
+        </button>
     </div>
     <div class="col-md-6">
         <div class="row mb-2 justify-content-end">
@@ -102,6 +134,21 @@ starter Page
 <script src="{{ URL::asset('build/plugins/metismenu/metisMenu.min.js') }}"></script>
 <script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>
 <script src="{{ URL::asset('build/js/main.js') }}"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/locales/bootstrap-datepicker.id.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#datepicker').datepicker({
+            format: "yyyy-mm",
+            startView: "months",
+            minViewMode: "months",
+            maxViewMode: "years",
+            autoclose: true
+        });
+    });
+</script>
 <script>
     $(document).ready(function() {
 
@@ -186,6 +233,7 @@ starter Page
             currentUrl = `${currentUrl[0]}?year=${$(this).val()}`;
             window.location.href = currentUrl;
         });
+
 
     });
 </script>

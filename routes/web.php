@@ -153,6 +153,7 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::match(['get', 'post'], '/salary', [GajiController::class, 'index'])->name('admin_gaji');
     Route::get('/ajax-get-bonus', [GajiController::class, 'ajax_get_bonus'])->name('admin_ajax_get_bonus');
     Route::post('/bonus', [GajiController::class, 'bonus'])->name('admin_bonus');
+    Route::post('/generate-gaji', [GajiController::class, 'generate'])->name('admin_generate_gaji');
     // scan page
     Route::match(['get', 'post'], '/scan', [ScanController::class, 'index'])->name('admin_scan');
     Route::post('/ajax-post-attendance', [ScanController::class, 'post_attendance'])->name('admin_ajax_post_attendance');

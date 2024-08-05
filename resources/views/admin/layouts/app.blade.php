@@ -15,6 +15,7 @@
             color: #a2a2a2;
         }
     </style>
+    @yield('css')
 </head>
 
 <body>
@@ -50,6 +51,11 @@
     <script>
         // format rupiah
         function formatRupiah(angka, prefix) {
+            // Jika input adalah string kosong, kembalikan 'Rp. 0' atau '0'
+            if (angka.trim() === '' && prefix) {
+                return prefix ? 'Rp. 0' : '0';
+            }
+
             var numberString = angka.replace(/[^,\d]/g, '').toString(),
                 split = numberString.split(','),
                 sisa = split[0].length % 3,

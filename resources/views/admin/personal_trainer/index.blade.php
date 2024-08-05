@@ -172,7 +172,6 @@ starter Page
 
         // fetch data
         function fetch_data(page, query) {
-            console.log(query);
             $.ajax({
                 url: `{{ route('admin_personal_trainer')}}?page=` + page + "&name=" + query,
                 success: function(data) {

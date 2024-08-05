@@ -20,7 +20,7 @@ class DashboardAdminController extends Controller
     function index(Request $request)
     {
 
-        return view('admin.test');
+        return view('admin.dashboard');
     }
 
     function ajax_dashboard_admin(Request $request)

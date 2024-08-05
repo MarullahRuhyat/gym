@@ -9,7 +9,7 @@ starter Page
         <form action="" method="post">
             @csrf
             <input type="hidden" name="bulan_gaji" id="bulan_gaji" value="{{$month}}">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Kirim
             </button>
             <!-- Modal -->
@@ -31,7 +31,19 @@ starter Page
     </div>
     <div class="col-md-6">
         <div class="row mb-2 justify-content-end">
-            <div class="col-md-6 mb-2 col-12 d-flex justify-content-end align-items-center">
+            <div class="col-md-3 mb-2 col-12 d-flex justify-content-end align-items-center">
+                <select class="form-control " aria-label="Default select example" id="year">
+                    @foreach($years as $row)
+                    @if($row->formatted_tahun_gaji == $year)
+                    <option value="{{$row->formatted_tahun_gaji}}" selected>{{$row->formatted_tahun_gaji}}</option>
+                    @else
+                    <option value="{{$row->formatted_tahun_gaji}}">{{$row->formatted_tahun_gaji}}</option>
+                    @endif
+                    @endforeach
+                </select>
+
+            </div>
+            <div class="col-md-3 mb-2 col-12 d-flex justify-content-end align-items-center">
                 <select class="form-control " aria-label="Default select example" id="month">
                     @foreach($months as $row)
                     @if($row->formatted_bulan_gaji == $month)
@@ -98,7 +110,6 @@ starter Page
             $.ajax({
                 url: `{{ route('admin_ajax_get_bonus')}}?gaji_id=` + id,
                 success: function(data) {
-                    console.log(data);
                     $('#gaji_id').val(id)
                     let html = ``
                     data.data.forEach(row => {
@@ -109,9 +120,9 @@ starter Page
                         </div>
                          <div class="mb-3 col-md-6">
                             <label for="amount_${row.id}" class="form-label">Amount</label>
-                            <input type="text" id="amount_${row.id}" name="amount_${row.id}" class="form-control" value="${row.amount}">
+                            <input type="text" id="amount_${row.id}" name="amount_${row.id}" class="form-control angka-rupiah" value="${formatRupiah(`${row.amount}`,false)}" required>
                         </div>
-                        <hr>
+                        <hr> 
                         `
                     });
                     $('#input_bonus').html(html);
@@ -127,7 +138,7 @@ starter Page
                         </div>
                          <div class="mb-3 col-md-6">
                             <label  class="form-label">Amount</label>
-                            <input type="text"  class="form-control" name="amounts[]" required>
+                            <input type="text"  class="form-control angka-rupiah" name="amounts[]" required>
                         </div>
                         <hr>
                         `
@@ -142,6 +153,7 @@ starter Page
                 url: `{{ route('admin_gaji')}}?page=` + page + "&name=" + query + "&month=" + month,
                 success: function(data) {
                     $('#data_gaji').html(data);
+                    updateRupiahElements();
                 }
             });
         }
@@ -168,6 +180,13 @@ starter Page
             let month = $('#month').val();
             fetch_data(page, searchQuery, month);
         });
+
+        $('#year').change(function() {
+            let currentUrl = window.location.href.split('?');
+            currentUrl = `${currentUrl[0]}?year=${$(this).val()}`;
+            window.location.href = currentUrl;
+        });
+
     });
 </script>
 @endpush

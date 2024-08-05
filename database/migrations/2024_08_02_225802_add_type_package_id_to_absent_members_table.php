@@ -9,9 +9,10 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
     public function up(): void
     {
-        Schema::table('gym_membership_packages', function (Blueprint $table) {
+        Schema::table('absent_members', function (Blueprint $table) {
             $table->foreignId('type_packages_id')->nullable()->constrained('type_packages');
         });
     }
@@ -21,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('gym_membership_packages', function (Blueprint $table) {
+        Schema::table('absent_members', function (Blueprint $table) {
             $table->dropForeign(['type_packages_id']);
             $table->dropColumn('type_packages_id');
         });

@@ -5,7 +5,7 @@ Starter Page
 @endsection
 
 @section('content')
-<h3><b> Jenis Latihan</b></h3>
+<h3><b> Tipe Paket</b></h3>
 <div class="row justify-content-start">
     <div class="col-md-2 mb-3 col-3">
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
@@ -16,18 +16,18 @@ Starter Page
         <table class="table table-bordered mb-0">
             <thead>
                 <tr>
-                    <th scope="col">Nama Latihan</th>
+                    <th scope="col">Nama Tipe Paket</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($jenis_latihan as $latihan)
+                @foreach ($type_package as $row)
                 <tr>
-                    <td>{{ $latihan->name }}</td>
+                    <td>{{ $row->name }}</td>
                     <td>
                         <!-- Contoh tombol aksi -->
-                        <button class="btn btn-sm btn-primary button_edit" data-bs-toggle="modal" data-bs-target="#modalEdit" data-id="{{$latihan->id}}" data-name="{{$latihan->name}}">Edit</button>
-                        <button class="btn btn-sm btn-danger button_delete" data-bs-toggle="modal" data-bs-target="#modalDelete" data-id="{{$latihan->id}}" data-name="{{$latihan->name}}">Delete</button>
+                        <button class="btn btn-sm btn-primary button_edit" data-bs-toggle="modal" data-bs-target="#modalEdit" data-id="{{$row->id}}" data-name="{{$row->name}}">Edit</button>
+                        <button class="btn btn-sm btn-danger button_delete" data-bs-toggle="modal" data-bs-target="#modalDelete" data-id="{{$row->id}}" data-name="{{$row->name}}">Delete</button>
                     </td>
                 </tr>
                 @endforeach
@@ -42,13 +42,13 @@ Starter Page
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Latihan</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Tipe Paket</h1>
             </div>
             <form id="membershipForm" method="POST" action="">
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Nama Latihan</label>
+                        <label for="name">Nama Tipe Paket</label>
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
                 </div>

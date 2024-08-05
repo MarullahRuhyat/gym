@@ -13,7 +13,7 @@ starter Page
 </div>
 <div class="row mb-2 justify-content-end">
     <div class="col-md-4 d-flex justify-content-end align-items-center">
-        <input type="text" class="form-control me-2" id="search_name" placeholder="Search Name">
+        <input type="text" class="form-control " id="search_name" placeholder="Search Name">
     </div>
 </div>
 

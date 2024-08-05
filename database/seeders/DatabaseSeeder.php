@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             HistoryMembersSeeder::class,
             AbsentMemberSeeder::class,
+            TypePackageSeeder::class,
         ]);
     }
 }

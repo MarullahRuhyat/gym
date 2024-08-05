@@ -13,6 +13,7 @@ if [ ! -L /app/public/storage ]; then
 fi
 
 php artisan key:generate --force 
+php artisan cache:clear
 php artisan config:clear
 php artisan config:cache
 php artisan route:clear

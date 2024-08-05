@@ -16,7 +16,7 @@ class AbsentMemberSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
-        
+
         for ($i = 0; $i < 10; $i++) {
             DB::table('absent_members')->insert([
                 'member_id' => $faker->numberBetween(1, 10), // Sesuaikan dengan range member_id yang ada di tabel users

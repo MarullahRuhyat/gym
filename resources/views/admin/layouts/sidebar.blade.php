@@ -76,6 +76,9 @@
                     <li>
                         <a href="{{ route('admin_membership_package')}}"><i class="material-icons-outlined">arrow_right</i>Membership Packages</a>
                     </li>
+                    <li>
+                        <a href="{{ route('admin_type_package')}}"><i class="material-icons-outlined">arrow_right</i>Tipe Paket</a>
+                    </li>
                 </ul>
             </li>
 

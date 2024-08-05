@@ -1,12 +1,12 @@
 @if($results->isNotEmpty())
 <div class="row">
-    @foreach ($results as $package)
+    @foreach ($results as $gaji)
     <div class="col-md-6">
         <div class="card rounded-4">
             <div class="card-header">
                 <div class="row">
                     <div class="col-10">
-                        <h3>{{ $package->name }}</h3>
+                        <h3>{{ $gaji->name }}</h3>
                     </div>
                     <div class="col-2 text-end">
                         <div class="test ">
@@ -15,8 +15,7 @@
                                 <span class="visually-hidden">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
-                                <a class="dropdown-item button_edit" href="javascript:;" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ $package->id }}" data-name="{{ $package->name }}" data-price="{{ $package->price }}" data-duration="{{ $package->duration_in_days }}" data-trainer="{{ $package->personal_trainer_quota }}" data-type="{{ $package->type_packages_id }}">Edit</a>
-                                <!-- <a class="dropdown-item button_delete" href="javascript:;" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $package->id }}" data-name="{{ $package->name }}">Delete</a> -->
+                                <a class="dropdown-item button_detail" href="javascript:;" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{$gaji->id}}">Detail Bonus</a>
                             </div>
                         </div>
                     </div>
@@ -26,37 +25,45 @@
                 <div class="d-flex flex-column gap-3 me-3">
                     <div class="d-flex align-items-center gap-3">
                         <div class="flex-grow-1">
-                            <h6 class="mb-0">Tipe Paket</h6>
+                            <h6 class="mb-0">Gaji</h6>
                         </div>
                         <div class="">
-                            <h5 class="mb-0">{{ $package->type_package_name }}</h5>
+                            <h5 class="mb-0">{{ $gaji->salary }}</h5>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-3">
                         <div class="flex-grow-1">
-                            <h6 class="mb-0">Price</h6>
+                            <h6 class="mb-0">Bonus</h6>
                         </div>
                         <div class="">
-                            <h5 class="mb-0">{{ $package->price }}</h5>
+                            <h5 class="mb-0">{{ $gaji->total_bonus }}</h5>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-3">
                         <div class="flex-grow-1">
-                            <h6 class="mb-0">Duration (Days)</h6>
+                            <h6 class="mb-0"><b> Total</b></h6>
                         </div>
                         <div class="">
-                            <h5 class="mb-0">{{ $package->duration_in_days }}</h5>
+                            @php
+                            $total = $gaji->salary + $gaji->total_bonus;
+                            @endphp
+                            <h5 class="mb-0"><b>{{ $total }}</b></h5>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-3">
                         <div class="flex-grow-1">
-                            <h6 class="mb-0">Personal Trainer</h6>
+                            <h6 class="mb-0">Status</h6>
                         </div>
                         <div class="">
-                            <h5 class="mb-0">{{ $package->personal_trainer_quota }}</h5>
+                            @if($gaji->status ==1)
+                            <h5 class="mb-0" style="color:red;">Belum Terkirim</h5>
+                            @else
+                            <h5 class="mb-0" style="color:green"> Terkirim</h5>
+                            @endif
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

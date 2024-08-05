@@ -2,18 +2,18 @@
 
 use App\Jobs\ProcessNotifMemberActive;
 use App\Jobs\ProcessNotifMemberExpired;
-use App\Jobs\ProcessSalary;
+use App\Jobs\ProcessPayroll;
 use App\Jobs\UpdateExpiredMembers;
 use App\Jobs\UpdateInactiveMembers;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 
-Artisan::command('process_salary', function () {
-    ProcessSalary::dispatch();
-    Log::info('process_salary scheduler', [
-        'process_salary scheduler'
+Artisan::command('process_payroll', function () {
+    ProcessPayroll::dispatch();
+    Log::info('process_payroll scheduler', [
+        'process_payroll scheduler'
     ]);
-})->purpose('process_salary')->monthlyOn(16, '12:59');
+})->purpose('process_payroll')->monthlyOn(3, '00:18');
 
 Artisan::command('process_notif_member_inactive', function () {
     ProcessNotifMemberActive::dispatch();

@@ -46,7 +46,6 @@ class MemberController extends Controller
         if ($request->ajax()) {
             return view('admin.member.data', compact('results', 'total_page'))->render();
         }
-        $users = User::where('role', 'member')->get();
         return view('admin.member.index', compact('results', 'total_page'));
     }
 

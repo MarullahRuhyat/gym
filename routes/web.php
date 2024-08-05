@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
 use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
 use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
+use App\Http\Controllers\Admin\TypePackageController;
 use App\Http\Controllers\Member\AuthController as MemberAuthController;
 use App\Http\Controllers\Member\ProfileController;
 use App\Http\Controllers\Member\PackageController;
@@ -95,9 +96,7 @@ Route::prefix('member')->group(function () {
                 Route::get('/payment-failed', [PaymentController::class, 'payment_failed'])->name('member.payment.failed');
                 Route::get('/payment-pending', [PaymentController::class, 'payment_pending'])->name('member.payment.pending');
                 Route::post('/check-payment-status', [PaymentController::class, 'check_payment_status'])->name('member.check_payment_status');
-
             });
-
         });
 
         Route::prefix('package')->group(function () {
@@ -159,8 +158,10 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
         Route::get('/', [AbsenController::class, 'index'])->name('admin_absen');
         Route::get('/search', [AbsenController::class, 'search'])->name('admin_search');
     });
-    // salary page belum anjing
-    Route::get('/salary', [GajiController::class, 'index'])->name('admin_gaji');
+    // salary page
+    Route::match(['get', 'post'], '/salary', [GajiController::class, 'index'])->name('admin_gaji');
+    Route::get('/ajax-get-bonus', [GajiController::class, 'ajax_get_bonus'])->name('admin_ajax_get_bonus');
+    Route::post('/bonus', [GajiController::class, 'bonus'])->name('admin_bonus');
     // scan page
     Route::match(['get', 'post'], '/scan', [ScanController::class, 'index'])->name('admin_scan');
     Route::post('/ajax-post-attendance', [ScanController::class, 'post_attendance'])->name('admin_ajax_post_attendance');
@@ -168,4 +169,6 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::match(['get', 'post'], '/membership-package', [JenisMemberController::class, 'index'])->name('admin_membership_package');
     // jenis latihan page
     Route::match(['get', 'post'], '/jenis-latihan', [JenisLatihanController::class, 'index'])->name('admin_jenis_latihan');
+    // type package page
+    Route::match(['get', 'post'], '/type-package', [TypePackageController::class, 'index'])->name('admin_type_package');
 });

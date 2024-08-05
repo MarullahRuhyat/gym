@@ -21,71 +21,7 @@
 
 <body>
 
-    <h1>Dynamic JSON Tree Viewer</h1>
-
-    <textarea id="json-input" placeholder='Masukkan data JSON di sini...'></textarea>
-    <button onclick="updateTree()">Update Tree</button>
-
-    <div id="tree"></div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"></script>
-    <script>
-        // Initialize jsTree with empty data
-        $('#tree').jstree({
-            'core': {
-                'data': []
-            }
-        });
-
-        // Function to convert JSON to jsTree format
-        function convertToJsTreeFormat(data) {
-            return data.map(item => {
-                const children = Object.entries(item).map(([key, value]) => {
-                    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-                        return {
-                            text: key,
-                            children: convertToJsTreeFormat([value])
-                        };
-                    } else {
-                        return {
-                            text: `${key}: ${value}`
-                        };
-                    }
-                });
-
-                return {
-                    text: item.nama,
-                    children: children
-                };
-            });
-        }
-
-        // Function to update the tree with JSON data from textarea
-        function updateTree() {
-            try {
-                // Get JSON data from textarea
-                const jsonData = JSON.parse(document.getElementById('json-input').value);
-
-                // Convert JSON data to jsTree format
-                const jsTreeData = convertToJsTreeFormat(jsonData);
-
-                // Update jsTree with new data
-                const treeInstance = $('#tree').jstree(true);
-                treeInstance.settings.core.data = jsTreeData;
-                treeInstance.refresh();
-
-                // Open all nodes after tree is refreshed
-                $('#tree').on('loaded.jstree', function() {
-                    $('#tree').jstree(true).open_all(); // Automatically open all nodes
-                });
-
-            } catch (e) {
-                alert('Invalid JSON data. Please check your input.');
-                console.error(e); // Print error to console for debugging
-            }
-        }
-    </script>
+    <iframe title="sales" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=da6b84d4-d9bc-4580-827e-8b5a2492df4e&autoAuth=true&ctid=20258bc7-726c-465a-a694-fb2207815411" frameborder="0" allowFullScreen="true"></iframe>
 
 </body>
 

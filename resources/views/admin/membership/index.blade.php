@@ -11,7 +11,7 @@ starter Page
 </div>
 <div class="row mb-2 justify-content-end">
     <div class="col-md-4 d-flex justify-content-end align-items-center">
-        <input type="text" class="form-control me-2" id="search_name" placeholder="Search Name">
+        <input type="text" class="form-control " id="search_name" placeholder="Search Name">
     </div>
 </div>
 
@@ -45,6 +45,16 @@ starter Page
                         <label for="personal_trainer_quota">Personal Trainer</label>
                         <input type="number" class="form-control" id="personal_trainer_quota" name="personal_trainer_quota" value="0" required>
                     </div>
+                    <div class="form-group">
+                        <label for="personal_trainer_quota">Personal Trainer</label>
+                        <select class="form-select" aria-label="Default select example" required name="type_packages_id">
+                            <option value="">-- pilih tipe paket --</option>
+                            @foreach($type_packages as $row)
+                            <option value="{{$row->id}}">{{$row->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -82,6 +92,15 @@ starter Page
                     <div class="form-group">
                         <label for="personal_trainer_quota_edit">Personal Trainer</label>
                         <input type="number" class="form-control" id="personal_trainer_quota_edit" name="personal_trainer_quota" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="personal_trainer_quota">Personal Trainer</label>
+                        <select class="form-select" aria-label="Default select example" required name="type_packages_id" id="type_edit">
+                            <option value="">-- pilih tipe paket --</option>
+                            @foreach($type_packages as $row)
+                            <option value="{{$row->id}}">{{$row->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -128,13 +147,14 @@ starter Page
             let price = $(this).data('price');
             let duration = $(this).data('duration');
             let trainer = $(this).data('trainer');
-            console.log(trainer);
+            let type = $(this).data('type');
 
             $('#name_edit').val(name);
             $('#price_edit').val(price);
             $('#duration_in_days_edit').val(duration);
             $('#personal_trainer_quota_edit').val(trainer);
             $('#id_edit').val(id);
+            $('#type_edit').val(type);
         });
         $('.button_delete').click(function() {
             let id = $(this).data('id');

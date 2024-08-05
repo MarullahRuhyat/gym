@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\ProcessSalary;
+use App\Models\AbsentMember;
+use App\Models\GajiPersonalTrainer;
+use App\Models\PersonalTrainingBonus;
 use App\Models\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
@@ -16,6 +19,7 @@ class DashboardAdminController extends Controller
     //
     function index(Request $request)
     {
+
         return view('admin.test');
     }
 

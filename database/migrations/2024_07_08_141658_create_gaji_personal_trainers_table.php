@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('gaji_personal_trainers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('personal_trainer_id')->constrained('users');
-            $table->integer('jumlah_pertemuan');
-            $table->integer('gaji_per_pertemuan');
+            $table->integer('salary');
             $table->date('bulan_gaji');
+            $table->integer('status');
             $table->timestamps();
         });
     }

@@ -13,5 +13,11 @@ class GymMembershipPackage extends Model
         'price',
         'duration_in_days',
         'personal_trainer_quota',
+        'type',
     ];
+
+    public function typePackage()
+    {
+        return $this->belongsTo(TypePackage::class, 'type_packages_id');
+    }
 }

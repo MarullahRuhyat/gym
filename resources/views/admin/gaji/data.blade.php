@@ -47,7 +47,7 @@
                             @php
                             $total = $gaji->salary + $gaji->total_bonus;
                             @endphp
-                            <h5 class="mb-0 rupiah"><b>{{ $total }}</b></h5>
+                            <h5 class="mb-0 "><b class="rupiah">{{ $total }}</b></h5>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-3">

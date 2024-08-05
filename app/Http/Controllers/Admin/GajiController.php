@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\ProcessPayroll;
 use App\Models\GajiPersonalTrainer;
 use App\Models\PersonalTrainingBonus;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -137,6 +139,27 @@ class GajiController extends Controller
             return redirect()->route('admin_gaji')->with('success', 'Data berhasil disimpan');
         } catch (\Throwable $th) {
             return redirect()->route('admin_gaji')->with('error', 'Data gagal disimpan!');
+        }
+    }
+
+    function generate(Request $request)
+    {
+        // Ambil tanggal dari request
+        $date = $request->input('date'); // Pastikan ini sesuai dengan nama field dalam request
+
+        // Format tanggal sekarang
+        $date_now = Carbon::today()->format('Y-m-d');
+        $endDate = "{$date}-24";
+        $start_date = Carbon::createFromFormat('Y-m-d', $endDate)->subMonth()->addDays()->format('Y-m-d');
+        // Membandingkan tanggal
+        if (Carbon::parse($endDate)->gt($date_now)) {
+            return redirect()->route('admin_gaji')->with('error', "Maaf untuk generate gaji bulan {$date} belum dapat dilakukan");
+        } elseif (Carbon::parse($endDate)->lt($date_now)) {
+            ProcessPayroll::dispatch($start_date, $endDate);
+            return redirect()->route('admin_gaji')->with('success', "Generate gaji sedang di lakukan mohon tunggu beberapa saat lalu refresh web anda.");
+        } else {
+            ProcessPayroll::dispatch($start_date, $endDate);
+            return redirect()->route('admin_gaji')->with('success', "Generate gaji sedang di lakukan mohon tunggu beberapa saat lalu refresh web anda.");
         }
     }
 }

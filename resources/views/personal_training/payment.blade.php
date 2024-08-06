@@ -6,7 +6,7 @@ Gaji Trainer
 <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
 @endpush
 @section('content')
-<h6 class="mb-0 text-uppercase">Gaji (nanti Bulan di sini)</h6>
+<h6 class="mb-0 text-uppercase">Gaji {{$gaji_pokok_tanggal}}</h6>
 <div class="d-flex flex-column flex-md-row justify-content-end align-items-center mb-2 mt-3">
     <form action="" method="get" class="form-inline d-flex flex-column flex-md-row w-100 mb-2 mb-md-0 ms-md-1">
         <input type="text" class="form-control date-format" placeholder="Masukkan Tanggal">
@@ -26,124 +26,109 @@ Gaji Trainer
             </div>
         </div>
     </div>
-    <div class="card-header py-2">
-        <div class="row row-cols-1 row-cols-lg-3">
-            <div class="col">
-                <div class="">
-                    <small>from</small>
-                    <address class="m-t-5 m-b-5">
-                        <strong class="text-inverse">Flozor's Gym</strong><br> 
-                        Jl. Puspowarno Tengah No.6<br>
-                        Kec. Semarang Barat, Kota Semarang
-                        <br>
-                        Jawa Tengah,Salamanmloyo, 50149<br>
-                        Phone: (+62) 8170706999<br>
-                    </address>
+    <div id="invoice-content">
+        <div class="card-header py-2">
+            <div class="row row-cols-1 row-cols-lg-3">
+                <div class="col">
+                    <div class="">
+                        <small>from</small>
+                        <address class="m-t-5 m-b-5">
+                            <strong class="text-inverse">Flozor's Gym</strong><br> 
+                            Jl. Puspowarno Tengah No.6<br>
+                            Kec. Semarang Barat, Kota Semarang
+                            <br>
+                            Jawa Tengah,Salamanmloyo, 50149<br>
+                            Phone: (+62) 8170706999<br>
+                        </address>
+                    </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="">
-                    <small>to</small>
-                    <address class="m-t-5 m-b-5">
-                        <strong class="text-inverse">Name PTnya</strong><br>
-                    </address>
+                <div class="col">
+                    <div class="">
+                        <small>to</small>
+                        <address class="m-t-5 m-b-5">
+                            <strong class="text-inverse">
+                                {{ $user->name }}    
+                            </strong><br>
+                        </address>
+                    </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="">
-                    <small>Invoice / July period</small>
-                    <div class=""><b>August 3,2012</b></div>
-                    <div class="invoice-detail">
-                        #0000123DSS<br>
-                        Services Product
+                <div class="col">
+                    <div class="">
+                        <small>Invoice period</small>
+                        <div class=""><b> {{$gaji_pokok_tanggal}}</b></div>
+                        <div class="invoice-detail">
+                            Invoice #<br>
+                            Gaji Trainer
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-invoice">
-                <thead>
-                    <tr>
-                        <th>Gaji Description</th>
-                        <th class="text-center" style="width: 10%;">RATE</th>
-                        <th class="text-center" style="width: 10%;">HOURS</th>
-                        <th class="text-right" style="width: 10%;">LINE TOTAL</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <span class="text-inverse">Website design &amp; development</span><br>
-                            <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis
-                                arcu.</small>
-                        </td>
-                        <td class="text-center">Rp.50.00</td>
-                        <td class="text-center">50</td>
-                        <td class="text-right">Rp.2,500.00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="text-inverse">Branding</span><br>
-                            <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis
-                                arcu.</small>
-                        </td>
-                        <td class="text-center">Rp.50.00</td>
-                        <td class="text-center">40</td>
-                        <td class="text-right">Rp.2,000.00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="text-inverse">Redesign Service</span><br>
-                            <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis
-                                arcu.</small>
-                        </td>
-                        <td class="text-center">Rp.50.00</td>
-                        <td class="text-center">50</td>
-                        <td class="text-right">Rp.2,500.00</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-invoice">
+                    <thead>
+                        <tr>
+                            <th>Gaji Description</th>
+                            <th class="text-center" style="width: 10%;">Jumlah</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="text-inverse">Gaji Pokok</span><br>
+                            </td>
+                            <td class="text-center">
+                                Rp.{{ number_format($gaji_pokok_salary, 0, ',', '.') }}
+                            </td>
+                        </tr>
+                        @foreach ($bonus as $bonusItem)
+                        <tr>
+                            <td>
+                                <span class="text-inverse">{{ $bonusItem->description }}</span><br>
+                            </td>
+                            <td class="text-center">
+                                Rp.{{ number_format($bonusItem->amount, 0, ',', '.') }}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+    
+            <div class="row bg-light align-items-center m-0">
+                <div class="col bg-primary col-auto p-4" style="margin-left:auto;">
+                    <p class="mb-0 text-white">TOTAL</p>
+                    <h4 class="mb-0 text-white">
+                        Rp.{{ number_format($total, 0, ',', '.') }}
+                    </h4>
+                </div>
+            </div><!--end row-->
+            
+    
+            <hr>
         </div>
-
-        <div class="row bg-light align-items-center m-0">
-            <div class="col col-auto p-4">
-                <p class="mb-0">SUBTOTAL</p>
-                <h4 class="mb-0">Rp.4,500.00</h4>
-            </div>
-            <div class="col col-auto p-4">
-                <i class="bi bi-plus-lg text-muted"></i>
-            </div>
-            <div class="col col-auto me-auto p-4">
-                <p class="mb-0">PAYPAL FEE (5.4%)</p>
-                <h4 class="mb-0">Rp.108.00</h4>
-            </div>
-            <div class="col bg-primary col-auto p-4">
-                <p class="mb-0 text-white">TOTAL</p>
-                <h4 class="mb-0 text-white">Rp.4508.00</h4>
-            </div>
-        </div><!--end row-->
-
-        <hr>
+    
+        <div class="card-footer py-3 bg-transparent">
+            <p class="text-center mb-2">
+                THANK YOU FOR YOUR SERVICE
+            </p>
+            <p class="text-center d-flex align-items-center gap-3 justify-content-center mb-0">
+                <span class=""><i class="bi bi-globe"></i> www.domain.com</span>
+                <span class=""><i class="bi bi-telephone-fill"></i> (+62) 8170706999</span>
+                <span class=""><i class="bi bi-envelope-fill"></i> flozorsgym@gmail.com</span>
+            </p>
+        </div>
     </div>
-
-    <div class="card-footer py-3 bg-transparent">
-        <p class="text-center mb-2">
-            THANK YOU FOR YOUR SERVICE
-        </p>
-        <p class="text-center d-flex align-items-center gap-3 justify-content-center mb-0">
-            <span class=""><i class="bi bi-globe"></i> www.domain.com</span>
-            <span class=""><i class="bi bi-telephone-fill"></i> (+62) 8170706999</span>
-            <span class=""><i class="bi bi-envelope-fill"></i> flozorsgym@gmail.com</span>
-        </p>
-    </div>
+    
 </div>
 
 
 @endsection
 @push('script')
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
 <script>
     $(".date-format").flatpickr({
         altInput: true,
@@ -151,5 +136,32 @@ Gaji Trainer
         dateFormat: "Y-m-d",
     });
 
+// Fungsi untuk mengekspor PDF
+function exportToPDF() {
+    // Pilih elemen HTML yang ingin Anda ekspor
+    var element = document.getElementById('invoice-content'); // Sesuaikan dengan ID elemen Anda
+    console.log(element);
+    if (element) {
+        console.log(element.innerHTML); // Memastikan elemen tidak kosong
+
+        var opt = {
+            margin:       0.5,
+            filename:     'invoice.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true },
+            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+
+        // Ekspor elemen ke PDF
+        html2pdf().from(element).set(opt).save();
+    } else {
+        console.error("Elemen yang ingin diekspor tidak ditemukan atau kosong.");
+    }
+}
+
+document.querySelector('.btn-danger').addEventListener('click', exportToPDF);
+
+
 </script>
+
 @endpush

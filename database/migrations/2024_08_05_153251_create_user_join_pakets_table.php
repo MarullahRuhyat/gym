@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gaji_personal_trainers', function (Blueprint $table) {
+        Schema::create('user_join_pakets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('personal_trainer_id')->constrained('users');
-            $table->integer('salary');
-            $table->date('bulan_gaji');
-            $table->integer('status');
+            $table->foreignId('user_id')->constrained('users'); 
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gaji_personal_trainers');
+        Schema::dropIfExists('user_join_pakets');
     }
 };

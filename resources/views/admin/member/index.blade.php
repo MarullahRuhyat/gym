@@ -8,7 +8,7 @@ starter Page
 <h3><b>Member's</b></h3>
 <div class="row mb-2 justify-content-end">
     <div class="col-md-4 d-flex justify-content-end align-items-center">
-        <input type="text" class="form-control me-2" id="search_name" placeholder="Search Name">
+        <input type="text" class="form-control " id="search_name" placeholder="Search Name">
     </div>
 </div>
 
@@ -75,11 +75,9 @@ starter Page
 
         // fetch data
         function fetch_data(page, query) {
-            console.log(query);
             $.ajax({
                 url: `{{ route('admin_member')}}?page=` + page + "&name=" + query,
                 success: function(data) {
-                    console.log(data);
                     $('#data_member').html(data);
                 }
             });

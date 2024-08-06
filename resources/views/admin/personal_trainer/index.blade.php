@@ -6,16 +6,24 @@ starter Page
 
 @section('content')
 <h3><b>Personal Trainer</b></h3>
-<div class="row justify-content-start">
-    <div class="col-md-2 mb-3 col-3">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Add</button>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="row justify-content-start">
+            <div class="col-md-2 mb-2 col-3">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row mb-2 justify-content-end">
+            <div class="col-md-8 d-flex justify-content-end align-items-center">
+                <input type="text" class="form-control " id="search_name" placeholder="Search Name">
+            </div>
+        </div>
     </div>
 </div>
-<div class="row mb-2 justify-content-end">
-    <div class="col-md-4 d-flex justify-content-end align-items-center">
-        <input type="text" class="form-control me-2" id="search_name" placeholder="Search Name">
-    </div>
-</div>
+
 
 <div id="data_pt">
     @include('admin.personal_trainer.data')
@@ -44,8 +52,8 @@ starter Page
                         <input type="text" class="form-control" id="phone_number" name="phone_number" required>
                     </div>
                     <div class="mb-3">
-                        <label for="salary" class="form-label">Salary</label>
-                        <input type="number" class="form-control" id="salary" name="salary_pt" required>
+                        <label for="salary" class="form-label ">Salary</label>
+                        <input type="text" class="form-control angka-rupiah" id="salary" name="salary_pt" required>
                     </div>
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
@@ -88,7 +96,7 @@ starter Page
                     </div>
                     <div class="mb-3">
                         <label for="salary_edit" class="form-label">Salary</label>
-                        <input type="number" class="form-control" id="salary_edit" name="salary_pt" required>
+                        <input type="text" class="form-control angka-rupiah" id="salary_edit" name="salary_pt" required>
                     </div>
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
@@ -145,6 +153,8 @@ starter Page
             let phone = $(this).data('phone');
             let status = $(this).data('status');
             let salary = $(this).data('salary');
+            salary = formatRupiah(`${salary}`, false)
+
             $('#name_edit').val(name);
             $('#phone_edit').val(phone);
             $('#id_edit').val(id);
@@ -162,12 +172,11 @@ starter Page
 
         // fetch data
         function fetch_data(page, query) {
-            console.log(query);
             $.ajax({
                 url: `{{ route('admin_personal_trainer')}}?page=` + page + "&name=" + query,
                 success: function(data) {
-                    console.log(data);
                     $('#data_pt').html(data);
+                    updateRupiahElements();
                 }
             });
         }

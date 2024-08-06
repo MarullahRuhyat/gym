@@ -1,3 +1,4 @@
+@if($results->isNotEmpty())
 <div class="row">
     @foreach ($results as $user)
     <div class="col-md-6">
@@ -35,7 +36,7 @@
                             <h6 class="mb-0">Salary</h6>
                         </div>
                         <div class="">
-                            <h5 class="mb-0">{{ $user->salary_pt }}</h5>
+                            <h5 class="mb-0 rupiah">{{ $user->salary_pt }}</h5>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-3">
@@ -103,3 +104,8 @@
         </ul>
     </nav>
 </div>
+@else
+<div class="d-flex justify-content-center">
+    Tidak ada data.
+</div>
+@endif

@@ -10,8 +10,14 @@ class PackageController extends Controller
 {
     public function package()
     {
-        $package = DB::table('gym_membership_packages')->get();
-        return view('member.membership.select-package', compact('package'));
+        $packages = DB::table('gym_membership_packages')
+            ->leftJoin('type_packages', 'gym_membership_packages.type', '=', 'type_packages.id')
+            ->select('gym_membership_packages.*', 'type_packages.name as type_name')
+            ->get();
+
+        $groupedPackages = $packages->groupBy('type_name');
+
+        return view('member.membership.select-package', compact('groupedPackages'));
     }
 
     public function subscribed_package()
@@ -26,11 +32,7 @@ class PackageController extends Controller
             ->leftjoin('gym_membership_packages', 'payments.gym_membership_packages', '=', 'gym_membership_packages.id')
             ->leftjoin('memberships', 'payments.membership_id', '=', 'memberships.id')
             ->where('payments.user_id', $user->id)
-<<<<<<< HEAD
-            ->orderBy('payments.created_at', 'desc')
-=======
             ->orderBy('payments.id', 'desc')
->>>>>>> 3b0f702 (chore: Order membership payments by ID in subscribed package view)
             ->get();
 
         return view('member.membership.subscribed-package', compact('packages_membership_payments'));

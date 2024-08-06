@@ -18,7 +18,9 @@ return new class extends Migration
             $table->integer('duration_in_days');
             $table->integer('personal_trainer_quota')->default(0);
             $table->string('description')->nullable();
-            $table->enum('type', ['harian', 'mandiri', 'pt']);
+            // $table->foreignId('type_pakages_id')->constrained('type_packages');
+            // $table->enum('type', ['harian', 'mandiri', 'pt']);
+            $table->integer('jumlah_member')->nullable();
             $table->timestamps();
         });
     }

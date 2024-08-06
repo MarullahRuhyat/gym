@@ -10,20 +10,20 @@ use App\Http\Controllers\Admin\GajiController;
 use App\Http\Controllers\Admin\ScanController;
 use App\Http\Controllers\Admin\AbsenController;
 use App\Http\Controllers\Admin\MemberController;
-use App\Http\Controllers\Member\PackageController;
-use App\Http\Controllers\Member\PaymentController;
-use App\Http\Controllers\Member\ProfileController;
 use App\Http\Controllers\Admin\JenisMemberController;
-use App\Http\Controllers\Admin\TypePackageController;
-use App\Http\Controllers\Member\AttendanceController;
 use App\Http\Controllers\Admin\JenisLatihanController;
 use App\Http\Controllers\Admin\DashboardAdminController;
-use App\Http\Controllers\PersonalTraining\ProfilePersonalTraining;
 use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
 use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
-use App\Http\Controllers\Member\AuthController as MemberAuthController;
-use App\Http\Controllers\PersonalTraining\GajiPersonalTrainerController;
 use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
+use App\Http\Controllers\Admin\TypePackageController;
+use App\Http\Controllers\Member\AuthController as MemberAuthController;
+use App\Http\Controllers\Member\ProfileController;
+use App\Http\Controllers\Member\PackageController;
+use App\Http\Controllers\Member\PaymentController;
+use App\Http\Controllers\Member\AttendanceController;
+use App\Http\Controllers\PersonalTraining\ProfilePersonalTraining;
+use App\Http\Controllers\PersonalTraining\GajiPersonalTrainerController;
 
 Route::get('test', fn () => phpinfo());
 Route::get('/', function () {

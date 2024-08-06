@@ -19,6 +19,9 @@
 <!-- data-tables  -->
 <link href="{{ URL::asset('build/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
 
+<!-- icons  -->
+<link rel="stylesheet" href="{{ URL::asset('build/css/extra-icons.css') }}">
+
 @stack('css')
 
 <!--main css-->
@@ -29,3 +32,4 @@
 <link href="{{ URL::asset('build/css/semi-dark.css') }}" rel="stylesheet">
 <link href="{{ URL::asset('build/css/bordered-theme.css') }}" rel="stylesheet">
 <link href="{{ URL::asset('build/css/responsive.css') }}" rel="stylesheet">
+

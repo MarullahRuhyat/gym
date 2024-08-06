@@ -56,15 +56,24 @@ Route::prefix('auth')->group(function () {
 
 // member
 Route::prefix('member')->group(function () {
-    Route::get('/register', [MemberAuthController::class, 'register'])->name('member.register');
-    Route::post('/register/process', [MemberAuthController::class, 'store1'])->name('member.register.process');
+    Route::get('/register', [MemberAuthController::class, 'register'])->name('member.register_select');
+    Route::get('/register-form', [MemberAuthController::class, 'register_form'])->name('member.register-form');
+    Route::post('/register-form', [MemberAuthController::class, 'register_form_process'])->name('member.register-form.process');
+    Route::get('/register-multi-user', [MemberAuthController::class, 'register_multi_user_get_package'])->name('member.register-get-package');
+    Route::post('/get-package-detail', [MemberAuthController::class, 'get_package_detail'])->name('member.get-package-detail');
+    // Route::post('/register/process', [MemberAuthController::class, 'store1'])->name('member.register.process');
     Route::post('/register-submit', [MemberAuthController::class, 'register_submit'])->name('member.register.submit');
+    // Route::post('/save-forms', [MemberController::class, 'store']);
 
     Route::get('/send-otp', [MemberAuthController::class, 'send_otp'])->name('member.send-otp');
     Route::post('/get-otp', [MemberAuthController::class, 'get_otp'])->name('member.get-otp');
     Route::get('/verify-otp/{phone_number}', [MemberAuthController::class, 'verify_otp'])->name('member.verify-otp');
     Route::post('/login', [MemberAuthController::class, 'login'])->name('member.login');
     Route::post('/logout', [MemberAuthController::class, 'logout'])->name('member.logout')->middleware(Member::class);
+
+
+    Route::get('/package', [PackageController::class, 'package'])->name('member.package');
+    Route::post('/package/select-package', [PackageController::class, 'select_package'])->name('member.select.package');
 
     Route::middleware(Member::class)->group(function () {
         Route::get('/dashboard', [ProfileController::class, 'dashboard'])->name('member.dashboard');
@@ -92,8 +101,8 @@ Route::prefix('member')->group(function () {
         });
 
         Route::prefix('package')->group(function () {
-            Route::get('/', [PackageController::class, 'package'])->name('member.package');
-            Route::post('/select-package', [PackageController::class, 'select_package'])->name('member.select.package');
+            // Route::get('/', [PackageController::class, 'package'])->name('member.package');
+            // Route::post('/select-package', [PackageController::class, 'select_package'])->name('member.select.package');
             Route::get('/selected-package-detail/{id}', [PackageController::class, 'selected_package_detail'])->name('member.selected-package-detail');
             Route::get('/subscribed-package', [PackageController::class, 'subscribed_package'])->name('member.subscribed-package');
         });

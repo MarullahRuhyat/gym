@@ -49,4 +49,16 @@ class MemberController extends Controller
         $users = User::where('role', 'member')->get();
         return view('admin.member.index', compact('results', 'total_page'));
     }
+
+    public function store(Request $request)
+    {
+        // response [{}, {}];
+        // save all data inside the object request
+
+        foreach ($request->all() as $data) {
+            $user = User::create($data);
+        }
+
+        return response()->json(['success' => true]);
+    }
 }

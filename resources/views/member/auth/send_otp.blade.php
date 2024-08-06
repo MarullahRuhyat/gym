@@ -4,6 +4,20 @@
 @endsection
 @section('content')
     <!--authentication-->
+    <!-- add message from controller success register  -->
+    @if (session('success'))
+        <div class="alert alert-success border-0 bg-grd-success alert-dismissible fade show">
+            <div class="d-flex align-items-center">
+                <div class="font-35 text-white">
+                    <span class="material-icons-outlined fs-2">done</span>
+                </div>
+                <div class="ms-3">
+                    <h6 class="mb-0 text-white">{{ session('success') }}</h6>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 
     <div class="mx-3 mx-lg-0">
         <div class="alert"></div>

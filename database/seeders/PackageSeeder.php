@@ -23,6 +23,7 @@ class PackageSeeder extends Seeder
                 'personal_trainer_quota' => $faker->numberBetween(0, 50),
                 'description' => $faker->sentence,
                 // 'type' => $faker->randomElement($types),
+                'jumlah_member' => $faker->numberBetween(1, 10),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

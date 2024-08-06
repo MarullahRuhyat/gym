@@ -100,15 +100,38 @@ class AuthController extends Controller
         }
     }
 
-    // register
-
+    // only register - single user
     public function register()
     {
         $package = DB::table('gym_membership_packages')->get();
-        return view('member.auth.register', compact('package'));
+        return view('member.auth.register_or_select_package', compact('package'));
     }
 
-    public function store1(Request $request)
+    public function register_form()
+    {
+        return view('member.auth.register-form');
+    }
+
+    public function register_form_process(Request $request)
+    {
+        $save = User::create($request->except('password_confirmation'));
+        return redirect()->route('member.send-otp')->with('success', 'Register success.');
+
+    }
+
+    // register multiple user
+    public function register_multi_user_get_package()
+    {
+        $packages = DB::table('gym_membership_packages')
+        ->leftJoin('type_packages', 'gym_membership_packages.type', '=', 'type_packages.id')
+        ->select('gym_membership_packages.*', 'type_packages.name as type_name')
+        ->get();
+
+        $groupedPackages = $packages->groupBy('type_name');
+        return view('member.auth.register_multi_user', compact('groupedPackages'));
+    }
+
+    public function get_package_detail(Request $request)
     {
         $package_id = $request->package_id;
         $package = DB::table('gym_membership_packages')->where('id', $package_id)->get();
@@ -124,48 +147,109 @@ class AuthController extends Controller
 
     public function register_submit(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'min:3', 'max:255'],
-            // 'email' => ['required', 'email', 'unique:users,email'],
-            'phone_number' => ['required', 'string', 'min:10', 'unique:users,phone_number'],
-            'address' => ['required', 'string', 'min:3', 'max:255'],
-            'start_date' => ['required', 'date'],
-            'password' => ['required', 'string', 'min:8', 'max:255'],
-            'password_confirmation' => ['required', 'same:password'],
-        ]);
-
-        if ($validator->fails()) {
-            $status = false;
-            $message = $validator->errors()->all();
-        } else {
-            $duration = DB::table('gym_membership_packages')->where('id', $request->package_id)->get('duration_in_days');
-            $end_date = date('Y-m-d', strtotime($request->start_date . ' + ' . $duration . ' days'));
-            $user = User::create($request->all());
-            $user_membership_packages = DB::table('memberships')->insert([
-                'user_id' => $user->id,
-                'gym_membership_packages' => $request->package_id,
-                'start_date' => $request->start_date,
-                'end_date' => $end_date,
-                'is_active' => false,
-            ]);
-            $status = true;
-            $message = 'Register success.';
-        }
-
-        $price = DB::table('gym_membership_packages')->where('id', $request->package_id)->pluck('price')->first();
-
-        $data = [
-            'status' => $status,
-            'message' => $message,
-            'data' => [
-                'user' => $user ?? null,
-                'gym_membership_packages_id' => $request->package_id ?? null,
-                'price' => $price ?? null,
-            ]
-        ];
-
-        return response()->json($data, 200);
+        
     }
+
+    // public function register_submit(Request $request)
+    // {
+    //     // dd($request->all());
+    //     $validator = Validator::make($request->all(), [
+    //         '*.name' => ['required', 'string', 'min:3', 'max:255'],
+    //         '*.phone_number' => ['required', 'string', 'min:10', 'unique:users,phone_number'],
+    //         '*.address' => ['required', 'string', 'min:3', 'max:255'],
+    //         '*.start_date' => ['required', 'date'],
+    //         '*.password' => ['required', 'string', 'min:8', 'max:255'],
+    //     ]);
+
+
+    //     if ($validator->fails()) {
+    //         $status = false;
+    //         $message = $validator->errors()->all();
+    //     } else {
+    //         foreach ($request->all() as $data) {
+    //             $user = User::create($data);
+    //             // get all id that already created with format like this 1,3,5 etc
+    //         }
+
+
+
+
+
+
+
+    //         $duration = DB::table('gym_membership_packages')->where('id', $request->package_id)->get('duration_in_days');
+    //         $end_date = date('Y-m-d', strtotime($request->start_date . ' + ' . $duration . ' days'));
+    //         $user = User::create($request->all());
+    //         $user_membership_packages = DB::table('memberships')->insert([
+    //             'user_id' => $user->id,
+    //             'gym_membership_packages' => $request->package_id,
+    //             'start_date' => $request->start_date,
+    //             'end_date' => $end_date,
+    //             'is_active' => false,
+    //         ]);
+    //         $status = true;
+    //         $message = 'Register success.';
+    //     }
+
+    //     $price = DB::table('gym_membership_packages')->where('id', $request->package_id)->pluck('price')->first();
+
+    //     $data = [
+    //         'status' => $status,
+    //         'message' => $message,
+    //         'data' => [
+    //             'user' => $user ?? null,
+    //             'gym_membership_packages_id' => $request->package_id ?? null,
+    //             'price' => $price ?? null,
+    //         ]
+    //     ];
+
+    //     return response()->json($data, 200);
+    // }
+
+    // public function register_submit_backup(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'name' => ['required', 'string', 'min:3', 'max:255'],
+    //         // 'email' => ['required', 'email', 'unique:users,email'],
+    //         'phone_number' => ['required', 'string', 'min:10', 'unique:users,phone_number'],
+    //         'address' => ['required', 'string', 'min:3', 'max:255'],
+    //         'start_date' => ['required', 'date'],
+    //         'password' => ['required', 'string', 'min:8', 'max:255'],
+    //         'password_confirmation' => ['required', 'same:password'],
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         $status = false;
+    //         $message = $validator->errors()->all();
+    //     } else {
+    //         $duration = DB::table('gym_membership_packages')->where('id', $request->package_id)->get('duration_in_days');
+    //         $end_date = date('Y-m-d', strtotime($request->start_date . ' + ' . $duration . ' days'));
+    //         $user = User::create($request->all());
+    //         $user_membership_packages = DB::table('memberships')->insert([
+    //             'user_id' => $user->id,
+    //             'gym_membership_packages' => $request->package_id,
+    //             'start_date' => $request->start_date,
+    //             'end_date' => $end_date,
+    //             'is_active' => false,
+    //         ]);
+    //         $status = true;
+    //         $message = 'Register success.';
+    //     }
+
+    //     $price = DB::table('gym_membership_packages')->where('id', $request->package_id)->pluck('price')->first();
+
+    //     $data = [
+    //         'status' => $status,
+    //         'message' => $message,
+    //         'data' => [
+    //             'user' => $user ?? null,
+    //             'gym_membership_packages_id' => $request->package_id ?? null,
+    //             'price' => $price ?? null,
+    //         ]
+    //     ];
+
+    //     return response()->json($data, 200);
+    // }
 
     // end register
 

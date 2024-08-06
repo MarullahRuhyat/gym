@@ -71,7 +71,8 @@ class GajiController extends Controller
             ->leftJoin('users as u', 'gaji_personal_trainers.personal_trainer_id', '=', 'u.id')
             ->leftJoin('personal_training_bonuses as b', 'gaji_personal_trainers.id', '=', 'b.gaji_personal_trainers_id')
             ->where(DB::raw('DATE_FORMAT(gaji_personal_trainers.bulan_gaji, "%Y-%m")'), $month)
-            ->groupBy('gaji_personal_trainers.id', 'u.name');
+            ->groupBy('gaji_personal_trainers.id', 'u.name', 'gaji_personal_trainers.salary', 'gaji_personal_trainers.status');
+        
         if ($name != '') {
             $gaji->where('u.name', 'LIKE', '%' . $name . '%');
         }

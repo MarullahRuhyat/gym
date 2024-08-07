@@ -72,7 +72,7 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="{{ route('admin_jenis_latihan')}}"><i class="material-icons-outlined">exercise</i>Jenis Latihan</a>
+                        <a href="{{ route('admin_jenis_latihan')}}"><i class="material-icons-outlined">directions_run</i>Jenis Latihan</a>
                     </li>
                     <li>
                         <a href="{{ route('admin_membership_package')}}"><i class="material-icons-outlined">card_membership</i>Membership Packages</a>

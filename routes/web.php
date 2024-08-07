@@ -64,7 +64,8 @@ Route::prefix('member')->group(function () {
     Route::get('/register-multi-user', [MemberAuthController::class, 'register_multi_user_get_package'])->name('member.register-get-package');
     Route::post('/get-package-detail', [MemberAuthController::class, 'get_package_detail'])->name('member.get-package-detail');
     // Route::post('/register/process', [MemberAuthController::class, 'store1'])->name('member.register.process');
-    Route::post('/register-submit', [MemberAuthController::class, 'register_submit'])->name('member.register.submit');
+    Route::post('/register/check-member-terkait', [MemberAuthController::class, 'check_member_terkait'])->name('member.check-member-terkait');
+    // Route::post('/register-multi-user-submit', [MemberAuthController::class, 'register__multi_user_submit'])->name('member.register-multi-user.submit');
     // Route::post('/save-forms', [MemberController::class, 'store']);
 
     Route::get('/send-otp', [MemberAuthController::class, 'send_otp'])->name('member.send-otp');
@@ -76,6 +77,7 @@ Route::prefix('member')->group(function () {
 
     Route::get('/package', [PackageController::class, 'package'])->name('member.package');
     Route::post('/package/select-package', [PackageController::class, 'select_package'])->name('member.select.package');
+    Route::get(('/guest/payment'), [PaymentController::class, 'guest_payment'])->name('member.guest.payment');
 
     Route::middleware(Member::class)->group(function () {
         Route::get('/dashboard', [ProfileController::class, 'dashboard'])->name('member.dashboard');

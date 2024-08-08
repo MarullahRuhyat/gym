@@ -18,7 +18,7 @@ starter Page
     snap.pay('{{ $snapToken }}', {
         onSuccess: function (result) {
             // Handle payment success
-            fetch('{{ route('member.payment.callback') }}', {
+            fetch("{{ route('member.payment.callback') }}", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ starter Page
         onPending: function (result) {
             // Handle payment pending
             // alert('Payment pending');
-            fetch('{{ route('member.payment.callback') }}', {
+            fetch("{{ route('member.payment.callback') }}", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ starter Page
         onError: function (result) {
             // Handle payment error
             // alert('Payment failed');
-            fetch('{{ route('member.payment.callback') }}', {
+            fetch("{{ route('member.payment.callback') }}", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

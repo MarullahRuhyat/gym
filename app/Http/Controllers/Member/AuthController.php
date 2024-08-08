@@ -200,6 +200,7 @@ class AuthController extends Controller
             'message' => $message,
             'data' => [
                 'user' => $user_registered,
+                'user_phone_number' => $request->form_first['phone_number'],
                 'user_registered' => (count($user_registered) + 1) * 75000,
                 'payment_item_total' => $amount_package,
                 'total' => ((count($user_registered) + 1) * 75000) + $amount_package,

@@ -68,6 +68,8 @@ Route::prefix('member')->group(function () {
     // Route::post('/register-multi-user-submit', [MemberAuthController::class, 'register__multi_user_submit'])->name('member.register-multi-user.submit');
     // Route::post('/save-forms', [MemberController::class, 'store']);
 
+    Route::get('/payment', [PaymentController::class, 'payment'])->name('member.payment');
+
     Route::get('/send-otp', [MemberAuthController::class, 'send_otp'])->name('member.send-otp');
     Route::post('/get-otp', [MemberAuthController::class, 'get_otp'])->name('member.get-otp');
     Route::get('/verify-otp/{phone_number}', [MemberAuthController::class, 'verify_otp'])->name('member.verify-otp');
@@ -90,7 +92,7 @@ Route::prefix('member')->group(function () {
             // Route::post('/change-password', [ProfileController::class, 'change_password_process'])->name('member.change-password.process');
         });
         Route::prefix('payment')->group(function () {
-            Route::get('/', [PaymentController::class, 'payment'])->name('member.payment');
+            // Route::get('/', [PaymentController::class, 'payment'])->name('member.payment');
             //             Route::post('/payment-callback', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
 
             Route::prefix('payment-callback')->group(function () {

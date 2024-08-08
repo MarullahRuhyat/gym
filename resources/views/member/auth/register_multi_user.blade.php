@@ -247,8 +247,9 @@ starter Page
                         <div class="row g-3">
                             <form action="{{ route('member.payment') }}" method="GET">
                                 @csrf
-                                <!-- <input type="text" name="submit_user_id" id="submit_user_id" value=""> -->
-                                <!-- <input type="text" name="submit_package_id" id="submit_package_id" value=""> -->
+                                <input type="text" name="payment_phone_number" id="payment_phone_number" value="">
+                                <input type="text" name="submit_package_id" id="submit_package_id" value="">
+                                <input type="text" name="payment_amount" id="payment_amount" value="">
                                 <div class="col">
                                     <div class="card">
                                         <div class="card-body">
@@ -280,7 +281,7 @@ starter Page
                                 </div>
                                 <div class="col-12">
                                     <div class="d-flex align-items-center gap-3">
-                                        <button class="btn btn-grey px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
+                                        <button class="btn btn-outline-secondary px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
                                         <!-- <a type="submit" class="btn btn-grd-primary px-4">Pay<i class='bx bx-right-arrow-alt ms-2'></i></a> -->
                                         <button type="submit" class="btn btn-primary px-4">Pay<i class='bx bx-right-arrow-alt ms-2'></i></button>
                                     </div>
@@ -496,6 +497,8 @@ starter Page
                     $('#payment-item-total').text(payment_item_total);
                     $('#payment-user-registered').text(user_registered);
                     $('#payment-total').text(total);
+                    $('#payment_phone_number').val(response.data.user_phone_number);
+                    $('#payment_amount').val(total);
                 } else {
                     alert(response.message);
                 }
@@ -504,7 +507,23 @@ starter Page
                 alert('Error saving forms');
             }
         });
-    })
+    });
+
+    // $('#payment_submit').on('click', function() {
+    //     var package_id = $('#package_id').val();
+    //     var user_form_first_phone = $('#bsValidation2').val();
+    //     var start_date = $('#start_date').val();
+
+    //     $.ajax({
+    //         url: "{{ route('member.payment') }}",
+    //         method: 'GET',
+    //         data: {
+    //             submit_package_id: package_id,
+    //             phone_number: user_form_first_phone,
+    //             amount : $('#payment-total').text(),
+    //         },
+    //     });
+    // });
 
     // $('#submit-form').on('click', function() {
     //     var forms = document.querySelectorAll('#dynamic-form');

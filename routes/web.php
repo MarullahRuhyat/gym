@@ -26,12 +26,18 @@ use App\Http\Controllers\PersonalTraining\GajiPersonalTrainerController;
 use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
 
 Route::get('test', fn () => phpinfo());
-Route::get('/', function () {
-    $appType = config('app.app_type');
-    if ($appType == 'ADMIN') {
-        return redirect()->route('auth.login');
-    }
-    return view('landing_page');
+
+Route::prefix('/')->group(function(){
+    Route::get('/', function () {
+        $appType = config('app.app_type');
+        if ($appType == 'ADMIN') {
+            return redirect()->route('auth.login');
+        }
+        return view('landing_page.index');
+    });
+    Route::get('/program-monthly-membership', function () {
+        return view('landing_page.program_monthly_membership');
+    })->name('program-monthly-membership');
 });
 
 Route::get('/starter-page', function () {

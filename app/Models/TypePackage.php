@@ -10,5 +10,7 @@ class TypePackage extends Model
     use HasFactory;
     protected $fillable = [
         'name',
+        'max_user',
+        'bonus'
     ];
 }

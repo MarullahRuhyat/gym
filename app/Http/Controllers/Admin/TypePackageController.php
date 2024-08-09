@@ -20,7 +20,11 @@ class TypePackageController extends Controller
                     'name' => 'required|string|max:255',
                 ]);
             }
-            $data = $request->only('name');
+            $data = $request->only('name', 'max_user', 'bonus');
+            // Memperbaiki format bonus
+            if (isset($data['bonus'])) {
+                $data['bonus'] = str_replace('.', '', $data['bonus']);
+            }
             try {
                 $id = $request->input('id', 0);
 
@@ -39,7 +43,21 @@ class TypePackageController extends Controller
             }
         }
 
+        $perPage = 1;
+        $type_package = TypePackage::query();
+        $page = $request->query('page', 1);
+        $name = $request->query('name', '');
+        if ($name != '') {
+            $type_package->where('name', 'LIKE', '%' . $name . '%');
+        }
+        $results = $type_package->paginate($perPage, ['*'], 'page', $page);
+        $total_page = intval(ceil($results->total() / $results->perPage()));
+
+        if ($request->ajax()) {
+            return view('admin.type_package.data', compact('results', 'total_page'))->render();
+        }
+
         $type_package = TypePackage::all();
-        return view('admin.type_package', compact('type_package'));
+        return view('admin.type_package.index', compact('results', 'total_page'));
     }
 }

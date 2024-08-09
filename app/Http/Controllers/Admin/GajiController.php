@@ -154,15 +154,15 @@ class GajiController extends Controller
         // Format tanggal sekarang
         $date_now = Carbon::today()->format('Y-m-d');
         $endDate = "{$date}-24";
-        $start_date = Carbon::createFromFormat('Y-m-d', $endDate)->subMonth()->addDays()->format('Y-m-d');
-        // Membandingkan tanggal
+        $startDate = Carbon::createFromFormat('Y-m-d', $endDate)->subMonth()->addDays()->format('Y-m-d');
+
         if (Carbon::parse($endDate)->gt($date_now)) {
             return redirect()->route('admin_gaji')->with('error', "Maaf untuk generate gaji bulan {$date} belum dapat dilakukan");
         } elseif (Carbon::parse($endDate)->lt($date_now)) {
-            ProcessPayroll::dispatch($start_date, $endDate);
+            ProcessPayroll::dispatch($startDate, $endDate);
             return redirect()->route('admin_gaji')->with('success', "Generate gaji sedang di lakukan mohon tunggu beberapa saat lalu refresh web anda.");
         } else {
-            ProcessPayroll::dispatch($start_date, $endDate);
+            ProcessPayroll::dispatch($startDate, $endDate);
             return redirect()->route('admin_gaji')->with('success', "Generate gaji sedang di lakukan mohon tunggu beberapa saat lalu refresh web anda.");
         }
     }

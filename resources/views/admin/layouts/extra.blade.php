@@ -10,8 +10,7 @@
           <div class="order-list">
               <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
                   <div class="order-img">
-                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75"
-                          alt="">
+                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75" alt="">
                   </div>
                   <div class="order-info flex-grow-1">
                       <h5 class="mb-1 order-title">White Men Shoes</h5>
@@ -25,8 +24,7 @@
 
               <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
                   <div class="order-img">
-                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75"
-                          alt="">
+                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75" alt="">
                   </div>
                   <div class="order-info flex-grow-1">
                       <h5 class="mb-1 order-title">Red Airpods</h5>
@@ -40,8 +38,7 @@
 
               <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
                   <div class="order-img">
-                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75"
-                          alt="">
+                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75" alt="">
                   </div>
                   <div class="order-info flex-grow-1">
                       <h5 class="mb-1 order-title">Men Polo Tshirt</h5>
@@ -55,8 +52,7 @@
 
               <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
                   <div class="order-img">
-                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75"
-                          alt="">
+                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75" alt="">
                   </div>
                   <div class="order-info flex-grow-1">
                       <h5 class="mb-1 order-title">Blue Jeans Casual</h5>
@@ -70,8 +66,7 @@
 
               <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
                   <div class="order-img">
-                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75"
-                          alt="">
+                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75" alt="">
                   </div>
                   <div class="order-info flex-grow-1">
                       <h5 class="mb-1 order-title">Fancy Shirts</h5>
@@ -85,8 +80,7 @@
 
               <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
                   <div class="order-img">
-                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75"
-                          alt="">
+                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75" alt="">
                   </div>
                   <div class="order-info flex-grow-1">
                       <h5 class="mb-1 order-title">Home Sofa Set </h5>
@@ -100,8 +94,7 @@
 
               <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
                   <div class="order-img">
-                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75"
-                          alt="">
+                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75" alt="">
                   </div>
                   <div class="order-info flex-grow-1">
                       <h5 class="mb-1 order-title">Black iPhone</h5>
@@ -115,8 +108,7 @@
 
               <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
                   <div class="order-img">
-                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75"
-                          alt="">
+                      <img src="https://placehold.co/200x150/png" class="img-fluid rounded-3" width="75" alt="">
                   </div>
                   <div class="order-info flex-grow-1">
                       <h5 class="mb-1 order-title">Goldan Watch</h5>
@@ -139,8 +131,7 @@
   <!--end cart-->
 
   <!--start switcher-->
-  <button class="btn btn-grd btn-grd-primary position-fixed bottom-0 end-0 m-3 d-flex align-items-center gap-2"
-      type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop">
+  <button class="btn btn-grd btn-grd-primary position-fixed bottom-0 end-0 m-3 d-flex align-items-center gap-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop">
       <i class="material-icons-outlined">tune</i>Customize
   </button>
 
@@ -157,49 +148,61 @@
       <div class="offcanvas-body">
           <div>
               <p>Theme variation</p>
-
+              @php
+              $selectedTheme = session('theme', 'light');
+              @endphp
               <div class="row g-3">
-                  <div class="col-12 col-xl-6">
+                  <div class="col-12 col-xl-6 theme" data-color="blue-theme">
+                      @if($selectedTheme == 'blue-theme' )
                       <input type="radio" class="btn-check" name="theme-options" id="BlueTheme" checked>
-                      <label
-                          class="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4"
-                          for="BlueTheme">
+                      @else
+                      <input type="radio" class="btn-check" name="theme-options" id="BlueTheme">
+                      @endif
+                      <label class="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4" for="BlueTheme">
                           <span class="material-icons-outlined">contactless</span>
                           <span>Blue</span>
                       </label>
                   </div>
-                  <div class="col-12 col-xl-6">
-                      <input type="radio" class="btn-check" name="theme-options" id="LightTheme">
-                      <label
-                          class="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4"
-                          for="LightTheme">
+                  <div class="col-12 col-xl-6 theme" data-color="light">
+                      @if($selectedTheme == 'light' )
+                      <input type="radio" class="btn-check " name="theme-options" id="LightTheme" checked>
+                      @else
+                      <input type="radio" class="btn-check " name="theme-options" id="LightTheme">
+                      @endif
+                      <label class="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4" for="LightTheme">
                           <span class="material-icons-outlined">light_mode</span>
                           <span>Light</span>
                       </label>
                   </div>
-                  <div class="col-12 col-xl-6">
+                  <div class="col-12 col-xl-6 theme" data-color="dark">
+                      @if($selectedTheme == 'dark' )
+                      <input type="radio" class="btn-check" name="theme-options" id="DarkTheme" checked>
+                      @else
                       <input type="radio" class="btn-check" name="theme-options" id="DarkTheme">
-                      <label
-                          class="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4"
-                          for="DarkTheme">
+                      @endif
+                      <label class="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4" for="DarkTheme">
                           <span class="material-icons-outlined">dark_mode</span>
                           <span>Dark</span>
                       </label>
                   </div>
-                  <div class="col-12 col-xl-6">
+                  <div class="col-12 col-xl-6 theme" data-color="semi-dark">
+                      @if($selectedTheme == 'semi-dark' )
+                      <input type="radio" class="btn-check" name="theme-options" id="SemiDarkTheme" checked>
+                      @else
                       <input type="radio" class="btn-check" name="theme-options" id="SemiDarkTheme">
-                      <label
-                          class="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4"
-                          for="SemiDarkTheme">
+                      @endif
+                      <label class="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4" for="SemiDarkTheme">
                           <span class="material-icons-outlined">contrast</span>
                           <span>Semi Dark</span>
                       </label>
                   </div>
-                  <div class="col-12 col-xl-6">
+                  <div class="col-12 col-xl-6 theme" data-color="bordered-theme">
+                      @if($selectedTheme == 'bordered-theme' )
+                      <input type="radio" class="btn-check" name="theme-options" id="BoderedTheme" checked>
+                      @else
                       <input type="radio" class="btn-check" name="theme-options" id="BoderedTheme">
-                      <label
-                          class="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4"
-                          for="BoderedTheme">
+                      @endif
+                      <label class="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4" for="BoderedTheme">
                           <span class="material-icons-outlined">border_style</span>
                           <span>Bordered</span>
                       </label>

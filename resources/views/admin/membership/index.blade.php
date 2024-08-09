@@ -149,7 +149,7 @@ starter Page
 <script src="{{ URL::asset('build/js/main.js') }}"></script>
 <script>
     $(document).ready(function() {
-        $('.button_edit').click(function() {
+        $(document).on('click', '.button_edit', function() {
             let id = $(this).data('id');
             let name = $(this).data('name');
             let price = $(this).data('price');
@@ -165,7 +165,7 @@ starter Page
             $('#id_edit').val(id);
             $('#type_edit').val(type);
         });
-        $('.button_delete').click(function() {
+        $(document).on('click', '.delete', function() {
             let id = $(this).data('id');
             let name = $(this).data('name');
             $('#id_delete').val(id);

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('type_packages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('max_user')->default(1);
+            $table->unsignedBigInteger('bonus')->default(0);
             $table->timestamps();
         });
     }

@@ -188,7 +188,7 @@
 				<div class="col-md-4 club-card-col">
 					<div class="club-card-item">
 						<div class="price-cover">
-							<div class="date"><span>Class (≥6 person)</span></div>
+							<div class="date"><span>Class (6-12 person)</span></div>
 						</div>
 						<ul class="list">
 							<li>Rp. 775.000 /person</li>

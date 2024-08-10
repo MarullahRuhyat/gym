@@ -152,7 +152,7 @@
 				<div class="col-md-4 club-card-col">
 					<div class="club-card-item">
 						<div class="price-cover">
-							<div class="date"><span>PBC/PBBC Isidentil Privat</span></div>
+							<div class="date"><span>PBC/PBBC Privat</span></div>
 						</div>
 						<ul class="list">
 							<li>Rp. 225.000</li>
@@ -167,7 +167,7 @@
 				<div class="col-md-4 club-card-col mb-3">
 					<div class="club-card-item">
 						<div class="price-cover">
-							<div class="date"><span>PBC/PBBC Isidentil Couple</span></div>
+							<div class="date"><span>PBC/PBBC Couple</span></div>
 						</div>
 						<ul class="list">
 							<li>Rp. 400.000 /person</li>
@@ -185,7 +185,7 @@
 				<div class="col-md-4 club-card-col">
 					<div class="club-card-item">
 						<div class="price-cover">
-							<div class="date"><span> PBC/PBBC Owner Isidentil</span></div>
+							<div class="date"><span> PBC/PBBC Owner</span></div>
 						</div>
 						<ul class="list">
 							<li>Rp. 350.000</li>

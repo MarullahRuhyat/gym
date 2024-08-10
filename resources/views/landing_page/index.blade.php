@@ -65,34 +65,11 @@
         {{-- <div class="header-menu"> --}}
         <div class="container">
             <div class="header-logo">
-                <a href="index.html" class="logo img-thumbnail">
+                <a href="{{route("landing_page")}}" class="logo img-thumbnail">
                     <img src="{{asset("landing_page/assets/img/9.svg")}}" class="card-img-top" alt="logo">
                 </a>
                 <p class="me-5">Flozor's Gym</p>
             </div>
-            {{-- <nav class="nav-menu">
-					<ul class="nav-list">
-						<li class="dropdown">
-							<a href="#">Home <i class="fa fa-caret-down"></i></a>
-							<ul>
-								<li class="menu-active"><a href="index.html">Crossfit</a></li>
-								<li><a href="home-fitness.html">Fitness</a></li>
-								<li><a href="home-crossfit-lite.html">Crossfit Lite</a></li>
-							</ul>
-						</li>
-						<li><a href="about.html">About</a></li>
-						<li><a href="services.html">Services</a></li>
-						<li class="dropdown">
-							<a href="#">Pages <i class="fa fa-caret-down"></i></a>
-							<ul>
-								<li><a href="program.html">Program</a></li>
-								<li><a href="trainer.html">Trainer</a></li>
-							</ul>
-						</li>
-						<li><a href="blog.html">News</a></li>
-						<li><a href="contacts.html">Contacts</a></li>
-					</ul>
-				</nav> --}}
         </div>
         {{-- </div> --}}
     </header>
@@ -119,52 +96,7 @@
                     <div class="crossfit-slide-cover">
                         <h2 class="title"> <span>YOU</span> VS <span>YOU</span></h2>
                         <p>Every day is a chance to become a better version of yourself. Challenge yourself to push past limits and overcome weaknesses. Life is too short to be held back by unhealthy habits. Push yourself, stay committed, and let your determination drive you forward. In the end, it’s you against you. Keep striving, because you are worth it.
-
                         </p>
-                    </div>
-                </div>
-            </div>
-            <div class="crossfit-slide">
-                <div class="crossfit-slider-effect effect-1">
-                    <div data-hover-only="true" class="scene">
-                        <span class="scene-item" data-depth="0.2"
-                            style="background-image: url(assets/img/effect-1.svg);"></span>
-                    </div>
-                </div>
-                <div class="crossfit-slider-effect effect-2">
-                    <div data-hover-only="true" class="scene">
-                        <span class="scene-item" data-depth="0.4"
-                            style="background-image: url(assets/img/effect-2.svg);"></span>
-                    </div>
-                </div>
-                <div class="crossfit-slide-bg" style="background-image: url(assets/img/slide-2.jpg);"></div>
-                <div class="container">
-                    <div class="crossfit-slide-cover">
-                        <h2 class="title">push <span>yourself</span></h2>
-                        <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor, auctor
-                            tincidunt lorem ut, venenatis dapibus mi. Nunc venenatis sollicitudin nisl vel auctor.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="crossfit-slide">
-                <div class="crossfit-slider-effect effect-1">
-                    <div data-hover-only="true" class="scene">
-                        <span class="scene-item" data-depth="0.2"
-                            style="background-image: url(assets/img/effect-1.svg);"></span>
-                    </div>
-                </div>
-                <div class="crossfit-slider-effect effect-2">
-                    <div data-hover-only="true" class="scene">
-                        <span class="scene-item" data-depth="0.4"
-                            style="background-image: url(assets/img/effect-2.svg);"></span>
-                    </div>
-                </div>
-                <div class="crossfit-slide-bg" style="background-image: url(assets/img/slide-3.jpg);"></div>
-                <div class="container">
-                    <div class="crossfit-slide-cover">
-                        <h2 class="title">push <span>yourself</span></h2>
-                        <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor, auctor
-                            tincidunt lorem ut, venenatis dapibus mi. Nunc venenatis sollicitudin nisl vel auctor.</p>
                     </div>
                 </div>
             </div>
@@ -219,7 +151,7 @@
                         <div class="program-item-back" style="background-image: url(landing_page/assets/img/programs-3.jpg);">
                             <div class="program-item-inner">
                                 <h3>Monthly Membership</h3>
-                                <a href="program.html" class="btn">More</a>
+                                <a href="{{route("program-monthly-membership")}}" class="btn">More</a>
                             </div>
                         </div>
                     </div>
@@ -234,7 +166,7 @@
                         <div class="program-item-back" style="background-image: url(landing_page/assets/img/programs-2.jpg);">
                             <div class="program-item-inner">
                                 <h3>Personal Body Care/Personal Beauty Body Care BY Personal Trainer</h3>
-                                <a href="program.html" class="btn">More</a>
+                                <a href="{{route("personal-body-care-by-pt")}}" class="btn">More</a>
                             </div>
                         </div>
                     </div>
@@ -249,7 +181,7 @@
                         <div class="program-item-back" style="background-image: url(landing_page/assets/img/programs-1.jpg);">
                             <div class="program-item-inner">
                                 <h3>Personal Body Care/Personal Beauty Body Care BY Personal Owner</h3>
-                                <a href="program.html" class="btn">More</a>
+                                <a href="{{route("personal-body-care-by-owner")}}" class="btn">More</a>
                             </div>
                         </div>
                     </div>
@@ -264,7 +196,7 @@
                         <div class="program-item-back" style="background-image: url(landing_page/assets/img/programs-4.jpg);">
                             <div class="program-item-inner">
                                 <h3>One Day Pass</h3>
-                                <a href="program.html" class="btn">More</a>
+                                <a href="{{route("one-day")}}" class="btn">More</a>
                             </div>
                         </div>
                     </div>
@@ -377,67 +309,6 @@
     </section>
     <!-- ============= S-OUT-TRAINER END ============= -->
 
-
-    <!-- ============== S-CLUB-CARDS ============== -->
-    <section class="s-club-cards">
-        <div class="container">
-            <h2 class="title-decor">Club <span>Cards</span></h2>
-            <p class="slogan">Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
-                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
-            <div class="row">
-                <div class="col-md-4 club-card-col">
-                    <div class="club-card-item" style="background-image: url(assets/img/bg-price-1.svg);">
-                        <div class="price-cover">
-                            <div class="price">40</div>
-                            <div class="date"><span>99</span>3 months</div>
-                        </div>
-                        <ul class="list">
-                            <li>Maecenas consequat</li>
-                            <li>ex id lobortis venenatis</li>
-                            <li>Mauris id erat enim</li>
-                            <li class="item-excluded">Morbi dolor dolortin</li>
-                            <li class="item-excluded">lorem ut, venenatis dapibus mi</li>
-                        </ul>
-                        <a href="program.html" class="btn">order now</a>
-                    </div>
-                </div>
-                <div class="col-md-4 club-card-col">
-                    <div class="club-card-item" style="background-image: url(assets/img/bg-price-2.svg);">
-                        <div class="price-cover">
-                            <div class="price">70</div>
-                            <div class="date"><span>99</span>6 months</div>
-                        </div>
-                        <ul class="list">
-                            <li>Maecenas consequat</li>
-                            <li>ex id lobortis venenatis</li>
-                            <li>Mauris id erat enim</li>
-                            <li>Morbi dolor dolortin</li>
-                            <li class="item-excluded">lorem ut, venenatis dapibus mi</li>
-                        </ul>
-                        <a href="program.html" class="btn">order now</a>
-                    </div>
-                </div>
-                <div class="col-md-4 club-card-col">
-                    <div class="club-card-item" style="background-image: url(assets/img/bg-price-3.svg);">
-                        <div class="price-cover">
-                            <div class="price">120</div>
-                            <div class="date"><span>99</span>1 year</div>
-                        </div>
-                        <ul class="list">
-                            <li>Maecenas consequat</li>
-                            <li>ex id lobortis venenatis</li>
-                            <li>Mauris id erat enim</li>
-                            <li>Morbi dolor dolortin</li>
-                            <li>lorem ut, venenatis dapibus mi</li>
-                        </ul>
-                        <a href="program.html" class="btn">order now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ============ S-CLUB-CARDS END ============ -->
-
     <!-- ============== S-TESTIMONIALS ============== -->
     <section class="s-testimonials" style="background-image: url(assets/img/bg-testimonials.jpg);">
         <div class="mask"></div>
@@ -474,11 +345,9 @@
     <!-- ============ S-TESTIMONIALS END ============ -->
 
     <!--================ RELATED POSTS ================-->
-    <section class="s-related-posts home-related-posts">
+    <section class="s-related-posts home-related-posts mb-5">
         <div class="container">
-            <h2 class="title-decor">Latest <span>News</span></h2>
-            <p class="slogan">Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
-                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
+            <h2 class="title-decor">promo <span>news</span>  event</h2>
             <div class="row">
                 <div class="col-md-6 related-post-col">
                     <div class="post-item-cover">
@@ -495,7 +364,7 @@
                                 <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i>October 31,
                                     2019</span>
                             </div>
-                            <h3 class="title"><a href="single-blog.html">Sed ut perspiciatis unde omnis</a></h3>
+                            <h3 class="title"><a href="single-blog.html">Healthy Jus</a></h3>
                             <div class="text">
                                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
                                     laudantium, totam rem...</p>
@@ -527,7 +396,7 @@
                                 <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i>October 31,
                                     2019</span>
                             </div>
-                            <h3 class="title"><a href="single-blog.html">Sed ut perspiciatis unde omnis</a></h3>
+                            <h3 class="title"><a href="single-blog.html">Suplement</a></h3>
                             <div class="text">
                                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
                                     laudantium, totam rem...</p>
@@ -559,7 +428,7 @@
                                 <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i>October 31,
                                     2019</span>
                             </div>
-                            <h3 class="title"><a href="single-blog.html">Sed ut perspiciatis unde omnis</a></h3>
+                            <h3 class="title"><a href="single-blog.html"></a></h3>
                             <div class="text">
                                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
                                     laudantium, totam rem...</p>
@@ -611,142 +480,13 @@
             </div>
         </div>
     </section>
-    <!--============== RELATED POSTS END ==============-->
-
-    <!-- =========== S-TRAINING-SCHEDULE =========== -->
-    <section class="s-training-schedule" style="background-image: url(assets/img/bg-table-1.svg);">
-        <div class="container">
-            <h2 class="title-decor">Training <span>Schedule</span></h2>
-            <p class="slogan">Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
-                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
-            <div class="training-schedule-cover">
-                <h3 class="training-schedule-top">1-7 APRIL, 2019</h3>
-                <div class="training-schedule-table">
-                    <table>
-                        <thead>
-                            <th></th>
-                            <th>monday</th>
-                            <th>tuesday</th>
-                            <th>wednesday</th>
-                            <th>thursday</th>
-                            <th>friday</th>
-                            <th>saturday</th>
-                            <th>sunday</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>9-00</td>
-                                <td>
-                                    <h4>body bulding</h4>
-                                    <div class="date">9-00 – 11:00</div>
-                                    <div class="name">Mark Klark</div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <h4>boxing</h4>
-                                    <div class="date">9-00 – 11:00</div>
-                                    <div class="name">Mark Klark</div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <h4>boxing</h4>
-                                    <div class="date">9-00 – 11:00</div>
-                                    <div class="name">Mark Klark</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>10-00</td>
-                                <td></td>
-                                <td>
-                                    <h4>yoga</h4>
-                                    <div class="date">10-00 – 12:00</div>
-                                    <div class="name">Mark Klark</div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <h4>body bulding</h4>
-                                    <div class="date">10-00 – 12:00</div>
-                                    <div class="name">Mark Klark</div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>11-00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <h4>body bulding</h4>
-                                    <div class="date">11-00 – 12:00</div>
-                                    <div class="name">Mark Klark</div>
-                                </td>
-                                <td></td>
-                                <td>
-                                    <h4>body bulding</h4>
-                                    <div class="date">11-00 – 12:00</div>
-                                    <div class="name">Mark Klark</div>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>12-00</td>
-                                <td>
-                                    <h4>body bulding</h4>
-                                    <div class="date">12-00 – 13:00</div>
-                                    <div class="name">Mark Klark</div>
-                                </td>
-                                <td></td>
-                                <td>
-                                    <h4>karate</h4>
-                                    <div class="date">12-00 – 13:00</div>
-                                    <div class="name">Mark Klark</div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <h4>karate</h4>
-                                    <div class="date">12-00 – 13:00</div>
-                                    <div class="name">Mark Klark</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>13-00</td>
-                                <td></td>
-                                <td>
-                                    <h4>body bulding</h4>
-                                    <div class="date">13-00 – 14:00</div>
-                                    <div class="name">Mark Klark</div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <h4>body bulding</h4>
-                                    <div class="date">13-00 – 14:00</div>
-                                    <div class="name">Mark Klark</div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ========= S-TRAINING-SCHEDULE END ========= -->
 
     <!-- ================== FOOTER ================== -->
     <section class="s-counter" style="background-image: url(assets/img/bg-2.jpg);">
         <div class="mask"></div>
         <div class="container">
-            <h2 class="title-decor">CrossFit <span>Competitions</span></h2>
-            <p class="slogan">Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
-                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
+            <h2 class="title-decor">Flozor's <span>Certification</span></h2>
+            <p class="slogan">To be a professional coach</p>
             <div id="clockdiv">
                 <div class="clock-item">
                     <span class="days"></span>
@@ -778,7 +518,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-lg-4 footer-item-logo">
-                    <a href="index.html" class="logo-footer"><img src="assets/img/footer-logo2.svg" alt="logo"></a>
+                    <a href="{{route("landing_page")}}" class="logo-footer"><img src="assets/img/footer-logo2.svg" alt="logo"></a>
                     <p>Flozors Gym, founded in 2002 by Frans Lee, offers top service and a welcoming atmosphere for fitness enthusiasts.</p>
                     <ul class="social-list">
                         <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"

@@ -22,7 +22,60 @@ class PaymentController extends Controller
         Config::$is3ds = true;
         Config::$isSanitized = true;
     }
+
     public function payment(Request $request)
+    {
+        $user_id = DB::table('users')->where('phone_number', $request->payment_phone_number)->pluck('id')->first();
+        $start_date = $request->submit_start_date;
+        $gym_membership_packages = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('duration_in_days')->first();
+        $end_date = date('Y-m-d', strtotime($start_date . ' + ' . $gym_membership_packages . ' days'));
+        // $amount = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('price')->first();
+        $amount = $request->payment_amount;
+        $user = DB::table('users')->where('id', $user_id)->first();
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => rand(),
+                'gross_amount' => $amount,
+            ),
+            'customer_details' => array(
+                'name' => $user->name,
+                'email' => $user->email,
+                'phone' => $user->phone_number,
+            ),
+        );
+
+        DB::table('memberships')->insert([
+            'user_id' => $user_id,
+            'gym_membership_packages' => $request->submit_package_id,
+            'start_date' => date('Y-m-d'),
+            'end_date' => $end_date,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('payments')->insert([
+            'order_id' => $params['transaction_details']['order_id'],
+            'membership_id' => DB::table('memberships')->latest()->first()->id,
+            'user_id' => $user_id,
+            'gym_membership_packages' => $request->submit_package_id,
+            'amount' => $amount,
+            'payment_method' => 'midtrans',
+            'status' => 'pending',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        // menambahkan snap token ke table payment
+        DB::table('payments')->where('order_id', $params['transaction_details']['order_id'])->update([
+            'snap_token' => $snapToken
+        ]);
+
+        return view('member.payment.payment_details', compact('snapToken'));
+    }
+
+    public function payment_backup(Request $request)
     {
         $start_date = $request->submit_start_date;
         $gym_membership_packages = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('duration_in_days')->first();

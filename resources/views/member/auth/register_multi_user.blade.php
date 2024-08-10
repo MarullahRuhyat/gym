@@ -158,73 +158,63 @@ starter Page
                     <div class="col">
                         <div class="card">
                             <div class="card-body p-4">
-                                <form id="dynamic-form" class="row g-3 needs-validation" novalidate id="form1">
+                                <form id="form-first" class="row g-3 needs-validation" novalidate id="form1">
                                     <input type="hidden" name="stepper3_package_id" id="stepper3_package_id_1" value="" disabled>
                                     <div class="col-md-12">
-                                        <label for="bsValidation1_1" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="bsValidation1_1" name="name" placeholder="Name" required>
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label for="bsValidation2_1" class="form-label">Phone Number</label>
-                                        <input type="text" class="form-control" id="bsValidation2_1" name="phone" placeholder="Phone" required>
-                                        <div class="invalid-feedback">
-                                            Please choose a username.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="d-flex align-items-center gap-3">
-                                            <label class="form-label">Gender</label>
-                                            <div class="form-check">
-                                                <input type="radio" class="form-check-input" id="bsValidation3_1_male" name="gender" value="L" required>
-                                                <label class="form-check-label" for="bsValidation3_1_male">Male</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input type="radio" class="form-check-input" id="bsValidation3_1_female" name="gender" value="P" required>
-                                                <label class="form-check-label" for="bsValidation3_1_female">Female</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label for="bsValidation4_1" class="form-label">Address</label>
-                                        <textarea class="form-control" id="bsValidation4_1" name="address" placeholder="Address ..." rows="3" required></textarea>
-                                        <div class="invalid-feedback">
-                                            Please enter a valid address.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label for="bsValidation5_1" class="form-label">Start Date</label>
-                                        <input type="date" class="form-control" id="bsValidation5_1" name="start_date" required>
-                                        <div class="invalid-feedback">
-                                            Please fill your start date.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label for="bsValidation6_1" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="bsValidation6_1" name="password" required>
-                                        <div class="invalid-feedback">
-                                            Please fill your password.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label for="bsValidation7_1" class="form-label">Confirm Password</label>
-                                        <input type="password" class="form-control" id="bsValidation7_1" name="password_confirmation" required>
-                                        <div class="invalid-feedback">
-                                            Please confirm your password.
-                                        </div>
-                                    </div>
+                            <label for="bsValidation1" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="bsValidation1" name="name" placeholder="Name" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="bsValidation2" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" id="bsValidation2" placeholder="Phone Number" name="phone_number" required>
+                            <div class="invalid-feedback">
+                                Please fill a phone number.
+                                </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="bsValidation3" class="form-label">Gender</label>
+                            <select class="form-select" id="bsValidation3" name="gender" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option value="L">Laki-laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid gender.
+                                </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="bsValidation4" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="bsValidation4" name="address" placeholder="Address" required>
+                            <div class="invalid-feedback">
+                                Please fill address.
+                                </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="bsValidation5" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="bsValidation5" name="password" required>
+                            <div class="invalid-feedback">
+                                Please fill your password.
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="bsValidation6" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="bsValidation6" name="password_confirmation" required>
+                            <div class="invalid-feedback">
+                                Confirmation password is required and must be same as password.
+                            </div>
+                        </div>
 
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                            <form id="dynamic-form-first">
+                            <div id="dynamic-form-id">
                                 <!-- form wil added here  -->
-
-                            </form>
+                            </div>
                         </div>
                         <!-- end  -->
 
@@ -257,8 +247,9 @@ starter Page
                         <div class="row g-3">
                             <form action="{{ route('member.payment') }}" method="GET">
                                 @csrf
-                                <input type="text" name="submit_user_id" id="submit_user_id" value="">
+                                <input type="text" name="payment_phone_number" id="payment_phone_number" value="">
                                 <input type="text" name="submit_package_id" id="submit_package_id" value="">
+                                <input type="text" name="payment_amount" id="payment_amount" value="">
                                 <div class="col">
                                     <div class="card">
                                         <div class="card-body">
@@ -267,6 +258,10 @@ starter Page
                                                 <div class="d-flex justify-content-between">
                                                     <p class="fw-semi-bold">Items subtotal :</p>
                                                     <p id="payment-item-total" class="fw-semi-bold"></p>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="fw-semi-bold">User Registered :</p>
+                                                    <p id="payment-user-registered" class="fw-semi-bold"></p>
                                                 </div>
                                                 <div class="d-flex justify-content-between">
                                                     <p class="fw-semi-bold">Discount :</p>
@@ -286,7 +281,7 @@ starter Page
                                 </div>
                                 <div class="col-12">
                                     <div class="d-flex align-items-center gap-3">
-                                        <button class="btn btn-grey px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
+                                        <button class="btn btn-outline-secondary px-4" onclick="stepper1.previous()"><i class='bx bx-left-arrow-alt me-2'></i>Previous</button>
                                         <!-- <a type="submit" class="btn btn-grd-primary px-4">Pay<i class='bx bx-right-arrow-alt ms-2'></i></a> -->
                                         <button type="submit" class="btn btn-primary px-4">Pay<i class='bx bx-right-arrow-alt ms-2'></i></button>
                                     </div>
@@ -391,7 +386,7 @@ starter Page
         let package_jumlah_member = $('#package_jumlah_member').val();
         if(formCount < package_jumlah_member) {
             formCount++;
-            $('#dynamic-form-first').append(`
+            $('#dynamic-form-id').append(`
                 <h3>Anggota ${formCount}</h3>
                 <div class="row g-3">
                     <div class="col">
@@ -399,13 +394,6 @@ starter Page
                             <div class="card-body p-4">
                                 <form id="dynamic-form" class="row g-3 needs-validation" novalidate id="form${formCount}">
                                     <input type="hidden" name="stepper3_package_id" id="stepper3_package_id_${formCount}" value="" disabled>
-                                    <div class="col-md-12">
-                                        <label for="bsValidation1_${formCount}" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="bsValidation1_${formCount}" name="name[]" placeholder="Name" required>
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>
-                                    </div>
                                     <div class="col-md-12">
                                         <label for="bsValidation2_${formCount}" class="form-label">Phone Number</label>
                                         <input type="text" class="form-control" id="bsValidation2_${formCount}" name="phone[]" placeholder="Phone" required>
@@ -448,23 +436,46 @@ starter Page
     });
 
     $('#submit-form').on('click', function() {
+        // get data from form 1
+        var name_form_first = $('#bsValidation1').val();
+        var phone_form_first = $('#bsValidation2').val();
+        var gender_form_first = $('#bsValidation3').val();
+        var address_form_first = $('#bsValidation4').val();
+        var password_form_first = $('#bsValidation5').val();
+        var form_first = {
+            name: name_form_first,
+            phone_number: phone_form_first,
+            gender: gender_form_first,
+            address: address_form_first,
+            password: password_form_first
+        };
+
+        // only get data phone number from dynamic form
+        var form_dynamic = [];
         var forms = document.querySelectorAll('#dynamic-form');
-        var members = [];
-        // forms.foreach(function(form) {
-        //     members.push({
-        //         name: form.querySelector('input[name="name[]"]').value
-        //     });
-        // });
         forms.forEach(function(form) {
+            // phone_number_dynamic.push(form.querySelector('input[name="phone[]"]').value);
             var member = {};
-            member.name = form.querySelector('input[name="name[]"]').value;
             member.phone_number = form.querySelector('input[name="phone[]"]').value;
-            member.gender = form.querySelector('input[name="gender[]"]:checked').value;
-            member.address = form.querySelector('textarea[name="address[]"]').value;
-            member.start_date = form.querySelector('input[name="start_date[]"]').value;
-            member.password = form.querySelector('input[name="password[]"]').value;
-            members.push(member);
+            form_dynamic.push(member);
         });
+
+        // combine all data
+        var package_id = $('#package_id').val();
+        var start_date = $('#start_date').val();
+        var form = {
+            package_id: package_id,
+            start_date: start_date,
+            form_first: form_first,
+            form_dynamic: form_dynamic
+        };
+
+        form = JSON.stringify(form);
+
+        console.log('form');
+        console.log(form);
+
+        // ajax header csrf token
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -473,12 +484,21 @@ starter Page
         });
 
         $.ajax({
-            url: '/member/register-submit', // Your Laravel route
+            url: "{{ route('member.check-member-terkait') }}",
             method: 'POST',
-            data: JSON.stringify(members),
+            data: form,
             success: function(response) {
                 if(response.status == true) {
-                    alert('Form saved');
+                    stepper1.next();
+                    // get response data user_registered
+                    var payment_item_total = response.data.payment_item_total;
+                    var user_registered = response.data.user_registered;
+                    var total = response.data.total;
+                    $('#payment-item-total').text(payment_item_total);
+                    $('#payment-user-registered').text(user_registered);
+                    $('#payment-total').text(total);
+                    $('#payment_phone_number').val(response.data.user_phone_number);
+                    $('#payment_amount').val(total);
                 } else {
                     alert(response.message);
                 }
@@ -488,6 +508,64 @@ starter Page
             }
         });
     });
+
+    // $('#payment_submit').on('click', function() {
+    //     var package_id = $('#package_id').val();
+    //     var user_form_first_phone = $('#bsValidation2').val();
+    //     var start_date = $('#start_date').val();
+
+    //     $.ajax({
+    //         url: "{{ route('member.payment') }}",
+    //         method: 'GET',
+    //         data: {
+    //             submit_package_id: package_id,
+    //             phone_number: user_form_first_phone,
+    //             amount : $('#payment-total').text(),
+    //         },
+    //     });
+    // });
+
+    // $('#submit-form').on('click', function() {
+    //     var forms = document.querySelectorAll('#dynamic-form');
+    //     var members = [];
+    //     // forms.foreach(function(form) {
+    //     //     members.push({
+    //     //         name: form.querySelector('input[name="name[]"]').value
+    //     //     });
+    //     // });
+    //     forms.forEach(function(form) {
+    //         var member = {};
+    //         member.name = form.querySelector('input[name="name[]"]').value;
+    //         member.phone_number = form.querySelector('input[name="phone[]"]').value;
+    //         member.gender = form.querySelector('input[name="gender[]"]:checked').value;
+    //         member.address = form.querySelector('textarea[name="address[]"]').value;
+    //         member.start_date = form.querySelector('input[name="start_date[]"]').value;
+    //         member.password = form.querySelector('input[name="password[]"]').value;
+    //         members.push(member);
+    //     });
+    //     $.ajaxSetup({
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+    //             'Content-Type': 'application/json'
+    //         }
+    //     });
+
+    //     $.ajax({
+    //         url: '/member/register-submit', // Your Laravel route
+    //         method: 'POST',
+    //         data: JSON.stringify(members),
+    //         success: function(response) {
+    //             if(response.status == true) {
+    //                 alert('Form saved');
+    //             } else {
+    //                 alert(response.message);
+    //             }
+    //         },
+    //         error: function(jqXHR, textStatus, errorThrown) {
+    //             alert('Error saving forms');
+    //         }
+    //     });
+    // });
 </script>
 <!--bootstrap js-->
 <script src="{{ URL::asset('build/js/bootstrap.bundle.min.js') }}"></script>

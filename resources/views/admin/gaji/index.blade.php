@@ -161,7 +161,7 @@ starter Page
                     $('#gaji_id').val(id)
                     let html = ``
                     data.data.forEach(row => {
-                        html += ` 
+                        html += `
                         <div class="mb-3 col-md-6">
                             <label for="description_${row.id}" class="form-label">Description</label>
                             <input type="text" id="description_${row.id}"  name="description_${row.id}" class="form-control" value="${row.description}" disabled>
@@ -170,7 +170,7 @@ starter Page
                             <label for="amount_${row.id}" class="form-label">Amount</label>
                             <input type="text" id="amount_${row.id}" name="amount_${row.id}" class="form-control angka-rupiah" value="${formatRupiah(`${row.amount}`,false)}" required>
                         </div>
-                        <hr> 
+                        <hr>
                         `
                     });
                     $('#input_bonus').html(html);
@@ -179,7 +179,7 @@ starter Page
         });
 
         $('#add_bonus').click(function() {
-            let html = ` 
+            let html = `
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Description</label>
                             <input type="text"  class="form-control"  name="descriptions[]" required>

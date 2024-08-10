@@ -55,7 +55,6 @@ class GajiController extends Controller
             ->limit(1)
             ->pluck('formatted_bulan_gaji')
             ->first();
-
         $perPage = 10;
         $page = $request->query('page', 1);
         $month = $request->query('month', $latestMonth);

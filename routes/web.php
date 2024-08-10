@@ -10,20 +10,20 @@ use App\Http\Controllers\Admin\GajiController;
 use App\Http\Controllers\Admin\ScanController;
 use App\Http\Controllers\Admin\AbsenController;
 use App\Http\Controllers\Admin\MemberController;
-use App\Http\Controllers\Member\PackageController;
-use App\Http\Controllers\Member\PaymentController;
-use App\Http\Controllers\Member\ProfileController;
 use App\Http\Controllers\Admin\JenisMemberController;
-use App\Http\Controllers\Admin\TypePackageController;
-use App\Http\Controllers\Member\AttendanceController;
 use App\Http\Controllers\Admin\JenisLatihanController;
 use App\Http\Controllers\Admin\DashboardAdminController;
-use App\Http\Controllers\PersonalTraining\ProfilePersonalTraining;
 use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
 use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
-use App\Http\Controllers\Member\AuthController as MemberAuthController;
-use App\Http\Controllers\PersonalTraining\GajiPersonalTrainerController;
 use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
+use App\Http\Controllers\Admin\TypePackageController;
+use App\Http\Controllers\Member\AuthController as MemberAuthController;
+use App\Http\Controllers\Member\ProfileController;
+use App\Http\Controllers\Member\PackageController;
+use App\Http\Controllers\Member\PaymentController;
+use App\Http\Controllers\Member\AttendanceController;
+use App\Http\Controllers\PersonalTraining\ProfilePersonalTraining;
+use App\Http\Controllers\PersonalTraining\GajiPersonalTrainerController;
 
 Route::get('test', fn () => phpinfo());
 Route::get('/', function () {
@@ -64,8 +64,11 @@ Route::prefix('member')->group(function () {
     Route::get('/register-multi-user', [MemberAuthController::class, 'register_multi_user_get_package'])->name('member.register-get-package');
     Route::post('/get-package-detail', [MemberAuthController::class, 'get_package_detail'])->name('member.get-package-detail');
     // Route::post('/register/process', [MemberAuthController::class, 'store1'])->name('member.register.process');
-    Route::post('/register-submit', [MemberAuthController::class, 'register_submit'])->name('member.register.submit');
+    Route::post('/register/check-member-terkait', [MemberAuthController::class, 'check_member_terkait'])->name('member.check-member-terkait');
+    // Route::post('/register-multi-user-submit', [MemberAuthController::class, 'register__multi_user_submit'])->name('member.register-multi-user.submit');
     // Route::post('/save-forms', [MemberController::class, 'store']);
+
+    Route::get('/payment', [PaymentController::class, 'payment'])->name('member.payment');
 
     Route::get('/send-otp', [MemberAuthController::class, 'send_otp'])->name('member.send-otp');
     Route::post('/get-otp', [MemberAuthController::class, 'get_otp'])->name('member.get-otp');
@@ -76,6 +79,7 @@ Route::prefix('member')->group(function () {
 
     Route::get('/package', [PackageController::class, 'package'])->name('member.package');
     Route::post('/package/select-package', [PackageController::class, 'select_package'])->name('member.select.package');
+    Route::get(('/guest/payment'), [PaymentController::class, 'guest_payment'])->name('member.guest.payment');
 
     Route::middleware(Member::class)->group(function () {
         Route::get('/dashboard', [ProfileController::class, 'dashboard'])->name('member.dashboard');
@@ -88,7 +92,7 @@ Route::prefix('member')->group(function () {
             // Route::post('/change-password', [ProfileController::class, 'change_password_process'])->name('member.change-password.process');
         });
         Route::prefix('payment')->group(function () {
-            Route::get('/', [PaymentController::class, 'payment'])->name('member.payment');
+            // Route::get('/', [PaymentController::class, 'payment'])->name('member.payment');
             //             Route::post('/payment-callback', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
 
             Route::prefix('payment-callback')->group(function () {

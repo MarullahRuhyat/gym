@@ -94,7 +94,7 @@ Subscribed Package
         snap.pay(snapToken, {
             onSuccess: function (result) {
                 // Handle payment success
-                fetch('{{ route('member.payment.callback') }}', {
+                fetch("{{ route('member.payment.callback') }}", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -103,14 +103,14 @@ Subscribed Package
                     body: JSON.stringify(result)
                 }).then(() => {
                     // reload page
-                    location.reload();                    
+                    location.reload();
 
                 });
             },
             onPending: function (result) {
                 // Handle payment pending
                 alert('Payment pending');
-                fetch('{{ route('member.payment.callback') }}', {
+                fetch("{{ route('member.payment.callback') }}", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ Subscribed Package
             onError: function (result) {
                 // Handle payment error
                 alert('Payment failed');
-                fetch('{{ route('member.payment.callback') }}', {
+                fetch("{{ route('member.payment.callback') }}", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

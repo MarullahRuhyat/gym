@@ -128,42 +128,6 @@
 	</section>
 	<!-- ============ S-ABOUT-PROGRAM END ============ -->
 
-	<!-- ============== S-ABOUT-BOTTOM ============== -->
-	<section class="s-about-bottom">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="about-bottom-item">
-						<div class="date-cover">
-							<div class="date">10</div>
-							<h4>years</h4>
-						</div>
-						<div class="about-bottom-info">Facilis voluptas harum natus enim dolorum dolores</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="about-bottom-item">
-						<div class="date-cover">
-							<div class="date">27</div>
-							<h4>trainer</h4>
-						</div>
-						<div class="about-bottom-info">But I must explain to you all this mistaken idea of</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="about-bottom-item">
-						<div class="date-cover">
-							<div class="date">18</div>
-							<h4>club</h4>
-						</div>
-						<div class="about-bottom-info">Nor again is there anyone who loves or pursues or</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- ============ S-ABOUT-BOTTOM END ============ -->
-
 	<!-- ============== S-OUR-PROGRAMS ============== -->
 	<section class="s-club-cards">
 		<div class="container">
@@ -173,12 +137,11 @@
 				<div class="col-md-4 club-card-col">
 					<div class="club-card-item">
 						<div class="price-cover">
-							<div class="price">325</div>
-							<div class="date"><span>k</span>1 months</div>
+							<div class="date"><span>1 months</span></div>
 						</div>
 						<ul class="list">
-							<li>Maecenas consequat</li>
-							<li>ex id lobortis venenatis</li>
+							<li>Rp.325.000</li>
+							<li>Masa berlaku 31 hari dihitung sejak tanggal lunas pembayaran.</li>
 							<li>Mauris id erat enim</li>
 							<li class="item-excluded">Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
@@ -189,12 +152,11 @@
 				<div class="col-md-4 club-card-col">
 					<div class="club-card-item">
 						<div class="price-cover">
-							<div class="price">550</div>
-							<div class="date"><span>k</span>2 months</div>
+							<div class="date"><span>2 months</span></div>
 						</div>
 						<ul class="list">
+							<li><s style="opacity: 50%">Rp. 650.000</s> Rp.550.000</li>
 							<li>Masa berlaku 62 hari dihitung sejak tanggal lunas pembayaran.</li>
-							<li>ex id lobortis venenatis</li>
 							<li>Mauris id erat enim</li>
 							<li>Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
@@ -205,12 +167,11 @@
 				<div class="col-md-4 club-card-col mb-3">
 					<div class="club-card-item">
 						<div class="price-cover">
-							<div class="price">750</div>
-							<div class="date"><span>k</span>3 months</div>
+							<div class="date"><span>3 months</span></div>
 						</div>
 						<ul class="list">
-							<li>Maecenas consequat</li>
-							<li>ex id lobortis venenatis</li>
+							<li><s style="opacity: 50%">Rp.975.000</s> Rp.750.000</li>
+							<li>Masa berlaku 93 hari dihitung sejak tanggal lunas pembayaran.</li>
 							<li>Mauris id erat enim</li>
 							<li>Morbi dolor dolortin</li>
 							<li>lorem ut, venenatis dapibus mi</li>
@@ -224,12 +185,11 @@
 				<div class="col-md-4 club-card-col">
 					<div class="club-card-item">
 						<div class="price-cover">
-							<div class="price">1.250</div>
-							<div class="date"><span>k</span>6  months</div>
+							<div class="date"><span>6  months</span></div>
 						</div>
 						<ul class="list">
-							<li>Maecenas consequat</li>
-							<li>ex id lobortis venenatis</li>
+							<li><s style="opacity: 50%">Rp.1.950.000</s> Rp.1.250.000</li>
+							<li>Masa berlaku 186 hari dihitung sejak tanggal lunas pembayaran.</li>
 							<li>Mauris id erat enim</li>
 							<li class="item-excluded">Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
@@ -241,12 +201,11 @@
 				<div class="col-md-4 club-card-col">
 					<div class="club-card-item">
 						<div class="price-cover">
-							<div class="price">2.000</div>
-							<div class="date"><span>k</span>1 year</div>
+							<div class="date"><span>1 Year</span></div>
 						</div>
 						<ul class="list">
-							<li>Masa berlaku 62 hari dihitung sejak tanggal lunas pembayaran.</li>
-							<li>ex id lobortis venenatis</li>
+							<li><s style="opacity: 50%">Rp.3.900.000</s> Rp.2.000.000</li>
+							<li>Masa berlaku 372 hari dihitung sejak tanggal lunas pembayaran.</li>
 							<li>Mauris id erat enim</li>
 							<li>Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
@@ -274,7 +233,7 @@
 						</div>
 						<div class="contact-item-right">
 							<ul class="contact-item-list">
-								<li><a href="tel:18004886040">1-800-488-6040</a></li>
+								<li><a href="https://wa.me/+628170706999">08170706999</a></li>
 								<li><a href="tel:18005784090">1-800-578-4090</a></li>
 							</ul>
 						</div>
@@ -299,20 +258,20 @@
 						<ul class="form-cover">
 							<li class="inp-name">
 								<label>Name * (required)</label>
-								<input id="name" type="text" name="your-name">
+								<input id="name" required type="text" name="name">
 							</li>
 							<li class="inp-email">
-								<label>E-mail * (required)</label>
-								<input id="email" type="email" name="your-email">
+								<label>Phone * (required)</label>
+								<input id="phone" required type="text" name="phone" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
 							</li>
 							<li class="inp-text">
 								<label>Message * (required)</label>
-								<textarea id="comments" name="your-text"></textarea>
+								<textarea id="comments" required name="comments"></textarea>
 							</li>
 						</ul>
 						<div class="checkbox-wrap">
 							<div class="checkbox-cover">
-								<input type="checkbox">
+								<input type="checkbox" name="checkbox">
 								<p>By using this form you agree with the storage and handling of your data by this website.</p>
 							</div>
 						</div>

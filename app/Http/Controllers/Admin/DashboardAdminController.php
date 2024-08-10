@@ -91,4 +91,12 @@ class DashboardAdminController extends Controller
             'absent' => $absent,
         ]);
     }
+
+    function custom_template(Request $request)
+    {
+        session()->put('theme', $request->color);
+        return response()->json([
+            'status' => true
+        ]);
+    }
 }

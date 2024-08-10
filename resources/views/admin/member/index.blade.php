@@ -56,7 +56,7 @@ starter Page
 <script>
     $(document).ready(function() {
         // Populate Edit Modal
-        $('.button_edit').click(function() {
+        $(document).on('click', '.button_edit', function() {
             let id = $(this).data('id');
             let name = $(this).data('name');
             let phone = $(this).data('phone');
@@ -66,7 +66,7 @@ starter Page
         });
 
         // Populate Delete Modal
-        $('.button_delete').click(function() {
+        $(document).on('click', '.button_delete', function() {
             let id = $(this).data('id');
             let name = $(this).data('name');
             $('#id_delete').val(id);

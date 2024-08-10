@@ -1,5 +1,8 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light-theme">
+@php
+$selectedTheme = session('theme', 'light');
+@endphp
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="{{$selectedTheme}}">
 
 <head>
     <meta charset="utf-8">
@@ -87,6 +90,26 @@
                 let nilai = $(this).val()
                 nilai = formatRupiah(nilai, false)
                 $(this).val(nilai)
+            });
+
+            $('.theme').click(function() {
+                let color = $(this).data('color')
+                var formData = {
+                    color: color,
+                    _token: '{{ csrf_token() }}'
+                };
+
+                $.ajax({
+                    url: `{{ route('admin_custom_template')}}`,
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
             });
         });
     </script>

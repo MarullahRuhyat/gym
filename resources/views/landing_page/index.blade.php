@@ -166,7 +166,7 @@
                         <div class="program-item-back" style="background-image: url(landing_page/assets/img/programs-2.jpg);">
                             <div class="program-item-inner">
                                 <h3>Personal Body Care/Personal Beauty Body Care BY Personal Trainer</h3>
-                                <a href="program.html" class="btn">More</a>
+                                <a href="{{route("personal-body-care-by-pt")}}" class="btn">More</a>
                             </div>
                         </div>
                     </div>
@@ -181,7 +181,7 @@
                         <div class="program-item-back" style="background-image: url(landing_page/assets/img/programs-1.jpg);">
                             <div class="program-item-inner">
                                 <h3>Personal Body Care/Personal Beauty Body Care BY Personal Owner</h3>
-                                <a href="program.html" class="btn">More</a>
+                                <a href="{{route("personal-body-care-by-owner")}}" class="btn">More</a>
                             </div>
                         </div>
                     </div>
@@ -196,7 +196,7 @@
                         <div class="program-item-back" style="background-image: url(landing_page/assets/img/programs-4.jpg);">
                             <div class="program-item-inner">
                                 <h3>One Day Pass</h3>
-                                <a href="program.html" class="btn">More</a>
+                                <a href="{{route("one-day")}}" class="btn">More</a>
                             </div>
                         </div>
                     </div>

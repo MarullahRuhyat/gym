@@ -9,6 +9,7 @@ use App\Http\Middleware\CheckPersonalTrainer;
 use App\Http\Controllers\Admin\GajiController;
 use App\Http\Controllers\Admin\ScanController;
 use App\Http\Controllers\Admin\AbsenController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Member\PackageController;
 use App\Http\Controllers\Member\PaymentController;
@@ -38,6 +39,21 @@ Route::prefix('/')->group(function(){
     Route::get('/program-monthly-membership', function () {
         return view('landing_page.program_monthly_membership');
     })->name('program-monthly-membership');
+
+    Route::get('/personal-body-care-by-pt', function () {
+        return view('landing_page.program_personal_body_care_by_pt');
+    })->name('personal-body-care-by-pt');
+
+    Route::get('/personal-body-care-by-owner', function () {
+        return view('landing_page.program_personal_body_care_by_owner');
+    })->name('personal-body-care-by-owner');
+
+    Route::get('/one-day', function () {
+        return view('landing_page.program_one_day');
+    })->name('one-day');
+
+    // post question 
+    Route::post('/post-question', [LandingPageController::class, 'post_question'])->name('post_question');
 });
 
 Route::get('/starter-page', function () {

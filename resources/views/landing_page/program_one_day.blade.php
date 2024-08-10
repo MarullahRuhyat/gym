@@ -76,10 +76,10 @@
 	<!-- =============== HEADER-TITLE =============== -->
 	<section class="s-header-title" style="background-image: url(landing_page/assets/img/bg-1-min.png);">
 		<div class="container">
-			<h1 class="title">Monthly Membership</h1>
+			<h1 class="title">One Day Pass</h1>
 			<ul class="breadcrambs">
 				<li><a href="index.html">Home</a></li>
-				<li>Monthly Membership</li>
+				<li>One Day Pass</li>
 			</ul>
 		</div>
 	</section>
@@ -103,7 +103,7 @@
 					</div>
 				</div>
 				<div class="col-md-7 about-info-cover">
-					<h2 class="title-decor">About <span>Program Monthly Membership</span></h2>
+					<h2 class="title-decor">About <span>Program One Day Pass</span></h2>
 					<div class="text">
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut <a href="contacts.html">enim ad minim</a> veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
@@ -137,11 +137,11 @@
 				<div class="col-md-4 club-card-col">
 					<div class="club-card-item">
 						<div class="price-cover">
-							<div class="date"><span>1 months</span></div>
+							<div class="date"><span>Isidentil</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp.325.000</li>
-							<li>Masa berlaku 31 hari dihitung sejak tanggal lunas pembayaran.</li>
+							<li>Rp. 75.000</li>
+							<li>1x datang tanpa Personal Trainer.</li>
 							<li>Mauris id erat enim</li>
 							<li class="item-excluded">Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
@@ -152,11 +152,11 @@
 				<div class="col-md-4 club-card-col">
 					<div class="club-card-item">
 						<div class="price-cover">
-							<div class="date"><span>2 months</span></div>
+							<div class="date"><span>PBC/PBBC Isidentil Privat</span></div>
 						</div>
 						<ul class="list">
-							<li><s style="opacity: 50%">Rp. 650.000</s> Rp.550.000</li>
-							<li>Masa berlaku 62 hari dihitung sejak tanggal lunas pembayaran.</li>
+							<li>Rp. 225.000</li>
+							<li>Masa tenggang 45 hari dengan 12x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 							<li>Mauris id erat enim</li>
 							<li>Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
@@ -167,11 +167,11 @@
 				<div class="col-md-4 club-card-col mb-3">
 					<div class="club-card-item">
 						<div class="price-cover">
-							<div class="date"><span>3 months</span></div>
+							<div class="date"><span>PBC/PBBC Isidentil Couple</span></div>
 						</div>
 						<ul class="list">
-							<li><s style="opacity: 50%">Rp.975.000</s> Rp.750.000</li>
-							<li>Masa berlaku 93 hari dihitung sejak tanggal lunas pembayaran.</li>
+							<li>Rp. 400.000 /person</li>
+							<li>Masa tenggang 30 hari dengan 10x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 							<li>Mauris id erat enim</li>
 							<li>Morbi dolor dolortin</li>
 							<li>lorem ut, venenatis dapibus mi</li>
@@ -185,11 +185,11 @@
 				<div class="col-md-4 club-card-col">
 					<div class="club-card-item">
 						<div class="price-cover">
-							<div class="date"><span>6  months</span></div>
+							<div class="date"><span> PBC/PBBC Owner Isidentil</span></div>
 						</div>
 						<ul class="list">
-							<li><s style="opacity: 50%">Rp.1.950.000</s> Rp.1.250.000</li>
-							<li>Masa berlaku 186 hari dihitung sejak tanggal lunas pembayaran.</li>
+							<li>Rp. 350.000</li>
+							<li>1x datang dengan bimbingan Personal Trainer Mr. Frans Lee</li>
 							<li>Mauris id erat enim</li>
 							<li class="item-excluded">Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
@@ -201,13 +201,13 @@
 				<div class="col-md-4 club-card-col">
 					<div class="club-card-item">
 						<div class="price-cover">
-							<div class="date"><span>1 Year</span></div>
+							<div class="date"><span>PBC/PBBC Owner Couple</span></div>
 						</div>
 						<ul class="list">
-							<li><s style="opacity: 50%">Rp.3.900.000</s> Rp.2.000.000</li>
-							<li>Masa berlaku 372 hari dihitung sejak tanggal lunas pembayaran.</li>
+							<li>Rp. 650.000 /person</li>
+							<li>1x datang dengan bimbingan Personal Trainer Mr. Frans Lee</li>
 							<li>Mauris id erat enim</li>
-							<li>Morbi dolor dolortin</li>
+							<li class="item-excluded">Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
 						</ul>
 						<a href="program.html" class="btn">order now</a>

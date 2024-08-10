@@ -141,7 +141,7 @@
 						</div>
 						<ul class="list">
 							<li>Rp. 3.500.000</li>
-							<li>Masa tenggang 45 hari dengan 12x bimbingan Mr.Frans Lee, sudah termasuk biaya paket monthly membership.</li>
+							<li>45 hari dengan 12x bimbingan Mr.Frans Lee, sudah termasuk biaya paket monthly membership.</li>
 							<li>Mauris id erat enim</li>
 							<li class="item-excluded">Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
@@ -156,7 +156,7 @@
 						</div>
 						<ul class="list">
 							<li>Rp. 3.000.000 /person</li>
-							<li>Masa tenggang 45 hari dengan 12x bimbingan Mr. Frans Lee, sudah termasuk biaya paket monthly membership.</li>
+							<li>45 hari dengan 12x bimbingan Mr. Frans Lee, sudah termasuk biaya paket monthly membership.</li>
 							<li>Mauris id erat enim</li>
 							<li>Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
@@ -171,7 +171,7 @@
 						</div>
 						<ul class="list">
 							<li>Rp. 1.500.000 /person</li>
-							<li>Masa tenggang 30 hari dengan 10x bimbingan Mr. Frans Lee, sudah termasuk biaya paket monthly membership.</li>
+							<li>30 hari dengan 10x bimbingan Mr. Frans Lee, sudah termasuk biaya paket monthly membership.</li>
 							<li>Mauris id erat enim</li>
 							<li>Morbi dolor dolortin</li>
 							<li>lorem ut, venenatis dapibus mi</li>

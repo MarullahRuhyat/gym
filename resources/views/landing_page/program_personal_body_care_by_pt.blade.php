@@ -141,7 +141,7 @@
 						</div>
 						<ul class="list">
 							<li>Rp. 1.900.000</li>
-							<li>Masa tenggang 45 hari dengan 12x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
+							<li>45 hari dengan 12x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 							<li>Mauris id erat enim</li>
 							<li class="item-excluded">Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
@@ -156,7 +156,7 @@
 						</div>
 						<ul class="list">
 							<li>Rp. 1.500.000 /person</li>
-							<li>Masa tenggang 45 hari dengan 12x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
+							<li>45 hari dengan 12x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 							<li>Mauris id erat enim</li>
 							<li>Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
@@ -171,7 +171,7 @@
 						</div>
 						<ul class="list">
 							<li>Rp. 1.075.000 /person</li>
-							<li>Masa tenggang 30 hari dengan 10x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
+							<li>30 hari dengan 10x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 							<li>Mauris id erat enim</li>
 							<li>Morbi dolor dolortin</li>
 							<li>lorem ut, venenatis dapibus mi</li>
@@ -192,7 +192,7 @@
 						</div>
 						<ul class="list">
 							<li>Rp. 775.000 /person</li>
-							<li>Berlatih di Flozor's Gym dengan orang-orang yang dipilih secara acak oleh kami pada saat yang sama. Masa tenggang 30 hari dengan 10x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
+							<li>Berlatih di Flozor's Gym dengan orang-orang yang dipilih secara acak oleh kami pada saat yang sama. 30 hari dengan 10x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 							<li>Mauris id erat enim</li>
 							<li class="item-excluded">Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>

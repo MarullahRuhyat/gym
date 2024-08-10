@@ -156,7 +156,7 @@
 						</div>
 						<ul class="list">
 							<li>Rp. 225.000</li>
-							<li>Masa tenggang 45 hari dengan 12x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
+							<li>45 hari dengan 12x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 							<li>Mauris id erat enim</li>
 							<li>Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
@@ -171,7 +171,7 @@
 						</div>
 						<ul class="list">
 							<li>Rp. 400.000 /person</li>
-							<li>Masa tenggang 30 hari dengan 10x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
+							<li>30 hari dengan 10x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 							<li>Mauris id erat enim</li>
 							<li>Morbi dolor dolortin</li>
 							<li>lorem ut, venenatis dapibus mi</li>

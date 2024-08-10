@@ -35,7 +35,7 @@ Route::prefix('/')->group(function(){
             return redirect()->route('auth.login');
         }
         return view('landing_page.index');
-    });
+    })->name('landing_page');
     Route::get('/program-monthly-membership', function () {
         return view('landing_page.program_monthly_membership');
     })->name('program-monthly-membership');

@@ -65,7 +65,7 @@
         {{-- <div class="header-menu"> --}}
         <div class="container">
             <div class="header-logo">
-                <a href="index.html" class="logo img-thumbnail">
+                <a href="{{route("landing_page")}}" class="logo img-thumbnail">
                     <img src="{{asset("landing_page/assets/img/9.svg")}}" class="card-img-top" alt="logo">
                 </a>
                 <p class="me-5">Flozor's Gym</p>
@@ -518,7 +518,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-lg-4 footer-item-logo">
-                    <a href="index.html" class="logo-footer"><img src="assets/img/footer-logo2.svg" alt="logo"></a>
+                    <a href="{{route("landing_page")}}" class="logo-footer"><img src="assets/img/footer-logo2.svg" alt="logo"></a>
                     <p>Flozors Gym, founded in 2002 by Frans Lee, offers top service and a welcoming atmosphere for fitness enthusiasts.</p>
                     <ul class="social-list">
                         <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"

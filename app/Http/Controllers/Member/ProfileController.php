@@ -102,9 +102,12 @@ class ProfileController extends Controller
                 ]);
                 // $qr_code = DB::table('qr_code')->where('user_id', $user->id)->pluck('path_qr_code')->first();
                 // $generate_image_from_qr_code = QrCode::format('png')->size(200)->generate($qr_details);
-                $generate_image_from_qr_code = QrCode::generate(
-                    'Hello, World!',
-                );
+                // $generate_image_from_qr_code = QrCode::generate(
+                //     'Hello, World!',
+                // );
+                // format png can be scanned by camera
+                $generate_image_from_qr_code = QrCode::format('png')->size(400)->generate($qr_details);
+
                 file_put_contents(public_path('build/images/member/qr_code/' . $qr_code), $generate_image_from_qr_code);
 
                 return response()->json(['status' => 'success', 'qr_code' => $qr_code]);

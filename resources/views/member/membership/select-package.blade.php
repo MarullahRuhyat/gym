@@ -95,8 +95,10 @@ starter Page
                 <form action="{{ route('member.payment') }}" method="GET">
                     @csrf
                     <input type="hidden" name="submit_package_id" id="submit_package_id" value="">
-                    <input type="hidden" name="submit_user_id" id="submit_user_id" value="{{ Auth::user()->id }}">
+                    <!-- <input type="hidden" name="submit_user_id" id="submit_user_id" value="{{ Auth::user()->id }}"> -->
+                    <input type="hidden" name="payment_phone_number" id="payment_phone_number" value="{{ Auth::user()->phone_number }}">
                     <input type="hidden" name="submit_start_date" id="submit_start_date" value="">
+                    <input type="text" name="payment_amount" id="payment_amount" value="">
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
@@ -173,6 +175,7 @@ starter Page
                 // $('#payment-total').text('Rp.' + response.price);
                 // format number
                 $('#payment-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                $('#payment_amount').val(response.price);
             },
             error: function(xhr, status, error) {
                 console.log(error);

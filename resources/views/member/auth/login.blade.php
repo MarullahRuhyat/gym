@@ -71,6 +71,11 @@ Login
                                     <button id="submit-otp-code" type="submit" class="btn btn-grd-deep-blue ">Login</button>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="d-grid">
+                                    <a href="" id="resend-otp">Resend OTP</a>
+                                </div>
+                            </div>
 
                         </form>
                     </div>
@@ -91,6 +96,30 @@ Login
 @push('script')
 <!-- custom script  -->
 <script>
+    // resend-otp
+    $(document).on('click', '#resend-otp', function(e) {
+        e.preventDefault();
+        var phone_number = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+        $.ajax({
+            url: "{{ route('member.get-otp') }}",
+            type: "POST",
+            data: {
+                phone_number: phone_number,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+                $('.alert').addClass('alert-success').html(
+                    '<button type="button" class="btn-close me-3" data-bs-dismiss="alert" aria-label="Close"></button>' +
+                    response.message);
+            },
+            error: function(xhr, status, error) {
+                var response = JSON.parse(xhr.responseText);
+                $('.alert').addClass('alert-danger').html(
+                    '<button type="button" class="btn-close me-3" data-bs-dismiss="alert" aria-label="Close"></button>' +
+                    response.message);
+            }
+        });
+    });
     const inputs = document.querySelectorAll('#otp input');
 
     inputs.forEach((input, index) => {

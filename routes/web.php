@@ -84,10 +84,10 @@ Route::prefix('member')->group(function () {
     Route::post('/register/process', [MemberAuthController::class, 'store1'])->name('member.register.process');
     Route::post('/register-submit', [MemberAuthController::class, 'register_submit'])->name('member.register.submit');
 
-    Route::get('/send-otp', [MemberAuthController::class, 'send_otp'])->name('member.send-otp');
+    Route::get('/login', [MemberAuthController::class, 'send_otp'])->name('member.send-otp');
     Route::post('/get-otp', [MemberAuthController::class, 'get_otp'])->name('member.get-otp');
     Route::get('/verify-otp/{phone_number}', [MemberAuthController::class, 'verify_otp'])->name('member.verify-otp');
-    Route::post('/login', [MemberAuthController::class, 'login'])->name('member.login');
+    Route::post('/post-login', [MemberAuthController::class, 'login'])->name('member.login');
     Route::post('/logout', [MemberAuthController::class, 'logout'])->name('member.logout')->middleware(Member::class);
 
     Route::middleware(Member::class)->group(function () {

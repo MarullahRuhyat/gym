@@ -30,7 +30,9 @@ starter Page
                                             <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
                                             <p class="card-text">{{ $pkg->description }}</p>
                                             <p class="card-text">Duration: {{ $pkg->duration_in_days }} Days</p>
-                                            <h5>Price: Rp.{{ $pkg->price }}</h5>
+                                            <h5>Price: 
+                                                Rp.{{ number_format($pkg->price, 0, ',', '.') }}
+                                            </h5>
                                             <div class="mt-3 d-flex align-items-center justify-content-between">
                                                 <button style="color:white;" class="btn bg-primary border-0 d-flex gap-2 px-3" onclick="SetStartDate('{{ $pkg->id }}')">
                                                     Select Package
@@ -144,6 +146,16 @@ starter Page
         var start_date = $('#start_date').val();
         var id = $('#pkg_id').val();
 
+        // if start_date is empty show alert message
+        if (start_date == '') {
+            alert('Start Date is required');
+            return;
+        }
+        if (start_date < '{{ date('Y-m-d') }}') {
+            alert('Start Date must be greater than today');
+            return;
+        }
+
         $('#SetStartDate').modal('hide');
         $('#ScrollableModal').modal('show');
         $('#submit_package_id').val(id);
@@ -155,8 +167,12 @@ starter Page
                 id: id,
             },
             success: function(response) {
-                $('#payment-item-total').text('Rp.' + response.price);
-                $('#payment-total').text('Rp.' + response.price);
+                // $('#payment-item-total').text('Rp.' + response.price);
+                // format number
+                $('#payment-item-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                // $('#payment-total').text('Rp.' + response.price);
+                // format number
+                $('#payment-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
             },
             error: function(xhr, status, error) {
                 console.log(error);

@@ -8,7 +8,7 @@
 	<meta name="description" content="">
 	<meta name="format-detection" content="telephone=no">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="{{asset("landing_page/assets/img/9.svg")}}">
+    <link rel="shortcut icon" href="{{asset("landing_page/assets/img/9.png")}}">
     	<!-- =================== STYLE =================== -->
     <link rel="stylesheet" href="{{asset("landing_page/assets/css/slick.min.css")}}">
     <link rel="stylesheet" href="{{asset("landing_page/assets/css/bootstrap-grid.css")}}">
@@ -64,7 +64,7 @@
         <div class="container">
             <div class="header-logo">
                 <a href="{{route("landing_page")}}" class="logo img-thumbnail">
-                    <img src="{{asset("landing_page/assets/img/9.svg")}}" class="card-img-top" alt="logo">
+                    <img src="{{asset("landing_page/assets/img/9.png")}}" class="card-img-top" alt="logo">
                 </a>
                 <p class="me-5">Flozor's Gym</p>
             </div>

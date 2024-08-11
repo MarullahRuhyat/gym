@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Member;
 
+use App\Helper\sendNotif;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -39,8 +40,8 @@ class AuthController extends Controller
                 'otp' => $otp,
                 'otp_expired_at' => $expired_at,
             ]);
-            // $send = new sendWA();
-            // $curl = $send->send($phone_number, $otp);
+            $send = new sendNotif();
+            $curl = $send->sendWA($phone_number,'Flozors Gym: Gunakan kode OTP ' . $otp . ', UNTUK LOGIN KE AKUN ANDA. Berlaku selama 5 menit. JANGAN pernah membagikan kode ini kepada orang lain, termasuk staf Flozors Gym.');
         }
 
         $data = [

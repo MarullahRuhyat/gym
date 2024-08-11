@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('end_date');
             $table->boolean('is_active')->default(false);
             $table->string('user_terkait')->nullable();
+            $table->integer('duration_in_days')->nullable();
             $table->timestamps();
         });
     }

@@ -29,13 +29,13 @@ starter Page
                 <div class="col" style="margin-top:30px;">
                     <button id="show_qr_member" type="button" class="btn btn-grd btn-grd-deep-blue px-5" data-bs-toggle="modal" data-bs-target="">Show QR Member</button>
                 </div>
-              
+
                 @if (auth()->user()->available_personal_trainer_quota != 0)
                     <div class="col" style="margin-top:30px;">
                         <button id="show_pt_member" type="button" class="btn btn-grd btn-grd-deep-blue px-5" data-bs-toggle="modal" data-bs-target="">Show QR PT</button>
                     </div>
                 @endif
-                
+
                 <div class="card" style="margin:auto; padding-bottom:50px; padding:30px;">
                     <h4 style="padding-bottom:30px;" class="card-title mb-4 fw-bold justify-content-between border-bottom pt-4">Membership Details</h4>
                     <div>
@@ -69,9 +69,9 @@ starter Page
                                 you don't have any personal trainer quota
                             </p>
                         </div>
-                        
+
                     @endif
-                    
+
                 </div>
             </div>
             @endif
@@ -93,14 +93,7 @@ starter Page
                 <div class="order-summary">
                     <div class="card mb-0">
                         <div class="card-body d-flex justify-content-center align-items-center">
-                            <div class="card border bg-transparent shadow-none mb-3" style="width: fit-content;">
-                                <div class="card-body">
-                                    <img id="qr_code_img" src="" class="w-150 rounded h-150" alt="...">
-                                </div>
-                            </div>
-                            <div class="card border bg-transparent shadow-none">
-                            </div>
-                        </div>
+                        <img id="qr_code_img" src="" class="w-150 rounded h-150" alt="...">
                     </div>
                 </div>
             </div>
@@ -124,9 +117,9 @@ starter Page
                     _token: "{{ csrf_token() }}",
                 }
             }).done(function(data) {
-                // $('#qr_code_img').attr('src', '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code);
+                $('#qr_code_img').attr('src', '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code);
                 // new tab with qr code
-                var win = window.open('{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code, '_blank');
+                // var win = window.open('{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code, '_blank');
             });
         });
     });
@@ -144,6 +137,7 @@ starter Page
                 }
             }).done(function(data) {
                 $('#qr_code_img').attr('src', '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code);
+                // var win = window.open('{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code, '_blank');
             });
         });
     });

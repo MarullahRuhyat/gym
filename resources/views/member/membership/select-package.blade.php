@@ -30,7 +30,7 @@ starter Page
                                             <h5 class="card-title mb-3">{{ $pkg->name }}</h5>
                                             <p class="card-text">{{ $pkg->description }}</p>
                                             <p class="card-text">Duration: {{ $pkg->duration_in_days }} Days</p>
-                                            <h5>Price: 
+                                            <h5>Price:
                                                 Rp.{{ number_format($pkg->price, 0, ',', '.') }}
                                             </h5>
                                             <div class="mt-3 d-flex align-items-center justify-content-between">
@@ -59,7 +59,7 @@ starter Page
                 <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="modal">
                     <i class="material-icons-outlined">close</i>
                 </a>
-            </div> 
+            </div>
             <div class="modal-body">
                 <input type="hidden" name="pkg_id" id="pkg_id">
                     <div class="col">
@@ -151,7 +151,7 @@ starter Page
             alert('Start Date is required');
             return;
         }
-        if (start_date < '{{ date('Y-m-d') }}') {
+        if (start_date < "{{ date('Y-m-d') }}") {
             alert('Start Date must be greater than today');
             return;
         }

@@ -78,8 +78,8 @@ class PaymentController extends Controller
     public function payment_backup(Request $request)
     {
         $start_date = $request->submit_start_date;
-        $gym_membership_packages = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('duration_in_days')->first();
-        $end_date = date('Y-m-d', strtotime($start_date . ' + ' . $gym_membership_packages . ' days'));
+        $duration_in_days = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('duration_in_days')->first();
+        $end_date = date('Y-m-d', strtotime($start_date . ' + ' . $duration_in_days . ' days'));
         $amount = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('price')->first();
         $user = DB::table('users')->where('id', $request->submit_user_id)->first();
         $params = array(
@@ -99,6 +99,7 @@ class PaymentController extends Controller
             'gym_membership_packages' => $request->submit_package_id,
             'start_date' => date('Y-m-d'),
             'end_date' => $end_date,
+            'duration_in_days' => $duration_in_days,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -114,6 +115,16 @@ class PaymentController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        // get current available_personal_trainer in table users
+        $available_personal_trainer_quota = DB::table('users')->where('id', $request->submit_user_id)->pluck('available_personal_trainer_quota')->first();
+        $personal_trainer_kouta = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('personal_trainer_quota')->first();
+
+        // update available_personal_trainer pada table users
+        DB::table('users')->where('id', $request->submit_user_id)->update([
+            'available_personal_trainer_quota' => $available_personal_trainer_quota + $personal_trainer_kouta
+        ]);
+        
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 

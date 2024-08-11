@@ -29,15 +29,22 @@ class ProfileController extends Controller
         $user = auth()->user();
         $qr_code = DB::table('qr_code')->where('user_id', $user->id)->pluck('path_qr_code')->first();
         $membership = DB::table('memberships')
-        ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+        // ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+        ->leftjoin('users', 'memberships.user_id', '=', 'users.id')
         ->where(function($query) use ($user) {
             $query->where('memberships.user_id', $user->id)
                 ->orWhere('memberships.user_terkait', 'like', '%' . $user->id . '%');
         })
-        ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as id', 'gym_membership_packages.id as gym_membership_packages_id')
-        ->get();
+        // ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as id', 'gym_membership_packages.id as gym_membership_packages_id')
+        ->select('memberships.*', 'users.*', 'memberships.id as id')
+        // get only latest membership desc
+        ->orderBy('memberships.created_at', 'desc') // Mengurutkan berdasarkan tanggal pembuatan secara menurun
+        ->first();
 
-        return view('member.profile.dashboard', compact('membership'));
+        // dd($membership);
+        
+
+        return view('member.profile.dashboard', ['membership' => $membership]);
     }
 
     public function qr_code(Request $request) {

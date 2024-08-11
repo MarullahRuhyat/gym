@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->enum('role', ['admin', 'member', 'personal trainer'])->default('member');
-            $table->enum('status', ['active', 'inactive','expired'])->default('inactive');
+            $table->enum('status', ['active', 'inactive','expired','unregistered'])->default('unregistered');
             $table->integer('available_personal_trainer_quota')->default(0);
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();

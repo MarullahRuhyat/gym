@@ -10,12 +10,13 @@ Subscribed Package
 </div>
 <div class="row">
     {{-- @if(count($membership_payments) == null) --}}
-    <div class="col-md-12 mb-5">
-    {{-- @if(count($membership_payments) == null) --}}
+    <div class="col-md-12 mb-5 row">
+    @if($packages_membership_payments == null)
     <div class="col-md-12 mb-5">
         <p>No Subscribed Package</p>
     </div>
-    {{-- @else --}}
+    @else
+    
     @foreach($packages_membership_payments as $membership)
     <div class="col-md-4">
         <div class="card rounded-4">
@@ -37,9 +38,11 @@ Subscribed Package
                             <p class="card-text">Duration: {{ $membership->duration_in_days }} Days</p>
                             <p class="card-text">Starting: {{ $membership->start_date }}</p>
                             <p class="card-text">Ending: {{ $membership->end_date }}</p>
-                            <p class="card-text">Personal Trainer Quota: {{ $membership->personal_trainer_quota }} /
-                                {{ $membership->personal_trainer_quota }}</p>
-                            <p class="card-text">Price: Rp.{{ $membership->price }}</p>
+                            <p class="card-text">Personal Trainer Quota: {{ $membership->personal_trainer_quota }} </p>
+                            <p class="card-text">
+                                Price: 
+                                Rp.{{ number_format($membership->price, 0, ',', '.') }}
+                            </p>
                             @if($membership->is_active == 1)
                             <button class="btn btn-outline-info" disabled>Active</button>
                             @else
@@ -56,7 +59,7 @@ Subscribed Package
         </div>
     </div>
     @endforeach
-    {{-- @endif --}}
+    @endif
 </div>
 
 @endsection
@@ -67,7 +70,7 @@ Subscribed Package
         button.addEventListener('click', function () {
 
             const orderId = this.getAttribute('data-id');
-            alert(orderId);
+            // alert(orderId);
 
             fetch('{{ route("member.check_payment_status") }}', {
                 method: 'POST',

@@ -4,7 +4,7 @@ starter Page
 @endsection
 @section('content')
 @foreach($profile as $profile)
-<div class="row justify-content-center">
+<div class="row justify-content-center" >
     <div class="col-12 col-xl-4">
         <div class="card rounded-4">
             <div class="card-body p-4">

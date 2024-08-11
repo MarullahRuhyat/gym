@@ -92,10 +92,10 @@ Route::prefix('member')->group(function () {
 
     Route::get('/payment', [PaymentController::class, 'payment'])->name('member.payment');
 
-    Route::get('/send-otp', [MemberAuthController::class, 'send_otp'])->name('member.send-otp');
+    Route::get('/login', [MemberAuthController::class, 'send_otp'])->name('member.send-otp');
     Route::post('/get-otp', [MemberAuthController::class, 'get_otp'])->name('member.get-otp');
     Route::get('/verify-otp/{phone_number}', [MemberAuthController::class, 'verify_otp'])->name('member.verify-otp');
-    Route::post('/login', [MemberAuthController::class, 'login'])->name('member.login');
+    Route::post('/post-login', [MemberAuthController::class, 'login'])->name('member.login');
     Route::post('/logout', [MemberAuthController::class, 'logout'])->name('member.logout')->middleware(Member::class);
 
 

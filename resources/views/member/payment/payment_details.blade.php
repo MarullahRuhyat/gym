@@ -12,6 +12,7 @@ starter Page
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
         pay();
+        preventPageReload();
     });
 
     function pay() {
@@ -31,8 +32,7 @@ starter Page
         },
         onPending: function (result) {
             // Handle payment pending
-            // alert('Payment pending');
-            fetch("{{ route('member.payment.callback') }}", {
+            fetch('{{ route('member.payment.callback') }}', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -58,12 +58,18 @@ starter Page
 
         },
         onClose: function () {
-            // alert('Payment closed');
             // Redirect when the Snap modal is closed
             window.location.href = '/member/package/subscribed-package';
         }
     });
 }
+
+    function preventPageReload() {
+        window.addEventListener('beforeunload', function (e) {
+            e.preventDefault();
+            e.returnValue = ''; // Menampilkan prompt yang memperingatkan pengguna
+        });
+    }
 
 </script>
 <!--plugins-->

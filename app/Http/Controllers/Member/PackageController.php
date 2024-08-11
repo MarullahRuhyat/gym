@@ -11,7 +11,7 @@ class PackageController extends Controller
     public function package()
     {
         $packages = DB::table('gym_membership_packages')
-            ->leftJoin('type_packages', 'gym_membership_packages.type', '=', 'type_packages.id')
+            ->leftJoin('type_packages', 'gym_membership_packages.type_packages_id', '=', 'type_packages.id')
             ->select('gym_membership_packages.*', 'type_packages.name as type_name')
             ->get();
 
@@ -34,6 +34,7 @@ class PackageController extends Controller
             ->where('payments.user_id', $user->id)
             ->orderBy('payments.id', 'desc')
             ->get();
+            // dd($packages_membership_payments);
 
         return view('member.membership.subscribed-package', compact('packages_membership_payments'));
     }

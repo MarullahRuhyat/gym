@@ -8,7 +8,7 @@ starter Page
         <div class="col row-cols-auto g-3 justify-content-center">
             <h1 class="text-center">Welcome, {{ ucwords(auth()->user()->name) }}</h1>
             <!-- <h1 style="padding-bottom:50px; font-size:60px"> </h1> -->
-            @if ($membership->isEmpty())
+            @if ($membership == null)
             <div class="justify-content-center text-center">
                 <div class="col my-5">
                     <a href="{{ route('member.package') }}" class="btn btn-grd btn-grd-deep-blue px-5">Buy Membership</a>
@@ -29,10 +29,13 @@ starter Page
                 <div class="col" style="margin-top:30px;">
                     <button id="show_qr_member" type="button" class="btn btn-grd btn-grd-deep-blue px-5" data-bs-toggle="modal" data-bs-target="">Show QR Member</button>
                 </div>
-                <div class="col" style="margin-top:30px;">
-                    <button id="show_pt_member" type="button" class="btn btn-grd btn-grd-deep-blue px-5" data-bs-toggle="modal" data-bs-target="">Show QR PT</button>
-                </div>
-                @foreach ($membership as $membership)
+              
+                @if (auth()->user()->available_personal_trainer_quota != 0)
+                    <div class="col" style="margin-top:30px;">
+                        <button id="show_pt_member" type="button" class="btn btn-grd btn-grd-deep-blue px-5" data-bs-toggle="modal" data-bs-target="">Show QR PT</button>
+                    </div>
+                @endif
+                
                 <div class="card" style="margin:auto; padding-bottom:50px; padding:30px;">
                     <h4 style="padding-bottom:30px;" class="card-title mb-4 fw-bold justify-content-between border-bottom pt-4">Membership Details</h4>
                     <div>
@@ -42,7 +45,7 @@ starter Page
                         </div>
                         <div class="d-flex justify-content-between">
                             <p class="fw-semi-bold">Membership Period :</p>
-                            <p id="" class="text-danger fw-bold">{{ $membership->duration_in_days }}</p>
+                            <p id="" class="text-danger fw-bold">{{ $membership->duration_in_days }} days</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <p class="fw-semi-bold">Starting Date :</p>
@@ -53,12 +56,23 @@ starter Page
                             <p id="" class="fw-bold">{{ $membership->end_date }}</p>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between border-top pt-4">
-                        <h5 class="mb-0 fw-bold">Total :</h5>
-                        <h5 id="" class="mb-0 fw-bold">Rp.{{ $membership->price }}</h5>
-                    </div>
+
+                    @if ($membership->available_personal_trainer_quota != 0)
+                        <div class="d-flex justify-content-between">
+                            <p class="fw-semi-bold">Personal Trainer Quota :</p>
+                            <p id="" class="fw-bold">{{ $membership->available_personal_trainer_quota }} times</p>
+                        </div>
+                    @else
+                        <div class="d-flex justify-content-between">
+                            <p class="fw-semi-bold">Personal Trainer Quota :</p>
+                            <p id="" class="fw-bold">
+                                you don't have any personal trainer quota
+                            </p>
+                        </div>
+                        
+                    @endif
+                    
                 </div>
-                @endforeach
             </div>
             @endif
         </div>
@@ -110,7 +124,9 @@ starter Page
                     _token: "{{ csrf_token() }}",
                 }
             }).done(function(data) {
-                $('#qr_code_img').attr('src', '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code);
+                // $('#qr_code_img').attr('src', '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code);
+                // new tab with qr code
+                var win = window.open('{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code, '_blank');
             });
         });
     });

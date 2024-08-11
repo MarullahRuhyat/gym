@@ -40,7 +40,12 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="d-grid">
-                                        <button id="submit-phone-number" type="submit" class="btn btn-grd-deep-blue ">Login</button>
+                                        <button id="submit-phone-number" type="submit" class="btn btn-grd-deep-blue ">Get OTP</button>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-grid">
+                                        <a href="{{ route('member.register')}}">Don't have an account? <span><strong>Register</strong></span></a>
                                     </div>
                                 </div>
                             </form>

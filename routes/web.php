@@ -168,6 +168,8 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
     // payment
     Route::prefix('payment')->group(function () {
         Route::get('/', [GajiPersonalTrainerController::class, 'index'])->name('personal_trainer.payment.index');
+        // search gaji personal trainer 
+        Route::get('/search', [GajiPersonalTrainerController::class, 'search'])->name('personal_trainer.payment.search');
     });
 });
 

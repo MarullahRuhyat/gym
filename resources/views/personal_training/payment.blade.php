@@ -8,9 +8,10 @@ Gaji Trainer
 @section('content')
 <h6 class="mb-0 text-uppercase">Gaji {{$gaji_pokok_tanggal}}</h6>
 <div class="d-flex flex-column flex-md-row justify-content-end align-items-center mb-2 mt-3">
-    <form action="" method="get" class="form-inline d-flex flex-column flex-md-row w-100 mb-2 mb-md-0 ms-md-1">
-        <input type="text" class="form-control date-format" placeholder="Masukkan Tanggal">
+    <form action="{{ route('personal_trainer.payment.search') }}" method="get" class="form-inline d-flex flex-column flex-md-row w-100 mb-2 mb-md-0 ms-md-1">
+        <input type="text" name="date" class="form-control date-format" placeholder="Masukkan Tanggal">
     </form>
+    
 </div>
 <hr>
 
@@ -158,6 +159,10 @@ function exportToPDF() {
         console.error("Elemen yang ingin diekspor tidak ditemukan atau kosong.");
     }
 }
+document.querySelector('.date-format').addEventListener('change', function () {
+    this.closest('form').submit();
+});
+
 
 document.querySelector('.btn-danger').addEventListener('click', exportToPDF);
 

@@ -98,7 +98,7 @@ starter Page
                     <!-- <input type="hidden" name="submit_user_id" id="submit_user_id" value="{{ Auth::user()->id }}"> -->
                     <input type="hidden" name="payment_phone_number" id="payment_phone_number" value="{{ Auth::user()->phone_number }}">
                     <input type="hidden" name="submit_start_date" id="submit_start_date" value="">
-                    <input type="text" name="payment_amount" id="payment_amount" value="">
+                    <input type="hidden" name="payment_amount" id="payment_amount" value="">
                     <div class="col">
                         <div class="card">
                             <div class="card-body">

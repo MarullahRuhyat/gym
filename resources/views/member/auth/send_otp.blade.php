@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="d-grid">
-                                        <a href="{{ route('member.register')}}">Don't have an account? <span><strong>Register</strong></span></a>
+                                        <a href="{{ route('member.register_select')}}">Don't have an account? <span><strong>Register</strong></span></a>
                                     </div>
                                 </div>
                             </form>

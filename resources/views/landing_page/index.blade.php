@@ -58,7 +58,7 @@
                         <li><a target="_blank" href="mailto:flozorsgym@gmail.com"><i class="fa fa-envelope-o"
                                     aria-hidden="true"></i></a></li>
                     </ul>
-                    <a href="" class="btn-login">Login</a>
+                    <a href="{{route("member.send-otp")}}" class="btn-login">Login</a>
                 </div>
             </div>
         </div>

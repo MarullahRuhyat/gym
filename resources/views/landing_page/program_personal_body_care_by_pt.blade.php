@@ -56,7 +56,7 @@
                         <li><a target="_blank" href="mailto:flozorsgym@gmail.com"><i class="fa fa-envelope-o"
                                     aria-hidden="true"></i></a></li>
                     </ul>
-                    <a href="" class="btn-login">Login</a>
+                    <a href="{{route("member.send-otp")}}" class="btn-login">Login</a>
                 </div>
             </div>
         </div>
@@ -146,7 +146,7 @@
 							<li class="item-excluded">Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
 						</ul>
-						<a href="program.html" class="btn">order now</a>
+						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
 				</div>
 				<div class="col-md-4 club-card-col">
@@ -161,7 +161,7 @@
 							<li>Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
 						</ul>
-						<a href="program.html" class="btn">order now</a>
+						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
 				</div>
 				<div class="col-md-4 club-card-col mb-3">
@@ -176,7 +176,7 @@
 							<li>Morbi dolor dolortin</li>
 							<li>lorem ut, venenatis dapibus mi</li>
 						</ul>
-						<a href="program.html" class="btn">order now</a>
+						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
 				</div>
                 
@@ -197,7 +197,7 @@
 							<li class="item-excluded">Morbi dolor dolortin</li>
 							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
 						</ul>
-						<a href="program.html" class="btn">order now</a>
+						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
 				</div>
                 

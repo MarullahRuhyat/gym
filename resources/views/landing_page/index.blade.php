@@ -66,7 +66,7 @@
         <div class="container">
             <div class="header-logo">
                 <a href="{{route("landing_page")}}" class="logo img-thumbnail">
-                    <img src="{{asset("landing_page/assets/img/9.png")}}" class="card-img-top" alt="logo">
+                    <img src="{{asset("landing_page/assets/img/10.svg")}}" class="card-img-top" alt="logo">
                 </a>
                 <p class="me-5">Flozor's Gym</p>
             </div>
@@ -95,7 +95,10 @@
                 <div class="container">
                     <div class="crossfit-slide-cover">
                         <h2 class="title"> <span>YOU</span> VS <span>YOU</span></h2>
-                        <p>Every day is a chance to become a better version of yourself. Challenge yourself to push past limits and overcome weaknesses. Life is too short to be held back by unhealthy habits. Push yourself, stay committed, and let your determination drive you forward. In the end, it’s you against you. Keep striving, because you are worth it.
+                        <p>Every day is a chance to become a better version of yourself. Challenge yourself to push past
+                            limits and overcome weaknesses. Life is too short to be held back by unhealthy habits. Push
+                            yourself, stay committed, and let your determination drive you forward. In the end, it’s you
+                            against you. Keep striving, because you are worth it.
                         </p>
                     </div>
                 </div>
@@ -139,16 +142,19 @@
         <div class="our-programs-effect" style="background-image: url(landing_page/assets/img/bg-programs.svg);"></div>
         <div class="container">
             <h2 class="title-decor">Our <span>Programs</span></h2>
-            <p class="slogan">Transform your life with our program- designed to reduce cortisol, manage stress effectively, and enhance your sleep quality, leading to a more peaceful and rejuvenated you.</p>
+            <p class="slogan">Transform your life with our program- designed to reduce cortisol, manage stress
+                effectively, and enhance your sleep quality, leading to a more peaceful and rejuvenated you.</p>
             <div class="row">
                 <div class="col-sm-6 col-md-3 program-col">
                     <div class="program-item">
-                        <div class="program-item-front" style="background-image: url(landing_page/assets/img/programs-3.jpg);">
+                        <div class="program-item-front"
+                            style="background-image: url(landing_page/assets/img/programs-3.jpg);">
                             <div class="program-item-inner">
                                 <h3>Monthly Membership</h3>
                             </div>
                         </div>
-                        <div class="program-item-back" style="background-image: url(landing_page/assets/img/programs-3.jpg);">
+                        <div class="program-item-back"
+                            style="background-image: url(landing_page/assets/img/programs-3.jpg);">
                             <div class="program-item-inner">
                                 <h3>Monthly Membership</h3>
                                 <a href="{{route("program-monthly-membership")}}" class="btn">More</a>
@@ -158,12 +164,14 @@
                 </div>
                 <div class="col-sm-6 col-md-3 program-col">
                     <div class="program-item">
-                        <div class="program-item-front" style="background-image: url(landing_page/assets/img/programs-2.jpg);">
+                        <div class="program-item-front"
+                            style="background-image: url(landing_page/assets/img/programs-2.jpg);">
                             <div class="program-item-inner">
                                 <h3>PBC/PBBC</h3>
                             </div>
                         </div>
-                        <div class="program-item-back" style="background-image: url(landing_page/assets/img/programs-2.jpg);">
+                        <div class="program-item-back"
+                            style="background-image: url(landing_page/assets/img/programs-2.jpg);">
                             <div class="program-item-inner">
                                 <h3>Personal Body Care/Personal Beauty Body Care BY Personal Trainer</h3>
                                 <a href="{{route("personal-body-care-by-pt")}}" class="btn">More</a>
@@ -173,12 +181,14 @@
                 </div>
                 <div class="col-sm-6 col-md-3 program-col">
                     <div class="program-item">
-                        <div class="program-item-front" style="background-image: url(landing_page/assets/img/programs-1.jpg);">
+                        <div class="program-item-front"
+                            style="background-image: url(landing_page/assets/img/programs-1.jpg);">
                             <div class="program-item-inner">
                                 <h3>PBC/PBBC Gold</h3>
                             </div>
                         </div>
-                        <div class="program-item-back" style="background-image: url(landing_page/assets/img/programs-1.jpg);">
+                        <div class="program-item-back"
+                            style="background-image: url(landing_page/assets/img/programs-1.jpg);">
                             <div class="program-item-inner">
                                 <h3>Personal Body Care/Personal Beauty Body Care BY Personal Owner</h3>
                                 <a href="{{route("personal-body-care-by-owner")}}" class="btn">More</a>
@@ -188,12 +198,14 @@
                 </div>
                 <div class="col-sm-6 col-md-3 program-col">
                     <div class="program-item">
-                        <div class="program-item-front" style="background-image: url(landing_page/assets/img/programs-4.jpg);">
+                        <div class="program-item-front"
+                            style="background-image: url(landing_page/assets/img/programs-4.jpg);">
                             <div class="program-item-inner">
                                 <h3>One Day Pass</h3>
                             </div>
                         </div>
-                        <div class="program-item-back" style="background-image: url(landing_page/assets/img/programs-4.jpg);">
+                        <div class="program-item-back"
+                            style="background-image: url(landing_page/assets/img/programs-4.jpg);">
                             <div class="program-item-inner">
                                 <h3>One Day Pass</h3>
                                 <a href="{{route("one-day")}}" class="btn">More</a>
@@ -316,27 +328,123 @@
         <div class="container">
             <div class="testimonials-slider">
                 <div class="testimonial-slide">
-                    <p>“Phasellus vestibulum nec dolor quis varius. Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Phasellus gravida magna sit amet euismod lacinia. Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit”</p>
+                    <p>“
+                        Trainernya ok, program latianmya terjadwal, gak ngasal.
+                        Hasilnya nyata
+                        ”</p>
                     <img src="assets/img/testimonials-1.png" alt="img">
-                    <h3 class="name">Anna Piters</h3>
+                    <a href="https://www.instagram.com/nicolassantoso?igsh=bGJkZnY3cTYycmlh&utm_source=qr"
+                        class="name">@Nicolassantoso</a>
                     <div class="prof">our client</div>
                 </div>
                 <div class="testimonial-slide">
-                    <p>“Phasellus vestibulum nec dolor quis varius. Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Phasellus gravida magna sit amet euismod lacinia. Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit”</p>
+                    <p>“The best gym di semarang , yang semua gym family nya passionate abis and gokil”</p>
                     <img src="assets/img/testimonials-2.png" alt="img">
-                    <h3 class="name">Mark Klark</h3>
+                    <a href="https://www.instagram.com/inaratnawati/" class="name">@inaratnawati</a>
                     <div class="prof">our client</div>
                 </div>
                 <div class="testimonial-slide">
-                    <p>“Phasellus vestibulum nec dolor quis varius. Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Phasellus gravida magna sit amet euismod lacinia. Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit”</p>
-                    <img src="assets/img/testimonials-3.png" alt="img">
-                    <h3 class="name">Kat Smith</h3>
+                    <p>“
+                        Salah satu tempat gym terbaik di Semarang dengan fasilitas yang baik dan para trainer yang
+                        berpengalaman
+                        ”</p>
+                    <img src="assets/img/testimonials-1.png" alt="img">
+                    <a href="https://www.instagram.com/agoe4g/" class="name">@agoe4g</a>
+                    <div class="prof">our client</div>
+                </div>
+                <div class="testimonial-slide">
+                    <p>“
+                        Trainer bagus, ada progress, suasana gym oke👍
+                        ”</p>
+                    <img src="assets/img/testimonials-1.png" alt="img">
+                    <a href="https://www.instagram.com/andrew_wicaksono/" class="name">@Andrew_Wicaksono</a>
+                    <div class="prof">our client</div>
+                </div>
+                <div class="testimonial-slide">
+                    <p>“
+                        Family Gym yang bersih dan bersih
+                        ”</p>
+                    <img src="assets/img/testimonials-1.png" alt="img">
+                    <a href="https://www.instagram.com/Gabriel_panji/" class="name">@Gabriel_panji</a>
+                    <div class="prof">our client</div>
+                </div>
+                <div class="testimonial-slide">
+                    <p>“
+                        SEMUA TRAINER NYA EDUCATIVE & HUMORIS
+                        LIKE MY SECOND HOME
+                        SO PASTI NGGA BOSEN !!!
+
+                        ”</p>
+                    <img src="assets/img/testimonials-1.png" alt="img">
+                    <a href="https://www.instagram.com/Gabriel_panji/" class="name">@dianchristanty11</a>
+                    <div class="prof">our client</div>
+                </div>
+                <div class="testimonial-slide">
+                    <p>“
+                        Tempat gym yang more than just a gym, its like a family, PT dan owener yang bisa ngemong
+                        member,mereka bekerja dengan hati.
+                        Program latihan tersusun rapi tiap member, diarahkan oleh ownernya.
+                        Gym yang bener" tempat buat gym..ga ada melenceng"nya
+                        ”</p>
+                    <img src="assets/img/testimonials-1.png" alt="img">
+                    <a href="https://www.instagram.com/miraoktarinachandra/" class="name">@dianchristanty11</a>
+                    <div class="prof">our client</div>
+                </div>
+                <div class="testimonial-slide">
+                    <p>“
+                        Flozor tempat gym yg membuat saya betah sejak 2020 karena dekat dengan rumah, Personal Trainer
+                        yg kompeten, tau kebutuhan saya dan saya tidak pernah cedera. Sakit boyok saya ga pernah kambuh
+                        lagi. Strechingnya sebelum latihan itu tidak ada di gym lain. Apalagi kalo leg day, streching
+                        nya muantappppp.... hahaha
+                        ”</p>
+                    <img src="assets/img/testimonials-1.png" alt="img">
+                    <a href="https://www.instagram.com/yoshita_jael/" class="name">@yoshita_jael</a>
+                    <div class="prof">our client</div>
+                </div>
+                <div class="testimonial-slide">
+                    <p>“
+                        Tempat gym nya Flozor nyaman, coachnya profesional dan berpengalaman , nyaman dan enjoy nge gym
+                        di Flozor 👍💪
+                        ”</p>
+                    <img src="assets/img/testimonials-1.png" alt="img">
+                    <a href="https://www.instagram.com/Iam_susan/" class="name">@Iam_susan</a>
+                    <div class="prof">our client</div>
+                </div>
+                <div class="testimonial-slide">
+                    <p>“
+                        Tempat gym yg seperti rumah sendiri.. nyaman dan aman, tidak takut menempatkan barang apapun di
+                        flozor.. pasti aman.. hp ketinggalan aja sudah 2 jam tetap aman ditempatnya..
+                        ”</p>
+                    <img src="assets/img/testimonials-1.png" alt="img">
+                    <a href="https://www.instagram.com/ricky_christian/" class="name">@ricky_christian</a>
+                    <div class="prof">our client</div>
+                </div>
+                <div class="testimonial-slide">
+                    <p>“
+                        Best Gym in Semarang. Equipment lengkap dan berkualitas, member disini sangat ramah, PT”nya luar
+                        biasa dan professional.
+                        Highly Recommend!
+                        ”</p>
+                    <img src="assets/img/testimonials-1.png" alt="img">
+                    <a href="https://www.instagram.com/nicsoebi/" class="name">@nicsoebi</a>
+                    <div class="prof">our client</div>
+                </div>
+                <div class="testimonial-slide">
+                    <p>“
+                        Best Gym in Semarang. Equipment lengkap dan berkualitas, member disini sangat ramah, PT”nya luar
+                        biasa dan professional.
+                        Highly Recommend!
+                        ”</p>
+                    <img src="assets/img/testimonials-1.png" alt="img">
+                    <a href="https://www.instagram.com/nicsoebi/" class="name">@nicsoebi</a>
+                    <div class="prof">our client</div>
+                </div>
+                <div class="testimonial-slide">
+                    <p>“
+                        Gym di flozor’s asik banget, waktunya fleksibel, jadi bisa kapan ajaa. Instruktur nya juga ramah dan informatif. Selama di flozor udah berhasil turun 17kg, thankyou flozor!
+                        ”</p>
+                    <img src="assets/img/testimonials-1.png" alt="img">
+                    <a href="https://www.instagram.com/angelanindyta/" class="name">@angelanindyta</a>
                     <div class="prof">our client</div>
                 </div>
             </div>
@@ -518,8 +626,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-lg-4 footer-item-logo">
-                    <a href="{{route("landing_page")}}" class="logo-footer"><img src="assets/img/footer-logo2.svg" alt="logo"></a>
-                    <p>Flozors Gym, founded in 2002 by Frans Lee, offers top service and a welcoming atmosphere for fitness enthusiasts.</p>
+                    <a href="{{route("landing_page")}}" class="logo-footer"><img src="assets/img/footer-logo2.svg"
+                            alt="logo"></a>
+                    <p>Flozors Gym, founded in 2002 by Frans Lee, offers top service and a welcoming atmosphere for
+                        fitness enthusiasts.</p>
                     <ul class="social-list">
                         <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
                                     aria-hidden="true"></i></a></li>
@@ -534,11 +644,14 @@
                 <div class="col-sm-6 col-lg-4 footer-item">
                     <h3>Contact us</h3>
                     <ul class="footer-cont">
-                        <li><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wa.me/+628170706999">08170706999</a>
+                        <li><i class="fa fa-whatsapp" aria-hidden="true"></i><a
+                                href="https://wa.me/+628170706999">08170706999</a>
                         </li>
                         <li><i class="fa fa-envelope" aria-hidden="true"></i><a
                                 href="mailto:flozorsgym@gmail.com">flozorsgym@gmail.com</a></li>
-                        <li><i class="fa fa-map-marker" aria-hidden="true"></i><a href="https://maps.app.goo.gl/r6iY1YkYoXq7tNkt6">Jl. Puspowarno Tengah No.6, Salamanmloyo, Kec. Semarang Barat, Kota Semarang, Jawa Tengah 50149</a></li>
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i><a
+                                href="https://maps.app.goo.gl/r6iY1YkYoXq7tNkt6">Jl. Puspowarno Tengah No.6,
+                                Salamanmloyo, Kec. Semarang Barat, Kota Semarang, Jawa Tengah 50149</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-6 col-lg-4 footer-item">

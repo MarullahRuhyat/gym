@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Member;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use App\Models\AbsentMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ProfileController extends Controller
@@ -30,19 +31,20 @@ class ProfileController extends Controller
         $user = auth()->user();
         // $qr_code = DB::table('absent_members')->where('member_id', $user->id)->pluck('path_qr_code')->first();
         $membership = DB::table('memberships')
-            // ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
             ->leftjoin('users', 'memberships.user_id', '=', 'users.id')
             ->where(function ($query) use ($user) {
                 $query->where('memberships.user_id', $user->id)
                     ->orWhere('memberships.user_terkait', 'like', '%' . $user->id . '%');
             })
-            // ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as id', 'gym_membership_packages.id as gym_membership_packages_id')
             ->select('memberships.*', 'users.*', 'memberships.id as id')
-            // get only latest membership desc
-            ->orderBy('memberships.created_at', 'desc') // Mengurutkan berdasarkan tanggal pembuatan secara menurun
+            ->orderBy('memberships.created_at', 'desc')
             ->first();
 
-        // dd($membership);
+        if ($membership) {
+            $startDate = Carbon::parse($membership->start_date);
+            $endDate = Carbon::parse($membership->end_date);
+            $membership->duration_in_days = (int) $startDate->diffInDays($endDate);
+        }
 
 
         return view('member.profile.dashboard', ['membership' => $membership]);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Models\AbsentMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -29,17 +30,17 @@ class ProfileController extends Controller
         $user = auth()->user();
         $qr_code = DB::table('qr_code')->where('user_id', $user->id)->pluck('path_qr_code')->first();
         $membership = DB::table('memberships')
-        // ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
-        ->leftjoin('users', 'memberships.user_id', '=', 'users.id')
-        ->where(function($query) use ($user) {
-            $query->where('memberships.user_id', $user->id)
-                ->orWhere('memberships.user_terkait', 'like', '%' . $user->id . '%');
-        })
-        // ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as id', 'gym_membership_packages.id as gym_membership_packages_id')
-        ->select('memberships.*', 'users.*', 'memberships.id as id')
-        // get only latest membership desc
-        ->orderBy('memberships.created_at', 'desc') // Mengurutkan berdasarkan tanggal pembuatan secara menurun
-        ->first();
+            // ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+            ->leftjoin('users', 'memberships.user_id', '=', 'users.id')
+            ->where(function ($query) use ($user) {
+                $query->where('memberships.user_id', $user->id)
+                    ->orWhere('memberships.user_terkait', 'like', '%' . $user->id . '%');
+            })
+            // ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as id', 'gym_membership_packages.id as gym_membership_packages_id')
+            ->select('memberships.*', 'users.*', 'memberships.id as id')
+            // get only latest membership desc
+            ->orderBy('memberships.created_at', 'desc') // Mengurutkan berdasarkan tanggal pembuatan secara menurun
+            ->first();
 
         // dd($membership);
 
@@ -47,74 +48,58 @@ class ProfileController extends Controller
         return view('member.profile.dashboard', ['membership' => $membership]);
     }
 
-    public function qr_code(Request $request) {
+    public function qr_code(Request $request)
+    {
         $user = auth()->user();
-        $membership = DB::table('memberships')
-        ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
-        ->where(function ($query) use ($user) {
-            $query->where('memberships.user_id', $user->id)
-                ->orWhere('memberships.user_terkait', 'like', '%' . $user->id . '%');
-        })
-        ->where('memberships.is_active', 1)
-        ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as id', 'gym_membership_packages.id as gym_membership_packages_id')
-        ->get();
 
-        $user_exist = DB::table('qr_code')
-            ->where('user_id', $user->id)
-            ->where('is_using_pt', $request->is_using_pt)
-            ->first();
+        $membership = DB::table('memberships')
+            ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+            ->where(function ($query) use ($user) {
+                $query->where('memberships.user_id', $user->id)
+                    ->orWhere('memberships.user_terkait', 'like', '%' . $user->id . '%');
+            })
+            ->where('memberships.is_active', 1)
+            ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as id', 'gym_membership_packages.id as gym_membership_packages_id')
+            ->get();
+
+
 
         if (!$membership->isEmpty()) {
-            $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            $length = 10;
-            $randomString = '';
-            for ($i = 0; $i < $length; $i++) {
-                $randomString .= $characters[rand(0, strlen($characters) - 1)];
-            }
 
-            if(!$user_exist) {
-                // foreach ($membership as $key => $value) {
-                    // $membership_user_id = $value->user_id;
-                    // $expired_at = date('Y-m-d', strtotime($value->start_date . '+' . $value->duration_in_days . ' days'));
-                $membership_user_id = $user->id;
-                $expired_at = date('Y-m-d', strtotime($membership[0]->start_date . '+' . $membership[0]->duration_in_days . ' days'));
-                $pt = $request->is_using_pt == 1 ? 'PT' : 'non-PT';
-                $qr_code = $randomString . '-' . $pt . '.png';
+            // get dari table memberships join ke table absent member berdasarkan user_id yg login , end_time = null dan is_using_pt
+            $qr_exist = AbsentMember::where('member_id', $user->id)
+                ->where('end_time', null)
+                ->where('is_using_pt', $request->is_using_pt)
+                ->first();
+
+            if (!$qr_exist) {
+
+                $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                $length = 10;
+                $randomString = '';
+                for ($i = 0; $i < $length; $i++) {
+                    $randomString .= $characters[rand(0, strlen($characters) - 1)];
+                }
+
+                $generate_image_from_qr_code = QrCode::format('png')->size(400)->generate($randomString);
+                $qr_code = $randomString . '.png';
+                file_put_contents(public_path('build/images/member/qr_code/' . $qr_code), $generate_image_from_qr_code);
                 $path_qr_code = 'build/images/member/qr_code/' . $qr_code;
 
-                $qr_details = json_encode([
-                    'member_id' => $membership_user_id,
-                    'qr_code' => $qr_code,
-                    'path_qr_code' => $path_qr_code,
-                    'tipe' => 'harian', // ganti ketika udah ada tipe membership di package
-                    'is_using_pt' => $request->is_using_pt,
-                ]);
-                // }
-                $insert_data_qr_code= DB::table('qr_code')->insert([
-                    'user_id' => $user->id,
-                    'qr_code' => $qr_code,
-                    'path_qr_code' => $path_qr_code,
-                    'status' => 'active',
-                    'expired_at' => $expired_at,
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'),
-                    'is_using_pt' => $request->is_using_pt,
-                ]);
-                // $qr_code = DB::table('qr_code')->where('user_id', $user->id)->pluck('path_qr_code')->first();
-                // $generate_image_from_qr_code = QrCode::format('png')->size(200)->generate($qr_details);
-                // $generate_image_from_qr_code = QrCode::generate(
-                //     'Hello, World!',
-                // );
-                // format png can be scanned by camera
-                $generate_image_from_qr_code = QrCode::format('png')->size(400)->generate($qr_details);
+                $absent_member = new AbsentMember();
+                $absent_member->qr_code = $randomString;
+                $absent_member->path_qr_code = $path_qr_code;
+                $absent_member->member_id = $user->id;
+                $absent_member->is_using_pt = $request->is_using_pt;
+                // bantu insert type_packages_id dapat dari mana
+                $absent_member->type_packages_id = 3;
+                $absent_member->save();
 
-                file_put_contents(public_path('build/images/member/qr_code/' . $qr_code), $generate_image_from_qr_code);
 
                 return response()->json(['status' => 'success', 'qr_code' => $qr_code]);
             } else {
-                return response()->json(['status' => 'error', 'message' => 'QR Code sudah ada', 'qr_code' => $user_exist->qr_code]);
+                return response()->json(['status' => 'error', 'message' => 'QR Code sudah ada', 'qr_code' => $qr_exist->path_qr_code]);
             }
-
         } else {
             return response()->json(['status' => 'error', 'message' => 'Anda belum memiliki membership']);
         }
@@ -160,11 +145,11 @@ class ProfileController extends Controller
             'user_phone_number' => ['required', 'min:10', 'unique:users,phone_number,' . $user[0]->id],
         ]);
 
-        if(!$validate) {
+        if (!$validate) {
             return response()->json(['status' => 'error', 'message' => 'Data tidak valid']);
         }
 
-        if($request->hasFile('photo_profile')) {
+        if ($request->hasFile('photo_profile')) {
             $file = $request->file('photo_profile');
             $file_name = time() . "_" . $file->getClientOriginalName();
             $file->move('build/images/member/photo_profile', $file_name);
@@ -173,7 +158,7 @@ class ProfileController extends Controller
         $update_data_user = DB::table('users')->where('id', $user[0]->id)->update([
             'photo_profile' => $file_name ?? null,
             'name' => $request->user_name,
-            'address'=> $request->user_address,
+            'address' => $request->user_address,
             'phone_number' => $request->user_phone_number,
             'email' => $request->user_email,
             'date_of_birth' => $request->user_date_of_birth,

@@ -7,10 +7,28 @@ starter Page
 <style>
     .qr-reader {
         width: 100%;
-        height: 100vh;
+        /* height: 100vh; */
         /* Full viewport height */
     }
+    #my-qr-reader {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        overflow: hidden;
+    }
+
+    .qr-reader video {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transform: scaleX(-1);
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
 </style>
+
 @endsection
 @section('content')
 <h3><b>Scanner</b></h3>
@@ -80,7 +98,6 @@ starter Page
             "my-qr-reader", {
                 fps: 10,
                 qrbox: {
-                    width: window.innerWidth * 0.8,
                     height: window.innerHeight * 1
                 }
             }

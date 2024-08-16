@@ -10,7 +10,7 @@ RUN chmod +x /usr/local/bin/start_dev.sh
 
 # Install dependencies yang diperlukan
 RUN apt-get update \
-    && apt-get install -y \
+    && apt-get install -y libmagickwand-dev \
         git \
         unzip \
         libzip-dev \
@@ -18,7 +18,11 @@ RUN apt-get update \
     && docker-php-ext-install zip pdo_mysql\
     # jika butuh redis
     && pecl install redis \
-    && docker-php-ext-enable redis
+    && docker-php-ext-enable redis \
+    # qr code
+    && pecl install imagick \
+    && docker-php-ext-enable imagick
+
 
 
 # Copy the supervisor configuration file

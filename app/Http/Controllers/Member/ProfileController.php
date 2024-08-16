@@ -84,7 +84,7 @@ class ProfileController extends Controller
                 $generate_image_from_qr_code = QrCode::format('png')->size(400)->generate($randomString);
                 $qr_code = $randomString . '.png';
                 file_put_contents(public_path('build/images/member/qr_code/' . $qr_code), $generate_image_from_qr_code);
-                $path_qr_code = 'build/images/member/qr_code/' . $qr_code;
+                $path_qr_code = $qr_code;
 
                 $absent_member = new AbsentMember();
                 $absent_member->qr_code = $randomString;

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Member;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use App\Http\Middleware\Member;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
 
 class PackageController extends Controller
 {
@@ -112,13 +113,24 @@ class PackageController extends Controller
             return redirect()->route('member.send-otp');
         }
 
+
         $packages_membership_payments = DB::table('payments')
             ->leftjoin('gym_membership_packages', 'payments.gym_membership_packages', '=', 'gym_membership_packages.id')
             ->leftjoin('memberships', 'payments.membership_id', '=', 'memberships.id')
             ->where('payments.user_id', $user->id)
             ->orderBy('payments.id', 'desc')
             ->get();
-            // dd($packages_membership_payments);
+
+        $packages_membership_payments->transform(function ($item) {
+            if ($item->start_date && $item->end_date) {
+                $startDate = Carbon::parse($item->start_date);
+                $endDate = Carbon::parse($item->end_date);
+                $item->duration_in_days = (int) $startDate->diffInDays($endDate);
+            } else {
+                $item->duration_in_days = null; // Jika tanggal tidak ada, beri nilai null
+            }
+            return $item;
+        });
 
         return view('member.membership.subscribed-package', compact('packages_membership_payments'));
     }

@@ -52,7 +52,7 @@ Route::prefix('/')->group(function(){
         return view('landing_page.program_one_day');
     })->name('one-day');
 
-    // post question 
+    // post question
     Route::post('/post-question', [LandingPageController::class, 'post_question'])->name('post_question');
 });
 
@@ -85,10 +85,7 @@ Route::prefix('member')->group(function () {
     Route::post('/register-form', [MemberAuthController::class, 'register_form_process'])->name('member.register-form.process');
     Route::get('/register-multi-user', [MemberAuthController::class, 'register_multi_user_get_package'])->name('member.register-get-package');
     Route::post('/get-package-detail', [MemberAuthController::class, 'get_package_detail'])->name('member.get-package-detail');
-    // Route::post('/register/process', [MemberAuthController::class, 'store1'])->name('member.register.process');
     Route::post('/register/check-member-terkait', [MemberAuthController::class, 'check_member_terkait'])->name('member.check-member-terkait');
-    // Route::post('/register-multi-user-submit', [MemberAuthController::class, 'register__multi_user_submit'])->name('member.register-multi-user.submit');
-    // Route::post('/save-forms', [MemberController::class, 'store']);
 
     Route::get('/payment', [PaymentController::class, 'payment'])->name('member.payment');
 
@@ -99,7 +96,7 @@ Route::prefix('member')->group(function () {
     Route::post('/logout', [MemberAuthController::class, 'logout'])->name('member.logout')->middleware(Member::class);
 
 
-    Route::get('/package', [PackageController::class, 'package'])->name('member.package');
+    Route::get('/package/register', [PackageController::class, 'package_register'])->name('member.package.register');
     Route::post('/package/select-package', [PackageController::class, 'select_package'])->name('member.select.package');
     Route::get(('/guest/payment'), [PaymentController::class, 'guest_payment'])->name('member.guest.payment');
 
@@ -110,13 +107,9 @@ Route::prefix('member')->group(function () {
             Route::get('/', [ProfileController::class, 'profile'])->name('member.profile');
             Route::get('/edit-profile', [ProfileController::class, 'edit_profile'])->name('member.edit_profile');
             Route::post('/edit-profile/{id}', [ProfileController::class, 'edit_profile_process'])->name('member.edit-profile.process');
-            // Route::get('/change-password', [ProfileController::class, 'change_password'])->name('member.change_password');
-            // Route::post('/change-password', [ProfileController::class, 'change_password_process'])->name('member.change-password.process');
         });
         Route::prefix('payment')->group(function () {
             // Route::get('/', [PaymentController::class, 'payment'])->name('member.payment');
-            //             Route::post('/payment-callback', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
-
             Route::prefix('payment-callback')->group(function () {
                 Route::match(['get', 'post'], '/', [PaymentController::class, 'payment_callback'])->name('member.payment.callback');
                 Route::get('/payment-success', [PaymentController::class, 'payment_success'])->name('member.payment.success');
@@ -127,19 +120,11 @@ Route::prefix('member')->group(function () {
         });
 
         Route::prefix('package')->group(function () {
-            // Route::get('/', [PackageController::class, 'package'])->name('member.package');
-            // Route::post('/select-package', [PackageController::class, 'select_package'])->name('member.select.package');
+            Route::get('/', [PackageController::class, 'package'])->name('member.package');
             Route::get('/selected-package-detail/{id}', [PackageController::class, 'selected_package_detail'])->name('member.selected-package-detail');
             Route::get('/subscribed-package', [PackageController::class, 'subscribed_package'])->name('member.subscribed-package');
         });
-        Route::prefix('membership')->group(function () {
-            // Route::post('/subscribe-membership', [MembershipController::class, 'subscribe_membership'])->name('member.subscribe_membership');
-            // Route::get('/history-membership', [MembershipController::class, 'history_membership'])->name('member.history-membership');
-            // Route::get('/detail-membership/{id}', [MembershipController::class, 'detail_membership'])->name('member.detail-membership');
-        });
         Route::prefix('attendance')->group(function () {
-            // Route::post('/check-in', [AttendanceController::class, 'check_in'])->name('member.check_in');
-            // Route::post('/check-out', [AttendanceController::class, 'check_out'])->name('member.check_out');
             Route::get('/history-attendance', [AttendanceController::class, 'history_attendance'])->name('member.history-attendance');
         });
     });
@@ -168,7 +153,7 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
     // payment
     Route::prefix('payment')->group(function () {
         Route::get('/', [GajiPersonalTrainerController::class, 'index'])->name('personal_trainer.payment.index');
-        // search gaji personal trainer 
+        // search gaji personal trainer
         Route::get('/search', [GajiPersonalTrainerController::class, 'search'])->name('personal_trainer.payment.search');
     });
 });

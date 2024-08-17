@@ -99,6 +99,7 @@ starter Page
                     <input type="hidden" name="payment_phone_number" id="payment_phone_number" value="{{ Auth::user()->phone_number }}">
                     <input type="hidden" name="submit_start_date" id="submit_start_date" value="">
                     <input type="hidden" name="payment_amount" id="payment_amount" value="">
+                    <input type="text" name="status_user" id="status_user" value="{{ Auth::user()->status }}">
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
@@ -108,6 +109,12 @@ starter Page
                                         <p class="fw-semi-bold">Items subtotal :</p>
                                         <p id="payment-item-total" class="fw-semi-bold"></p>
                                     </div>
+                                    @if (Auth::user()->status == 'expired' || Auth::user()->status == 'unregistered')
+                                        <div class="d-flex justify-content-between">
+                                            <p class="fw-semi-bold">Register Fee :</p>
+                                            <p id="payment-register" class="fw-semi-bold">Rp.75.000</p>
+                                        </div>
+                                    @endif
                                     <div class="d-flex justify-content-between">
                                         <p class="fw-semi-bold">Discount :</p>
                                         <p id="payment-discount" class="text-danger fw-semi-bold">Rp.-</p>
@@ -174,8 +181,18 @@ starter Page
                 $('#payment-item-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
                 // $('#payment-total').text('Rp.' + response.price);
                 // format number
+                // if status user expired or unregistered
+                // $('#payment-register').text('Rp.' + 75000);
+                $('#payment-register').text('Rp.' + (75000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
                 $('#payment-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-                $('#payment_amount').val(response.price);
+                // $('#payment_amount').val(response.price);
+                if ($('#status_user').val() == 'expired' || $('#status_user').val() == 'unregistered') {
+                    $('#payment-total').text('Rp.' + (response.price + 75000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                    $('#payment_amount').val(response.price + 75000);
+                } else {
+                    $('#payment-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                    $('#payment_amount').val(response.price);
+                }
             },
             error: function(xhr, status, error) {
                 console.log(error);

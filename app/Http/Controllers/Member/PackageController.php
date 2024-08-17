@@ -8,6 +8,18 @@ use Illuminate\Support\Facades\DB;
 
 class PackageController extends Controller
 {
+    public function package_register()
+    {
+        $packages = DB::table('gym_membership_packages')
+            ->leftJoin('type_packages', 'gym_membership_packages.type_packages_id', '=', 'type_packages.id')
+            ->select('gym_membership_packages.*', 'type_packages.name as type_name')
+            ->get();
+
+        $groupedPackages = $packages->groupBy('type_name');
+
+        return view('member.membership.select-package', compact('groupedPackages'));
+    }
+    
     public function package()
     {
         $packages = DB::table('gym_membership_packages')

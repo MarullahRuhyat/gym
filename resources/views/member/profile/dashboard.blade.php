@@ -117,7 +117,7 @@ starter Page
                     _token: "{{ csrf_token() }}",
                 }
             }).done(function(data) {
-                $('#qr_code_img').attr('src', '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code);
+                $('#qr_code_img').attr('src', '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code + '.png');
                 // new tab with qr code
                 // var win = window.open('{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code, '_blank');
             });
@@ -136,7 +136,7 @@ starter Page
                     _token: "{{ csrf_token() }}",
                 }
             }).done(function(data) {
-                $('#qr_code_img').attr('src', '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code);
+                $('#qr_code_img').attr('src', '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code + '.png');
                 // var win = window.open('{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code, '_blank');
             });
         });

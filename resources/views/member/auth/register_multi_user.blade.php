@@ -87,7 +87,9 @@ starter Page
                                                                 <p class="card-text">{{ $pkg->description }}</p>
                                                                 <p class="card-text">Duration:
                                                                     {{ $pkg->duration_in_days }} Days</p>
-                                                                <h5>Price: Rp.{{ $pkg->price }}</h5>
+                                                                    <h5>Price:
+                                                                        Rp.{{ number_format($pkg->price, 0, ',', '.') }}
+                                                                    </h5>
                                                                 <div
                                                                     class="mt-3 d-flex align-items-center justify-content-between">
                                                                     <button style="color:white;"
@@ -285,7 +287,7 @@ starter Page
                                             <p id="payment-item-total" class="fw-semi-bold"></p>
                                         </div>
                                         <div class="d-flex justify-content-between">
-                                            <p class="fw-semi-bold">User Registered :</p>
+                                            <p class="fw-semi-bold">Fee User Registration :</p>
                                             <p id="payment-user-registered" class="fw-semi-bold"></p>
                                         </div>
                                         <div class="d-flex justify-content-between">
@@ -532,11 +534,14 @@ starter Page
                     var payment_item_total = response.data.payment_item_total;
                     var user_registered = response.data.user_registered;
                     var total = response.data.total;
-                    $('#payment-item-total').text(payment_item_total);
-                    $('#payment-user-registered').text(user_registered);
-                    $('#payment-total').text(total);
+                    // $('#payment-item-total').text(payment_item_total);
+                    $('#payment-item-total').text('Rp.' + payment_item_total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                    $('#payment-user-registered').text('Rp.' + user_registered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                    $('#payment-total').text('Rp.' + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
                     $('#payment_phone_number').val(response.data.user_phone_number);
+                    // $('#payment_phone_number').text('Rp.' + response.data.user_phone_number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
                     $('#payment_amount').val(total);
+                    // $('#payment_amount').text('Rp.' + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
                 } else {
                     alert(response.message);
                 }

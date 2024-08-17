@@ -73,7 +73,6 @@ class ProfileController extends Controller
                 ->first();
 
             if (!$qr_exist) {
-
                 $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
                 $length = 10;
                 $randomString = '';

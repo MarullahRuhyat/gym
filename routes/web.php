@@ -136,6 +136,7 @@ Route::prefix('member')->group(function () {
 // personal trainer
 Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->group(function () {
     Route::get('/dashboard', [PersonalTrainerController::class, 'dashboard'])->name('personal_trainer.dashboard');
+    Route::get('/personal_trainer_dashboard', [PersonalTrainerController::class, 'personal_trainer_dashboard'])->name('personal_trainer_dashboard');
     // attendance member
     Route::prefix('attendance-member')->group(function () {
         Route::get('/', [AttendanceMemberController::class, 'index'])->name('personal_trainer.attendance_member');

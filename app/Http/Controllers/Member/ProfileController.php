@@ -95,7 +95,8 @@ class ProfileController extends Controller
                 $absent_member->save();
 
 
-                return response()->json(['status' => 'success', 'qr_code' => $qr_code]);
+                // return response()->json(['status' => 'success', 'qr_code' => $qr_code]);
+                
             } else {
                 return response()->json(['status' => 'error', 'message' => 'QR Code sudah ada', 'qr_code' => $qr_exist->path_qr_code]);
             }

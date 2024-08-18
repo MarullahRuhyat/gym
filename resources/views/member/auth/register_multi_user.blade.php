@@ -4,7 +4,7 @@ starter Page
 @endsection
 @section('content')
 <!--start stepper one-->
-<h6 class="text-uppercase">Non Linear</h6>
+<!-- <h6 class="text-uppercase">Non Linear</h6> -->
 <hr>
 <div id="stepper1" class="bs-stepper">
     <div class="card">
@@ -274,9 +274,9 @@ starter Page
                 <div class="row g-3">
                     <form action="{{ route('member.payment') }}" method="GET">
                         @csrf
-                        <input type="text" name="payment_phone_number" id="payment_phone_number" value="">
-                        <input type="text" name="submit_package_id" id="submit_package_id" value="">
-                        <input type="text" name="payment_amount" id="payment_amount" value="">
+                        <input type="hidden" name="payment_phone_number" id="payment_phone_number" value="">
+                        <input type="hidden" name="submit_package_id" id="submit_package_id" value="">
+                        <input type="hidden" name="payment_amount" id="payment_amount" value="">
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
@@ -322,7 +322,7 @@ starter Page
         </div>
     </div>
 </div>
-</div>
+<!-- </div> -->
 <!--end stepper one-->
 
 

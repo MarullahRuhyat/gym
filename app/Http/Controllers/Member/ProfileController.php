@@ -36,6 +36,7 @@ class ProfileController extends Controller
                 $query->where('memberships.user_id', $user->id)
                     ->orWhere('memberships.user_terkait', 'like', '%' . $user->id . '%');
             })
+            ->where('memberships.is_active', 1)
             ->select('memberships.*', 'users.*', 'memberships.id as id')
             ->orderBy('memberships.created_at', 'desc')
             ->first();
@@ -43,7 +44,8 @@ class ProfileController extends Controller
         if ($membership) {
             $startDate = Carbon::parse($membership->start_date);
             $endDate = Carbon::parse($membership->end_date);
-            $membership->duration_in_days = (int) $startDate->diffInDays($endDate);
+            // $membership->duration_in_days = (int) $startDate->diffInDays($endDate);
+            $membership->duration_in_days = $membership->duration_in_days;
         }
 
 

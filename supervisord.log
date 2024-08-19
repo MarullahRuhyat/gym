@@ -1,0 +1,267 @@
+2024-08-18 16:37:13,469 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 16:37:13,472 INFO supervisord started with pid 7
+2024-08-18 16:37:14,477 INFO spawned: 'laravel-queue-worker' with pid 93
+2024-08-18 16:37:14,481 INFO spawned: 'laravel-schedule-worker' with pid 94
+2024-08-18 16:37:14,486 INFO spawned: 'php-fpm' with pid 95
+2024-08-18 16:37:14,804 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:37:15,810 INFO spawned: 'laravel-queue-worker' with pid 104
+2024-08-18 16:37:15,811 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 16:37:15,811 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 16:37:16,193 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:37:18,202 INFO spawned: 'laravel-queue-worker' with pid 109
+2024-08-18 16:37:18,470 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:37:21,484 INFO spawned: 'laravel-queue-worker' with pid 114
+2024-08-18 16:37:21,782 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:37:22,785 INFO gave up: laravel-queue-worker entered FATAL state, too many start retries too quickly
+2024-08-18 16:42:34,298 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 16:42:34,303 INFO supervisord started with pid 7
+2024-08-18 16:42:35,308 INFO spawned: 'laravel-queue-worker' with pid 93
+2024-08-18 16:42:35,311 INFO spawned: 'laravel-schedule-worker' with pid 94
+2024-08-18 16:42:35,316 INFO spawned: 'php-fpm' with pid 95
+2024-08-18 16:42:35,591 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:42:36,597 INFO spawned: 'laravel-queue-worker' with pid 104
+2024-08-18 16:42:36,598 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 16:42:36,602 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 16:42:36,856 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:42:38,865 INFO spawned: 'laravel-queue-worker' with pid 109
+2024-08-18 16:42:39,156 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:42:42,168 INFO spawned: 'laravel-queue-worker' with pid 114
+2024-08-18 16:42:42,422 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:42:43,425 INFO gave up: laravel-queue-worker entered FATAL state, too many start retries too quickly
+2024-08-18 16:49:36,937 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 16:49:36,940 INFO supervisord started with pid 6
+2024-08-18 16:49:37,946 INFO spawned: 'laravel-queue-worker' with pid 93
+2024-08-18 16:49:37,950 INFO spawned: 'laravel-schedule-worker' with pid 94
+2024-08-18 16:49:37,953 INFO spawned: 'php-fpm' with pid 95
+2024-08-18 16:49:38,394 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:49:39,401 INFO spawned: 'laravel-queue-worker' with pid 104
+2024-08-18 16:49:39,402 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 16:49:39,402 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 16:49:39,820 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:49:41,829 INFO spawned: 'laravel-queue-worker' with pid 109
+2024-08-18 16:49:42,186 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:49:45,197 INFO spawned: 'laravel-queue-worker' with pid 114
+2024-08-18 16:49:45,477 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:49:46,479 INFO gave up: laravel-queue-worker entered FATAL state, too many start retries too quickly
+2024-08-18 16:55:20,116 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 16:55:20,121 INFO supervisord started with pid 6
+2024-08-18 16:55:21,127 INFO spawned: 'laravel-queue-worker' with pid 93
+2024-08-18 16:55:21,131 INFO spawned: 'laravel-schedule-worker' with pid 94
+2024-08-18 16:55:21,136 INFO spawned: 'php-fpm' with pid 95
+2024-08-18 16:55:21,458 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:55:22,466 INFO spawned: 'laravel-queue-worker' with pid 104
+2024-08-18 16:55:22,467 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 16:55:22,468 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 16:55:22,837 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:55:24,847 INFO spawned: 'laravel-queue-worker' with pid 109
+2024-08-18 16:55:25,190 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:55:28,198 INFO spawned: 'laravel-queue-worker' with pid 114
+2024-08-18 16:55:28,504 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:55:29,507 INFO gave up: laravel-queue-worker entered FATAL state, too many start retries too quickly
+2024-08-18 16:57:51,958 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 16:57:51,962 INFO supervisord started with pid 7
+2024-08-18 16:57:52,967 INFO spawned: 'laravel-queue-worker' with pid 94
+2024-08-18 16:57:52,971 INFO spawned: 'laravel-schedule-worker' with pid 95
+2024-08-18 16:57:52,976 INFO spawned: 'php-fpm' with pid 96
+2024-08-18 16:57:53,331 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:57:54,338 INFO spawned: 'laravel-queue-worker' with pid 105
+2024-08-18 16:57:54,340 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 16:57:54,340 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 16:57:54,731 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:57:56,742 INFO spawned: 'laravel-queue-worker' with pid 110
+2024-08-18 16:57:57,070 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:58:00,080 INFO spawned: 'laravel-queue-worker' with pid 117
+2024-08-18 16:58:00,422 WARN exited: laravel-queue-worker (exit status 1; not expected)
+2024-08-18 16:58:01,425 INFO gave up: laravel-queue-worker entered FATAL state, too many start retries too quickly
+2024-08-18 17:02:07,106 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 17:02:07,112 INFO supervisord started with pid 7
+2024-08-18 17:02:08,125 INFO spawned: 'laravel-queue-worker' with pid 70
+2024-08-18 17:02:08,146 INFO spawned: 'laravel-schedule-worker' with pid 71
+2024-08-18 17:02:08,170 INFO spawned: 'php-fpm' with pid 72
+2024-08-18 17:02:09,441 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:02:09,442 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:02:09,442 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:09:50,540 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 17:09:50,546 INFO supervisord started with pid 7
+2024-08-18 17:09:51,552 INFO spawned: 'laravel-queue-worker' with pid 70
+2024-08-18 17:09:51,556 INFO spawned: 'laravel-schedule-worker' with pid 71
+2024-08-18 17:09:51,560 INFO spawned: 'php-fpm' with pid 72
+2024-08-18 17:09:52,789 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:09:52,790 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:09:52,790 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:11:31,459 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 17:11:31,463 INFO supervisord started with pid 25
+2024-08-18 17:11:32,469 INFO spawned: 'laravel-queue-worker' with pid 73
+2024-08-18 17:11:32,473 INFO spawned: 'laravel-schedule-worker' with pid 74
+2024-08-18 17:11:32,477 INFO spawned: 'php-fpm' with pid 75
+2024-08-18 17:11:33,494 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:11:33,494 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:11:33,495 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:14:00,621 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 17:14:00,627 INFO supervisord started with pid 25
+2024-08-18 17:14:01,635 INFO spawned: 'laravel-queue-worker' with pid 73
+2024-08-18 17:14:01,639 INFO spawned: 'laravel-schedule-worker' with pid 74
+2024-08-18 17:14:01,643 INFO spawned: 'php-fpm' with pid 75
+2024-08-18 17:14:02,747 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:14:02,748 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:14:02,749 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:20:07,242 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 17:20:07,249 INFO supervisord started with pid 23
+2024-08-18 17:20:08,257 INFO spawned: 'laravel-queue-worker' with pid 71
+2024-08-18 17:20:08,261 INFO spawned: 'laravel-schedule-worker' with pid 72
+2024-08-18 17:20:08,263 INFO spawned: 'php-fpm' with pid 73
+2024-08-18 17:20:09,383 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:20:09,383 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:20:09,384 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:26:04,052 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 17:26:04,056 INFO supervisord started with pid 23
+2024-08-18 17:26:05,061 INFO spawned: 'laravel-queue-worker' with pid 71
+2024-08-18 17:26:05,065 INFO spawned: 'laravel-schedule-worker' with pid 72
+2024-08-18 17:26:05,068 INFO spawned: 'php-fpm' with pid 73
+2024-08-18 17:26:06,290 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:26:06,291 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:26:06,291 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:42:30,639 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 17:42:30,641 INFO supervisord started with pid 7
+2024-08-18 17:42:31,647 INFO spawned: 'laravel-queue-worker' with pid 68
+2024-08-18 17:42:31,650 INFO spawned: 'laravel-schedule-worker' with pid 69
+2024-08-18 17:42:31,653 INFO spawned: 'php-fpm' with pid 70
+2024-08-18 17:42:32,849 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:42:32,850 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:42:32,850 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:48:24,833 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 17:48:24,835 INFO supervisord started with pid 7
+2024-08-18 17:48:25,841 INFO spawned: 'laravel-queue-worker' with pid 68
+2024-08-18 17:48:25,844 INFO spawned: 'laravel-schedule-worker' with pid 69
+2024-08-18 17:48:25,847 INFO spawned: 'php-fpm' with pid 70
+2024-08-18 17:48:27,025 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:48:27,025 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 17:48:27,026 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:00:23,464 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 18:00:23,468 INFO supervisord started with pid 7
+2024-08-18 18:00:24,475 INFO spawned: 'laravel-queue-worker' with pid 69
+2024-08-18 18:00:24,479 INFO spawned: 'laravel-schedule-worker' with pid 70
+2024-08-18 18:00:24,483 INFO spawned: 'php-fpm' with pid 71
+2024-08-18 18:00:25,672 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:00:25,674 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:00:25,674 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:08:30,477 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 18:08:30,480 INFO supervisord started with pid 7
+2024-08-18 18:08:31,487 INFO spawned: 'laravel-queue-worker' with pid 68
+2024-08-18 18:08:31,491 INFO spawned: 'laravel-schedule-worker' with pid 69
+2024-08-18 18:08:31,495 INFO spawned: 'php-fpm' with pid 70
+2024-08-18 18:08:32,725 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:08:32,726 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:08:32,727 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:19:03,544 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 18:19:03,547 INFO supervisord started with pid 7
+2024-08-18 18:19:04,552 INFO spawned: 'laravel-queue-worker' with pid 68
+2024-08-18 18:19:04,555 INFO spawned: 'laravel-schedule-worker' with pid 69
+2024-08-18 18:19:04,560 INFO spawned: 'php-fpm' with pid 70
+2024-08-18 18:19:05,790 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:19:05,791 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:19:05,791 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:22:59,006 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 18:22:59,009 INFO supervisord started with pid 6
+2024-08-18 18:23:00,014 INFO spawned: 'laravel-queue-worker' with pid 69
+2024-08-18 18:23:00,019 INFO spawned: 'laravel-schedule-worker' with pid 70
+2024-08-18 18:23:00,023 INFO spawned: 'php-fpm' with pid 71
+2024-08-18 18:23:01,536 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:23:01,536 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:23:01,537 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:25:44,354 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 18:25:44,356 INFO supervisord started with pid 7
+2024-08-18 18:25:45,363 INFO spawned: 'laravel-queue-worker' with pid 68
+2024-08-18 18:25:45,367 INFO spawned: 'laravel-schedule-worker' with pid 69
+2024-08-18 18:25:45,369 INFO spawned: 'php-fpm' with pid 70
+2024-08-18 18:25:46,618 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:25:46,619 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:25:46,620 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:28:51,941 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 18:28:51,945 INFO supervisord started with pid 6
+2024-08-18 18:28:52,951 INFO spawned: 'laravel-queue-worker' with pid 67
+2024-08-18 18:28:52,955 INFO spawned: 'laravel-schedule-worker' with pid 68
+2024-08-18 18:28:52,958 INFO spawned: 'php-fpm' with pid 69
+2024-08-18 18:28:54,166 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:28:54,167 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:28:54,168 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:31:01,495 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 18:31:01,498 INFO supervisord started with pid 7
+2024-08-18 18:31:02,502 INFO spawned: 'laravel-queue-worker' with pid 68
+2024-08-18 18:31:02,506 INFO spawned: 'laravel-schedule-worker' with pid 69
+2024-08-18 18:31:02,511 INFO spawned: 'php-fpm' with pid 70
+2024-08-18 18:31:04,353 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:31:04,354 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:31:04,354 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:36:41,967 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-18 18:36:41,969 INFO supervisord started with pid 7
+2024-08-18 18:36:42,976 INFO spawned: 'laravel-queue-worker' with pid 68
+2024-08-18 18:36:42,980 INFO spawned: 'laravel-schedule-worker' with pid 69
+2024-08-18 18:36:42,984 INFO spawned: 'php-fpm' with pid 70
+2024-08-18 18:36:44,172 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:36:44,173 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-18 18:36:44,173 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:07:38,365 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-19 02:07:38,370 INFO supervisord started with pid 7
+2024-08-19 02:07:39,375 INFO spawned: 'laravel-queue-worker' with pid 70
+2024-08-19 02:07:39,378 INFO spawned: 'laravel-schedule-worker' with pid 71
+2024-08-19 02:07:39,382 INFO spawned: 'php-fpm' with pid 72
+2024-08-19 02:07:40,840 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:07:40,840 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:07:40,841 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:09:34,048 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-19 02:09:34,051 INFO supervisord started with pid 7
+2024-08-19 02:09:35,058 INFO spawned: 'laravel-queue-worker' with pid 70
+2024-08-19 02:09:35,061 INFO spawned: 'laravel-schedule-worker' with pid 71
+2024-08-19 02:09:35,064 INFO spawned: 'php-fpm' with pid 72
+2024-08-19 02:09:36,440 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:09:36,441 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:09:36,441 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:10:54,768 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-19 02:10:54,772 INFO supervisord started with pid 6
+2024-08-19 02:10:55,780 INFO spawned: 'laravel-queue-worker' with pid 69
+2024-08-19 02:10:55,784 INFO spawned: 'laravel-schedule-worker' with pid 70
+2024-08-19 02:10:55,787 INFO spawned: 'php-fpm' with pid 71
+2024-08-19 02:10:57,083 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:10:57,083 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:10:57,084 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:12:15,336 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-19 02:12:15,341 INFO supervisord started with pid 7
+2024-08-19 02:12:16,348 INFO spawned: 'laravel-queue-worker' with pid 70
+2024-08-19 02:12:16,352 INFO spawned: 'laravel-schedule-worker' with pid 71
+2024-08-19 02:12:16,356 INFO spawned: 'php-fpm' with pid 72
+2024-08-19 02:12:17,711 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:12:17,711 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:12:17,712 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:14:56,938 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-19 02:14:56,943 INFO supervisord started with pid 8
+2024-08-19 02:14:57,949 INFO spawned: 'laravel-queue-worker' with pid 71
+2024-08-19 02:14:57,955 INFO spawned: 'laravel-schedule-worker' with pid 72
+2024-08-19 02:14:57,960 INFO spawned: 'php-fpm' with pid 73
+2024-08-19 02:14:59,262 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:14:59,263 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:14:59,263 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:22:47,775 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-19 02:22:47,778 INFO supervisord started with pid 7
+2024-08-19 02:22:48,784 INFO spawned: 'laravel-queue-worker' with pid 70
+2024-08-19 02:22:48,789 INFO spawned: 'laravel-schedule-worker' with pid 71
+2024-08-19 02:22:48,795 INFO spawned: 'php-fpm' with pid 72
+2024-08-19 02:22:50,000 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:22:50,001 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:22:50,002 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:29:03,401 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-19 02:29:03,407 INFO supervisord started with pid 7
+2024-08-19 02:29:04,415 INFO spawned: 'laravel-queue-worker' with pid 70
+2024-08-19 02:29:04,419 INFO spawned: 'laravel-schedule-worker' with pid 71
+2024-08-19 02:29:04,423 INFO spawned: 'php-fpm' with pid 72
+2024-08-19 02:29:05,553 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:29:05,554 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:29:05,555 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:34:28,626 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-19 02:34:28,631 INFO supervisord started with pid 7
+2024-08-19 02:34:29,637 INFO spawned: 'laravel-queue-worker' with pid 70
+2024-08-19 02:34:29,641 INFO spawned: 'laravel-schedule-worker' with pid 71
+2024-08-19 02:34:29,645 INFO spawned: 'php-fpm' with pid 72
+2024-08-19 02:34:31,137 INFO success: laravel-queue-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:34:31,139 INFO success: laravel-schedule-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 02:34:31,139 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)

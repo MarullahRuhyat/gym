@@ -10,6 +10,7 @@ starter Page
         /* height: 100vh; */
         /* Full viewport height */
     }
+
     #my-qr-reader {
         width: 100%;
         max-width: 100%;
@@ -73,14 +74,13 @@ starter Page
 <script src="{{ URL::asset('build/js/main.js') }}"></script>
 @endpush
 @section('javascript')
-<script src="https://unpkg.com/html5-qrcode"></script>
+<script src="{{ URL::asset('build/plugins/html5-qrcode.min.js') }}"></script>
 <script>
     // Mengambil data JSON dari tag HTML
     var personalTrainersJson = document.getElementById('personalTrainers').getAttribute('data-personal-trainers');
 
     // Mengonversi data JSON menjadi objek JavaScript
     var personalTrainers = JSON.parse(personalTrainersJson);
-    console.log(personalTrainers);
 
     function domReady(fn) {
         if (
@@ -98,7 +98,8 @@ starter Page
             "my-qr-reader", {
                 fps: 10,
                 qrbox: {
-                    height: window.innerHeight * 1
+                    width: window.innerWidth * 0.8, // 80% dari lebar layar
+                    height: window.innerHeight * 0.8 // 80% dari tinggi layar
                 }
             }
         );
@@ -120,6 +121,7 @@ starter Page
                 type: 'POST',
                 data: formData,
                 success: function(response) {
+
                     if (response.status == true) {
 
                         let data = response.absen.end_time;
@@ -137,17 +139,26 @@ starter Page
                         if (response.absen.member.available_personal_trainer_quota < 1 || nilai_end_time != '-') {
                             pt_disabled = 'disabled';
                         }
-                        console.log(response.absen.personal_trainer_id);
-
 
                         let html = `
                                 <h3>${greating}</h3>
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Name</label>
-                                    <input type="hidden" class="form-control" name="id"  value="${response.absen.id}">
+                                <input type="hidden" class="form-control" name="id"  value="${response.absen.id}">
+                              `
+
+
+                        if (response.absen.is_using_pt != 1) {
+                            html += `<div class="mb-3">
+                                    <label for="name" class="form-label">Member</label>
                                     <input type="text" class="form-control" id="name" name="name" disabled value="${response.absen.member.name}">
-                                </div>
-                                <div class="mb-3">
+                                </div>`
+                        } else {
+                            let member = response.user.map(e => e.name).join(', ');
+                            html += `<div class="mb-3">
+                                   <label for="exampleFormControlTextarea1">Member</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" disabled rows="3">${member}</textarea>
+                                </div>`
+                        }
+                        html += `<div class="mb-3">
                                     <label for="name" class="form-label">Date</label>
                                     <input type="text" class="form-control" id="name" name="name" disabled value="${response.absen.date}">
                                 </div>
@@ -162,14 +173,17 @@ starter Page
                                 <div class="mb-3">
                                     <label for="start_time" class="form-label">Available PT</label>
                                     <input type="text" class="form-control" id="start_time" name="start_time" disabled value="${response.absen.member.available_personal_trainer_quota}">
-                                </div>
-                                <div class="mb-3">
+                                </div>`
+                        if (response.absen.is_using_pt == 1) {
+                            html += `<div class="mb-3">
                                     <label for="start_time" class="form-label">PT</label>
-                                    <select class="form-select" aria-label="Default select example" name="pt" ${pt_disabled}>
+                                    <select class="form-select" aria-label="Default select example" name="pt" ${pt_disabled} required>
                                         ${option}
                                     </select>
                                 </div>
                         `
+                        }
+
                         $('.modal-body').html(html)
                         $('#btn_simpan').show();
                     } else {

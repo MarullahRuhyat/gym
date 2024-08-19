@@ -141,7 +141,7 @@ starter Page
             // Hide the loading spinner and show the QR code image
             $('#loadingSpinner').hide();
             $('#qr_code_img').attr('src',
-                '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code);
+                '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code + '.png');
             $('#qr_code_img').show();
         }).fail(function () {
             // Hide the loading spinner if there was an error
@@ -173,7 +173,7 @@ starter Page
                 // Hide the loading spinner and show the QR code image
                 $('#loadingSpinner').hide();
                 $('#qr_code_img').attr('src',
-                    '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code);
+                    '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code + '.png');
                 $('#qr_code_img').show();
             }).fail(function () {
                 // Hide the loading spinner if there was an error

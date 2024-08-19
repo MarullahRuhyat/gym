@@ -148,6 +148,7 @@ class AuthController extends Controller
 
     public function check_member_terkait(Request $request)
     {
+        // cek status user_registered (unregistered, expired, active)
         $phone_number = $request->form_dynamic;
         $user_registered = User::whereIn('phone_number', $phone_number)->get(); // ini harus di cek semua phone number yang di inputkan
         if($user_registered == null) {
@@ -175,14 +176,20 @@ class AuthController extends Controller
                     DB::table('users')->insert($request->form_first);
                     $duration = DB::table('gym_membership_packages')->where('id', $request->package_id)->pluck('duration_in_days')->first();
                     $end_date = date('Y-m-d', strtotime($request->start_date . ' + ' . $duration . ' days'));
+                    $user_id = DB::table('users')->where('phone_number', $request->form_first['phone_number'])->pluck('id')->first();
                     $user_membership_packages = DB::table('memberships')->insert([
                         'user_id' => DB::table('users')->where('phone_number', $request->form_first['phone_number'])->pluck('id')->first(),
                         'gym_membership_packages' => $request->package_id,
                         'start_date' => $request->start_date,
                         'end_date' => $end_date,
                         // 'user_terkait' => $user_terkait,
-                        'user_terkait' => implode(',', $user_terkait->toArray()),
+                        // 'user_terkait' => implode(',', $user_terkait->toArray()),
+                        // user_terkait + user_id
+                        'user_terkait' => $user_id . ',' . implode(',', $user_terkait->toArray()),
+                        'duration_in_days' => $duration,
                         'is_active' => false,
+                        'created_at' => now(),
+                        'updated_at' => now(),
                     ]);
 
                     $status = true;
@@ -196,15 +203,25 @@ class AuthController extends Controller
 
         $amount_package = DB::table('gym_membership_packages')->where('id', $request->package_id)->pluck('price')->first();
 
+        $user_dynamic_status = DB::table('users')->whereIn('phone_number', $phone_number)->pluck('status')->toArray();
+        $fee = 75000;
+        foreach ($user_dynamic_status as $status_dynamic) {
+            if ($status_dynamic == 'unregistered' || $status_dynamic == 'expired') {
+                $fee += 75000;
+            }
+        }
+
         $data = [
             'status' => $status,
             'message' => $message,
             'data' => [
                 'user' => $user_registered,
                 'user_phone_number' => $request->form_first['phone_number'],
-                'user_registered' => (count($user_registered) + 1) * 75000,
+                // 'user_registered' => (count($user_registered) + 1) * 75000,
+                'user_registered' => $fee,
                 'payment_item_total' => $amount_package,
-                'total' => ((count($user_registered) + 1) * 75000) + $amount_package,
+                // 'total' => ((count($user_registered) + 1) * 75000) + $amount_package,
+                'total' => $fee + $amount_package,
             ],
         ];
 

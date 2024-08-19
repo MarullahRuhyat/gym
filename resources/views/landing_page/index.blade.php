@@ -626,8 +626,8 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 col-lg-4 footer-item-logo">
-                    <a href="{{route("landing_page")}}" class="logo-footer"><img src="assets/img/footer-logo2.svg"
+                <div class="col-sm-6 col-lg-6 footer-item-logo">
+                    <a href="{{route("landing_page")}}" class="logo-footer"><img src="{{asset("landing_page/assets/img/10.svg")}}"
                             alt="logo"></a>
                     <p>Flozors Gym, founded in 2002 by Frans Lee, offers top service and a welcoming atmosphere for
                         fitness enthusiasts.</p>
@@ -642,7 +642,7 @@
                                     aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
-                <div class="col-sm-6 col-lg-4 footer-item">
+                <div class="col-sm-6 col-lg-6 footer-item">
                     <h3>Contact us</h3>
                     <ul class="footer-cont">
                         <li><i class="fa fa-whatsapp" aria-hidden="true"></i><a
@@ -653,25 +653,6 @@
                         <li><i class="fa fa-map-marker" aria-hidden="true"></i><a
                                 href="https://maps.app.goo.gl/r6iY1YkYoXq7tNkt6">Jl. Puspowarno Tengah No.6,
                                 Salamanmloyo, Kec. Semarang Barat, Kota Semarang, Jawa Tengah 50149</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-6 col-lg-4 footer-item">
-                    <h3>Blog</h3>
-                    <ul class="footer-blog">
-                        <li>
-                            <a href="blog.html" class="img-cover"><img src="assets/img/footer-icon-1.jpg" alt="img"></a>
-                            <div class="footer-blog-info">
-                                <div class="name"><a href="blog.html">Sed ut perspiciatis</a></div>
-                                <p>Omnis iste natus error sit voluptatem…</p>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="blog.html" class="img-cover"><img src="assets/img/footer-icon-2.jpg" alt="img"></a>
-                            <div class="footer-blog-info">
-                                <div class="name"><a href="blog.html">Sed ut perspiciatis</a></div>
-                                <p>Omnis iste natus error sit voluptatem…</p>
-                            </div>
-                        </li>
                     </ul>
                 </div>
             </div>

@@ -49,6 +49,7 @@ class PaymentController extends Controller
             'gym_membership_packages' => $request->submit_package_id,
             'start_date' => date('Y-m-d'),
             'end_date' => $end_date,
+            'duration_in_days' => $gym_membership_packages,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -124,7 +125,7 @@ class PaymentController extends Controller
         DB::table('users')->where('id', $request->submit_user_id)->update([
             'available_personal_trainer_quota' => $available_personal_trainer_quota + $personal_trainer_kouta
         ]);
-        
+
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 

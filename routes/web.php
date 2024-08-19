@@ -53,8 +53,6 @@ Route::prefix('/')->group(function(){
         return view('landing_page.program_one_day');
     })->name('one-day');
 
-
-    // post question
     Route::post('/post-question', [LandingPageController::class, 'post_question'])->name('post_question');
 });
 

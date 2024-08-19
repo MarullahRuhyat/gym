@@ -288,6 +288,7 @@ starter Page
                         </button>
                     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 </div>
 =======
             </div>
@@ -353,6 +354,9 @@ starter Page
                     </div>
                 </form>
 >>>>>>> 19797f7 (merge: fix conflict)
+=======
+                </div>
+>>>>>>> 60d681c (merge: fix conflict)
             </div>
         </div>
     </div>
@@ -394,10 +398,14 @@ starter Page
                 _token: "{{ csrf_token() }}"
             },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 60d681c (merge: fix conflict)
             success: function (data) {
                 if (data.status == true) {
                     stepper1.next();
                     Stepper2DetailsPackage(data.data);
+<<<<<<< HEAD
                 }
 =======
             success: function(response) {
@@ -422,6 +430,9 @@ starter Page
             error: function(xhr, status, error) {
                 console.log(error);
 >>>>>>> 19797f7 (merge: fix conflict)
+=======
+                }
+>>>>>>> 60d681c (merge: fix conflict)
             }
         });
     }

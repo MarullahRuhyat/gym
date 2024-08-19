@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{asset("landing_page/assets/css/bootstrap-grid.css")}}">
     <link rel="stylesheet" href="{{asset("landing_page/assets/css/font-awesome.min.css")}}">
     <link rel="stylesheet" href="{{asset("landing_page/assets/css/style.css")}}">
+
 </head>
 
 <body id="home">
@@ -322,131 +323,19 @@
     <!-- ============= S-OUT-TRAINER END ============= -->
 
     <!-- ============== S-TESTIMONIALS ============== -->
-    <section class="s-testimonials" style="background-image: url(assets/img/bg-testimonials.jpg);">
+    <section class="s-testimonials" style="background-image: url(landing_page/assets/img/bg-testimonials.jpg);">
         <div class="mask"></div>
-        <img class="testimonials-effect" src="assets/img/bg-testimonials.svg" alt="effect">
+        <img class="testimonials-effect" src="{{asset("landing_page/assets/img/bg-testimonials.svg")}}" alt="effect">
         <div class="container">
             <div class="testimonials-slider">
-                <div class="testimonial-slide">
-                    <p>“
-                        Trainernya ok, program latianmya terjadwal, gak ngasal.
-                        Hasilnya nyata
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/nicolassantoso?igsh=bGJkZnY3cTYycmlh&utm_source=qr"
-                        class="name">@Nicolassantoso</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“The best gym di semarang , yang semua gym family nya passionate abis and gokil”</p>
-                    <img src="assets/img/testimonials-2.png" alt="img">
-                    <a href="https://www.instagram.com/inaratnawati/" class="name">@inaratnawati</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Salah satu tempat gym terbaik di Semarang dengan fasilitas yang baik dan para trainer yang
-                        berpengalaman
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/agoe4g/" class="name">@agoe4g</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Trainer bagus, ada progress, suasana gym oke👍
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/andrew_wicaksono/" class="name">@Andrew_Wicaksono</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Family Gym yang bersih dan bersih
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/Gabriel_panji/" class="name">@Gabriel_panji</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        SEMUA TRAINER NYA EDUCATIVE & HUMORIS
-                        LIKE MY SECOND HOME
-                        SO PASTI NGGA BOSEN !!!
-
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/Gabriel_panji/" class="name">@dianchristanty11</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Tempat gym yang more than just a gym, its like a family, PT dan owener yang bisa ngemong
-                        member,mereka bekerja dengan hati.
-                        Program latihan tersusun rapi tiap member, diarahkan oleh ownernya.
-                        Gym yang bener" tempat buat gym..ga ada melenceng"nya
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/miraoktarinachandra/" class="name">@dianchristanty11</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Flozor tempat gym yg membuat saya betah sejak 2020 karena dekat dengan rumah, Personal Trainer
-                        yg kompeten, tau kebutuhan saya dan saya tidak pernah cedera. Sakit boyok saya ga pernah kambuh
-                        lagi. Strechingnya sebelum latihan itu tidak ada di gym lain. Apalagi kalo leg day, streching
-                        nya muantappppp.... hahaha
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/yoshita_jael/" class="name">@yoshita_jael</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Tempat gym nya Flozor nyaman, coachnya profesional dan berpengalaman , nyaman dan enjoy nge gym
-                        di Flozor 👍💪
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/Iam_susan/" class="name">@Iam_susan</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Tempat gym yg seperti rumah sendiri.. nyaman dan aman, tidak takut menempatkan barang apapun di
-                        flozor.. pasti aman.. hp ketinggalan aja sudah 2 jam tetap aman ditempatnya..
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/ricky_christian/" class="name">@ricky_christian</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Best Gym in Semarang. Equipment lengkap dan berkualitas, member disini sangat ramah, PT”nya luar
-                        biasa dan professional.
-                        Highly Recommend!
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/nicsoebi/" class="name">@nicsoebi</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Best Gym in Semarang. Equipment lengkap dan berkualitas, member disini sangat ramah, PT”nya luar
-                        biasa dan professional.
-                        Highly Recommend!
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/nicsoebi/" class="name">@nicsoebi</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Gym di flozor’s asik banget, waktunya fleksibel, jadi bisa kapan ajaa. Instruktur nya juga ramah dan informatif. Selama di flozor udah berhasil turun 17kg, thankyou flozor!
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/angelanindyta/" class="name">@angelanindyta</a>
-                    <div class="prof">our client</div>
-                </div>
+                @foreach($testimonials as $testimonial)
+                    <div class="testimonial-slide">
+                        <p>“{{ $testimonial['text'] }}”</p>
+                        <img src="{{ $testimonial['profile_image'] }}" alt="img">
+                        <a href="{{ $testimonial['instagram_url'] }}" class="name">{{ $testimonial['name'] }}</a>
+                        <div class="prof">our client</div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -625,8 +514,8 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 col-lg-4 footer-item-logo">
-                    <a href="{{route("landing_page")}}" class="logo-footer"><img src="assets/img/footer-logo2.svg"
+                <div class="col-sm-6 col-lg-6 footer-item-logo">
+                    <a href="{{route("landing_page")}}" class="logo-footer"><img src="{{asset("landing_page/assets/img/10.svg")}}"
                             alt="logo"></a>
                     <p>Flozors Gym, founded in 2002 by Frans Lee, offers top service and a welcoming atmosphere for
                         fitness enthusiasts.</p>
@@ -641,7 +530,7 @@
                                     aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
-                <div class="col-sm-6 col-lg-4 footer-item">
+                <div class="col-sm-6 col-lg-6 footer-item">
                     <h3>Contact us</h3>
                     <ul class="footer-cont">
                         <li><i class="fa fa-whatsapp" aria-hidden="true"></i><a
@@ -652,25 +541,6 @@
                         <li><i class="fa fa-map-marker" aria-hidden="true"></i><a
                                 href="https://maps.app.goo.gl/r6iY1YkYoXq7tNkt6">Jl. Puspowarno Tengah No.6,
                                 Salamanmloyo, Kec. Semarang Barat, Kota Semarang, Jawa Tengah 50149</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-6 col-lg-4 footer-item">
-                    <h3>Blog</h3>
-                    <ul class="footer-blog">
-                        <li>
-                            <a href="blog.html" class="img-cover"><img src="assets/img/footer-icon-1.jpg" alt="img"></a>
-                            <div class="footer-blog-info">
-                                <div class="name"><a href="blog.html">Sed ut perspiciatis</a></div>
-                                <p>Omnis iste natus error sit voluptatem…</p>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="blog.html" class="img-cover"><img src="assets/img/footer-icon-2.jpg" alt="img"></a>
-                            <div class="footer-blog-info">
-                                <div class="name"><a href="blog.html">Sed ut perspiciatis</a></div>
-                                <p>Omnis iste natus error sit voluptatem…</p>
-                            </div>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -685,6 +555,7 @@
     <!--================= TO TOP END =================-->
 
     <!--=================== SCRIPT	===================-->
+    
     <script src="{{asset("landing_page/assets/js/jquery-2.2.4.min.js")}}"></script>
     <script src="{{asset("landing_page/assets/js/slick.min.js")}}"></script>
     <script src="{{asset("landing_page/assets/js/rx-lazy.js")}}"></script>

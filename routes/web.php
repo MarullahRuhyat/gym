@@ -34,8 +34,9 @@ Route::prefix('/')->group(function(){
         if ($appType == 'ADMIN') {
             return redirect()->route('auth.login');
         }
-        return view('landing_page.index');
+        return redirect()->route('landing_page_user');
     })->name('landing_page');
+    Route::get('/landing-page', [LandingPageController::class, 'index'])->name('landing_page_user');
     Route::get('/program-monthly-membership', function () {
         return view('landing_page.program_monthly_membership');
     })->name('program-monthly-membership');
@@ -51,6 +52,7 @@ Route::prefix('/')->group(function(){
     Route::get('/one-day', function () {
         return view('landing_page.program_one_day');
     })->name('one-day');
+
 
     // post question 
     Route::post('/post-question', [LandingPageController::class, 'post_question'])->name('post_question');

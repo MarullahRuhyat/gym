@@ -64,7 +64,7 @@
         <div class="container">
             <div class="header-logo">
                 <a href="{{route("landing_page")}}" class="logo img-thumbnail">
-                    <img src="{{asset("landing_page/assets/img/9.png")}}" class="card-img-top" alt="logo">
+                    <img src="{{asset("landing_page/assets/img/10.svg")}}" class="card-img-top" alt="logo">
                 </a>
                 <p class="me-5">Flozor's Gym</p>
             </div>
@@ -284,7 +284,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-lg-4 footer-item-logo">
-                    <a href="{{route("landing_page")}}" class="logo-footer"><img src="assets/img/footer-logo2.svg" alt="logo"></a>
+                    <a href="{{route("landing_page")}}" class="logo-footer"><img src="{{asset("landing_page/assets/img/10.svg")}}" alt="logo"></a>
                     <p>Flozors Gym, founded in 2002 by Frans Lee, offers top service and a welcoming atmosphere for fitness enthusiasts.</p>
                     <ul class="social-list">
                         <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
@@ -305,25 +305,6 @@
                         <li><i class="fa fa-envelope" aria-hidden="true"></i><a
                                 href="mailto:flozorsgym@gmail.com">flozorsgym@gmail.com</a></li>
                         <li><i class="fa fa-map-marker" aria-hidden="true"></i><a href="https://maps.app.goo.gl/r6iY1YkYoXq7tNkt6">Jl. Puspowarno Tengah No.6, Salamanmloyo, Kec. Semarang Barat, Kota Semarang, Jawa Tengah 50149</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-6 col-lg-4 footer-item">
-                    <h3>Blog</h3>
-                    <ul class="footer-blog">
-                        <li>
-                            <a href="blog.html" class="img-cover"><img src="assets/img/footer-icon-1.jpg" alt="img"></a>
-                            <div class="footer-blog-info">
-                                <div class="name"><a href="blog.html">Sed ut perspiciatis</a></div>
-                                <p>Omnis iste natus error sit voluptatem…</p>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="blog.html" class="img-cover"><img src="assets/img/footer-icon-2.jpg" alt="img"></a>
-                            <div class="footer-blog-info">
-                                <div class="name"><a href="blog.html">Sed ut perspiciatis</a></div>
-                                <p>Omnis iste natus error sit voluptatem…</p>
-                            </div>
-                        </li>
                     </ul>
                 </div>
             </div>

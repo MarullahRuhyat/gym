@@ -43,7 +43,7 @@ class TypePackageController extends Controller
             }
         }
 
-        $perPage = 1;
+        $perPage = 10;
         $type_package = TypePackage::query();
         $page = $request->query('page', 1);
         $name = $request->query('name', '');

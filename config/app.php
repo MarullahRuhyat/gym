@@ -13,6 +13,16 @@ return [
     |
     */
     'app_type' => env('APP_TYPE', 'USER'),
+
+    'scheduler' => [
+        "payroll_date" => env('SCHEDULER_PAYROLL_DATE', 25),
+        "payroll_time" => env('SCHEDULER_PAYROLL_TIME', "03:00"),
+        "notif_member_inactive_time" => env('SCHEDULER_NOTIF_MEMBER_INACTIVE_TIME', "12:00"),
+        "notif_member_expired_time" => env('SCHEDULER_NOTIF_MEMBER_EXPIRED_TIME', "14:00"),
+        "update_member_inactive_time" => env('SCHEDULER_UPDATE_MEMBER_INACTIVE_TIME', "01:00"),
+        "update_member_expired_time" => env('SCHEDULER_UPDATE_MEMBER_EXPIRED_TIME', "02:00"),
+    ],
+
     'name' => env('APP_NAME', 'Laravel'),
 
     /*

@@ -71,7 +71,7 @@ class GajiController extends Controller
             ->leftJoin('personal_training_bonuses as b', 'gaji_personal_trainers.id', '=', 'b.gaji_personal_trainers_id')
             ->where(DB::raw('DATE_FORMAT(gaji_personal_trainers.bulan_gaji, "%Y-%m")'), $month)
             ->groupBy('gaji_personal_trainers.id', 'u.name', 'gaji_personal_trainers.salary', 'gaji_personal_trainers.status');
-        
+
         if ($name != '') {
             $gaji->where('u.name', 'LIKE', '%' . $name . '%');
         }
@@ -153,12 +153,13 @@ class GajiController extends Controller
 
         // Format tanggal sekarang
         $date_now = Carbon::today()->format('Y-m-d');
-        $endDate = "{$date}-24";
-        $startDate = Carbon::createFromFormat('Y-m-d', $endDate)->subMonth()->addDays()->format('Y-m-d');
+        $date_gaji = "{$date}-" . config('app.scheduler.payroll_date');
+        $endDate = Carbon::createFromFormat('Y-m-d', $date_gaji)->subDay()->format('Y-m-d');
+        $startDate = Carbon::createFromFormat('Y-m-d', $date_gaji)->subMonth()->format('Y-m-d');
 
-        if (Carbon::parse($endDate)->gt($date_now)) {
+        if (Carbon::parse($date_gaji)->gt($date_now)) {
             return redirect()->route('admin_gaji')->with('error', "Maaf untuk generate gaji bulan {$date} belum dapat dilakukan");
-        } elseif (Carbon::parse($endDate)->lt($date_now)) {
+        } elseif (Carbon::parse($date_gaji)->lt($date_now)) {
             ProcessPayroll::dispatch($startDate, $endDate);
             return redirect()->route('admin_gaji')->with('success', "Generate gaji sedang di lakukan mohon tunggu beberapa saat lalu refresh web anda.");
         } else {

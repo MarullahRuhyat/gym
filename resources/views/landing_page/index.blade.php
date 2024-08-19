@@ -328,126 +328,14 @@
         <img class="testimonials-effect" src="{{asset("landing_page/assets/img/bg-testimonials.svg")}}" alt="effect">
         <div class="container">
             <div class="testimonials-slider">
-                <div class="testimonial-slide">
-                    <p>“
-                        Trainernya ok, program latianmya terjadwal, gak ngasal.
-                        Hasilnya nyata
-                        ”</p>
-                        <img src="https://instagram.fcgk6-3.fna.fbcdn.net/v/t51.2885-19/394476565_611513047642457_4932480621790199214_n.jpg?_nc_ht=instagram.fcgk6-3.fna.fbcdn.net&_nc_cat=105&_nc_ohc=ctr2mReBXxEQ7kNvgEIFOaA&edm=APHcPcMBAAAA&ccb=7-5&oh=00_AYCEKvA8lAy_LrcoskbhKcgpVn73YpvWqBxO9nmW_vStWw&oe=66C8A426&_nc_sid=bef7bc" alt="img">
-                        <a href="https://www.instagram.com/nicolassantoso?igsh=bGJkZnY3cTYycmlh&utm_source=qr"
-                        class="name">@Nicolassantoso</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“The best gym di semarang , yang semua gym family nya passionate abis and gokil”</p>
-                    <img src="https://instagram.fcgk6-2.fna.fbcdn.net/v/t51.2885-19/418425787_728909796039544_4360184562163851187_n.jpg?_nc_ht=instagram.fcgk6-2.fna.fbcdn.net&_nc_cat=104&_nc_ohc=HzkggUUqZegQ7kNvgEVK9To&edm=AEhyXUkBAAAA&ccb=7-5&oh=00_AYCRgH65Q_1c84ml3Gq6oEw53YKC4n0-ANV2YWBOsjm8lA&oe=66C8A9B3&_nc_sid=8f1549" alt="img">
-                    <a href="https://www.instagram.com/inaratnawati/" class="name">@inaratnawati</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Salah satu tempat gym terbaik di Semarang dengan fasilitas yang baik dan para trainer yang
-                        berpengalaman
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/agoe4g/" class="name">@agoe4g</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Trainer bagus, ada progress, suasana gym oke👍
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/andrew_wicaksono/" class="name">@Andrew_Wicaksono</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Family Gym yang bersih dan bersih
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/Gabriel_panji/" class="name">@Gabriel_panji</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        SEMUA TRAINER NYA EDUCATIVE & HUMORIS
-                        LIKE MY SECOND HOME
-                        SO PASTI NGGA BOSEN !!!
-
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/Gabriel_panji/" class="name">@dianchristanty11</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Tempat gym yang more than just a gym, its like a family, PT dan owener yang bisa ngemong
-                        member,mereka bekerja dengan hati.
-                        Program latihan tersusun rapi tiap member, diarahkan oleh ownernya.
-                        Gym yang bener" tempat buat gym..ga ada melenceng"nya
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/miraoktarinachandra/" class="name">@dianchristanty11</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Flozor tempat gym yg membuat saya betah sejak 2020 karena dekat dengan rumah, Personal Trainer
-                        yg kompeten, tau kebutuhan saya dan saya tidak pernah cedera. Sakit boyok saya ga pernah kambuh
-                        lagi. Strechingnya sebelum latihan itu tidak ada di gym lain. Apalagi kalo leg day, streching
-                        nya muantappppp.... hahaha
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/yoshita_jael/" class="name">@yoshita_jael</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Tempat gym nya Flozor nyaman, coachnya profesional dan berpengalaman , nyaman dan enjoy nge gym
-                        di Flozor 👍💪
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/Iam_susan/" class="name">@Iam_susan</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Tempat gym yg seperti rumah sendiri.. nyaman dan aman, tidak takut menempatkan barang apapun di
-                        flozor.. pasti aman.. hp ketinggalan aja sudah 2 jam tetap aman ditempatnya..
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/ricky_christian/" class="name">@ricky_christian</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Best Gym in Semarang. Equipment lengkap dan berkualitas, member disini sangat ramah, PT”nya luar
-                        biasa dan professional.
-                        Highly Recommend!
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/nicsoebi/" class="name">@nicsoebi</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Best Gym in Semarang. Equipment lengkap dan berkualitas, member disini sangat ramah, PT”nya luar
-                        biasa dan professional.
-                        Highly Recommend!
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/nicsoebi/" class="name">@nicsoebi</a>
-                    <div class="prof">our client</div>
-                </div>
-                <div class="testimonial-slide">
-                    <p>“
-                        Gym di flozor’s asik banget, waktunya fleksibel, jadi bisa kapan ajaa. Instruktur nya juga ramah dan informatif. Selama di flozor udah berhasil turun 17kg, thankyou flozor!
-                        ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/angelanindyta/" class="name">@angelanindyta</a>
-                    <div class="prof">our client</div>
-                </div>
+                @foreach($testimonials as $testimonial)
+                    <div class="testimonial-slide">
+                        <p>“{{ $testimonial['text'] }}”</p>
+                        <img src="{{ $testimonial['profile_image'] }}" alt="img">
+                        <a href="{{ $testimonial['instagram_url'] }}" class="name">{{ $testimonial['name'] }}</a>
+                        <div class="prof">our client</div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

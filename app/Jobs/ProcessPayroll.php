@@ -54,6 +54,7 @@ class ProcessPayroll implements ShouldQueue
                 $gaji->save();
 
                 $absents = AbsentMember::select(
+                    'type_packages.bonus as bonus',
                     'type_packages.name as package_name',
                     DB::raw('COUNT(absent_members.type_packages_id) as type_count')
                 )
@@ -68,7 +69,7 @@ class ProcessPayroll implements ShouldQueue
                 foreach ($absents as $absent) {
                     $bonus = new PersonalTrainingBonus();
                     $bonus->description = $absent->package_name . ' (' . $absent->type_count . ')';
-                    $bonus->amount = 0;
+                    $bonus->amount = intval($absent->type_count) * intval($absent->bonus);
                     $bonus->gaji_personal_trainers_id = $gaji->id;
                     $bonus->save();
                 }

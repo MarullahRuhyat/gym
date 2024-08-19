@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{asset("landing_page/assets/css/bootstrap-grid.css")}}">
     <link rel="stylesheet" href="{{asset("landing_page/assets/css/font-awesome.min.css")}}">
     <link rel="stylesheet" href="{{asset("landing_page/assets/css/style.css")}}">
+
 </head>
 
 <body id="home">
@@ -685,6 +686,7 @@
     <!--================= TO TOP END =================-->
 
     <!--=================== SCRIPT	===================-->
+    
     <script src="{{asset("landing_page/assets/js/jquery-2.2.4.min.js")}}"></script>
     <script src="{{asset("landing_page/assets/js/slick.min.js")}}"></script>
     <script src="{{asset("landing_page/assets/js/rx-lazy.js")}}"></script>

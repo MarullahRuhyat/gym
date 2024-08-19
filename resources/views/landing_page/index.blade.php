@@ -323,9 +323,9 @@
     <!-- ============= S-OUT-TRAINER END ============= -->
 
     <!-- ============== S-TESTIMONIALS ============== -->
-    <section class="s-testimonials" style="background-image: url(assets/img/bg-testimonials.jpg);">
+    <section class="s-testimonials" style="background-image: url(landing_page/assets/img/bg-testimonials.jpg);">
         <div class="mask"></div>
-        <img class="testimonials-effect" src="assets/img/bg-testimonials.svg" alt="effect">
+        <img class="testimonials-effect" src="{{asset("landing_page/assets/img/bg-testimonials.svg")}}" alt="effect">
         <div class="container">
             <div class="testimonials-slider">
                 <div class="testimonial-slide">
@@ -333,14 +333,14 @@
                         Trainernya ok, program latianmya terjadwal, gak ngasal.
                         Hasilnya nyata
                         ”</p>
-                    <img src="assets/img/testimonials-1.png" alt="img">
-                    <a href="https://www.instagram.com/nicolassantoso?igsh=bGJkZnY3cTYycmlh&utm_source=qr"
+                        <img src="https://instagram.fcgk6-3.fna.fbcdn.net/v/t51.2885-19/394476565_611513047642457_4932480621790199214_n.jpg?_nc_ht=instagram.fcgk6-3.fna.fbcdn.net&_nc_cat=105&_nc_ohc=ctr2mReBXxEQ7kNvgEIFOaA&edm=APHcPcMBAAAA&ccb=7-5&oh=00_AYCEKvA8lAy_LrcoskbhKcgpVn73YpvWqBxO9nmW_vStWw&oe=66C8A426&_nc_sid=bef7bc" alt="img">
+                        <a href="https://www.instagram.com/nicolassantoso?igsh=bGJkZnY3cTYycmlh&utm_source=qr"
                         class="name">@Nicolassantoso</a>
                     <div class="prof">our client</div>
                 </div>
                 <div class="testimonial-slide">
                     <p>“The best gym di semarang , yang semua gym family nya passionate abis and gokil”</p>
-                    <img src="assets/img/testimonials-2.png" alt="img">
+                    <img src="https://instagram.fcgk6-2.fna.fbcdn.net/v/t51.2885-19/418425787_728909796039544_4360184562163851187_n.jpg?_nc_ht=instagram.fcgk6-2.fna.fbcdn.net&_nc_cat=104&_nc_ohc=HzkggUUqZegQ7kNvgEVK9To&edm=AEhyXUkBAAAA&ccb=7-5&oh=00_AYCRgH65Q_1c84ml3Gq6oEw53YKC4n0-ANV2YWBOsjm8lA&oe=66C8A9B3&_nc_sid=8f1549" alt="img">
                     <a href="https://www.instagram.com/inaratnawati/" class="name">@inaratnawati</a>
                     <div class="prof">our client</div>
                 </div>

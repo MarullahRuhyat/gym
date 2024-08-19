@@ -64,7 +64,7 @@
         <div class="container">
             <div class="header-logo">
                 <a href="{{route("landing_page")}}" class="logo img-thumbnail">
-                    <img src="{{asset("landing_page/assets/img/9.png")}}" class="card-img-top" alt="logo">
+                    <img src="{{asset("landing_page/assets/img/10.svg")}}" class="card-img-top" alt="logo">
                 </a>
                 <p class="me-5">Flozor's Gym</p>
             </div>

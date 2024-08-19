@@ -287,7 +287,72 @@ starter Page
                             Next
                         </button>
                     </div>
+<<<<<<< HEAD
                 </div>
+=======
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="ScrollableModal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 bg-primary py-2">
+                <h5 class="modal-title" style="color:white">Detail Payment</h5>
+                <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="modal">
+                    <i class="material-icons-outlined">close</i>
+                </a>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('member.payment') }}" method="GET">
+                    @csrf
+                    <input type="hidden" name="submit_package_id" id="submit_package_id" value="">
+                    <!-- <input type="hidden" name="submit_user_id" id="submit_user_id" value="{{ Auth::user()->id }}"> -->
+                    <input type="hidden" name="payment_phone_number" id="payment_phone_number" value="{{ Auth::user()->phone_number }}">
+                    <input type="hidden" name="submit_start_date" id="submit_start_date" value="">
+                    <input type="hidden" name="payment_amount" id="payment_amount" value="">
+                    <input type="text" name="status_user" id="status_user" value="{{ Auth::user()->status }}">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4 fw-bold">Summary</h4>
+                                <div>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="fw-semi-bold">Items subtotal :</p>
+                                        <p id="payment-item-total" class="fw-semi-bold"></p>
+                                    </div>
+                                    @if (Auth::user()->status == 'expired' || Auth::user()->status == 'unregistered')
+                                        <div class="d-flex justify-content-between">
+                                            <p class="fw-semi-bold">Register Fee :</p>
+                                            <p id="payment-register" class="fw-semi-bold">Rp.75.000</p>
+                                        </div>
+                                    @endif
+                                    <div class="d-flex justify-content-between">
+                                        <p class="fw-semi-bold">Discount :</p>
+                                        <p id="payment-discount" class="text-danger fw-semi-bold">Rp.-</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="fw-semi-bold">Tax :</p>
+                                        <p id="payment-tax" class="fw-semi-bold">Rp.-</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between border-top pt-4">
+                                    <h5 class="mb-0 fw-bold">Total :</h5>
+                                    <h5 id="payment-total" class="mb-0 fw-bold"></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex justify-content-end mt-4">
+                            <button type="submit" class="btn btn-grd-deep-blue px-4">Pay</button>
+                        </div>
+                    </div>
+                </form>
+>>>>>>> 19797f7 (merge: fix conflict)
             </div>
         </div>
     </div>
@@ -328,11 +393,35 @@ starter Page
                 package_id: package_id,
                 _token: "{{ csrf_token() }}"
             },
+<<<<<<< HEAD
             success: function (data) {
                 if (data.status == true) {
                     stepper1.next();
                     Stepper2DetailsPackage(data.data);
                 }
+=======
+            success: function(response) {
+                // $('#payment-item-total').text('Rp.' + response.price);
+                // format number
+                $('#payment-item-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                // $('#payment-total').text('Rp.' + response.price);
+                // format number
+                // if status user expired or unregistered
+                // $('#payment-register').text('Rp.' + 75000);
+                $('#payment-register').text('Rp.' + (75000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                $('#payment-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                // $('#payment_amount').val(response.price);
+                if ($('#status_user').val() == 'expired' || $('#status_user').val() == 'unregistered') {
+                    $('#payment-total').text('Rp.' + (response.price + 75000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                    $('#payment_amount').val(response.price + 75000);
+                } else {
+                    $('#payment-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                    $('#payment_amount').val(response.price);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+>>>>>>> 19797f7 (merge: fix conflict)
             }
         });
     }

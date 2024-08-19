@@ -54,11 +54,15 @@ Route::prefix('/')->group(function(){
     })->name('one-day');
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     // post question
 =======
 
     // post question 
 >>>>>>> e261be1 (update code untuk looping testimony)
+=======
+    // post question
+>>>>>>> 19797f7 (merge: fix conflict)
     Route::post('/post-question', [LandingPageController::class, 'post_question'])->name('post_question');
 });
 
@@ -127,8 +131,12 @@ Route::prefix('member')->group(function () {
 
         Route::prefix('package')->group(function () {
             Route::get('/', [PackageController::class, 'package'])->name('member.package');
+<<<<<<< HEAD
             // Route::get('/selected-package-detail/{id}', [PackageController::class, 'selected_package_detail'])->name('member.selected-package-detail');
             Route::post('/submit-package', [PackageController::class, 'submit_package'])->name('member.submit-package');
+=======
+            Route::get('/selected-package-detail/{id}', [PackageController::class, 'selected_package_detail'])->name('member.selected-package-detail');
+>>>>>>> 19797f7 (merge: fix conflict)
             Route::get('/subscribed-package', [PackageController::class, 'subscribed_package'])->name('member.subscribed-package');
         });
         Route::prefix('attendance')->group(function () {

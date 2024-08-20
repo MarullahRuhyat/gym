@@ -350,10 +350,7 @@ starter Page
                         </div>
                     </div>
                 </form>
->>>>>>> 19797f7 (merge: fix conflict)
-=======
                 </div>
->>>>>>> 60d681c (merge: fix conflict)
             </div>
         </div>
     </div>

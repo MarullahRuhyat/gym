@@ -170,7 +170,7 @@ starter Page
                             <!-- <h3>Anggota 1</h3> -->
                             <form id="form-first" class="row g-3 needs-validation" novalidate
                             id="form1">
-                            <input type="text" class="form-control"
+                            <input type="hidden" class="form-control"
                             placeholder="Phone Number" id="bsValidation2" name="phone_number" value="{{ Auth::user()->phone_number }}">
                             </form>
                             <div id="dynamic-form-id">
@@ -287,10 +287,7 @@ starter Page
                             Next
                         </button>
                     </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
                 </div>
-=======
             </div>
         </div>
     </div>
@@ -397,43 +394,35 @@ starter Page
                 package_id: package_id,
                 _token: "{{ csrf_token() }}"
             },
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 60d681c (merge: fix conflict)
             success: function (data) {
                 if (data.status == true) {
                     stepper1.next();
                     Stepper2DetailsPackage(data.data);
-<<<<<<< HEAD
-                }
-=======
-            success: function(response) {
-                // $('#payment-item-total').text('Rp.' + response.price);
-                // format number
-                $('#payment-item-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-                // $('#payment-total').text('Rp.' + response.price);
-                // format number
-                // if status user expired or unregistered
-                // $('#payment-register').text('Rp.' + 75000);
-                $('#payment-register').text('Rp.' + (75000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-                $('#payment-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-                // $('#payment_amount').val(response.price);
-                if ($('#status_user').val() == 'expired' || $('#status_user').val() == 'unregistered') {
-                    $('#payment-total').text('Rp.' + (response.price + 75000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-                    $('#payment_amount').val(response.price + 75000);
-                } else {
-                    $('#payment-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-                    $('#payment_amount').val(response.price);
                 }
             },
+            // success: function(response) {
+            //     // $('#payment-item-total').text('Rp.' + response.price);
+            //     // format number
+            //     $('#payment-item-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+            //     // $('#payment-total').text('Rp.' + response.price);
+            //     // format number
+            //     // if status user expired or unregistered
+            //     // $('#payment-register').text('Rp.' + 75000);
+            //     $('#payment-register').text('Rp.' + (75000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+            //     $('#payment-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+            //     // $('#payment_amount').val(response.price);
+            //     if ($('#status_user').val() == 'expired' || $('#status_user').val() == 'unregistered') {
+            //         $('#payment-total').text('Rp.' + (response.price + 75000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+            //         $('#payment_amount').val(response.price + 75000);
+            //     } else {
+            //         $('#payment-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+            //         $('#payment_amount').val(response.price);
+            //     }
+            // },
             error: function(xhr, status, error) {
                 console.log(error);
->>>>>>> 19797f7 (merge: fix conflict)
-=======
-                }
->>>>>>> 60d681c (merge: fix conflict)
             }
+
         });
     }
 

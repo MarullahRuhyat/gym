@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AbsentMember;
+use App\Models\Membership;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,9 +20,9 @@ class ScanController extends Controller
                 if ($absent->end_time == null && $pt != null) {
                     $absent->personal_trainer_id = $pt;
                     $absent->save();
-                    $user = User::find($absent->member_id);
-                    $user->available_personal_trainer_quota = $user->available_personal_trainer_quota - 1;
-                    $user->save();
+                    $membersip = Membership::where('user_id', $absent->member_id)->select('user_terkait')->first();
+                    $user_terkait = array_map('intval', explode(',', $membersip->user_terkait));
+                    User::whereIn('id',  $user_terkait)->decrement('available_personal_trainer_quota', 1);
                 }
                 return redirect()->route('admin_scan')->with('success', 'Data berhasil disimpan!');
             } catch (\Throwable $th) {
@@ -40,10 +41,14 @@ class ScanController extends Controller
         ]);
         try {
             $qr_code = $request->qr_code;
-            $absen = AbsentMember::with('member')->where('qr_code', $qr_code)->first();
+            $absen = AbsentMember::with('member')
+                ->where('qr_code', $qr_code)
+                ->where('end_time', null)
+                ->first();
             if ($absen) {
                 if ($absen->start_time == null || $absen->start_time == '') {
                     $absen->start_time = Carbon::now();
+                    $absen->date = Carbon::now()->format('Y-m-d');
                     $absen->save();
                 } elseif ($absen->start_time != null  && ($absen->end_time == null || $absen->start_time == '')) {
                     $absen->end_time = Carbon::now();
@@ -56,16 +61,23 @@ class ScanController extends Controller
                         'absen' => $absen
                     ]);
                 }
+                $user = null;
+                if ($absen->is_using_pt == 1) {
+                    $membersip = Membership::where('user_id', $absen->member_id)->select('user_terkait')->first();
+                    $user_terkait = array_map('intval', explode(',', $membersip->user_terkait));
+                    $user = User::whereIn('id',  $user_terkait)->select('name')->get();
+                }
+
+                // Do something with the validated data, e.g., save to the database
                 return response()->json([
                     'status' => true,
                     'message' => 'Berhasil Proses',
                     'qr' => $request->qr_code,
                     'absen' => $absen,
-                    'time' => config('app.timezone')
+                    'time' => config('app.timezone'),
+                    'user' => $user
                 ]);
             }
-
-            // Do something with the validated data, e.g., save to the database
 
             return response()->json([
                 'status' => false,

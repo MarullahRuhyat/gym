@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('salary_pt')->nullable();
+            $table->unsignedBigInteger('salary_pt')->default(0);
         });
     }
 

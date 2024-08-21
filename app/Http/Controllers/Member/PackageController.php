@@ -66,6 +66,18 @@ class PackageController extends Controller
                     'updated_at' => now(),
                 ]);
 
+                // update end_date using duration_in_days for each user_registered
+                foreach ($user_registered as $user) {
+                    $end_date = date('Y-m-d', strtotime($request->start_date . ' + ' . $duration . ' days'));
+                    DB::table('users')->where('id', $user->id)->update([
+                        'end_date' => $end_date,
+                    ]);
+                }
+                // also update end_date for user_id
+                DB::table('users')->where('id', $user_id)->update([
+                    'end_date' => $end_date,
+                ]);
+
                 $status = true;
                 $message = 'Register success.';
             } else {

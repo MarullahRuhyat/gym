@@ -33,18 +33,27 @@ class ProcessNotifMemberActive implements ShouldQueue
         $today = Carbon::today();
 
         // Mendapatkan data dengan end_date lebih dari 4 hari dari hari ini
-        $users = DB::table('users')
-            ->select('name', 'phone_number', 'end_date')
-            ->where('end_date', '=', $today->addDays(4))
-            ->where('role', 'member')
+        // $users = DB::table('users')
+        //     ->select('name', 'phone_number', 'end_date')
+        //     ->where('end_date', '=', $today->addDays(4))
+        //     ->where('role', 'member')
+        //     ->get();
+
+        $end_date_membership = DB::table('memberships')
+            ->select('memberships.user_id', 'users.name as user_name', 'users.phone_number', 'memberships.end_date as end_date')
+            ->join('users', 'memberships.user_id', '=', 'users.id')
+            ->where('memberships.end_date', '=', $today->addDays(4))
+            ->where('memberships.is_active', 1)
             ->get();
 
         $client = new Client();
-        foreach ($users as $user) {
+        // foreach ($users as $user) {
+        foreach ($end_date_membership as $user) {
             // Buat pesan yang dipersonalisasi
             Log::info('process_notif_member_inactive queue', [$user->name]);
 
-            $message = "Hallo {$user->name}, selamat siang\n\n";
+            // $message = "Hallo {$user->name}, selamat siang\n\n";
+            $message = "Hallo {$user->user_name}, selamat siang\n\n";
             $message .= "Saat ini masa aktif member Anda tinggal 4 hari lagi berakhir pada tanggal {$user->end_date}. ";
             $message .= "Segera perpanjang member Anda untuk dapat menikmati fasilitas gym kami.";
 

@@ -20,7 +20,7 @@ class ScanController extends Controller
                 if ($absent->end_time == null && $pt != null) {
                     $absent->personal_trainer_id = $pt;
                     $absent->save();
-                    $membersip = Membership::where('user_id', $absent->member_id)->where('status', 'active')->select('user_terkait')->first();
+                    $membersip = Membership::where('user_id', $absent->member_id)->where('is_active', 1)->select('user_terkait')->first();
                     $user_terkait = array_map('intval', explode(',', $membersip->user_terkait));
                     User::whereIn('id',  $user_terkait)->decrement('available_personal_trainer_quota', 1);
                 }
@@ -63,7 +63,7 @@ class ScanController extends Controller
                 }
                 $user = null;
                 if ($absent->is_using_pt == 1) {
-                    $membersip = Membership::where('user_id', $absent->member_id)->where('status', 'active')->select('user_terkait')->first();
+                    $membersip = Membership::where('user_id', $absent->member_id)->where('is_active', 1)->select('user_terkait')->first();
                     $user_terkait = array_map('intval', explode(',', $membersip->user_terkait));
                     $user = User::whereIn('id',  $user_terkait)->select('name')->get();
                 }

@@ -20,7 +20,7 @@ class ScanController extends Controller
                 if ($absent->end_time == null && $pt != null) {
                     $absent->personal_trainer_id = $pt;
                     $absent->save();
-                    $membersip = Membership::where('user_id', $absent->member_id)->select('user_terkait')->first();
+                    $membersip = Membership::where('user_id', $absent->member_id)->where('status', 'active')->select('user_terkait')->first();
                     $user_terkait = array_map('intval', explode(',', $membersip->user_terkait));
                     User::whereIn('id',  $user_terkait)->decrement('available_personal_trainer_quota', 1);
                 }
@@ -41,29 +41,29 @@ class ScanController extends Controller
         ]);
         try {
             $qr_code = $request->qr_code;
-            $absen = AbsentMember::with('member')
+            $absent = AbsentMember::with('member')
                 ->where('qr_code', $qr_code)
                 ->where('end_time', null)
                 ->first();
-            if ($absen) {
-                if ($absen->start_time == null || $absen->start_time == '') {
-                    $absen->start_time = Carbon::now();
-                    $absen->date = Carbon::now()->format('Y-m-d');
-                    $absen->save();
-                } elseif ($absen->start_time != null  && ($absen->end_time == null || $absen->start_time == '')) {
-                    $absen->end_time = Carbon::now();
-                    $absen->save();
+            if ($absent) {
+                if ($absent->start_time == null || $absent->start_time == '') {
+                    $absent->start_time = Carbon::now();
+                    $absent->date = Carbon::now()->format('Y-m-d');
+                    $absent->save();
+                } elseif ($absent->start_time != null  && ($absent->end_time == null || $absent->start_time == '')) {
+                    $absent->end_time = Carbon::now();
+                    $absent->save();
                 } else {
                     return response()->json([
                         'status' => false,
                         'message' => 'QR sudah digunakan',
                         'qr' => $request->qr_code,
-                        'absen' => $absen
+                        'absen' => $absent
                     ]);
                 }
                 $user = null;
-                if ($absen->is_using_pt == 1) {
-                    $membersip = Membership::where('user_id', $absen->member_id)->select('user_terkait')->first();
+                if ($absent->is_using_pt == 1) {
+                    $membersip = Membership::where('user_id', $absent->member_id)->where('status', 'active')->select('user_terkait')->first();
                     $user_terkait = array_map('intval', explode(',', $membersip->user_terkait));
                     $user = User::whereIn('id',  $user_terkait)->select('name')->get();
                 }
@@ -73,7 +73,7 @@ class ScanController extends Controller
                     'status' => true,
                     'message' => 'Berhasil Proses',
                     'qr' => $request->qr_code,
-                    'absen' => $absen,
+                    'absen' => $absent,
                     'time' => config('app.timezone'),
                     'user' => $user
                 ]);

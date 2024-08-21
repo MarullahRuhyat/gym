@@ -77,7 +77,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => Str::random(10),
                 'created_at' => now(),
                 'updated_at' => now(),
-                'salary_pt' => null,
+                'salary_pt' => 0,
             ]);
         }
     }

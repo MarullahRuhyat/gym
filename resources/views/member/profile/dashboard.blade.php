@@ -96,9 +96,9 @@ starter Page
                     <i class="material-icons-outlined">close</i>
                 </a>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="background-color : #fff">
                 <div class="order-summary">
-                    <div class="card mb-0">
+                    {{-- <div class="card mb-0"> --}}
                         <div class="card-body d-flex justify-content-center align-items-center">
                             <!-- Loading Spinner -->
                             <div id="loadingSpinner" style="display:none;">
@@ -108,7 +108,7 @@ starter Page
                             <!-- QR Code Image -->
                             <img id="qr_code_img" src="" class="w-150 rounded h-150" alt="..." style="display:none;">
                         </div>
-                    </div>
+                    {{-- </div> --}}
                 </div>
             </div>
         </div>

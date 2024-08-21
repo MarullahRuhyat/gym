@@ -22,7 +22,7 @@ starter Page
         width: 100%;
         height: auto;
         object-fit: cover;
-        transform: scaleX(-1);
+        /* transform: scaleX(-1); */
     }
 
     .btn {
@@ -207,7 +207,7 @@ starter Page
                 if (videoElement) {
                     $('#html5-qrcode-button-camera-start').addClass('btn  btn-success');
                     $('#html5-qrcode-button-camera-stop').addClass('btn  btn-danger');
-                    videoElement.style.transform = 'scaleX(-1)';
+                    // videoElement.style.transform = 'scaleX(-1)';
                     clearInterval(intervalId);
                 }
             }, 100);

@@ -85,7 +85,7 @@ class ProfileController extends Controller
         $absent_member->member_id = $user->id;
         $absent_member->is_using_pt = $is_using_pt;
         $absent_member->type_packages_id  = $data[0]->type_packages_id;
-        $absent_member->id_paket_member = $data[0]->gym_membership_packages_id;
+        // $absent_member->id_paket_member = $data[0]->gym_membership_packages_id;
         $absent_member->save();
 
         // $path_qr_code = 'build/images/member/qr_code/' . $qr_code;

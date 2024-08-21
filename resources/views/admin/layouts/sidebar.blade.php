@@ -2,10 +2,10 @@
 <aside class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header">
         <div class="logo-icon">
-            <img src="{{ URL::asset('build/images/logo-icon.png') }}" class="logo-img" alt="">
+            <img src="{{ URL::asset('landing_page/assets/img/10.svg') }}" class="logo-img" alt="">
         </div>
         <div class="logo-name flex-grow-1">
-            <h5 class="mb-0">Maxton</h5>
+            <h5 class="mb-0">Flozors Gym</h5>
         </div>
         <div class="sidebar-close">
             <span class="material-icons-outlined">close</span>
@@ -17,7 +17,7 @@
             <li>
                 <a href="{{ route('admin_dashboard')}}">
                     <div class="parent-icon"><i class="material-icons-outlined">
-                        dashboard</i>
+                            dashboard</i>
                     </div>
                     <div class="menu-title">Dashboard</div>
                 </a>

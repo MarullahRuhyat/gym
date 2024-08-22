@@ -14,6 +14,7 @@ class GymMembershipPackage extends Model
         'duration_in_days',
         'personal_trainer_quota',
         'type',
+        'type_packages_id',
     ];
 
     public function typePackage()

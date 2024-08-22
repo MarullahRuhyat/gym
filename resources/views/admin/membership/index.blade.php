@@ -37,25 +37,25 @@ starter Page
             <form id="membershipFormAdd" method="POST" action="">
                 <div class="modal-body">
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="price">Price</label>
                         <input type="text" class="form-control angka-rupiah" id="price" name="price" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="duration_in_days">Duration (Days)</label>
                         <input type="number" class="form-control" id="duration_in_days" name="duration_in_days" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="personal_trainer_quota">Personal Trainer</label>
                         <input type="number" class="form-control" id="personal_trainer_quota" name="personal_trainer_quota" value="0" required>
                     </div>
-                    <div class="form-group">
-                        <label for="personal_trainer_quota">Personal Trainer</label>
-                        <select class="form-select" aria-label="Default select example" required name="type_packages_id">
+                    <div class="form-group my-2">
+                        <label for="tipe_paket">Tipe Paket</label>
+                        <select class="form-select" aria-label="Default select example" id="tipe_paket" required name="type_packages_id">
                             <option value="">-- pilih tipe paket --</option>
                             @foreach($type_packages as $row)
                             <option value="{{$row->id}}">{{$row->name}}</option>
@@ -83,26 +83,26 @@ starter Page
             <form id="membershipFormEdit" method="POST" action="">
                 <div class="modal-body">
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name_edit" name="name" required>
                         <input type="hidden" name="id" id="id_edit">
                         <input type="hidden" name="edit" value="1">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="price">Price</label>
                         <input type="text" class="form-control angka-rupiah" id="price_edit" name="price" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="duration_in_days">Duration (Days)</label>
                         <input type="number" class="form-control" id="duration_in_days_edit" name="duration_in_days" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="personal_trainer_quota_edit">Personal Trainer</label>
                         <input type="number" class="form-control" id="personal_trainer_quota_edit" name="personal_trainer_quota" required>
                     </div>
-                    <div class="form-group">
-                        <label for="personal_trainer_quota">Personal Trainer</label>
+                    <div class="form-group my-2">
+                        <label for="personal_trainer_quota">Tipe Paket</label>
                         <select class="form-select" aria-label="Default select example" required name="type_packages_id" id="type_edit">
                             <option value="">-- pilih tipe paket --</option>
                             @foreach($type_packages as $row)

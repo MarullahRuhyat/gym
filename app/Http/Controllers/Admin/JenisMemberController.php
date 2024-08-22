@@ -52,14 +52,18 @@ class JenisMemberController extends Controller
         $perPage = 10;
         $membership = GymMembershipPackage::query()
             ->leftJoin('type_packages', 'gym_membership_packages.type_packages_id', '=', 'type_packages.id')
-            ->select('gym_membership_packages.*', 'type_packages.name as type_package_name');
+            ->select('gym_membership_packages.*', 'type_packages.name as type_package_name')
+            ->orderBy('gym_membership_packages.created_at', 'desc');
+
         $page = $request->query('page', 1);
         $name = $request->query('name', '');
         if ($name != '') {
             $membership->where('gym_membership_packages.name', 'LIKE', '%' . $name . '%');
         }
+
         $results = $membership->paginate($perPage, ['*'], 'page', $page);
         $total_page = intval(ceil($results->total() / $results->perPage()));
+
 
         $type_packages = TypePackage::all();
 

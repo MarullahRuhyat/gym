@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\JenisMemberController;
 use App\Http\Controllers\Admin\JenisLatihanController;
 use App\Http\Controllers\Admin\DashboardAdminController;
+use App\Http\Controllers\Admin\PaymentCashController;
 use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
 use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
 use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
@@ -195,8 +196,8 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::match(['get', 'post'], '/type-package', [TypePackageController::class, 'index'])->name('admin_type_package');
 
     // cash
-    Route::get('/cash', [GajiController::class, 'cash'])->name('admin_cash');
-    Route::post('/cash-acc', [GajiController::class, 'cash_acc'])->name('admin_cash_acc');
-    Route::post('/cash-reject', [GajiController::class, 'cash_reject'])->name('admin_cash_reject');
+    Route::get('/cash', [PaymentCashController::class, 'index'])->name('admin_cash');
+    Route::post('/cash-acc', [PaymentCashController::class, 'cash_acc'])->name('admin_cash_acc');
+    Route::post('/cash-reject', [PaymentCashController::class, 'cash_rej'])->name('admin_cash_rej');
 
 });

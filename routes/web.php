@@ -11,21 +11,22 @@ use App\Http\Controllers\Admin\ScanController;
 use App\Http\Controllers\Admin\AbsenController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Admin\MemberController;
-use App\Http\Controllers\Admin\JenisMemberController;
-use App\Http\Controllers\Admin\JenisLatihanController;
-use App\Http\Controllers\Admin\DashboardAdminController;
-use App\Http\Controllers\Admin\PaymentCashController;
-use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
-use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
-use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
-use App\Http\Controllers\Admin\TypePackageController;
-use App\Http\Controllers\Member\AuthController as MemberAuthController;
-use App\Http\Controllers\Member\ProfileController;
 use App\Http\Controllers\Member\PackageController;
 use App\Http\Controllers\Member\PaymentController;
+use App\Http\Controllers\Member\ProfileController;
+use App\Http\Controllers\Admin\JenisMemberController;
+use App\Http\Controllers\Admin\PaymentCashController;
+use App\Http\Controllers\Admin\TypePackageController;
 use App\Http\Controllers\Member\AttendanceController;
+use App\Http\Controllers\Admin\JenisLatihanController;
+use App\Http\Controllers\Admin\DashboardAdminController;
+use App\Http\Controllers\PersonalTrainer\ScanByPTController;
 use App\Http\Controllers\PersonalTraining\ProfilePersonalTraining;
+use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
+use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
+use App\Http\Controllers\Member\AuthController as MemberAuthController;
 use App\Http\Controllers\PersonalTraining\GajiPersonalTrainerController;
+use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
 
 Route::get('test', fn () => phpinfo());
 
@@ -161,6 +162,10 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
         // search gaji personal trainer
         Route::get('/search', [GajiPersonalTrainerController::class, 'search'])->name('personal_trainer.payment.search');
     });
+
+    // scan
+    Route::match(['get', 'post'], '/scan', [ScanByPTController::class, 'index'])->name('pt_scan');
+    Route::post('/ajax-post-attendance', [ScanByPTController::class, 'post_attendance'])->name('pt_scan_ajax_post_attendance');
 });
 
 

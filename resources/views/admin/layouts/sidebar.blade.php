@@ -63,6 +63,14 @@
                 </a>
 
             </li>
+            <li>
+                <a href="{{ route('admin_cash')}}">
+                    <div class="parent-icon"><i class="material-icons-outlined">attach_money</i>
+                    </div>
+                    <div class="menu-title">CASH</div>
+                </a>
+
+            </li>
             <li class="menu-label">Master</li>
             <li>
                 <a href="javascript:;" class="has-arrow">

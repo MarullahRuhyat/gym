@@ -69,7 +69,7 @@
                 <a href="{{route("landing_page")}}" class="logo img-thumbnail">
                     <img src="{{asset("landing_page/assets/img/10.svg")}}" class="card-img-top" alt="logo">
                 </a>
-                <p class="me-5">Flozor's Gym</p>
+                <p class="me-5" style="font-size:20px">FLOZOR'S GYM</p>
             </div>
         </div>
         {{-- </div> --}}

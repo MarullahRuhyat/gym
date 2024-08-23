@@ -198,4 +198,10 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::match(['get', 'post'], '/jenis-latihan', [JenisLatihanController::class, 'index'])->name('admin_jenis_latihan');
     // type package page
     Route::match(['get', 'post'], '/type-package', [TypePackageController::class, 'index'])->name('admin_type_package');
+
+    // cash
+    Route::get('/cash', [GajiController::class, 'cash'])->name('admin_cash');
+    Route::post('/cash-acc', [GajiController::class, 'cash_acc'])->name('admin_cash_acc');
+    Route::post('/cash-reject', [GajiController::class, 'cash_reject'])->name('admin_cash_reject');
+
 });

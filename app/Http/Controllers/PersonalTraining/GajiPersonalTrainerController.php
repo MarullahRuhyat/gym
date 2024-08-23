@@ -61,12 +61,19 @@ class GajiPersonalTrainerController extends Controller
     {
         $user = auth()->user();
 
-        // Mengambil tanggal dari request dan mengkonversinya ke format yang sesuai
-        $selectedDate = Carbon::createFromFormat('Y-m-d', $request->input('date'));
+        // Ambil input tanggal dari form
+        $dateInput = request()->input('date');
 
-        // Mendapatkan rentang tanggal untuk pencarian
-        $startDate = $selectedDate->startOfDay();
-        $endDate = $selectedDate->endOfDay();
+        // Cek apakah ada input tanggal, jika tidak gunakan rentang default
+        if ($dateInput) {
+            // Jika ada input tanggal, gunakan tanggal tersebut sebagai rentang pencarian
+            $startDate = Carbon::parse($dateInput)->startOfDay();
+            $endDate = Carbon::parse($dateInput)->endOfDay();
+        } else {
+            // Rentang default: 25 hari sebelum sekarang hingga akhir hari ini
+            $startDate = Carbon::now()->subDays(25)->startOfMonth();
+            $endDate = Carbon::now()->endOfDay();
+        }
 
         // Query untuk mendapatkan bonus
         $bonus = DB::table('gaji_personal_trainers')
@@ -85,7 +92,7 @@ class GajiPersonalTrainerController extends Controller
         if ($bonus) {
             $bonus_sum = $bonus->sum('amount');
         } else {
-            $bonus = 0;
+            $bonus_sum = 0;
         }
 
         if ($gaji_pokok) {
@@ -93,16 +100,14 @@ class GajiPersonalTrainerController extends Controller
             $gaji_pokok_tanggal = $gaji_pokok->bulan_gaji;
             $gaji_pokok_tanggal = Carbon::parse($gaji_pokok_tanggal)->translatedFormat('d-F-Y');
         } else {
-            $gaji_pokok = 0;
             $gaji_pokok_salary = 0;
-            $gaji_pokok_tanggal = 0;
+            $gaji_pokok_tanggal = '-';
         }
 
-        $bonus_sum = $bonus->sum('amount');
-        $gaji_pokok_total = $gaji_pokok_salary;
-        $total = $bonus_sum + $gaji_pokok_total;
+        $total = $bonus_sum + $gaji_pokok_salary;
 
         return view('personal_training.payment', compact('user', 'bonus', 'gaji_pokok_salary', 'gaji_pokok_tanggal', 'total'));
+
     }
 
 }

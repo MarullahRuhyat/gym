@@ -24,7 +24,7 @@ class PackageController extends Controller
         return view('member.membership.select-package', compact('groupedPackages'));
     }
 
-    public function package()
+    public function buy_new_package()
     {
         $packages = DB::table('gym_membership_packages')
         ->leftJoin('type_packages', 'gym_membership_packages.type_packages_id', '=', 'type_packages.id')
@@ -33,11 +33,19 @@ class PackageController extends Controller
 
         $groupedPackages = $packages->groupBy('type_name');
 
-        return view('member.membership.select-package', compact('groupedPackages'));
+        return view('member.membership.buy-new-membership', compact('groupedPackages'));
+    }
+
+    public function submit_buy_new_package(Request $request)
+    {
+
     }
 
     public function submit_package(Request $request)
     {
+        $personal_trainer_in_table_user_first = DB::table('users')->where('phone_number', $request->form_first['phone_number'])->pluck('available_personal_trainer_quota')->first();
+        $personal_trainer_in_table_user_registered = DB::table('users')->whereIn('phone_number', $request->form_dynamic)->pluck('available_personal_trainer_quota')->first();
+        $personal_trainer_quota_from_membership = DB::table('gym_membership_packages')->where('id', $request->package_id)->pluck('personal_trainer_quota')->first();
         $phone_number = $request->form_dynamic;
         $user_registered = User::whereIn('phone_number', $phone_number)->get(); // ini harus di cek semua phone number yang di inputkan
         if($user_registered == null) {
@@ -55,7 +63,7 @@ class PackageController extends Controller
                 $end_date = date('Y-m-d', strtotime($request->start_date . ' + ' . $duration . ' days'));
                 $user_id = DB::table('users')->where('phone_number', $request->form_first['phone_number'])->pluck('id')->first();
                 $user_membership_packages = DB::table('memberships')->insert([
-                    'user_id' => DB::table('users')->where('phone_number', $request->form_first['phone_number'])->pluck('id')->first(),
+                    'user_id' => $user_id,
                     'gym_membership_packages' => $request->package_id,
                     'start_date' => $request->start_date,
                     'end_date' => $end_date,
@@ -66,16 +74,37 @@ class PackageController extends Controller
                     'updated_at' => now(),
                 ]);
 
+                // save all user_registered to memberships in each row
+                foreach ($user_registered as $user) {
+                    $user_membership_packages = DB::table('memberships')->insert([
+                        'user_id' => $user->id,
+                        'gym_membership_packages' => $request->package_id,
+                        'start_date' => $request->start_date,
+                        'end_date' => $end_date,
+                        'user_terkait' => $user_id . ',' . implode(',', $user_terkait->toArray()),
+                        'duration_in_days' => $duration,
+                        'is_active' => false,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+
+                DB::table('memberships')->where('user_id', $user_id)->update([
+                    'is_active' => 0,
+                ]);
+
                 // update end_date using duration_in_days for each user_registered
                 foreach ($user_registered as $user) {
                     $end_date = date('Y-m-d', strtotime($request->start_date . ' + ' . $duration . ' days'));
                     DB::table('users')->where('id', $user->id)->update([
                         'end_date' => $end_date,
+                        'available_personal_trainer_quota' => $personal_trainer_quota_from_membership + $personal_trainer_in_table_user_registered,
                     ]);
                 }
                 // also update end_date for user_id
                 DB::table('users')->where('id', $user_id)->update([
                     'end_date' => $end_date,
+                    'available_personal_trainer_quota' => $personal_trainer_quota_from_membership + $personal_trainer_in_table_user_first,
                 ]);
 
                 $status = true;
@@ -106,10 +135,8 @@ class PackageController extends Controller
             'data' => [
                 'user' => $user_registered,
                 'user_phone_number' => $request->form_first['phone_number'],
-                // 'user_registered' => (count($user_registered) + 1) * 75000,
                 'user_registered' => $fee,
                 'payment_item_total' => $amount_package,
-                // 'total' => ((count($user_registered) + 1) * 75000) + $amount_package + $fee,
                 'total' => $fee + $amount_package,
             ],
         ];
@@ -133,11 +160,14 @@ class PackageController extends Controller
             ->orderBy('payments.id', 'desc')
             ->get();
 
-        $packages_membership_payments->transform(function ($item) {
+        $get_available_personal_trainer_quota = DB::table('users')->where('id', $user->id)->pluck('available_personal_trainer_quota')->first();
+
+        $packages_membership_payments->transform(function ($item) use ($get_available_personal_trainer_quota) {
             if ($item->start_date && $item->end_date) {
                 $startDate = Carbon::parse($item->start_date);
                 $endDate = Carbon::parse($item->end_date);
                 $item->duration_in_days = (int) $startDate->diffInDays($endDate);
+                $item->available_personal_trainer_quota = $get_available_personal_trainer_quota;
             } else {
                 $item->duration_in_days = null; // Jika tanggal tidak ada, beri nilai null
             }

@@ -44,15 +44,15 @@ class PaymentController extends Controller
             ),
         );
 
-        DB::table('memberships')->insert([
-            'user_id' => $user_id,
-            'gym_membership_packages' => $request->submit_package_id,
-            'start_date' => date('Y-m-d'),
-            'end_date' => $end_date,
-            'duration_in_days' => $gym_membership_packages,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // DB::table('memberships')->insert([
+        //     'user_id' => $user_id,
+        //     'gym_membership_packages' => $request->submit_package_id,
+        //     'start_date' => date('Y-m-d'),
+        //     'end_date' => $end_date,
+        //     'duration_in_days' => $gym_membership_packages,
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        // ]);
 
         DB::table('payments')->insert([
             'order_id' => $params['transaction_details']['order_id'],

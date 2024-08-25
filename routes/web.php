@@ -123,6 +123,7 @@ Route::prefix('member')->group(function () {
 
         Route::prefix('package')->group(function () {
             Route::get('/', [PackageController::class, 'package'])->name('member.package');
+            Route::post('/submit-cash-payment', [PackageController::class, 'submitCashPayment'])->name('member.submit-cash-payment');
 
             // Route::get('/selected-package-detail/{id}', [PackageController::class, 'selected_package_detail'])->name('member.selected-package-detail');
             // Route::get('/selected-package-detail/{id}', [PackageController::class, 'selected_package_detail'])->name('member.selected-package-detail');

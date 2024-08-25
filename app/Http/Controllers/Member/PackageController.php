@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Member;
 
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Payment;
+use Illuminate\Http\Request;
 use App\Http\Middleware\Member;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class PackageController extends Controller
 {
@@ -151,6 +152,26 @@ class PackageController extends Controller
     {
         $package = DB::table('gym_membership_packages')->where('id', $id)->first();
         return response()->json($package);
+    }
+
+    public function submitCashPayment(Request $request)
+    {
+        $data = $request->validate([
+            'package_id' => 'required',
+            'amount' => 'required|numeric',
+        ]);
+
+        Payment::create([
+            'gym_membership_packages' => $data['package_id'],
+            'amount' => $data['amount'],
+            'user_id' => auth()->id(),
+            'status' => 'pending',
+            'membership_id' => DB::table('memberships')->latest()->first()->id,
+            'payment_method' => 'cash',
+            'order_id' => '000' . time(),
+
+        ]);
+        return response()->json(['status' => true, 'message' => 'Pembayaran berhasil']);
     }
 
 }

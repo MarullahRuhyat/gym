@@ -19,6 +19,45 @@
 
 </head>
 
+<style>
+    .image-carousel {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .carousel-images {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-image {
+        min-width: 100%;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .carousel-control {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .prev {
+        left: 10px;
+    }
+
+    .next {
+        right: 10px;
+    }
+
+</style>
+
 <body id="home">
     <!--================ PRELOADER ================-->
     <div class="preloader-cover">
@@ -119,12 +158,6 @@
             <img src="{{asset("landing_page/assets/img/placeholder-all.png")}}"
                 data-src="{{asset("landing_page/assets/img/group-circle-2.svg")}}" alt="img"
                 class="crossfit-icon-1 rx-lazy">
-            <img src="{{asset("landing_page/assets/img/placeholder-all.png")}}"
-                data-src="{{asset("landing_page/assets/img/line-red-1.svg")}}" alt="img"
-                class="crossfit-icon-2 rx-lazy">
-            <img src="{{asset("landing_page/assets/img/placeholder-all.png")}}"
-                data-src="{{asset("landing_page/assets/img/tringle-about-top.svg")}}" alt="img"
-                class="crossfit-icon-3 rx-lazy">
             <h2 class="title-decor">Welcome To <span>Flozor's Gym</span></h2>
             <p class="slogan">Flozors Gym has a dynamic history rooted in dedication to fitness and community. Founded
                 in 2002 by Frans Lee as Scorpion Gym on Kranggan Road, it quickly gained popularity over three years. We
@@ -227,11 +260,11 @@
             <div class="row">
                 <div class="col-md-6 out-trainer-col">
                     <div class="out-trainer-item">
-                        <a href="trainer.html" class="out-trainer-img"><img class="rx-lazy"
-                                src="{{asset("landing_page/assets/img/placeholder-all.png")}}"
-                                data-src="assets/img/trainer-1.jpg" alt="img"></a>
+                        <a href="javascript:void(0);" class="out-trainer-img"><img class="rx-lazy"
+                                src="{{asset("landing_page/assets/img/ptFajar.jpg")}}"
+                                data-src="{{asset("landing_page/assets/img/ptFajar.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
-                            <h3><a href="trainer.html">Fadjar</a></h3>
+                            <h3><a href="javascript:void(0);">Fadjar</a></h3>
                             <div class="prof">Weightlifting</div>
                             <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
                                 auctor tincidunt lorem ut, venenatis dapibus miq.</p>
@@ -250,11 +283,11 @@
                 </div>
                 <div class="col-md-6 out-trainer-col">
                     <div class="out-trainer-item">
-                        <a href="trainer.html" class="out-trainer-img"><img class="rx-lazy"
-                                src="{{asset("landing_page/assets/img/placeholder-all.png")}}"
-                                data-src="assets/img/trainer-2.jpg" alt="img"></a>
+                        <a href="javascript:void(0);" class="out-trainer-img"><img class="rx-lazy"
+                                src="{{asset("landing_page/assets/img/ptAgus.jpg")}}"
+                                data-src="{{asset("landing_page/assets/img/ptAgus.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
-                            <h3><a href="trainer.html">Agus</a></h3>
+                            <h3><a href="javascript:void(0);">Agus</a></h3>
                             <div class="prof">Weightlifting</div>
                             <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
                                 auctor tincidunt lorem ut, venenatis dapibus miq.</p>
@@ -273,11 +306,11 @@
                 </div>
                 <div class="col-md-6 out-trainer-col">
                     <div class="out-trainer-item">
-                        <a href="trainer.html" class="out-trainer-img"><img class="rx-lazy"
-                                src="{{asset("landing_page/assets/img/placeholder-all.png")}}"
-                                data-src="assets/img/trainer-3.jpg" alt="img"></a>
+                        <a href="javascript:void(0);" class="out-trainer-img"><img class="rx-lazy"
+                                src="{{asset("landing_page/assets/img/ptMelky.jpg")}}"
+                                data-src="{{asset("landing_page/assets/img/ptMelky.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
-                            <h3><a href="trainer.html">Melky Clause</a></h3>
+                            <h3><a href="javascript:void(0);">Melky</a></h3>
                             <div class="prof">Weightlifting</div>
                             <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
                                 auctor tincidunt lorem ut, venenatis dapibus miq.</p>
@@ -296,11 +329,34 @@
                 </div>
                 <div class="col-md-6 out-trainer-col">
                     <div class="out-trainer-item">
-                        <a href="trainer.html" class="out-trainer-img"><img class="rx-lazy"
-                                src="{{asset("landing_page/assets/img/placeholder-all.png")}}"
-                                data-src="assets/img/trainer-4.jpg" alt="img"></a>
+                        <a href="#" class="out-trainer-img"><img class="rx-lazy"
+                            src="{{asset("landing_page/assets/img/ptclaus.jpg")}}"
+                            data-src="{{asset("landing_page/assets/img/ptclaus.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
-                            <h3><a href="trainer.html">Anna</a></h3>
+                            <h3><a href="#">Claus</a></h3>
+                            <div class="prof">Weightlifting</div>
+                            <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
+                                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
+                            <ul class="social-list">
+                                <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
+                                            aria-hidden="true"></i></a></li>
+                                <li><a target="_blank" href="https://twitter.com/RovadexStudio"><i class="fa fa-twitter"
+                                            aria-hidden="true"></i></a></li>
+                                <li><a target="_blank" href="https://www.youtube.com"><i class="fa fa-youtube"
+                                            aria-hidden="true"></i></a></li>
+                                <li><a target="_blank" href="https://www.instagram.com/rovadex"><i
+                                            class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 out-trainer-col">
+                    <div class="out-trainer-item">
+                        <a href="#" class="out-trainer-img"><img class="rx-lazy"
+                                src="{{asset("landing_page/assets/img/anna.jpg")}}"
+                                data-src="{{asset("landing_page/assets/img/anna.jpg")}}" alt="img"></a>
+                        <div class="out-trainer-info">
+                            <h3><a href="#">Anna</a></h3>
                             <div class="prof">Weightlifting</div>
                             <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
                                 auctor tincidunt lorem ut, venenatis dapibus miq.</p>
@@ -326,18 +382,18 @@
     <section class="s-testimonials" style="background-image: url(landing_page/assets/img/bg-testimonials.jpg);">
         <div class="mask"></div>
         <img class="testimonials-effect" src="{{asset("landing_page/assets/img/bg-testimonials.svg")}}" alt="effect">
-        <div class="container">
-            <div class="testimonials-slider">
-                @foreach($testimonials as $testimonial)
-                    <div class="testimonial-slide">
-                        <p>“{{ $testimonial['text'] }}”</p>
-                        <img src="{{ $testimonial['profile_image'] }}" alt="img">
-                        <a href="{{ $testimonial['instagram_url'] }}" class="name">{{ $testimonial['name'] }}</a>
-                        <div class="prof">our client</div>
-                    </div>
-                @endforeach
+    <div class="container">
+        <div class="testimonials-slider">
+            @foreach($testimonials as $testimonial)
+            <div class="testimonial-slide">
+                <p>“{{ $testimonial['text'] }}”</p>
+                <img src="{{ $testimonial['profile_image'] }}" alt="img">
+                <a href="{{ $testimonial['instagram_url'] }}" class="name">{{ $testimonial['name'] }}</a>
+                <div class="prof">our client</div>
             </div>
+            @endforeach
         </div>
+    </div>
     </section>
     <!-- ============ S-TESTIMONIALS END ============ -->
 
@@ -346,134 +402,170 @@
         <div class="container">
             <h2 class="title-decor">promo <span>news</span>  event</h2>
             <div class="row">
+                <!-- Card 1 -->
                 <div class="col-md-6 related-post-col">
                     <div class="post-item-cover">
                         <div class="post-header">
-                            <div class="related-post-categ">fitness</div>
-                            <div class="post-thumbnail">
-                                <a href="single-blog.html"><img class="rx-lazy"
-                                        src="{{asset("landing_page/assets/img/placeholder-all.png")}}"
-                                        data-src="assets/img/blog-4.jpg" alt="img"></a>
+                            <div class="related-post-categ">F&B</div>
+
+                            <!-- Image Carousel Start for Card 1 -->
+                            <div class="image-carousel" id="carousel1">
+                                <div class="carousel-images">
+                                    <img class="carousel-image" style="max-height: 468px;"
+                                        src="{{asset('landing_page/assets/img/JusDadaAyam1.jpg')}}"
+                                        alt="Healthy Snacks">
+                                    <img class="carousel-image" style="max-height: 468px;"
+                                        src="{{asset('landing_page/assets/img/JusDadaAyam2.jpg')}}"
+                                        alt="Healthy Snacks">
+                                    <img class="carousel-image" style="max-height: 468px;"
+                                        src="{{asset('landing_page/assets/img/JusDadaAyam3.jpg')}}" alt="Healthy Meals">
+                                </div>
+                                <!-- Carousel Controls -->
+                                <button class="carousel-control prev" onclick="prevImage(1)">&#10094;</button>
+                                <button class="carousel-control next" onclick="nextImage(1)">&#10095;</button>
                             </div>
+                            <!-- Image Carousel End -->
+
+                        </div>
+                        <div class="post-content">
+                            <div class="meta">
+                                <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i>August 25,
+                                    2024</span>
+                            </div>
+                            <h3 class="title">Jus Dada Ayam</h3>
+                            <div class="text">
+                                <p>Jus Dada Ayam untuk sumber protein (kandungan 1 botol : 80 gr protein), menguatkan
+                                    sistem kekebalan tubuh, mudah dicerna, dan mendukung pemulihan otot. Tersedia dalam
+                                    rasa coklat, almond, kopi, dan strawberry nanas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-md-6 related-post-col">
+                    <div class="post-item-cover">
+                        <div class="post-header">
+                            <div class="related-post-categ">F&B</div>
+
+                            <!-- Image Carousel Start for Card 2 -->
+                            <div class="image-carousel" id="carousel2">
+                                <div class="carousel-images">
+                                    <img class="carousel-image" style="max-height: 468px;"
+                                        src="{{asset('landing_page/assets/img/GreenJuiceandSmoothies1.jpg')}}"
+                                        alt="Green Juice">
+                                    <img class="carousel-image" style="max-height: 468px;"
+                                        src="{{asset('landing_page/assets/img/GreenJuiceandSmoothies2.jpg')}}"
+                                        alt="Green Juice">
+                                    <img class="carousel-image" style="max-height: 468px;"
+                                        src="{{asset('landing_page/assets/img/GreenJuiceandSmoothies3.jpg')}}"
+                                        alt="Green Juice">
+                                </div>
+                                <!-- Carousel Controls -->
+                                <button class="carousel-control prev" onclick="prevImage(2)">&#10094;</button>
+                                <button class="carousel-control next" onclick="nextImage(2)">&#10095;</button>
+                            </div>
+                            <!-- Image Carousel End -->
+
                         </div>
                         <div class="post-content">
                             <div class="meta">
                                 <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i>October 31,
                                     2019</span>
                             </div>
-                            <h3 class="title"><a href="single-blog.html">Healthy Jus</a></h3>
+                            <h3 class="title">Green Juice and Smoothies</h3>
                             <div class="text">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                    laudantium, totam rem...</p>
+                                <p>Membantu badan tetap fit, menjaga berat badan, kaya akan vitamin, mineral, serat, dan
+                                    antioksidan, serta baik untuk membuat kulit menjadi glowing. Smoothies kaya akan
+                                    nutrisi dari buah-buahan dan biji-bijian yang mengenyangkan dan meningkatkan energi.
+                                    Tersedia dalam berbagai rasa, seperti buah naga, sirsak, mangga, strawberry, dll.
+                                </p>
                             </div>
-                        </div>
-                        <div class="post-footer">
-                            <div class="meta">
-                                <span class="post-by"><i class="fa fa-user" aria-hidden="true"></i><a href="#">By
-                                        Rovadex</a></span>
-                                <span class="post-comment"><i class="fa fa-comment" aria-hidden="true"></i><a href="#">2
-                                        Comments(s)</a></span>
-                            </div>
-                            <a href="single-blog.html" class="btn"><span>read more</span></a>
                         </div>
                     </div>
                 </div>
+
+                <!-- Card 3 -->
                 <div class="col-md-6 related-post-col">
                     <div class="post-item-cover">
                         <div class="post-header">
-                            <div class="related-post-categ">lifting</div>
-                            <div class="post-thumbnail">
-                                <a href="single-blog.html"><img class="rx-lazy"
-                                        src="{{asset("landing_page/assets/img/placeholder-all.png")}}"
-                                        data-src="assets/img/blog-1.jpg" alt="img"></a>
+                            <div class="related-post-categ">F&B</div>
+
+                            <!-- Image Carousel Start for Card 3 -->
+                            <div class="image-carousel" id="carousel3">
+                                <div class="carousel-images">
+                                    <img class="carousel-image" style="max-height: 468px;"
+                                        src="{{asset('landing_page/assets/img/Camilan_Sehat1.jpg')}}"
+                                        alt="Healthy Snacks">
+                                    <img class="carousel-image" style="max-height: 468px;"
+                                        src="{{asset('landing_page/assets/img/Camilan_Sehat2.jpg')}}"
+                                        alt="Healthy Snacks">
+                                    <img class="carousel-image" style="max-height: 468px;"
+                                        src="{{asset('landing_page/assets/img/Snack3.jpg')}}" alt="Healthy Snacks">
+                                </div>
+                                <!-- Carousel Controls -->
+                                <button class="carousel-control prev" onclick="prevImage(3)">&#10094;</button>
+                                <button class="carousel-control next" onclick="nextImage(3)">&#10095;</button>
                             </div>
+                            <!-- Image Carousel End -->
+
                         </div>
                         <div class="post-content">
                             <div class="meta">
                                 <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i>October 31,
                                     2019</span>
                             </div>
-                            <h3 class="title"><a href="single-blog.html">Suplement</a></h3>
+                            <h3 class="title">Camilan Sehat</h3>
                             <div class="text">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                    laudantium, totam rem...</p>
+                                <p>Beraneka macam camilan diet yang merupakan sumber protein dan lemak sehat, membantu
+                                    kamu yang masih suka nyemil tapi mau hidup dengan gaya yang lebih sehat.</p>
                             </div>
-                        </div>
-                        <div class="post-footer">
-                            <div class="meta">
-                                <span class="post-by"><i class="fa fa-user" aria-hidden="true"></i><a href="#">By
-                                        Rovadex</a></span>
-                                <span class="post-comment"><i class="fa fa-comment" aria-hidden="true"></i><a href="#">2
-                                        Comments(s)</a></span>
-                            </div>
-                            <a href="single-blog.html" class="btn"><span>read more</span></a>
                         </div>
                     </div>
                 </div>
+
+                <!-- Card 4 -->
                 <div class="col-md-6 related-post-col">
                     <div class="post-item-cover">
                         <div class="post-header">
-                            <div class="related-post-categ">fitness</div>
-                            <div class="post-thumbnail">
-                                <a href="single-blog.html"><img class="rx-lazy"
-                                        src="{{asset("landing_page/assets/img/placeholder-all.png")}}"
-                                        data-src="assets/img/blog-3.jpg" alt="img"></a>
+                            <div class="related-post-categ">F&B</div>
+
+                            <!-- Image Carousel Start for Card 4 -->
+                            <div class="image-carousel" id="carousel4">
+                                <div class="carousel-images">
+                                    <img class="carousel-image" style="max-height: 468px;"
+                                        src="{{asset('landing_page/assets/img/HealthyFood1.jpg')}}"
+                                        alt="Healthy Drinks">
+                                    <img class="carousel-image" style="max-height: 468px;"
+                                        src="{{asset('landing_page/assets/img/HealthyFood2.jpg')}}"
+                                        alt="Healthy Drinks">
+                                    <img class="carousel-image" style="max-height: 468px;"
+                                        src="{{asset('landing_page/assets/img/HealthyFood3.jpg')}}"
+                                        alt="Healthy Drinks">
+                                </div>
+                                <!-- Carousel Controls -->
+                                <button class="carousel-control prev" onclick="prevImage(4)">&#10094;</button>
+                                <button class="carousel-control next" onclick="nextImage(4)">&#10095;</button>
                             </div>
+                            <!-- Image Carousel End -->
+
                         </div>
                         <div class="post-content">
                             <div class="meta">
-                                <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i>October 31,
+                                <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i>November 15,
                                     2019</span>
                             </div>
-                            <h3 class="title"><a href="single-blog.html"></a></h3>
+                            <h3 class="title">Healthy Food</h3>
                             <div class="text">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                    laudantium, totam rem...</p>
+                                <p>Solusi praktis untuk kamu yang ingin menjalani hidup sehat, menjaga kondisi tubuh,
+                                    dan mengikuti diet khusus tanpa kerepotan merencanakan dan menyiapkan makanan.
+                                    Layanan ini memudahkan untuk mencapai tujuan kesehatan dengan nutrisi yang tepat.
+                                </p>
                             </div>
-                        </div>
-                        <div class="post-footer">
-                            <div class="meta">
-                                <span class="post-by"><i class="fa fa-user" aria-hidden="true"></i><a href="#">By
-                                        Rovadex</a></span>
-                                <span class="post-comment"><i class="fa fa-comment" aria-hidden="true"></i><a href="#">2
-                                        Comments(s)</a></span>
-                            </div>
-                            <a href="single-blog.html" class="btn"><span>read more</span></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 related-post-col">
-                    <div class="post-item-cover">
-                        <div class="post-header">
-                            <div class="related-post-categ">lifting</div>
-                            <div class="post-thumbnail">
-                                <a href="single-blog.html"><img class="rx-lazy"
-                                        src="{{asset("landing_page/assets/img/placeholder-all.png")}}"
-                                        data-src="assets/img/blog-2.jpg" alt="img"></a>
-                            </div>
-                        </div>
-                        <div class="post-content">
-                            <div class="meta">
-                                <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i>October 31,
-                                    2019</span>
-                            </div>
-                            <h3 class="title"><a href="single-blog.html">Sed ut perspiciatis unde omnis</a></h3>
-                            <div class="text">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                    laudantium, totam rem...</p>
-                            </div>
-                        </div>
-                        <div class="post-footer">
-                            <div class="meta">
-                                <span class="post-by"><i class="fa fa-user" aria-hidden="true"></i><a href="#">By
-                                        Rovadex</a></span>
-                                <span class="post-comment"><i class="fa fa-comment" aria-hidden="true"></i><a href="#">2
-                                        Comments(s)</a></span>
-                            </div>
-                            <a href="single-blog.html" class="btn"><span>read more</span></a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
@@ -515,8 +607,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-lg-6 footer-item-logo">
-                    <a href="{{route("landing_page")}}" class="logo-footer"><img src="{{asset("landing_page/assets/img/10.svg")}}"
-                            alt="logo"></a>
+                    <a href="{{route("landing_page")}}" class="logo-footer"><img
+                            src="{{asset("landing_page/assets/img/10.svg")}}" alt="logo"></a>
                     <p>Flozors Gym, founded in 2002 by Frans Lee, offers top service and a welcoming atmosphere for
                         fitness enthusiasts.</p>
                     <ul class="social-list">
@@ -555,12 +647,52 @@
     <!--================= TO TOP END =================-->
 
     <!--=================== SCRIPT	===================-->
-    
+
     <script src="{{asset("landing_page/assets/js/jquery-2.2.4.min.js")}}"></script>
     <script src="{{asset("landing_page/assets/js/slick.min.js")}}"></script>
     <script src="{{asset("landing_page/assets/js/rx-lazy.js")}}"></script>
     <script src="{{asset("landing_page/assets/js/parallax.min.js")}}"></script>
     <script src="{{asset("landing_page/assets/js/scripts.js")}}"></script>
+
+    <script>
+        let currentIndex = [0, 0, 0, 0]; // Array to store current index for each carousel
+        const totalImages = 3; // Set to the exact number of images for each carousel
+
+        function showImage(carouselNumber, index) {
+            const carousel = document.querySelector(`#carousel${carouselNumber} .carousel-images`);
+            const images = document.querySelectorAll(`#carousel${carouselNumber} .carousel-image`);
+
+            // Ensure the index stays within 0 to totalImages - 1
+            if (index >= totalImages) {
+                currentIndex[carouselNumber - 1] = 0; // Loop back to the first image
+            } else if (index < 0) {
+                currentIndex[carouselNumber - 1] = totalImages - 1; // Loop back to the last image
+            } else {
+                currentIndex[carouselNumber - 1] = index;
+            }
+
+            // Calculate offset based on the number of images (max -200% for 3 images)
+            const offset = -currentIndex[carouselNumber - 1] * 100;
+            carousel.style.transform = `translateX(${offset}%)`;
+        }
+
+        function nextImage(carouselNumber) {
+            showImage(carouselNumber, currentIndex[carouselNumber - 1] + 1);
+        }
+
+        function prevImage(carouselNumber) {
+            showImage(carouselNumber, currentIndex[carouselNumber - 1] - 1);
+        }
+
+        // Optionally, add auto-slide functionality for each carousel
+        setInterval(() => {
+            nextImage(1); // Carousel 1
+            nextImage(2); // Carousel 2
+            nextImage(3); // Carousel 3
+            nextImage(4); // Carousel 4
+        }, 3000); // Change the image every 3 seconds
+
+    </script>
 </body>
 
 </html>

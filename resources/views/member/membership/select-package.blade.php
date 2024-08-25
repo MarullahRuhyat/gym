@@ -530,7 +530,7 @@ starter Page
         });
 
         $.ajax({
-            url: "{{ route('member.submit-package') }}",
+            url: "{{ route('member.submit-buy-new-package') }}",
             method: 'POST',
             data: form,
             success: function (response) {

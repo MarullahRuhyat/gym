@@ -191,7 +191,6 @@ starter Page
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="col-md-12" style="margin-top:20px;">
                             <div class="d-md-flex d-grid align-items-center gap-3">
@@ -444,44 +443,94 @@ starter Page
 
 <!-- script dinamis add form member -->
 <script>
+    // Global form count variable
     var formCount = 1;
-    $('#addForm').on('click', function () {
-        let package_jumlah_member = $('#package_jumlah_member').val();
-        if (formCount < package_jumlah_member) {
-            formCount++;
-            $('#dynamic-form-id').append(`
+
+    // Function to delete a form
+    function deleteForm(formId) {
+        // Remove the specific form
+        $('#' + formId).remove();
+
+        // Decrement the form count
+        formCount--;
+
+        // Update the package_jumlah_member value
+        var package_jumlah_member = parseInt($('#package_jumlah_member').val(), 10);
+        package_jumlah_member++;
+        $('#package_jumlah_member').val(package_jumlah_member);
+    }
+
+    // Add new form on button click
+
+$('#addForm').on('click', function () {
+    var package_jumlah_member = parseInt($('#package_jumlah_member').val(), 10);
+
+    if (formCount < package_jumlah_member) {
+        formCount++;
+
+        // Generate unique ID for the new form
+        var newFormId = 'dynamic-form' + formCount;
+
+        // Append the new form HTML
+        $('#dynamic-form-id').append(`
+            <div class="card" id="form${formCount}">
+                <button type="button" class="btn btn-danger" onclick="deleteForm('form${formCount}')">Delete</button>
                 <h3>Anggota ${formCount}</h3>
                 <div class="row g-3">
                     <div class="col">
-                        <div class="card">
-                            <div class="card-body p-4">
-                                <form id="dynamic-form" class="row g-3 needs-validation" novalidate id="form${formCount}">
-                                    <input type="hidden" name="stepper3_package_id" id="stepper3_package_id_${formCount}" value="" disabled>
-                                    <div class="col-md-12">
-                                        <label for="bsValidation2_${formCount}" class="form-label">Phone Number</label>
-                                        <input type="text" class="form-control" id="bsValidation2_${formCount}" name="phone[]" placeholder="Phone" required>
-                                        <div class="invalid-feedback">
-                                            Please choose a username.
-                                        </div>
+                        <div class="card-body p-4">
+                            <form id="${newFormId}" class="row g-3 needs-validation" novalidate>
+                                <input type="hidden" name="stepper3_package_id" id="stepper3_package_id_${formCount}" value="" disabled>
+                                <div class="col-md-12">
+                                    <label for="bsValidation2_${formCount}" class="form-label">Phone Number</label>
+                                    <input type="text" class="form-control" id="bsValidation2_${formCount}" name="phone[]" placeholder="Phone" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid phone number.
                                     </div>
-                                </form>
-                            <div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            `);
+            </div>
+        `);
 
-            package_jumlah_member--;
-            $('#package_jumlah_member').val(package_jumlah_member);
+        // Decrement the package_jumlah_member value
+        package_jumlah_member--;
+        $('#package_jumlah_member').val(package_jumlah_member);
 
-            // scroll to the newly adden form
-            $('html, body').animate({
-                scrollTop: $(`#form${formCount}`).offset().top
-            }, 1000);
-        } else {
-            alert('You have reached the maximum number of members');
-        }
-    });
+        // Scroll to the newly added form
+        $('html, body').animate({
+            scrollTop: $(`#form${formCount}`).offset().top
+        }, 1000);
+    } else {
+        alert('You have reached the maximum number of members');
+    }
+});
+
+
+    // Function to collect form data
+    function getFormData() {
+        var form_dynamic = [];
+        // Select all forms by using the class selector since ID will be unique
+        var forms = document.querySelectorAll('form[id^="dynamic-form"]');
+
+        forms.forEach(function (form) {
+            var member = {};
+            // Get phone number from the input field within the form
+            member.phone_number = form.querySelector('input[name="phone[]"]').value;
+
+            // Check if the phone number is empty and alert the user if so
+            if (member.phone_number === '') {
+                alert('Phone number cannot be empty');
+                return; // Exit the function if any phone number is empty
+            }
+            form_dynamic.push(member);
+        });
+
+        return form_dynamic;
+    }
+
 
     $('#submit-form').on('click', function () {
         // agree form and term condition
@@ -491,22 +540,20 @@ starter Page
         }
 
         // get data from form 1
-        var phone_form_first = $('#bsValidation2').val();
+        var phone_form_first = "{{ Auth::user()->phone_number }}";
         var form_first = {
             phone_number: phone_form_first,
         };
 
-        // only get data phone number from dynamic form
-        var form_dynamic = [];
-        var forms = document.querySelectorAll('#dynamic-form');
-        forms.forEach(function (form) {
-            // phone_number_dynamic.push(form.querySelector('input[name="phone[]"]').value);
-            var member = {};
-            member.phone_number = form.querySelector('input[name="phone[]"]').value;
-            form_dynamic.push(member);
-        });
+        // Collect the form data
+        var form_dynamic = getFormData();
 
-        // combine all data
+        // Check if form_dynamic is empty (i.e., if there were empty phone number fields)
+        if (form_dynamic.length === 0) {
+            return; // Exit if no valid form data
+        }
+
+        // Combine all data
         var package_id = $('#package_id').val();
         var start_date = $('#start_date').val();
         var form = {
@@ -516,6 +563,7 @@ starter Page
             form_dynamic: form_dynamic
         };
 
+        // Convert the form data to JSON
         form = JSON.stringify(form);
 
         console.log('form');
@@ -530,7 +578,7 @@ starter Page
         });
 
         $.ajax({
-            url: "{{ route('member.submit-package') }}",
+            url: "{{ route('member.submit-buy-new-package') }}",
             method: 'POST',
             data: form,
             success: function (response) {
@@ -557,7 +605,9 @@ starter Page
             }
         });
     });
+
 </script>
+
 <!--bootstrap js-->
 <!-- <script src="{{ URL::asset('build/js/bootstrap.bundle.min.js') }}"></script> -->
 <!--plugins-->

@@ -95,18 +95,17 @@
 						<div class="about-img-1">
 							<img class="about-img-effect-1" src="{{asset("landing_page/assets/img/square-yellow.svg")}}" alt="img">
 							<img class="about-img-effect-2" src="{{asset("landing_page/assets/img/group-circle-2.svg")}}" alt="img">
-							<img src="{{asset("landing_page/assets/img/about-top-1.jpg")}}" alt="img">
+							<img src="{{asset("landing_page/assets/img/programs-3.jpg")}}" style="max-height: 422px; max-width:422px" alt="img">
 						</div>
 						<div class="about-img-2">
-							<img src="{{asset("landing_page/assets/img/about-top-2.jpg")}}" alt="img">
+							<img src="{{asset("landing_page/assets/img/programs-1.jpg")}}" style="max-height: 309px; max-width:312px" alt="img">
 						</div>
 					</div>
 				</div>
 				<div class="col-md-7 about-info-cover">
 					<h2 class="title-decor">About <span>Program Monthly Membership</span></h2>
 					<div class="text">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut <a href="contacts.html">enim ad minim</a> veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+						<p>Unlock your fitness journey with monthly membership program starting only from Rp. 325.000,-/month, huge discounts on longer terms. Start your transformation today with unbeatable value and premium benefits!</p>
 					</div>
 					<ul class="about-cont">
 						<li><i class="fa fa-phone" aria-hidden="true"></i><a  href="https://wa.me/+628170706999">08170706999</a></li>
@@ -132,7 +131,7 @@
 	<section class="s-club-cards">
 		<div class="container">
 			<h2 class="title-decor">Program <span>Price</span></h2>
-			<p class="slogan">Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor, auctor tincidunt lorem ut, venenatis dapibus miq.</p>
+			<p class="slogan"> Untuk member baru, ada tambahan biaya registrasi sebesar Rp.75.000,- yang dapat ditukarkan dalam bentuk kartu anggota (e-money).			</p>
 			<div class="row mb-3">
 				<div class="col-md-4 club-card-col">
 					<div class="club-card-item">
@@ -142,9 +141,6 @@
 						<ul class="list">
 							<li>Rp.325.000</li>
 							<li>Masa berlaku 31 hari dihitung sejak tanggal lunas pembayaran.</li>
-							<li>Mauris id erat enim</li>
-							<li class="item-excluded">Morbi dolor dolortin</li>
-							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
@@ -157,9 +153,6 @@
 						<ul class="list">
 							<li><s style="opacity: 50%">Rp. 650.000</s> Rp.550.000</li>
 							<li>Masa berlaku 62 hari dihitung sejak tanggal lunas pembayaran.</li>
-							<li>Mauris id erat enim</li>
-							<li>Morbi dolor dolortin</li>
-							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
@@ -172,9 +165,6 @@
 						<ul class="list">
 							<li><s style="opacity: 50%">Rp.975.000</s> Rp.750.000</li>
 							<li>Masa berlaku 93 hari dihitung sejak tanggal lunas pembayaran.</li>
-							<li>Mauris id erat enim</li>
-							<li>Morbi dolor dolortin</li>
-							<li>lorem ut, venenatis dapibus mi</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
@@ -190,9 +180,6 @@
 						<ul class="list">
 							<li><s style="opacity: 50%">Rp.1.950.000</s> Rp.1.250.000</li>
 							<li>Masa berlaku 186 hari dihitung sejak tanggal lunas pembayaran.</li>
-							<li>Mauris id erat enim</li>
-							<li class="item-excluded">Morbi dolor dolortin</li>
-							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
@@ -206,9 +193,6 @@
 						<ul class="list">
 							<li><s style="opacity: 50%">Rp.3.900.000</s> Rp.2.000.000</li>
 							<li>Masa berlaku 372 hari dihitung sejak tanggal lunas pembayaran.</li>
-							<li>Mauris id erat enim</li>
-							<li>Morbi dolor dolortin</li>
-							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
@@ -223,7 +207,7 @@
 	<section class="s-contacts" style="background-image: url(assets/img/bg-contacts.svg);">
 		<div class="container">
 			<h2 class="title-decor">Contact <span>Us</span></h2>
-			<p class="slogan">Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor, auctor tincidunt lorem ut, venenatis dapibus miq.</p>
+			<p class="slogan">If you have any questions, please contact us.</p>
 			<div class="row">
 				<div class="col-md-5 col-lg-4">
 					<div class="contact-item">

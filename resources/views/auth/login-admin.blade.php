@@ -55,6 +55,10 @@ Login
                                 </div>
                             </div>
 
+                            <div class="col-md-6 text-end">
+                                <a href="{{ route('auth.forgot_password') }}" class="text-primary">Forgot Password?</a>
+                            </div>
+
                             <div class="col-12">
                                 <div class="d-grid">
                                     <button type="submit" class="btn btn-primary ">Login</button>

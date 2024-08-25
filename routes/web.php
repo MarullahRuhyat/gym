@@ -78,6 +78,10 @@ Route::prefix('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     // for personal trainer
     Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('auth.forgot_password');
+    Route::post('/forgot-password', [AuthController::class, 'forgotPasswordProcess'])->name('auth.forgot_password.process');
+
+    Route::get('/verify-otp', [AuthController::class, 'verifyOtp'])->name('verify.otp');
+    Route::post('/verify-otp', [AuthController::class, 'verifyOtpProcess'])->name('verify.otp.process');
 });
 
 // member

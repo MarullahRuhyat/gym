@@ -148,7 +148,8 @@ class AuthController extends Controller
 
     public function register_form_process(Request $request)
     {
-        $save = User::create($request->except('password_confirmation'));
+        // $save = User::create($request->except('password_confirmation'));
+        $save = DB::table('users')->insert($request->all());
         return redirect()->route('member.send-otp')->with('success', 'Register success.');
 
     }
@@ -199,7 +200,7 @@ class AuthController extends Controller
                     'name' => ['required', 'string', 'min:3', 'max:255'],
                     'phone_number' => ['required', 'string', 'min:10', 'unique:users,phone_number'],
                     'address' => ['required', 'string', 'min:3', 'max:255'],
-                    'password' => ['required', 'string', 'min:8', 'max:255'],
+                    // 'password' => ['required', 'string', 'min:8', 'max:255'],
                 ]);
 
                 if ($validator->fails()) {
@@ -224,6 +225,21 @@ class AuthController extends Controller
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
+
+                    // save all user_registered to memberships in each row
+                    foreach ($user_registered as $user) {
+                        $user_membership_packages = DB::table('memberships')->insert([
+                            'user_id' => $user->id,
+                            'gym_membership_packages' => $request->package_id,
+                            'start_date' => $request->start_date,
+                            'end_date' => $end_date,
+                            'user_terkait' => $user_id . ',' . implode(',', $user_terkait->toArray()),
+                            'duration_in_days' => $duration,
+                            'is_active' => false,
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]);
+                    }
 
                     // update end_date using duration_in_days for each user_registered
                     foreach ($user_registered as $user) {

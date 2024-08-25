@@ -185,7 +185,7 @@ class ProfileController extends Controller
             'email' => $request->user_email,
             'date_of_birth' => $request->user_date_of_birth,
             'gender' => $request->user_gender,
-            'password' => bcrypt($request->user_password),
+            // 'password' => bcrypt($request->user_password),
         ]);
 
         $update_informasi_fisik = DB::table('informasi_fisik')->where('user_id', $user[0]->id)->update([

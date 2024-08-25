@@ -140,14 +140,14 @@ starter Page
                             <option value="P" {{ $profile->gender == 'P' ? 'selected' : '' }}>Perempuan</option>
                         </select>
                     </div>
-                    <div class="col-md-12">
+                    <!-- <div class="col-md-12">
                         <label for="input7" class="form-label">Password</label>
                         <input type="password" class="form-control" id="user_password" name="user_password" placeholder="Password">
                     </div>
                     <div class="col-md-12">
                         <label for="input8" class="form-label">Confirm Password</label>
                         <input type="password" class="form-control" id="user_password_confirmation" name="user_password_confirmation" placeholder="Confirm Password">
-                    </div>
+                    </div> -->
                     <!-- <div class="col-md-12">
                         <div class="d-md-flex d-grid align-items-center gap-3">
                             <button id="submit-update-profile" type="submit" class="btn btn-primary px-4">Update Profile</button>

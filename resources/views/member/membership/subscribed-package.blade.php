@@ -5,7 +5,9 @@ Subscribed Package
 @section('content')
 <div class="row justify-content-center" style="margin-bottom:20px;">
     <div class="col-12 col">
-        <a href="{{ route('member.package') }}" class="btn btn-grd-deep-blue">Buy Membership</a>
+        <a href="{{ route('member.buy-new-package') }}" class="btn btn-grd-deep-blue">Buy New Membership</a>
+        <a href="" class="btn btn-grd-deep-blue">Extend Membership</a>
+
     </div>
 </div>
 <div class="row">
@@ -16,7 +18,7 @@ Subscribed Package
         <p>No Subscribed Package</p>
     </div>
     @else
-    
+
     @foreach($packages_membership_payments as $membership)
     <div class="col-md-4">
         <div class="card rounded-4">
@@ -38,9 +40,10 @@ Subscribed Package
                             <p class="card-text">Duration: {{ $membership->duration_in_days }} Days</p>
                             <p class="card-text">Starting: {{ $membership->start_date }}</p>
                             <p class="card-text">Ending: {{ $membership->end_date }}</p>
-                            <p class="card-text">Personal Trainer Quota: {{ $membership->personal_trainer_quota }} </p>
+                            <!-- <p class="card-text">Personal Trainer Quota: {{ $membership->personal_trainer_quota }} </p> -->
+                            <p class="card-text">Personal Trainer Quota: {{ $membership->available_personal_trainer_quota }} </p>
                             <p class="card-text">
-                                Price: 
+                                Price:
                                 Rp.{{ number_format($membership->price, 0, ',', '.') }}
                             </p>
                             @if($membership->is_active == 1)

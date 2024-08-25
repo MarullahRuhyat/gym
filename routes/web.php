@@ -99,6 +99,8 @@ Route::prefix('member')->group(function () {
     Route::post('/get-otp', [MemberAuthController::class, 'get_otp'])->name('member.get-otp');
     Route::get('/verify-otp/{phone_number}', [MemberAuthController::class, 'verify_otp'])->name('member.verify-otp');
     Route::post('/post-login', [MemberAuthController::class, 'login'])->name('member.login');
+    Route::get('/login-with-password', [MemberAuthController::class, 'withPassword'])->name('member.with_password');
+    Route::post('/login-with-password', [MemberAuthController::class, 'login_with_password'])->name('member.login_with_password');
     Route::post('/logout', [MemberAuthController::class, 'logout'])->name('member.logout')->middleware(Member::class);
 
 

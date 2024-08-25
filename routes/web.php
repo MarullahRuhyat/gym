@@ -120,7 +120,7 @@ Route::prefix('member')->group(function () {
         });
 
         Route::prefix('package')->group(function () {
-            Route::get('/', [PackageController::class, 'package'])->name('member.package');
+            // Route::get('/', [PackageController::class, 'package'])->name('member.package');
             Route::get('/buy-new-package', [PackageController::class, 'buy_new_package'])->name('member.buy-new-package');
             Route::post('/submit-buy-new-package', [PackageController::class, 'submit_buy_new_package'])->name('member.submit-buy-new-package');
             Route::get('/extend-package', [PackageController::class, 'extend_package'])->name('member.extend-package');

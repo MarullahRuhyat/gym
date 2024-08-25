@@ -11,7 +11,7 @@ starter Page
             @if ($membership == null)
             <div class="justify-content-center text-center">
                 <div class="col my-5">
-                    <a href="{{ route('member.package') }}" class="btn btn-grd btn-grd-deep-blue px-5">Buy
+                    <a href="{{ route('member.buy-new-package') }}" class="btn btn-grd btn-grd-deep-blue px-5">Buy
                         Membership</a>
                 </div>
             </div>

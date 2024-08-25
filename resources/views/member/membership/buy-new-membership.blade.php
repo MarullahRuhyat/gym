@@ -455,7 +455,7 @@ starter Page
         formCount--;
 
         // Update the package_jumlah_member value
-        var package_jumlah_member = parseInt($('#package_jumlah_member').val(), 10);
+        let package_jumlah_member = $('#package_jumlah_member').val();
         package_jumlah_member++;
         $('#package_jumlah_member').val(package_jumlah_member);
     }
@@ -463,7 +463,7 @@ starter Page
     // Add new form on button click
 
 $('#addForm').on('click', function () {
-    var package_jumlah_member = parseInt($('#package_jumlah_member').val(), 10);
+    var package_jumlah_member = $('#package_jumlah_member').val();
 
     if (formCount < package_jumlah_member) {
         formCount++;
@@ -547,11 +547,17 @@ $('#addForm').on('click', function () {
 
         // only get data phone number from dynamic form
         var form_dynamic = [];
-        var forms = document.querySelectorAll('#dynamic-form');
+        // var forms = document.querySelectorAll('#dynamic-form');
+        var forms = document.querySelectorAll('form[id^="dynamic-form"]');
         forms.forEach(function (form) {
             // phone_number_dynamic.push(form.querySelector('input[name="phone[]"]').value);
             var member = {};
             member.phone_number = form.querySelector('input[name="phone[]"]').value;
+            // Check if the phone number is empty and alert the user if so
+            if (member.phone_number === '') {
+                alert('Phone number cannot be empty');
+                return; // Exit the function if any phone number is empty
+            }
             form_dynamic.push(member);
         });
 

@@ -39,7 +39,8 @@ class PackageController extends Controller
     public function submit_buy_new_package(Request $request)
     {
         // Ensure phone_number_user_terkait is an array
-        $phone_number_user_terkait = $request->input('phone_number', []);
+        // $phone_number_user_terkait = $request->input('phone_number', []);
+        $phone_number_user_terkait = $request->form_dynamic;
 
         // Validate that phone_number_user_terkait is indeed an array
         if (!is_array($phone_number_user_terkait)) {

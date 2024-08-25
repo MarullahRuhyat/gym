@@ -76,7 +76,7 @@ class AuthController extends Controller
             $url = "https://jogja.wablas.com";
             $token = "SujEXjKi5MEvVWebuRK17sG4H69mKzZwFD4Uca7HPrPwNiQawGLJ4ShA5uCCaUtv"; // Ganti dengan token Wablas yang valid
             $mobileNumber = $user->phone_number;
-            $message = "Your OTP code is: http://127.0.0.1:8000/auth/verify-otp?otp=$otp. This code will expire in 10 minutes.";
+            $message = "Your OTP code is: https://flozorsgym.com/auth/verify-otp?otp=$otp .This code will expire in 10 minutes.";
 
             $client = new Client(['base_uri' => $url]);
 

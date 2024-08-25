@@ -540,7 +540,7 @@ $('#addForm').on('click', function () {
         }
 
         // get data from form 1
-        var phone_form_first = $('#bsValidation2').val();
+        var phone_form_first = "{{ Auth::user()->phone_number }}";
         var form_first = {
             phone_number: phone_form_first,
         };
@@ -561,7 +561,12 @@ $('#addForm').on('click', function () {
             form_dynamic.push(member);
         });
 
-        // combine all data
+        // Check if form_dynamic is empty (i.e., if there were empty phone number fields)
+        if (form_dynamic.length === 0) {
+            return; // Exit if no valid form data
+        }
+
+        // Combine all data
         var package_id = $('#package_id').val();
         var start_date = $('#start_date').val();
         var form = {
@@ -571,6 +576,7 @@ $('#addForm').on('click', function () {
             form_dynamic: form_dynamic
         };
 
+        // Convert the form data to JSON
         form = JSON.stringify(form);
 
         console.log('form');

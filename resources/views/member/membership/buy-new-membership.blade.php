@@ -510,26 +510,26 @@ $('#addForm').on('click', function () {
 
 
     // Function to collect form data
-    function getFormData() {
-        var form_dynamic = [];
-        // Select all forms by using the class selector since ID will be unique
-        var forms = document.querySelectorAll('form[id^="dynamic-form"]');
+    // function getFormData() {
+    //     var form_dynamic = [];
+    //     // Select all forms by using the class selector since ID will be unique
+    //     var forms = document.querySelectorAll('form[id^="dynamic-form"]');
 
-        forms.forEach(function (form) {
-            var member = {};
-            // Get phone number from the input field within the form
-            member.phone_number = form.querySelector('input[name="phone[]"]').value;
+    //     forms.forEach(function (form) {
+    //         var member = {};
+    //         // Get phone number from the input field within the form
+    //         member.phone_number = form.querySelector('input[name="phone[]"]').value;
 
-            // Check if the phone number is empty and alert the user if so
-            if (member.phone_number === '') {
-                alert('Phone number cannot be empty');
-                return; // Exit the function if any phone number is empty
-            }
-            form_dynamic.push(member);
-        });
+    //         // Check if the phone number is empty and alert the user if so
+    //         if (member.phone_number === '') {
+    //             alert('Phone number cannot be empty');
+    //             return; // Exit the function if any phone number is empty
+    //         }
+    //         form_dynamic.push(member);
+    //     });
 
-        return form_dynamic;
-    }
+    //     return form_dynamic;
+    // }
 
 
     $('#submit-form').on('click', function () {
@@ -540,20 +540,22 @@ $('#addForm').on('click', function () {
         }
 
         // get data from form 1
-        var phone_form_first = "{{ Auth::user()->phone_number }}";
+        var phone_form_first = $('#bsValidation2').val();
         var form_first = {
             phone_number: phone_form_first,
         };
 
-        // Collect the form data
-        var form_dynamic = getFormData();
+        // only get data phone number from dynamic form
+        var form_dynamic = [];
+        var forms = document.querySelectorAll('#dynamic-form');
+        forms.forEach(function (form) {
+            // phone_number_dynamic.push(form.querySelector('input[name="phone[]"]').value);
+            var member = {};
+            member.phone_number = form.querySelector('input[name="phone[]"]').value;
+            form_dynamic.push(member);
+        });
 
-        // Check if form_dynamic is empty (i.e., if there were empty phone number fields)
-        if (form_dynamic.length === 0) {
-            return; // Exit if no valid form data
-        }
-
-        // Combine all data
+        // combine all data
         var package_id = $('#package_id').val();
         var start_date = $('#start_date').val();
         var form = {
@@ -563,7 +565,6 @@ $('#addForm').on('click', function () {
             form_dynamic: form_dynamic
         };
 
-        // Convert the form data to JSON
         form = JSON.stringify(form);
 
         console.log('form');

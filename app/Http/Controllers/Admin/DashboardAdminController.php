@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\ProcessSalary;
 use App\Models\AbsentMember;
 use App\Models\GajiPersonalTrainer;
+use App\Models\Membership;
 use App\Models\PersonalTrainingBonus;
 use App\Models\User;
 use Carbon\Carbon;
@@ -84,11 +85,26 @@ class DashboardAdminController extends Controller
             'inactive' => $trainerStatusCounts->inactive
         ];
 
+        $data = Membership::select('gym_membership_packages.name', DB::raw('COUNT(memberships.id) as active_members'))
+            ->join('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+            ->where('memberships.is_active', 1)
+            ->groupBy('gym_membership_packages.name')
+            ->get();
+
+        // Memisahkan data untuk digunakan di chart
+        $labels = $data->pluck('name');
+        $series = $data->pluck('active_members');
+
+
         // Mengembalikan respon dalam bentuk JSON
         return response()->json([
             'memberStatus' => $memberStatus,
             'trainerStatus' => $trainerStatus,
             'absent' => $absent,
+            'package' => [
+                'labels' => $labels,
+                'series' => $series,
+            ]
         ]);
     }
 

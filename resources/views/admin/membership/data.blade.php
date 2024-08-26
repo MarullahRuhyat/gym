@@ -50,7 +50,7 @@
                     </div>
                     <div class="d-flex align-items-center gap-3">
                         <div class="flex-grow-1">
-                            <h6 class="mb-0">Personal Trainer</h6>
+                            <h6 class="mb-0">Kuota Personal Trainer</h6>
                         </div>
                         <div class="">
                             <h5 class="mb-0">{{ $package->personal_trainer_quota }}</h5>

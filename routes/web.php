@@ -28,9 +28,9 @@ use App\Http\Controllers\Member\AuthController as MemberAuthController;
 use App\Http\Controllers\PersonalTraining\GajiPersonalTrainerController;
 use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
 
-Route::get('test', fn () => phpinfo());
+Route::get('test', fn() => phpinfo());
 
-Route::prefix('/')->group(function(){
+Route::prefix('/')->group(function () {
     Route::get('/', function () {
         $appType = config('app.app_type');
         if ($appType == 'ADMIN') {
@@ -194,6 +194,7 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::match(['get', 'post'], '/personal-trainer', [PersonalTrainerAdminController::class, 'index'])->name('admin_personal_trainer');
     // member page
     Route::match(['get', 'post'], '/member', [MemberController::class, 'index'])->name('admin_member');
+    Route::get('/member/{id}', [MemberController::class, 'detail'])->name('admin_member_detail');
     // Attendance page
     Route::prefix('attendance-member')->group(function () {
         Route::get('/', [AbsenController::class, 'index'])->name('admin_absen');
@@ -218,5 +219,4 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::get('/cash', [PaymentCashController::class, 'index'])->name('admin_cash');
     Route::post('/cash-acc', [PaymentCashController::class, 'cash_acc'])->name('admin_cash_acc');
     Route::post('/cash-reject', [PaymentCashController::class, 'cash_rej'])->name('admin_cash_rej');
-
 });

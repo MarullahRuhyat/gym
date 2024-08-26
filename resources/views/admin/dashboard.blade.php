@@ -12,16 +12,6 @@ starter Page
                         <div class="">
                             <h5 class="mb-0">Member</h5>
                         </div>
-                        <div class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle-nocaret options dropdown-toggle" data-bs-toggle="dropdown">
-                                <span class="material-icons-outlined fs-5">more_vert</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:;">Action</a></li>
-                                <li><a class="dropdown-item" href="javascript:;">Another action</a></li>
-                                <li><a class="dropdown-item" href="javascript:;">Something else here</a></li>
-                            </ul>
-                        </div>
                     </div>
                     <div class="position-relative">
                         <div class="piechart-legend">
@@ -56,16 +46,6 @@ starter Page
                         <div class="">
                             <h5 class="mb-0">Personal Trainer</h5>
                         </div>
-                        <div class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle-nocaret options dropdown-toggle" data-bs-toggle="dropdown">
-                                <span class="material-icons-outlined fs-5">more_vert</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:;">Action</a></li>
-                                <li><a class="dropdown-item" href="javascript:;">Another action</a></li>
-                                <li><a class="dropdown-item" href="javascript:;">Something else here</a></li>
-                            </ul>
-                        </div>
                     </div>
                     <div class="position-relative">
                         <div class="piechart-legend">
@@ -92,13 +72,23 @@ starter Page
             </div>
         </div>
     </div>
-    <div class="col-md-12 d-flex align-items-stretch">
+    <div class="col-md-6 d-flex align-items-stretch">
         <div class="card w-100 rounded-4">
             <div class="card-body">
                 <div class="text-center">
                     <h6 class="mb-0">Absent Member</h6>
                 </div>
                 <div class="mt-4" id="absent"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 d-flex align-items-stretch">
+        <div class="card w-100 rounded-4">
+            <div class="card-body">
+                <div class="text-center">
+                    <h6 class="mb-0">Package</h6>
+                </div>
+                <div class="mt-4" id="package"></div>
             </div>
         </div>
     </div>
@@ -131,9 +121,12 @@ starter Page
             type: 'POST',
             data: formData,
             success: function(response) {
+                console.log(response);
+
                 chart_member(parseInt(response['memberStatus']['active']), parseInt(response['memberStatus']['inactive']));
                 chart_pt(parseInt(response['trainerStatus']['active']), parseInt(response['trainerStatus']['inactive']));
-                chart_absent(response['absent'])
+                chart_absent(response['absent']);
+                chart_package(response['package']);
             },
             error: function(xhr, status, error) {
                 console.log('error');
@@ -340,6 +333,86 @@ starter Page
 
             var chart = new ApexCharts(document.querySelector("#absent"), options);
             chart.render();
+        }
+
+        function chart_package(results) {
+            // Membuat array warna acak berdasarkan jumlah data
+            var colors = results['labels'].map(() => getRandomColor());
+
+            var options = {
+                series: [{
+                    name: "Total",
+                    data: results['series']
+                }],
+                chart: {
+                    foreColor: "#9ba7b2",
+                    height: 280,
+                    type: 'bar',
+                    toolbar: {
+                        show: !1
+                    },
+                    sparkline: {
+                        enabled: !1
+                    },
+                    zoom: {
+                        enabled: false
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    width: 1,
+                    curve: 'smooth'
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        borderRadius: 4,
+                        borderRadiusApplication: 'around',
+                        borderRadiusWhenStacked: 'last',
+                        columnWidth: '45%',
+                    }
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shade: 'dark',
+                        gradientToColors: ['#009efd'],
+                        shadeIntensity: 1,
+                        type: 'vertical',
+                        opacityFrom: 1,
+                        opacityTo: 1,
+                        stops: [0, 100, 100, 100]
+                    },
+                },
+                colors: colors,
+                grid: {
+                    show: true,
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                },
+                xaxis: {
+                    categories: results['labels'],
+                },
+                tooltip: {
+                    theme: "dark",
+                    marker: {
+                        show: !1
+                    }
+                },
+            };
+
+            var chart = new ApexCharts(document.querySelector("#package"), options);
+            chart.render();
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
 
     });

@@ -311,38 +311,6 @@ class AuthController extends Controller
 
     public function login_with_password(Request $request)
     {
-
-        // // Validation
-        // $validator = Validator::make($request->only('phone_number', 'password'), [
-        //     'phone_number' => ['required', 'string', 'min:10', 'max:13'],
-        //     'password' => ['required', 'string', 'min:8', 'max:255'],
-        // ]);
-
-        // // Check if validation fails
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator)->withInput();
-        // }
-
-        // // Retrieve user by phone number
-        // $user = User::where('phone_number', $phone_number)->first();
-
-        // // Check if user exists
-        // if (!$user) {
-        //     return redirect()->back()->withErrors(['phone_number' => 'Phone number not found.'])->withInput();
-        // }
-
-        // // Check if password is correct
-        // if (!password_verify($password, $user->password)) {
-        //     return redirect()->back()->withErrors(['password' => 'Password does not match.'])->withInput();
-        // }
-
-        // // Login user
-        // Auth::login($user);
-
-        // // Redirect to intended page or dashboard after login
-        // return redirect()->intended('member.dashboard'); // or any route you want to redirect to
-
-
         $credentials = $request->only('phone_number', 'password');
         if (Auth::attempt($credentials)) {
                 return redirect()->route('member.dashboard');

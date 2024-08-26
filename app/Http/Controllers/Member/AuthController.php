@@ -21,7 +21,7 @@ class AuthController extends Controller
     public function get_otp(Request $request)
     {
         $phone_number = $request->phone_number;
-        $user_id= User::where('phone_number', $phone_number)->pluck('id')->first();
+        $user_id = User::where('phone_number', $phone_number)->pluck('id')->first();
         $validator = Validator::make($request->only('phone_number'), [
             'phone_number' => ['required', 'string', 'min:10', 'max:13']
         ]);
@@ -29,7 +29,8 @@ class AuthController extends Controller
         if ($validator->fails()) {
             $status = false;
             $message = $validator->errors()->all();
-        } if ($user_id == null) {
+        }
+        if ($user_id == null) {
             $status = false;
             $message = 'Phone number not found.';
         } else {
@@ -40,7 +41,7 @@ class AuthController extends Controller
                 'otp' => $otp,
                 'otp_expired_at' => $expired_at,
             ]);
-            $curl = $this->sendWA($phone_number,'Flozors Gym: Gunakan kode OTP ' . $otp . ', UNTUK LOGIN KE AKUN ANDA. Berlaku selama 5 menit. JANGAN pernah membagikan kode ini kepada orang lain, termasuk staf Flozors Gym.');
+            $curl = $this->sendWA($phone_number, 'Flozors Gym: Gunakan kode OTP ' . $otp . ', UNTUK LOGIN KE AKUN ANDA. Berlaku selama 5 menit. JANGAN pernah membagikan kode ini kepada orang lain, termasuk staf Flozors Gym.');
         }
 
         $data = [
@@ -70,18 +71,18 @@ class AuthController extends Controller
                 'message' => $message
             ],
             'headers' => [
-                'Accept'     => 'application/json',
+                'Accept' => 'application/json',
                 'Content-Type' => 'application/x-www-form-urlencoded',
                 'Authorization' => $token
             ]
         ]);
 
         $body = json_decode($response->getBody(), true);
-        if($body['status'] == true) {
+        if ($body['status'] == true) {
             // return true;
-            if($response->getStatusCode() != 200) {
+            if ($response->getStatusCode() != 200) {
                 return false;
-            }else{
+            } else {
                 return true;
             }
         }
@@ -94,7 +95,7 @@ class AuthController extends Controller
         return view('member.auth.login');
     }
 
-    public function login (Request $request)
+    public function login(Request $request)
     {
         $phone_number = $request->phone_number;
         $otp = $request->otp;
@@ -103,7 +104,7 @@ class AuthController extends Controller
             'otp' => ['required', 'numeric', 'digits:4']
         ]);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             $message = $validator->errors()->all();
         }
 
@@ -158,9 +159,9 @@ class AuthController extends Controller
     public function register_multi_user_get_package()
     {
         $packages = DB::table('gym_membership_packages')
-        ->leftJoin('type_packages', 'gym_membership_packages.type_packages_id', '=', 'type_packages.id')
-        ->select('gym_membership_packages.*', 'type_packages.name as type_name')
-        ->get();
+            ->leftJoin('type_packages', 'gym_membership_packages.type_packages_id', '=', 'type_packages.id')
+            ->select('gym_membership_packages.*', 'type_packages.name as type_name')
+            ->get();
 
         $groupedPackages = $packages->groupBy('type_name');
         return view('member.auth.register_multi_user', compact('groupedPackages'));
@@ -185,7 +186,7 @@ class AuthController extends Controller
         // cek status user_registered (unregistered, expired, active)
         $phone_number = $request->form_dynamic;
         $user_registered = User::whereIn('phone_number', $phone_number)->get(); // ini harus di cek semua phone number yang di inputkan
-        if($user_registered == null) {
+        if ($user_registered == null) {
             $user_registered = [];
         }
 
@@ -258,7 +259,7 @@ class AuthController extends Controller
                 }
             } else {
                 $status = false;
-                $message =  'Phone number not found.';
+                $message = 'Phone number not found.';
             }
         }
 
@@ -302,4 +303,18 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('member.send-otp');
     }
+
+    public function withPassword()
+    {
+        return view('member.auth.loginpassword');
+    }
+
+    public function login_with_password(Request $request)
+    {
+        $credentials = $request->only('phone_number', 'password');
+        if (Auth::attempt($credentials)) {
+                return redirect()->route('member.dashboard');
+        }
+    }
+
 }

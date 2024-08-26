@@ -38,7 +38,11 @@
                         </div>
                         <div class="">
                             <div class="form-check form-switch">
+                                @if($user->status == "active")
                                 <input class="form-check-input" type="checkbox" role="switch" id="ada" checked disabled>
+                                @else
+                                <input class="form-check-input" type="checkbox" role="switch" id="ada" disabled>
+                                @endif
                                 <label>
                                     <h5> Active</h5>
                                 </label>

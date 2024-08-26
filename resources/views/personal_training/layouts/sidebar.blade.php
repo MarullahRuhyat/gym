@@ -38,6 +38,14 @@
             </a>
 
         </li>
+        <li>
+            <a href="{{ route('pt_scan')}}">
+                <div class="parent-icon"><i class="material-icons-outlined">qr_code_scanner</i>
+                </div>
+                <div class="menu-title">Scan</div>
+            </a>
+
+        </li>
     </ul>
     <!--end navigation-->
 </div>

@@ -29,7 +29,7 @@ Login
                     <h4 class="fw-bold">Login</h4>
                     <p class="mb-0">Enter your credentials to login your account</p>
                     <div class="form-body mt-4">
-                        <form class="row g-3" method="post" action="{{route('auth.login.process')}}">
+                        <form class="row g-3" method="post" action="{{route('member.login_with_password')}}">
                             @csrf
                             <div class="col-12">
                                 <label for="inputPhoneNumber" class="form-label">Phone Number</label>
@@ -48,15 +48,9 @@ Login
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-switch">
-                                    {{-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="{{$remember ?? ''}}" checked name="remember_me"> --}}
-                                    {{-- cehck box if checked value 1 if not value 0 --}}
                                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="1" name="remember_me">
                                     <label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
                                 </div>
-                            </div>
-
-                            <div class="col-md-6 text-end">
-                                <a href="{{ route('auth.forgot_password') }}" class="text-primary">Forgot Password?</a>
                             </div>
 
                             <div class="col-12">

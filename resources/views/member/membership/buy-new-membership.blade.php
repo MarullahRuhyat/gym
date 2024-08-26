@@ -85,9 +85,9 @@ starter Page
                                                                 <p class="card-text">{{ $pkg->description }}</p>
                                                                 <p class="card-text">Duration:
                                                                     {{ $pkg->duration_in_days }} Days</p>
-                                                                <h5>Price:
-                                                                    Rp.{{ number_format($pkg->price, 0, ',', '.') }}
-                                                                </h5>
+                                                                    <h5>Price:
+                                                                        Rp.{{ number_format($pkg->price, 0, ',', '.') }}
+                                                                    </h5>
                                                                 <div
                                                                     class="mt-3 d-flex align-items-center justify-content-between">
                                                                     <button style="color:white;"
@@ -168,9 +168,10 @@ starter Page
                         <!-- disini  -->
                         <div id="form-container">
                             <!-- <h3>Anggota 1</h3> -->
-                            <form id="form-first" class="row g-3 needs-validation" novalidate id="form1">
-                                <input type="hidden" class="form-control" placeholder="Phone Number" id="bsValidation2"
-                                    name="phone_number" value="{{ Auth::user()->phone_number }}">
+                            <form id="form-first" class="row g-3 needs-validation" novalidate
+                            id="form1">
+                            <input type="hidden" class="form-control"
+                            placeholder="Phone Number" id="bsValidation2" name="phone_number" value="{{ Auth::user()->phone_number }}">
                             </form>
                             <div id="dynamic-form-id">
                                 <!-- form wil added here  -->
@@ -190,7 +191,6 @@ starter Page
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="col-md-12" style="margin-top:20px;">
                             <div class="d-md-flex d-grid align-items-center gap-3">
@@ -245,14 +245,9 @@ starter Page
                             <div class="d-flex align-items-center gap-3">
                                 <button class="btn btn-outline-secondary px-4" onclick="stepper1.previous()"><i
                                         class='bx bx-left-arrow-alt me-2'></i>Previous</button>
+                                <!-- <a type="submit" class="btn btn-grd-primary px-4">Pay<i class='bx bx-right-arrow-alt ms-2'></i></a> -->
                                 <button type="submit" class="btn btn-primary px-4">Pay<i
                                         class='bx bx-right-arrow-alt ms-2'></i></button>
-                                {{-- button cash --}}
-                                <button type="button" class="btn btn-primary px-4" data-bs-toggle="modal"
-                                    data-bs-target="#cashPaymentModal">
-                                    Cash<i class='bx bx-right-arrow-alt ms-2'></i>
-                                </button>
-
                             </div>
                         </div>
                     </form>
@@ -313,8 +308,7 @@ starter Page
                     @csrf
                     <input type="hidden" name="submit_package_id" id="submit_package_id" value="">
                     <!-- <input type="hidden" name="submit_user_id" id="submit_user_id" value="{{ Auth::user()->id }}"> -->
-                    <input type="hidden" name="payment_phone_number" id="payment_phone_number"
-                        value="{{ Auth::user()->phone_number }}">
+                    <input type="hidden" name="payment_phone_number" id="payment_phone_number" value="{{ Auth::user()->phone_number }}">
                     <input type="hidden" name="submit_start_date" id="submit_start_date" value="">
                     <input type="hidden" name="payment_amount" id="payment_amount" value="">
                     <input type="text" name="status_user" id="status_user" value="{{ Auth::user()->status }}">
@@ -328,10 +322,10 @@ starter Page
                                         <p id="payment-item-total" class="fw-semi-bold"></p>
                                     </div>
                                     @if (Auth::user()->status == 'expired' || Auth::user()->status == 'unregistered')
-                                    <div class="d-flex justify-content-between">
-                                        <p class="fw-semi-bold">Register Fee :</p>
-                                        <p id="payment-register" class="fw-semi-bold">Rp.75.000</p>
-                                    </div>
+                                        <div class="d-flex justify-content-between">
+                                            <p class="fw-semi-bold">Register Fee :</p>
+                                            <p id="payment-register" class="fw-semi-bold">Rp.75.000</p>
+                                        </div>
                                     @endif
                                     <div class="d-flex justify-content-between">
                                         <p class="fw-semi-bold">Discount :</p>
@@ -355,30 +349,7 @@ starter Page
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-
-<!-- Modal Cash Payment -->
-<div class="modal fade" id="cashPaymentModal" tabindex="-1" aria-labelledby="cashPaymentModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cashPaymentModalLabel">Konfirmasi Pembayaran Cash</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Apakah Anda akan melanjutkan pembayaran dengan cash dengan nominal <span id="cash-amount"></span>?
-                </p>
-                <input type="hidden" name="package_id" id="submit_package_id" value="">
-                <input type="hidden" name="phone_number" id="payment_phone_number" value="">
-                <input type="hidden" name="amount" id="payment_amount" value="">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                <button type="button" class="btn btn-primary" id="confirm-cash-payment">Ya</button>
+                </div>
             </div>
         </div>
     </div>
@@ -444,7 +415,7 @@ starter Page
             //         $('#payment_amount').val(response.price);
             //     }
             // },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.log(error);
             }
 
@@ -468,103 +439,98 @@ starter Page
         $('#stepper3_package_id').val(package_id);
     }
 
-    $(document).ready(function() {
-        $('#cashPaymentModal').on('show.bs.modal', function (event) {
-            var modal = $(this);
-            var totalAmount = $('#payment-total').text();
-            modal.find('#cash-amount').text(totalAmount);
-        });
-    });
-
-    // Saat tombol "Ya" ditekan pada modal
-    $('#cashPaymentModal').on('show.bs.modal', function (event) {
-        var modal = $(this);
-        var totalAmount = $('#payment-total').text(); // Ambil nominal dari elemen total pembayaran
-        modal.find('#cash-amount').text(totalAmount); // Isi nominal di modal
-    });
-
-    // Saat tombol "Ya" ditekan pada modal
-    $('#confirm-cash-payment').on('click', function () {
-        // Ambil data yang dibutuhkan
-        var packageId = $('#submit_package_id').val(); // Pastikan ID paket sudah benar
-        var phoneNumber = $('#payment_phone_number').val(); // Nomor telepon harus sudah terisi
-        var amount = $('#payment-total').text().replace(/[^0-9,-]+/g, ""); // Pastikan nilai ini benar
-        amount = parseInt(amount.replace(',', '')); // Konversi nilai ke integer
-
-
-
-
-        // Buat objek data untuk dikirim ke server
-        var data = {
-            package_id: packageId,
-            phone_number: phoneNumber,
-            payment_method: 'cash', // Metode pembayaran di-set ke 'cash'
-            amount: amount,
-            _token: "{{ csrf_token() }}" // Pastikan CSRF token disertakan
-        };
-        // Lakukan request AJAX
-        $.ajax({
-            url: "{{ route('member.submit-cash-payment') }}", // URL ke route yang benar
-            method: 'POST',
-            data: JSON.stringify(data), // Ubah objek data menjadi JSON string
-            contentType: 'application/json', // Tentukan bahwa kamu mengirim JSON
-            success: function (response) {
-                if (response.status === true) {
-                    alert('Pembayaran dengan cash berhasil disimpan!');
-                    // $('#cashPaymentModal').modal('hide'); // Tutup modal
-                    window.location.href = "{{ route('member.payment') }}"; // Redirect ke halaman pembayaran
-                } else {
-                    alert('Gagal menyimpan pembayaran. Silakan coba lagi.');
-                }
-            },
-            error: function (xhr, status, error) {
-                alert('Terjadi kesalahan. Silakan coba lagi.');
-            }
-        });
-    });
-
 </script>
 
 <!-- script dinamis add form member -->
 <script>
+    // Global form count variable
     var formCount = 1;
-    $('#addForm').on('click', function () {
+
+    // Function to delete a form
+    function deleteForm(formId) {
+        // Remove the specific form
+        $('#' + formId).remove();
+
+        // Decrement the form count
+        formCount--;
+
+        // Update the package_jumlah_member value
         let package_jumlah_member = $('#package_jumlah_member').val();
-        if (formCount < package_jumlah_member) {
-            formCount++;
-            $('#dynamic-form-id').append(`
+        package_jumlah_member++;
+        $('#package_jumlah_member').val(package_jumlah_member);
+    }
+
+    // Add new form on button click
+
+$('#addForm').on('click', function () {
+    var package_jumlah_member = $('#package_jumlah_member').val();
+
+    if (formCount < package_jumlah_member) {
+        formCount++;
+
+        // Generate unique ID for the new form
+        var newFormId = 'dynamic-form' + formCount;
+
+        // Append the new form HTML
+        $('#dynamic-form-id').append(`
+            <div class="card" id="form${formCount}">
+                <button type="button" class="btn btn-danger" onclick="deleteForm('form${formCount}')">Delete</button>
                 <h3>Anggota ${formCount}</h3>
                 <div class="row g-3">
                     <div class="col">
-                        <div class="card">
-                            <div class="card-body p-4">
-                                <form id="dynamic-form" class="row g-3 needs-validation" novalidate id="form${formCount}">
-                                    <input type="hidden" name="stepper3_package_id" id="stepper3_package_id_${formCount}" value="" disabled>
-                                    <div class="col-md-12">
-                                        <label for="bsValidation2_${formCount}" class="form-label">Phone Number</label>
-                                        <input type="text" class="form-control" id="bsValidation2_${formCount}" name="phone[]" placeholder="Phone" required>
-                                        <div class="invalid-feedback">
-                                            Please choose a username.
-                                        </div>
+                        <div class="card-body p-4">
+                            <form id="${newFormId}" class="row g-3 needs-validation" novalidate>
+                                <input type="hidden" name="stepper3_package_id" id="stepper3_package_id_${formCount}" value="" disabled>
+                                <div class="col-md-12">
+                                    <label for="bsValidation2_${formCount}" class="form-label">Phone Number</label>
+                                    <input type="text" class="form-control" id="bsValidation2_${formCount}" name="phone[]" placeholder="Phone" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid phone number.
                                     </div>
-                                </form>
-                            <div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            `);
+            </div>
+        `);
 
-            package_jumlah_member--;
-            $('#package_jumlah_member').val(package_jumlah_member);
+        // Decrement the package_jumlah_member value
+        package_jumlah_member--;
+        $('#package_jumlah_member').val(package_jumlah_member);
 
-            // scroll to the newly adden form
-            $('html, body').animate({
-                scrollTop: $(`#form${formCount}`).offset().top
-            }, 1000);
-        } else {
-            alert('You have reached the maximum number of members');
-        }
-    });
+        // Scroll to the newly added form
+        $('html, body').animate({
+            scrollTop: $(`#form${formCount}`).offset().top
+        }, 1000);
+    } else {
+        alert('You have reached the maximum number of members');
+    }
+});
+
+
+    // Function to collect form data
+    // function getFormData() {
+    //     var form_dynamic = [];
+    //     // Select all forms by using the class selector since ID will be unique
+    //     var forms = document.querySelectorAll('form[id^="dynamic-form"]');
+
+    //     forms.forEach(function (form) {
+    //         var member = {};
+    //         // Get phone number from the input field within the form
+    //         member.phone_number = form.querySelector('input[name="phone[]"]').value;
+
+    //         // Check if the phone number is empty and alert the user if so
+    //         if (member.phone_number === '') {
+    //             alert('Phone number cannot be empty');
+    //             return; // Exit the function if any phone number is empty
+    //         }
+    //         form_dynamic.push(member);
+    //     });
+
+    //     return form_dynamic;
+    // }
+
 
     $('#submit-form').on('click', function () {
         // agree form and term condition
@@ -574,22 +540,33 @@ starter Page
         }
 
         // get data from form 1
-        var phone_form_first = $('#bsValidation2').val();
+        var phone_form_first = "{{ Auth::user()->phone_number }}";
         var form_first = {
             phone_number: phone_form_first,
         };
 
         // only get data phone number from dynamic form
         var form_dynamic = [];
-        var forms = document.querySelectorAll('#dynamic-form');
+        // var forms = document.querySelectorAll('#dynamic-form');
+        var forms = document.querySelectorAll('form[id^="dynamic-form"]');
         forms.forEach(function (form) {
             // phone_number_dynamic.push(form.querySelector('input[name="phone[]"]').value);
             var member = {};
             member.phone_number = form.querySelector('input[name="phone[]"]').value;
+            // Check if the phone number is empty and alert the user if so
+            if (member.phone_number === '') {
+                alert('Phone number cannot be empty');
+                return; // Exit the function if any phone number is empty
+            }
             form_dynamic.push(member);
         });
 
-        // combine all data
+        // Check if form_dynamic is empty (i.e., if there were empty phone number fields)
+        if (form_dynamic.length === 0) {
+            return; // Exit if no valid form data
+        }
+
+        // Combine all data
         var package_id = $('#package_id').val();
         var start_date = $('#start_date').val();
         var form = {
@@ -599,6 +576,7 @@ starter Page
             form_dynamic: form_dynamic
         };
 
+        // Convert the form data to JSON
         form = JSON.stringify(form);
 
         console.log('form');
@@ -624,12 +602,9 @@ starter Page
                     var user_registered = response.data.user_registered;
                     var total = response.data.total;
                     // $('#payment-item-total').text(payment_item_total);
-                    $('#payment-item-total').text('Rp.' + payment_item_total.toString().replace(
-                        /\B(?=(\d{3})+(?!\d))/g, "."));
-                    $('#payment-user-registered').text('Rp.' + user_registered.toString().replace(
-                        /\B(?=(\d{3})+(?!\d))/g, "."));
-                    $('#payment-total').text('Rp.' + total.toString().replace(
-                        /\B(?=(\d{3})+(?!\d))/g, "."));
+                    $('#payment-item-total').text('Rp.' + payment_item_total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                    $('#payment-user-registered').text('Rp.' + user_registered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                    $('#payment-total').text('Rp.' + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
                     $('#payment_phone_number').val(response.data.user_phone_number);
                     // $('#payment_phone_number').text('Rp.' + response.data.user_phone_number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
                     $('#payment_amount').val(total);
@@ -645,6 +620,7 @@ starter Page
     });
 
 </script>
+
 <!--bootstrap js-->
 <!-- <script src="{{ URL::asset('build/js/bootstrap.bundle.min.js') }}"></script> -->
 <!--plugins-->

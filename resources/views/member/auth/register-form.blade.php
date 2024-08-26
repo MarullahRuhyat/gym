@@ -54,7 +54,7 @@ starter Page
                                 Please fill your start date.
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                             <label for="bsValidation6" class="form-label">Password</label>
                             <input type="password" class="form-control" id="bsValidation6" name="password" required>
                             <div class="invalid-feedback">
@@ -67,7 +67,7 @@ starter Page
                             <div class="invalid-feedback">
                                 Confirmation password is required and must be same as password.
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-12">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="bsValidation14" required>
@@ -118,31 +118,31 @@ starter Page
     })()
 
     // check password and confirm password
-    $(document).ready(function() {
-        $('#bsValidation6').keyup(function() {
-            var password = $('#bsValidation6').val();
-            var confirmPassword = $('#bsValidation7').val();
-            if (password != confirmPassword) {
-                $('#bsValidation7').addClass('is-invalid');
-                $('#bsValidation7').removeClass('is-valid');
-            } else {
-                $('#bsValidation7').addClass('is-valid');
-                $('#bsValidation7').removeClass('is-invalid ');
-            }
-        });
+    // $(document).ready(function() {
+    //     $('#bsValidation6').keyup(function() {
+    //         var password = $('#bsValidation6').val();
+    //         var confirmPassword = $('#bsValidation7').val();
+    //         if (password != confirmPassword) {
+    //             $('#bsValidation7').addClass('is-invalid');
+    //             $('#bsValidation7').removeClass('is-valid');
+    //         } else {
+    //             $('#bsValidation7').addClass('is-valid');
+    //             $('#bsValidation7').removeClass('is-invalid ');
+    //         }
+    //     });
 
-        $('#bsValidation7').keyup(function() {
-            var password = $('#bsValidation6').val();
-            var confirmPassword = $('#bsValidation7').val();
-            if (password != confirmPassword) {
-                $('#bsValidation7').addClass('is-invalid');
-                $('#bsValidation7').removeClass('is-valid');
-            } else {
-                $('#bsValidation7').addClass('is-valid');
-                $('#bsValidation7').removeClass('is-invalid');
-            }
-        });
-    });
+    //     $('#bsValidation7').keyup(function() {
+    //         var password = $('#bsValidation6').val();
+    //         var confirmPassword = $('#bsValidation7').val();
+    //         if (password != confirmPassword) {
+    //             $('#bsValidation7').addClass('is-invalid');
+    //             $('#bsValidation7').removeClass('is-valid');
+    //         } else {
+    //             $('#bsValidation7').addClass('is-valid');
+    //             $('#bsValidation7').removeClass('is-invalid');
+    //         }
+    //     });
+    // });
 </script>
 <!--bootstrap js-->
 <script src="{{ URL::asset('build/js/bootstrap.bundle.min.js') }}"></script>

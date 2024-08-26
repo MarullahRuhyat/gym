@@ -95,10 +95,10 @@
 						<div class="about-img-1">
 							<img class="about-img-effect-1" src="{{asset("landing_page/assets/img/square-yellow.svg")}}" alt="img">
 							<img class="about-img-effect-2" src="{{asset("landing_page/assets/img/group-circle-2.svg")}}" alt="img">
-							<img src="{{asset("landing_page/assets/img/about-top-1.jpg")}}" alt="img">
+							<img src="{{asset("landing_page/assets/img/programs-3.jpg")}}" style="max-height: 422px; max-width:422px" alt="img">
 						</div>
 						<div class="about-img-2">
-							<img src="{{asset("landing_page/assets/img/about-top-2.jpg")}}" alt="img">
+							<img src="{{asset("landing_page/assets/img/programs-1.jpg")}}" style="max-height: 309px; max-width:312px" alt="img">
 						</div>
 					</div>
 				</div>
@@ -132,7 +132,7 @@
 	<section class="s-club-cards">
 		<div class="container">
 			<h2 class="title-decor">Program <span>Price</span></h2>
-			<p class="slogan">Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor, auctor tincidunt lorem ut, venenatis dapibus miq.</p>
+			<p class="slogan"> Untuk member baru, ada tambahan biaya registrasi sebesar Rp.75.000,- yang dapat ditukarkan dalam bentuk kartu anggota (e-money).</p>
 			<div class="row mb-3">
 				<div class="col-md-4 club-card-col">
 					<div class="club-card-item">
@@ -142,9 +142,6 @@
 						<ul class="list">
 							<li>Rp. 1.900.000</li>
 							<li>45 hari dengan 12x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
-							<li>Mauris id erat enim</li>
-							<li class="item-excluded">Morbi dolor dolortin</li>
-							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
@@ -157,9 +154,6 @@
 						<ul class="list">
 							<li>Rp. 1.500.000 /person</li>
 							<li>45 hari dengan 12x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
-							<li>Mauris id erat enim</li>
-							<li>Morbi dolor dolortin</li>
-							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
@@ -172,9 +166,6 @@
 						<ul class="list">
 							<li>Rp. 1.075.000 /person</li>
 							<li>30 hari dengan 10x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
-							<li>Mauris id erat enim</li>
-							<li>Morbi dolor dolortin</li>
-							<li>lorem ut, venenatis dapibus mi</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
@@ -193,9 +184,6 @@
 						<ul class="list">
 							<li>Rp. 775.000 /person</li>
 							<li>Berlatih di Flozor's Gym dengan orang-orang yang dipilih secara acak oleh kami pada saat yang sama. 30 hari dengan 10x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
-							<li>Mauris id erat enim</li>
-							<li class="item-excluded">Morbi dolor dolortin</li>
-							<li class="item-excluded">lorem ut, venenatis dapibus mi</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
@@ -210,7 +198,9 @@
 	<section class="s-contacts" style="background-image: url(assets/img/bg-contacts.svg);">
 		<div class="container">
 			<h2 class="title-decor">Contact <span>Us</span></h2>
-			<p class="slogan">Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor, auctor tincidunt lorem ut, venenatis dapibus miq.</p>
+			<p class="slogan">
+				Have a question? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+			</p>
 			<div class="row">
 				<div class="col-md-5 col-lg-4">
 					<div class="contact-item">

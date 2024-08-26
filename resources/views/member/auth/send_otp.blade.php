@@ -48,6 +48,12 @@
                                         <a href="{{ route('member.register_select')}}">Don't have an account? <span><strong>Register</strong></span></a>
                                     </div>
                                 </div>
+
+                                <div class="col-12">
+                                    <div class="d-grid">
+                                        <a href="{{ route('member.with_password')}}">forgot bring phone? <span><strong>With Password</strong></span></a>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>

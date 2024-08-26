@@ -214,7 +214,7 @@ starter Page
                                                         Please fill address.
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
+                                                <!-- <div class="col-md-12">
                                                     <label for="bsValidation5" class="form-label">Password</label>
                                                     <input type="password" class="form-control" id="bsValidation5"
                                                         name="password" required>
@@ -230,7 +230,7 @@ starter Page
                                                     <div class="invalid-feedback">
                                                         Confirmation password is required and must be same as password.
                                                     </div>
-                                                </div>
+                                                </div> -->
 
                                             </form>
                                         </div>
@@ -481,13 +481,13 @@ starter Page
         var phone_form_first = $('#bsValidation2').val();
         var gender_form_first = $('#bsValidation3').val();
         var address_form_first = $('#bsValidation4').val();
-        var password_form_first = $('#bsValidation5').val();
+        // var password_form_first = $('#bsValidation5').val();
         var form_first = {
             name: name_form_first,
             phone_number: phone_form_first,
             gender: gender_form_first,
             address: address_form_first,
-            password: password_form_first
+            // password: password_form_first
         };
 
         // only get data phone number from dynamic form

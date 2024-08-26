@@ -16,15 +16,15 @@ class PersonalTrainerController extends Controller
         ->groupBy('gym_membership_packages.name')
         ->get();
 
-    // Memisahkan data untuk digunakan di chart
-    $labels = $data->pluck('name');
-    $series = $data->pluck('active_members');
+        // Memisahkan data untuk digunakan di chart
+        $labels = $data->pluck('name');
+        $series = $data->pluck('active_members');
 
-    // Memisahkan data untuk digunakan di chart
-    $labels = $data->pluck('name');
-    $series = $data->pluck('active_members');
+        // Memisahkan data untuk digunakan di chart
+        $labels = $data->pluck('name');
+        $series = $data->pluck('active_members');
 
-    return view('personal_training.dashboard', compact('labels', 'series'));
+        return view('personal_training.dashboard', compact('labels', 'series'));
     }
 
     public function personal_trainer_dashboard()

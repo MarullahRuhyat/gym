@@ -50,7 +50,7 @@ starter Page
                         <input type="number" class="form-control" id="duration_in_days" name="duration_in_days" required>
                     </div>
                     <div class="form-group my-2">
-                        <label for="personal_trainer_quota">Personal Trainer</label>
+                        <label for="personal_trainer_quota">Kuota Personal Trainer</label>
                         <input type="number" class="form-control" id="personal_trainer_quota" name="personal_trainer_quota" value="0" required>
                     </div>
                     <div class="form-group my-2">
@@ -98,7 +98,7 @@ starter Page
                         <input type="number" class="form-control" id="duration_in_days_edit" name="duration_in_days" required>
                     </div>
                     <div class="form-group my-2">
-                        <label for="personal_trainer_quota_edit">Personal Trainer</label>
+                        <label for="personal_trainer_quota_edit">Kuota Personal Trainer</label>
                         <input type="number" class="form-control" id="personal_trainer_quota_edit" name="personal_trainer_quota" required>
                     </div>
                     <div class="form-group my-2">

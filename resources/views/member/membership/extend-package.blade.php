@@ -3,6 +3,17 @@
 starter Page
 @endsection
 @section('content')
+@if($packages->isEmpty())
+<div class="justify-content-center text-center">
+    <!-- you don't have any membership yet -->
+     <div class="col my-5">
+        <p>You don't have any membership yet</p>
+     </div>
+    <div class="col my-5">
+        <a href="{{ route('member.buy-new-package') }}" class="btn btn-grd btn-grd-deep-blue px-5">Buy Membership</a>
+    </div>
+</div>
+@endif
 @foreach($packages as $pkg)
 <!-- notif response  -->
  @if (session('status'))

@@ -254,6 +254,11 @@ starter Page
                                         You must agree before submitting.
                                     </div>
                                 </div>
+                                <!-- show term and condition button  to modal -->
+                                <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                                    data-bs-target="#TermAndConditioModal">
+                                    Term and Condition?
+                                </button>
                             </div>
 
                         </div>
@@ -324,6 +329,23 @@ starter Page
 </div>
 <!-- </div> -->
 <!--end stepper one-->
+
+<!-- modal start term and condition -->
+<div class="modal fade" id="TermAndConditioModal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 bg-primary py-2">
+                <h5 class="modal-title" style="color:white">Term and Condition</h5>
+                <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="modal">
+                    <i class="material-icons-outlined">close</i>
+                </a>
+            </div>
+            <div class="modal-body">
+                <p>Term and Condition</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- modal start input start_date  if click submit redirect to next modal -->
@@ -421,52 +443,61 @@ starter Page
 
 <!-- script dinamis add form member -->
 <script>
+    // Global form count variable
     var formCount = 1;
-    $('#addForm').on('click', function () {
+
+    // Function to delete a form
+    function deleteForm(formId) {
+        // Remove the specific form
+        $('#' + formId).remove();
+
+        // Decrement the form count
+        formCount--;
+
+        // Update the package_jumlah_member value
         let package_jumlah_member = $('#package_jumlah_member').val();
+        package_jumlah_member++;
+        $('#package_jumlah_member').val(package_jumlah_member);
+    }
+
+    $('#addForm').on('click', function () {
+        var package_jumlah_member = $('#package_jumlah_member').val();
+
         if (formCount < package_jumlah_member) {
             formCount++;
+
+            // Generate unique ID for the new form
+            var newFormId = 'dynamic-form' + formCount;
+
+            // Append the new form HTML
             $('#dynamic-form-id').append(`
-                <h3>Anggota ${formCount}</h3>
-                <div class="row g-3">
-                    <div class="col">
-                        <div class="card">
+                <div class="card" id="form${formCount}">
+                    <button type="button" class="btn btn-danger col-md-3" onclick="deleteForm('form${formCount}')">Delete</button>
+                    <h3>Anggota ${formCount}</h3>
+                    <div class="row g-3">
+                        <div class="col">
                             <div class="card-body p-4">
-                                <form id="dynamic-form" class="row g-3 needs-validation" novalidate id="form${formCount}">
+                                <form id="${newFormId}" class="row g-3 needs-validation" novalidate>
                                     <input type="hidden" name="stepper3_package_id" id="stepper3_package_id_${formCount}" value="" disabled>
                                     <div class="col-md-12">
                                         <label for="bsValidation2_${formCount}" class="form-label">Phone Number</label>
                                         <input type="text" class="form-control" id="bsValidation2_${formCount}" name="phone[]" placeholder="Phone" required>
                                         <div class="invalid-feedback">
-                                            Please choose a username.
+                                            Please provide a valid phone number.
                                         </div>
                                     </div>
                                 </form>
-                            <div>
+                            </div>
                         </div>
                     </div>
                 </div>
             `);
 
-            // only show one agree-term
-            // if (formCount == package_jumlah_member) {
-            //     $('#agree-term').append(`
-            //         <div class="col-md-12">
-            //                 <div class="form-check">
-            //                     <input class="form-check-input" type="checkbox" id="agreeTerms" required>
-            //                     <label class="form-check-label" for="agreeTerms">Agree to terms and conditions</label>
-            //                     <div class="invalid-feedback">
-            //                         You must agree before submitting.
-            //                     </div>
-            //                 </div>
-            //             </div>
-            //     `);
-            // }
-
+            // Decrement the package_jumlah_member value
             package_jumlah_member--;
             $('#package_jumlah_member').val(package_jumlah_member);
 
-            // scroll to the newly adden form
+            // Scroll to the newly added form
             $('html, body').animate({
                 scrollTop: $(`#form${formCount}`).offset().top
             }, 1000);
@@ -476,6 +507,12 @@ starter Page
     });
 
     $('#submit-form').on('click', function () {
+        // agree form and term condition
+        if (!$('#agreeTerms').is(':checked')) {
+            alert('You must agree to the terms and conditions');
+            return;
+        }
+
         // get data from form 1
         var name_form_first = $('#bsValidation1').val();
         var phone_form_first = $('#bsValidation2').val();
@@ -491,14 +528,30 @@ starter Page
         };
 
         // only get data phone number from dynamic form
+        // var form_dynamic = [];
+        // var forms = document.querySelectorAll('#dynamic-form');
+        // forms.forEach(function (form) {
+        //     // phone_number_dynamic.push(form.querySelector('input[name="phone[]"]').value);
+        //     var member = {};
+        //     member.phone_number = form.querySelector('input[name="phone[]"]').value;
+        //     form_dynamic.push(member);
+        // });
+
         var form_dynamic = [];
-        var forms = document.querySelectorAll('#dynamic-form');
+        var forms = document.querySelectorAll('form[id^="dynamic-form"]');
         forms.forEach(function (form) {
-            // phone_number_dynamic.push(form.querySelector('input[name="phone[]"]').value);
             var member = {};
             member.phone_number = form.querySelector('input[name="phone[]"]').value;
+            // Check if the phone number is empty and alert the user if so
+            // if (member.phone_number === '') {
+            //     alert('Phone number cannot be empty');
+            //     return; // Exit the function if any phone number is empty
+            // }
             form_dynamic.push(member);
         });
+
+        // add package_id
+        $('#submit_package_id').val($('#package_id').val());
 
         // combine all data
         var package_id = $('#package_id').val();
@@ -534,14 +587,11 @@ starter Page
                     var payment_item_total = response.data.payment_item_total;
                     var user_registered = response.data.user_registered;
                     var total = response.data.total;
-                    // $('#payment-item-total').text(payment_item_total);
                     $('#payment-item-total').text('Rp.' + payment_item_total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
                     $('#payment-user-registered').text('Rp.' + user_registered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
                     $('#payment-total').text('Rp.' + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
                     $('#payment_phone_number').val(response.data.user_phone_number);
-                    // $('#payment_phone_number').text('Rp.' + response.data.user_phone_number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
                     $('#payment_amount').val(total);
-                    // $('#payment_amount').text('Rp.' + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
                 } else {
                     alert(response.message);
                 }
@@ -551,64 +601,6 @@ starter Page
             }
         });
     });
-
-    // $('#payment_submit').on('click', function() {
-    //     var package_id = $('#package_id').val();
-    //     var user_form_first_phone = $('#bsValidation2').val();
-    //     var start_date = $('#start_date').val();
-
-    //     $.ajax({
-    //         url: "{{ route('member.payment') }}",
-    //         method: 'GET',
-    //         data: {
-    //             submit_package_id: package_id,
-    //             phone_number: user_form_first_phone,
-    //             amount : $('#payment-total').text(),
-    //         },
-    //     });
-    // });
-
-    // $('#submit-form').on('click', function() {
-    //     var forms = document.querySelectorAll('#dynamic-form');
-    //     var members = [];
-    //     // forms.foreach(function(form) {
-    //     //     members.push({
-    //     //         name: form.querySelector('input[name="name[]"]').value
-    //     //     });
-    //     // });
-    //     forms.forEach(function(form) {
-    //         var member = {};
-    //         member.name = form.querySelector('input[name="name[]"]').value;
-    //         member.phone_number = form.querySelector('input[name="phone[]"]').value;
-    //         member.gender = form.querySelector('input[name="gender[]"]:checked').value;
-    //         member.address = form.querySelector('textarea[name="address[]"]').value;
-    //         member.start_date = form.querySelector('input[name="start_date[]"]').value;
-    //         member.password = form.querySelector('input[name="password[]"]').value;
-    //         members.push(member);
-    //     });
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-    //             'Content-Type': 'application/json'
-    //         }
-    //     });
-
-    //     $.ajax({
-    //         url: '/member/register-submit', // Your Laravel route
-    //         method: 'POST',
-    //         data: JSON.stringify(members),
-    //         success: function(response) {
-    //             if(response.status == true) {
-    //                 alert('Form saved');
-    //             } else {
-    //                 alert(response.message);
-    //             }
-    //         },
-    //         error: function(jqXHR, textStatus, errorThrown) {
-    //             alert('Error saving forms');
-    //         }
-    //     });
-    // });
 
 </script>
 <!--bootstrap js-->

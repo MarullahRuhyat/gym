@@ -261,6 +261,7 @@ class PackageController extends Controller
             ->where('memberships.user_id', auth()->user()->id)
             ->where('memberships.is_active', 1)
             ->get();
+        // dd($packages);
         return view('member.membership.extend-package', compact('packages'));
     }
 

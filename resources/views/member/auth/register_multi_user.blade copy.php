@@ -3,6 +3,8 @@
 starter Page
 @endsection
 @section('content')
+<!--start stepper one-->
+<!-- <h6 class="text-uppercase">Non Linear</h6> -->
 <hr>
 <div id="stepper1" class="bs-stepper">
     <div class="card">
@@ -110,7 +112,7 @@ starter Page
                         </div>
 
                     </div>
-                    <div id="test-l-2" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger2">
+                    <div id="test-l-2" role="tabpanel" class="bs-stepper-pane" aria-labelledby=P"stepper1trigger2">
                         <h5 class="mb-1">Package Details</h5>
                         <p class="mb-4">This is details package</p>
                         <div class="row g-3">
@@ -167,12 +169,74 @@ starter Page
                         </div>
                         <!-- disini  -->
                         <div id="form-container">
-                            <!-- <h3>Anggota 1</h3> -->
-                            <form id="form-first" class="row g-3 needs-validation" novalidate
-                            id="form1">
-                            <input type="hidden" class="form-control"
-                            placeholder="Phone Number" id="bsValidation2" name="phone_number" value="{{ Auth::user()->phone_number }}">
-                            </form>
+                            <h3>Anggota 1</h3>
+                            <div class="row g-3">
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-body p-4">
+                                            <form id="form-first" class="row g-3 needs-validation" novalidate
+                                                id="form1">
+                                                <input type="hidden" name="stepper3_package_id"
+                                                    id="stepper3_package_id_1" value="" disabled>
+                                                <div class="col-md-12">
+                                                    <label for="bsValidation1" class="form-label">Name</label>
+                                                    <input type="text" class="form-control" id="bsValidation1"
+                                                        name="name" placeholder="Name" required>
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label for="bsValidation2" class="form-label">Phone Number</label>
+                                                    <input type="text" class="form-control" id="bsValidation2"
+                                                        placeholder="Phone Number" name="phone_number" required>
+                                                    <div class="invalid-feedback">
+                                                        Please fill a phone number.
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label for="bsValidation3" class="form-label">Gender</label>
+                                                    <select class="form-select" id="bsValidation3" name="gender"
+                                                        required>
+                                                        <option selected disabled value="">Choose...</option>
+                                                        <option value="L">Laki-laki</option>
+                                                        <option value="P">Perempuan</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        Please select a valid gender.
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label for="bsValidation4" class="form-label">Address</label>
+                                                    <input type="text" class="form-control" id="bsValidation4"
+                                                        name="address" placeholder="Address" required>
+                                                    <div class="invalid-feedback">
+                                                        Please fill address.
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="col-md-12">
+                                                    <label for="bsValidation5" class="form-label">Password</label>
+                                                    <input type="password" class="form-control" id="bsValidation5"
+                                                        name="password" required>
+                                                    <div class="invalid-feedback">
+                                                        Please fill your password.
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label for="bsValidation6" class="form-label">Confirm
+                                                        Password</label>
+                                                    <input type="password" class="form-control" id="bsValidation6"
+                                                        name="password_confirmation" required>
+                                                    <div class="invalid-feedback">
+                                                        Confirmation password is required and must be same as password.
+                                                    </div>
+                                                </div> -->
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div id="dynamic-form-id">
                                 <!-- form wil added here  -->
                             </div>
@@ -196,6 +260,7 @@ starter Page
                                     Term and Condition?
                                 </button>
                             </div>
+
                         </div>
                         <div class="col-md-12" style="margin-top:20px;">
                             <div class="d-md-flex d-grid align-items-center gap-3">
@@ -314,70 +379,6 @@ starter Page
     </div>
 </div>
 
-
-<!-- Modal -->
-<div class="modal fade" id="ScrollableModal">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header border-bottom-0 bg-primary py-2">
-                <h5 class="modal-title" style="color:white">Detail Payment</h5>
-                <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="modal">
-                    <i class="material-icons-outlined">close</i>
-                </a>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('member.payment') }}" method="GET">
-                    @csrf
-                    <input type="hidden" name="submit_package_id" id="submit_package_id" value="">
-                    <!-- <input type="hidden" name="submit_user_id" id="submit_user_id" value="{{ Auth::user()->id }}"> -->
-                    <input type="hidden" name="payment_phone_number" id="payment_phone_number" value="{{ Auth::user()->phone_number }}">
-                    <input type="hidden" name="submit_start_date" id="submit_start_date" value="">
-                    <input type="hidden" name="payment_amount" id="payment_amount" value="">
-                    <input type="text" name="status_user" id="status_user" value="{{ Auth::user()->status }}">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title mb-4 fw-bold">Summary</h4>
-                                <div>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="fw-semi-bold">Items subtotal :</p>
-                                        <p id="payment-item-total" class="fw-semi-bold"></p>
-                                    </div>
-                                    @if (Auth::user()->status == 'expired' || Auth::user()->status == 'unregistered')
-                                        <div class="d-flex justify-content-between">
-                                            <p class="fw-semi-bold">Register Fee :</p>
-                                            <p id="payment-register" class="fw-semi-bold">Rp.75.000</p>
-                                        </div>
-                                    @endif
-                                    <div class="d-flex justify-content-between">
-                                        <p class="fw-semi-bold">Discount :</p>
-                                        <p id="payment-discount" class="text-danger fw-semi-bold">Rp.-</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="fw-semi-bold">Tax :</p>
-                                        <p id="payment-tax" class="fw-semi-bold">Rp.-</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between border-top pt-4">
-                                    <h5 class="mb-0 fw-bold">Total :</h5>
-                                    <h5 id="payment-total" class="mb-0 fw-bold"></h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="d-flex justify-content-end mt-4">
-                            <button type="submit" class="btn btn-grd-deep-blue px-4">Pay</button>
-                        </div>
-                    </div>
-                </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 @endsection
 @push('script')
 <script>
@@ -417,11 +418,7 @@ starter Page
                     stepper1.next();
                     Stepper2DetailsPackage(data.data);
                 }
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
             }
-
         });
     }
 
@@ -446,133 +443,89 @@ starter Page
 
 <!-- script dinamis add form member -->
 <script>
-    // Global form count variable
     var formCount = 1;
-
-    // Function to delete a form
-    function deleteForm(formId) {
-        // Remove the specific form
-        $('#' + formId).remove();
-
-        // Decrement the form count
-        formCount--;
-
-        // Update the package_jumlah_member value
+    $('#addForm').on('click', function () {
         let package_jumlah_member = $('#package_jumlah_member').val();
-        package_jumlah_member++;
-        $('#package_jumlah_member').val(package_jumlah_member);
-    }
-
-    // Add new form on button click
-
-$('#addForm').on('click', function () {
-    var package_jumlah_member = $('#package_jumlah_member').val();
-
-    if (formCount < package_jumlah_member) {
-        formCount++;
-
-        // Generate unique ID for the new form
-        var newFormId = 'dynamic-form' + formCount;
-
-        // Append the new form HTML
-        $('#dynamic-form-id').append(`
-            <div class="card" id="form${formCount}">
-                <button type="button" class="btn btn-danger col-md-3" onclick="deleteForm('form${formCount}')">Delete</button>
+        if (formCount < package_jumlah_member) {
+            formCount++;
+            $('#dynamic-form-id').append(`
                 <h3>Anggota ${formCount}</h3>
                 <div class="row g-3">
                     <div class="col">
-                        <div class="card-body p-4">
-                            <form id="${newFormId}" class="row g-3 needs-validation" novalidate>
-                                <input type="hidden" name="stepper3_package_id" id="stepper3_package_id_${formCount}" value="" disabled>
-                                <div class="col-md-12">
-                                    <label for="bsValidation2_${formCount}" class="form-label">Phone Number</label>
-                                    <input type="text" class="form-control" id="bsValidation2_${formCount}" name="phone[]" placeholder="Phone" required>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid phone number.
+                        <div class="card">
+                            <div class="card-body p-4">
+                                <form id="dynamic-form" class="row g-3 needs-validation" novalidate id="form${formCount}">
+                                    <input type="hidden" name="stepper3_package_id" id="stepper3_package_id_${formCount}" value="" disabled>
+                                    <div class="col-md-12">
+                                        <label for="bsValidation2_${formCount}" class="form-label">Phone Number</label>
+                                        <input type="text" class="form-control" id="bsValidation2_${formCount}" name="phone[]" placeholder="Phone" required>
+                                        <div class="invalid-feedback">
+                                            Please choose a username.
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            <div>
                         </div>
                     </div>
                 </div>
-            </div>
-        `);
+            `);
 
-        // Decrement the package_jumlah_member value
-        package_jumlah_member--;
-        $('#package_jumlah_member').val(package_jumlah_member);
+            // only show one agree-term
+            // if (formCount == package_jumlah_member) {
+            //     $('#agree-term').append(`
+            //         <div class="col-md-12">
+            //                 <div class="form-check">
+            //                     <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+            //                     <label class="form-check-label" for="agreeTerms">Agree to terms and conditions</label>
+            //                     <div class="invalid-feedback">
+            //                         You must agree before submitting.
+            //                     </div>
+            //                 </div>
+            //             </div>
+            //     `);
+            // }
 
-        // Scroll to the newly added form
-        $('html, body').animate({
-            scrollTop: $(`#form${formCount}`).offset().top
-        }, 1000);
-    } else {
-        alert('You have reached the maximum number of members');
-    }
-});
+            package_jumlah_member--;
+            $('#package_jumlah_member').val(package_jumlah_member);
 
-
-    // Function to collect form data
-    // function getFormData() {
-    //     var form_dynamic = [];
-    //     // Select all forms by using the class selector since ID will be unique
-    //     var forms = document.querySelectorAll('form[id^="dynamic-form"]');
-
-    //     forms.forEach(function (form) {
-    //         var member = {};
-    //         // Get phone number from the input field within the form
-    //         member.phone_number = form.querySelector('input[name="phone[]"]').value;
-
-    //         // Check if the phone number is empty and alert the user if so
-    //         if (member.phone_number === '') {
-    //             alert('Phone number cannot be empty');
-    //             return; // Exit the function if any phone number is empty
-    //         }
-    //         form_dynamic.push(member);
-    //     });
-
-    //     return form_dynamic;
-    // }
-
+            // scroll to the newly adden form
+            $('html, body').animate({
+                scrollTop: $(`#form${formCount}`).offset().top
+            }, 1000);
+        } else {
+            alert('You have reached the maximum number of members');
+        }
+    });
 
     $('#submit-form').on('click', function () {
-        // agree form and term condition
-        if (!$('#agreeTerms').is(':checked')) {
-            alert('You must agree to the terms and conditions');
-            return;
-        }
-
         // get data from form 1
-        var phone_form_first = "{{ Auth::user()->phone_number }}";
+        var name_form_first = $('#bsValidation1').val();
+        var phone_form_first = $('#bsValidation2').val();
+        var gender_form_first = $('#bsValidation3').val();
+        var address_form_first = $('#bsValidation4').val();
+        // var password_form_first = $('#bsValidation5').val();
         var form_first = {
+            name: name_form_first,
             phone_number: phone_form_first,
+            gender: gender_form_first,
+            address: address_form_first,
+            // password: password_form_first
         };
 
         // only get data phone number from dynamic form
         var form_dynamic = [];
-        // var forms = document.querySelectorAll('#dynamic-form');
-        var forms = document.querySelectorAll('form[id^="dynamic-form"]');
+        var forms = document.querySelectorAll('#dynamic-form');
         forms.forEach(function (form) {
             // phone_number_dynamic.push(form.querySelector('input[name="phone[]"]').value);
             var member = {};
             member.phone_number = form.querySelector('input[name="phone[]"]').value;
-            // Check if the phone number is empty and alert the user if so
-            // if (member.phone_number === '') {
-            //     alert('Phone number cannot be empty');
-            //     return; // Exit the function if any phone number is empty
-            // }
             form_dynamic.push(member);
         });
-
-        // Check if form_dynamic is empty (i.e., if there were empty phone number fields)
-        // if (form_dynamic.length === 0) {
-        //     return; // Exit if no valid form data
-        // }
 
         // add package_id
         $('#submit_package_id').val($('#package_id').val());
 
-        // Combine all data
+        // combine all data
         var package_id = $('#package_id').val();
         var start_date = $('#start_date').val();
         var form = {
@@ -582,7 +535,6 @@ $('#addForm').on('click', function () {
             form_dynamic: form_dynamic
         };
 
-        // Convert the form data to JSON
         form = JSON.stringify(form);
 
         console.log('form');
@@ -597,7 +549,7 @@ $('#addForm').on('click', function () {
         });
 
         $.ajax({
-            url: "{{ route('member.submit-buy-new-package') }}",
+            url: "{{ route('member.check-member-terkait') }}",
             method: 'POST',
             data: form,
             success: function (response) {
@@ -625,10 +577,67 @@ $('#addForm').on('click', function () {
         });
     });
 
-</script>
+    // $('#payment_submit').on('click', function() {
+    //     var package_id = $('#package_id').val();
+    //     var user_form_first_phone = $('#bsValidation2').val();
+    //     var start_date = $('#start_date').val();
 
+    //     $.ajax({
+    //         url: "{{ route('member.payment') }}",
+    //         method: 'GET',
+    //         data: {
+    //             submit_package_id: package_id,
+    //             phone_number: user_form_first_phone,
+    //             amount : $('#payment-total').text(),
+    //         },
+    //     });
+    // });
+
+    // $('#submit-form').on('click', function() {
+    //     var forms = document.querySelectorAll('#dynamic-form');
+    //     var members = [];
+    //     // forms.foreach(function(form) {
+    //     //     members.push({
+    //     //         name: form.querySelector('input[name="name[]"]').value
+    //     //     });
+    //     // });
+    //     forms.forEach(function(form) {
+    //         var member = {};
+    //         member.name = form.querySelector('input[name="name[]"]').value;
+    //         member.phone_number = form.querySelector('input[name="phone[]"]').value;
+    //         member.gender = form.querySelector('input[name="gender[]"]:checked').value;
+    //         member.address = form.querySelector('textarea[name="address[]"]').value;
+    //         member.start_date = form.querySelector('input[name="start_date[]"]').value;
+    //         member.password = form.querySelector('input[name="password[]"]').value;
+    //         members.push(member);
+    //     });
+    //     $.ajaxSetup({
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+    //             'Content-Type': 'application/json'
+    //         }
+    //     });
+
+    //     $.ajax({
+    //         url: '/member/register-submit', // Your Laravel route
+    //         method: 'POST',
+    //         data: JSON.stringify(members),
+    //         success: function(response) {
+    //             if(response.status == true) {
+    //                 alert('Form saved');
+    //             } else {
+    //                 alert(response.message);
+    //             }
+    //         },
+    //         error: function(jqXHR, textStatus, errorThrown) {
+    //             alert('Error saving forms');
+    //         }
+    //     });
+    // });
+
+</script>
 <!--bootstrap js-->
-<!-- <script src="{{ URL::asset('build/js/bootstrap.bundle.min.js') }}"></script> -->
+<script src="{{ URL::asset('build/js/bootstrap.bundle.min.js') }}"></script>
 <!--plugins-->
 <script src="{{ URL::asset('build/js/jquery.min.js') }}"></script>
 <!--plugins-->

@@ -36,6 +36,12 @@ starter Page
                         <label for="phone_edit" class="form-label">Phone Number</label>
                         <input type="text" class="form-control" id="phone_edit" name="phone_number" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="phone_edit" class="form-label">Status</label>
+                        <div id="status_edit">
+
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -60,9 +66,42 @@ starter Page
             let id = $(this).data('id');
             let name = $(this).data('name');
             let phone = $(this).data('phone');
+            let status = $(this).data('status');
             $('#name_edit').val(name);
             $('#phone_edit').val(phone);
             $('#id_edit').val(id);
+            if (status == "active") {
+                $('#status_edit').html(`
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="status" value="active" id="statusActive" checked>
+            <label class="form-check-label" for="statusActive">
+                Active
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="status" value="inactive" id="statusInactive">
+            <label class="form-check-label" for="statusInactive">
+                Inactive
+            </label>
+        </div>
+    `);
+            } else {
+                $('#status_edit').html(`
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="status" value="active" id="statusActive">
+            <label class="form-check-label" for="statusActive">
+                Active
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="status" value="inactive" id="statusInactive" checked>
+            <label class="form-check-label" for="statusInactive">
+                Inactive
+            </label>
+        </div>
+    `);
+            }
+
         });
 
         // Populate Delete Modal

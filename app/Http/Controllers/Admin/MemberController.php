@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -17,9 +18,10 @@ class MemberController extends Controller
             $edit = intval($request->input('edit', 0));
             $request->validate([
                 'name' => 'required|string|max:255',
-                'phone_number' => 'nullable|string|max:20',
+                'phone_number' => 'required|string|max:20',
+                'status' => 'required|string|max:20',
             ]);
-            $data = $request->only('name', 'phone_number');
+            $data = $request->only('name', 'phone_number', 'status');
 
             try {
                 $id = $request->input('id', 0);
@@ -59,5 +61,26 @@ class MemberController extends Controller
         }
 
         return response()->json(['success' => true]);
+    }
+
+    public function detail(Request $request, $id)
+    {
+        $user = User::find($id);
+        if ($user->gender == 'P') {
+            $photo_profile = 'default-user-women.jpg';
+        } else {
+            $photo_profile = 'default-user-male.jpg';
+        }
+
+        $profile = DB::table('users')
+            ->leftJoin('informasi_fisik', 'users.id', '=', 'informasi_fisik.user_id')
+            ->where('users.id', $user->id)
+            ->select('users.*', 'informasi_fisik.*', 'users.id as id')
+            ->get();
+
+        // insert photo_profile to profile array
+        $profile[0]->photo_profile = $photo_profile;
+
+        return view('admin.member.detail', compact('profile'));
     }
 }

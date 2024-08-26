@@ -20,6 +20,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(false);
             $table->string('user_terkait')->nullable();
             $table->integer('duration_in_days')->nullable();
+            $table->integer('extend_package')->default(0);
             $table->timestamps();
         });
     }

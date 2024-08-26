@@ -76,66 +76,66 @@ class PaymentController extends Controller
         return view('member.payment.payment_details', compact('snapToken'));
     }
 
-    public function payment_backup(Request $request)
-    {
-        $start_date = $request->submit_start_date;
-        $duration_in_days = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('duration_in_days')->first();
-        $end_date = date('Y-m-d', strtotime($start_date . ' + ' . $duration_in_days . ' days'));
-        $amount = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('price')->first();
-        $user = DB::table('users')->where('id', $request->submit_user_id)->first();
-        $params = array(
-            'transaction_details' => array(
-                'order_id' => rand(),
-                'gross_amount' => $amount,
-            ),
-            'customer_details' => array(
-                'name' => $user->name,
-                'email' => $user->email,
-                'phone' => $user->phone_number,
-            ),
-        );
+    // public function payment_backup(Request $request)
+    // {
+    //     $start_date = $request->submit_start_date;
+    //     $duration_in_days = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('duration_in_days')->first();
+    //     $end_date = date('Y-m-d', strtotime($start_date . ' + ' . $duration_in_days . ' days'));
+    //     $amount = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('price')->first();
+    //     $user = DB::table('users')->where('id', $request->submit_user_id)->first();
+    //     $params = array(
+    //         'transaction_details' => array(
+    //             'order_id' => rand(),
+    //             'gross_amount' => $amount,
+    //         ),
+    //         'customer_details' => array(
+    //             'name' => $user->name,
+    //             'email' => $user->email,
+    //             'phone' => $user->phone_number,
+    //         ),
+    //     );
 
-        DB::table('memberships')->insert([
-            'user_id' => $request->submit_user_id,
-            'gym_membership_packages' => $request->submit_package_id,
-            'start_date' => date('Y-m-d'),
-            'end_date' => $end_date,
-            'duration_in_days' => $duration_in_days,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+    //     DB::table('memberships')->insert([
+    //         'user_id' => $request->submit_user_id,
+    //         'gym_membership_packages' => $request->submit_package_id,
+    //         'start_date' => date('Y-m-d'),
+    //         'end_date' => $end_date,
+    //         'duration_in_days' => $duration_in_days,
+    //         'created_at' => now(),
+    //         'updated_at' => now(),
+    //     ]);
 
-        DB::table('payments')->insert([
-            'order_id' => $params['transaction_details']['order_id'],
-            'membership_id' => DB::table('memberships')->latest()->first()->id,
-            'user_id' => $request->submit_user_id,
-            'gym_membership_packages' => $request->submit_package_id,
-            'amount' => $amount,
-            'payment_method' => 'midtrans',
-            'status' => 'pending',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+    //     DB::table('payments')->insert([
+    //         'order_id' => $params['transaction_details']['order_id'],
+    //         'membership_id' => DB::table('memberships')->latest()->first()->id,
+    //         'user_id' => $request->submit_user_id,
+    //         'gym_membership_packages' => $request->submit_package_id,
+    //         'amount' => $amount,
+    //         'payment_method' => 'midtrans',
+    //         'status' => 'pending',
+    //         'created_at' => now(),
+    //         'updated_at' => now(),
+    //     ]);
 
-        // get current available_personal_trainer in table users
-        $available_personal_trainer_quota = DB::table('users')->where('id', $request->submit_user_id)->pluck('available_personal_trainer_quota')->first();
-        $personal_trainer_kouta = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('personal_trainer_quota')->first();
+    //     // get current available_personal_trainer in table users
+    //     $available_personal_trainer_quota = DB::table('users')->where('id', $request->submit_user_id)->pluck('available_personal_trainer_quota')->first();
+    //     $personal_trainer_kouta = DB::table('gym_membership_packages')->where('id', $request->submit_package_id)->pluck('personal_trainer_quota')->first();
 
-        // update available_personal_trainer pada table users
-        DB::table('users')->where('id', $request->submit_user_id)->update([
-            'available_personal_trainer_quota' => $available_personal_trainer_quota + $personal_trainer_kouta
-        ]);
+    //     // update available_personal_trainer pada table users
+    //     DB::table('users')->where('id', $request->submit_user_id)->update([
+    //         'available_personal_trainer_quota' => $available_personal_trainer_quota + $personal_trainer_kouta
+    //     ]);
 
 
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
+    //     $snapToken = \Midtrans\Snap::getSnapToken($params);
 
-        // menambahkan snap token ke table payment
-        DB::table('payments')->where('order_id', $params['transaction_details']['order_id'])->update([
-            'snap_token' => $snapToken
-        ]);
+    //     // menambahkan snap token ke table payment
+    //     DB::table('payments')->where('order_id', $params['transaction_details']['order_id'])->update([
+    //         'snap_token' => $snapToken
+    //     ]);
 
-        return view('member.payment.payment_details', compact('snapToken'));
-    }
+    //     return view('member.payment.payment_details', compact('snapToken'));
+    // }
 
     public function payment_callback(Request $request)
     {

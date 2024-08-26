@@ -125,12 +125,16 @@ Route::prefix('member')->group(function () {
             Route::get('/', [PackageController::class, 'package'])->name('member.package');
             Route::post('/submit-cash-payment', [PackageController::class, 'submitCashPayment'])->name('member.submit-cash-payment');
             // Route::get('/', [PackageController::class, 'package'])->name('member.package');
+            Route::post('/submit-cash-payment', [PackageController::class, 'submitCashPayment'])->name('member.submit-cash-payment');
             Route::get('/buy-new-package', [PackageController::class, 'buy_new_package'])->name('member.buy-new-package');
             Route::post('/submit-buy-new-package', [PackageController::class, 'submit_buy_new_package'])->name('member.submit-buy-new-package');
+            Route::get('/extend-package', [PackageController::class, 'extend_package'])->name('member.extend-package');
+            Route::post('/submit-extend-package', [PackageController::class, 'submit_extend_package'])->name('member.submit-extend-package');
+            // Route::get('/current-package', [PackageController::class, 'current_package'])->name('member.current-package');
 
             // Route::get('/selected-package-detail/{id}', [PackageController::class, 'selected_package_detail'])->name('member.selected-package-detail');
             // Route::get('/selected-package-detail/{id}', [PackageController::class, 'selected_package_detail'])->name('member.selected-package-detail');
-            // Route::post('/submit-package', [PackageController::class, 'submit_package'])->name('member.submit-package');
+            // Route::post('/submit-package-buy-new-package', [PackageController::class, 'submit_package_selected_package'])->name('member.submit-package-buy-new-package');
             Route::get('/subscribed-package', [PackageController::class, 'subscribed_package'])->name('member.subscribed-package');
         });
         Route::prefix('attendance')->group(function () {

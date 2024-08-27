@@ -36,7 +36,7 @@ starter Page
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <input type="hidden" name="package_id" id="package_id" value="">
+                        <input type="hidden" name="package_id" id="package_id" value="{{ $pkg->id }}">
                         <input type="hidden" name="membership_id" id="membership_id" value="{{ $pkg->membership_id }}">
                         <h5 class="card-title mb-3">{{ ucwords($pkg->name) }}</h5>
                         <p class="card-text">{{ $pkg->description }}</p>
@@ -133,10 +133,15 @@ starter Page
             data: {
                 _token: "{{ csrf_token() }}",
                 // price: price
-                'membership_id': $('#membership_id').val()
+                'membership_id': $('#membership_id').val(),
+                'package_id': $('#package_id').val(),
             },
             success: function(data){
-                console.log(data);
+                if(data.status == true){
+                    $('#modalPayment').modal('show');
+                } else {
+                    alert(data.message);
+                }
             }
         })
 

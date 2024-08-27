@@ -269,7 +269,7 @@ class PackageController extends Controller
     public function submit_extend_package(Request $request)
     {
         $user_id = auth()->user()->id;
-        $package_id = $request->submit_package_id;
+        $package_id = $request->package_id;
         $end_date = DB::table('memberships')->where('id', $request->membership_id)->pluck('end_date')->first();
 
         // get field extend in table membership then looping
@@ -281,25 +281,26 @@ class PackageController extends Controller
             $message = "maksimal perpanjang paket sudah habis";
         } else {
             // dd('masuk');
-            // $insert_to_membership = DB::table('memberships')->insert([
-            //     'user_id' => $user_id,
-            //     'gym_membership_packages' => $package_id,
-            //     'start_date' => $end_date,
-            //     'end_date' => date('Y-m-d', strtotime($end_date . ' + 30 days')),
-            //     'user_terkait' => null,
-            //     'duration_in_days' => 30,
-            //     'is_active' => 0,
-            //     'extend' => $extend + 1,
-            //     'created_at' => now(),
-            //     'updated_at' => now(),
-            // ]);
-            // dd($request->membership_id);
-            // Ending: 2024-09-25
-            $update_membership = DB::table('memberships')->where('id', $request->membership_id)->update([
+            $insert_to_membership = DB::table('memberships')->insert([
+                'user_id' => $user_id,
+                'gym_membership_packages' => $package_id,
+                'start_date' => $end_date,
                 'end_date' => date('Y-m-d', strtotime($end_date . ' + 30 days')),
+                'user_terkait' => $user_id,
+                'duration_in_days' => 30,
+                'is_active' => 0,
                 'extend_package' => $extend + 1,
+                'created_at' => now(),
                 'updated_at' => now(),
             ]);
+            // dd($request->membership_id);
+            // Ending: 2024-09-25
+            // $update_membership = DB::table('memberships')->where('id', $request->membership_id)->update([
+                // 'end_date' => date('Y-m-d', strtotime($end_date . ' + 30 days')),
+                // 'extend_package' => $extend + 1,
+                // 'updated_at' => now(),
+                // 'is_active' => 0,
+            // ]);
             $status = true;
             $message = "Perpanjang paket berhasil";
         }

@@ -37,6 +37,7 @@ starter Page
                 <div class="col-md-8">
                     <div class="card-body">
                         <input type="hidden" name="package_id" id="package_id" value="">
+                        <input type="hidden" name="membership_id" id="membership_id" value="{{ $pkg->membership_id }}">
                         <h5 class="card-title mb-3">{{ ucwords($pkg->name) }}</h5>
                         <p class="card-text">{{ $pkg->description }}</p>
                         <h5 class="card-title mb-3">Duration: {{ $pkg->duration_in_days }} Days</h5>
@@ -124,13 +125,15 @@ starter Page
 @push('script')
 <script>
     function onclickPayNow(){
-        $('#modalPayment').modal('show');
+        // $('#modalPayment').modal('show');
         // also redirect to member.submit-extend-package as ajax
         $.ajax({
             url: "{{ route('member.submit-extend-package') }}",
-            type: "GET",
+            type: "POST",
             data: {
-                price: price
+                _token: "{{ csrf_token() }}",
+                // price: price
+                'membership_id': $('#membership_id').val()
             },
             success: function(data){
                 console.log(data);

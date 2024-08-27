@@ -193,20 +193,26 @@ class PaymentController extends Controller
 
             // update status membership
             $membership = DB::table('memberships')->where('id', $data->membership_id)->first();
+            $user_terkait = DB::table('users')->where('id', $membership->user_id)->pluck('user_terkait')->toArray();
             if ($transaction == 'settlement') {
-                DB::table('memberships')->where('id', $data->membership_id)->update([
+                // DB::table('memberships')->where('id', $data->membership_id)->update([
+                // where user_id contain in user terkait, where end date same with membership end date
+                DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
                     'is_active' => 1
                 ]);
             } elseif ($transaction == 'cancel' || $transaction == 'deny') {
-                DB::table('memberships')->where('id', $data->membership_id)->update([
+                // DB::table('memberships')->where('id', $data->membership_id)->update([
+                DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
                     'is_active' => 0
                 ]);
             } elseif ($transaction == 'pending') {
-                DB::table('memberships')->where('id', $data->membership_id)->update([
+                // DB::table('memberships')->where('id', $data->membership_id)->update([
+                DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
                     'is_active' => 0
                 ]);
             } elseif ($transaction == 'expire') {
-                DB::table('memberships')->where('id', $data->membership_id)->update([
+                // DB::table('memberships')->where('id', $data->membership_id)->update([
+                DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
                     'is_active' => 0
                 ]);
             }

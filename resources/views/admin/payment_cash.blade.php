@@ -25,12 +25,12 @@
                 <button class="btn btn-primary">Accept</button>
                 <button class="btn btn-danger">Reject</button>
             </div>
-            
+
         </div>
     </div>
 </div>
-    
-    
+
+
 @endsection
 @push('script')
     <!--plugins-->

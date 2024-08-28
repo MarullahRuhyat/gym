@@ -190,6 +190,11 @@ starter Page
                                         You must agree before submitting.
                                     </div>
                                 </div>
+                                <!-- show term and condition button  to modal -->
+                                <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                                    data-bs-target="#TermAndConditioModal">
+                                    Term and Condition?
+                                </button>
                             </div>
                         </div>
                         <div class="col-md-12" style="margin-top:20px;">
@@ -264,6 +269,23 @@ starter Page
 </div>
 <!-- </div> -->
 <!--end stepper one-->
+
+<!-- modal start term and condition -->
+<div class="modal fade" id="TermAndConditioModal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 bg-primary py-2">
+                <h5 class="modal-title" style="color:white">Term and Condition</h5>
+                <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="modal">
+                    <i class="material-icons-outlined">close</i>
+                </a>
+            </div>
+            <div class="modal-body">
+                <p>Term and Condition</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- modal start input start_date  if click submit redirect to next modal -->
@@ -423,25 +445,6 @@ starter Page
                     Stepper2DetailsPackage(data.data);
                 }
             },
-            // success: function(response) {
-            //     // $('#payment-item-total').text('Rp.' + response.price);
-            //     // format number
-            //     $('#payment-item-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-            //     // $('#payment-total').text('Rp.' + response.price);
-            //     // format number
-            //     // if status user expired or unregistered
-            //     // $('#payment-register').text('Rp.' + 75000);
-            //     $('#payment-register').text('Rp.' + (75000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-            //     $('#payment-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-            //     // $('#payment_amount').val(response.price);
-            //     if ($('#status_user').val() == 'expired' || $('#status_user').val() == 'unregistered') {
-            //         $('#payment-total').text('Rp.' + (response.price + 75000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-            //         $('#payment_amount').val(response.price + 75000);
-            //     } else {
-            //         $('#payment-total').text('Rp.' + response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-            //         $('#payment_amount').val(response.price);
-            //     }
-            // },
             error: function(xhr, status, error) {
                 console.log(error);
             }
@@ -556,7 +559,7 @@ $('#addForm').on('click', function () {
         // Append the new form HTML
         $('#dynamic-form-id').append(`
             <div class="card" id="form${formCount}">
-                <button type="button" class="btn btn-danger" onclick="deleteForm('form${formCount}')">Delete</button>
+                <button type="button" class="btn btn-danger col-md-3" onclick="deleteForm('form${formCount}')">Delete</button>
                 <h3>Anggota ${formCount}</h3>
                 <div class="row g-3">
                     <div class="col">
@@ -636,17 +639,20 @@ $('#addForm').on('click', function () {
             var member = {};
             member.phone_number = form.querySelector('input[name="phone[]"]').value;
             // Check if the phone number is empty and alert the user if so
-            if (member.phone_number === '') {
-                alert('Phone number cannot be empty');
-                return; // Exit the function if any phone number is empty
-            }
+            // if (member.phone_number === '') {
+            //     alert('Phone number cannot be empty');
+            //     return; // Exit the function if any phone number is empty
+            // }
             form_dynamic.push(member);
         });
 
         // Check if form_dynamic is empty (i.e., if there were empty phone number fields)
-        if (form_dynamic.length === 0) {
-            return; // Exit if no valid form data
-        }
+        // if (form_dynamic.length === 0) {
+        //     return; // Exit if no valid form data
+        // }
+
+        // add package_id
+        $('#submit_package_id').val($('#package_id').val());
 
         // Combine all data
         var package_id = $('#package_id').val();

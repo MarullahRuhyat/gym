@@ -180,7 +180,15 @@ class PaymentController extends Controller
 
             // Perbarui status pembayaran
             if ($transaction == 'settlement') {
+                $membership = DB::table('memberships')->where('id', $data->membership_id)->first();
+                $user_terkait = DB::table('users')->where('id', $membership->user_id)->pluck('user_terkait')->toArray();
                 $data->status = 'paid';
+                DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
+                    'is_active' => 1
+                ]);
+                DB::table('users')->whereIn('id', $user_terkait)->update([
+                    'end_date' => $membership->end_date
+                ]);
             } elseif ($transaction == 'cancel' || $transaction == 'deny') {
                 $data->status = 'failed';
             } elseif ($transaction == 'pending') {

@@ -105,8 +105,9 @@
 				<div class="col-md-7 about-info-cover">
 					<h2 class="title-decor">About <span>Program One Day Pass</span></h2>
 					<div class="text">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut <a href="contacts.html">enim ad minim</a> veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+						<p>
+							Experience the ultimate flexibility with our *One Day Pass*—access our gym starting from just Rp. 75.000,-. Enjoy a full day of workouts, or choose our specialized options for personal or couple sessions with expert trainers. Perfect for a quick fitness boost or trying us out before committing!
+						</p>
 					</div>
 					<ul class="about-cont">
 						<li><i class="fa fa-phone" aria-hidden="true"></i><a  href="https://wa.me/+628170706999">08170706999</a></li>

@@ -105,8 +105,7 @@
 				<div class="col-md-7 about-info-cover">
 					<h2 class="title-decor">About <span>Program Personal Body Care by Owner</span></h2>
 					<div class="text">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut <a href="contacts.html">enim ad minim</a> veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+						<p>Upgrade your fitness journey with our exclusive PBC/PBBC (Personal Body Care/Personal Beauty Body Care) Gold plans. Enjoy 10 to 12 sessions with Mr. Frans Lee (Owner) personally over 30 to 45 days, including a 1-month gym membership. Ideal for those seeking unparalleled, bespoke training to achieve their ultimate fitness goals. Begin your elite transformation today!</p>
 					</div>
 					<ul class="about-cont">
 						<li><i class="fa fa-phone" aria-hidden="true"></i><a  href="https://wa.me/+628170706999">08170706999</a></li>

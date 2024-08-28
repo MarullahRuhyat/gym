@@ -265,9 +265,8 @@
                                 data-src="{{asset("landing_page/assets/img/ptFajar.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
                             <h3><a href="javascript:void(0);">Fadjar</a></h3>
-                            <div class="prof">Weightlifting</div>
-                            <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
-                                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
+                            <div class="prof">Firm man</div>
+                            <p>Fajar adalah seorang instruktur Fitnes yang tegas, suka bertanya pada member dan bertanggung jawab dalam segala apapun, mampu mengajar dengan baik dan bersemangat dalam mengajar.</p>
                             <ul class="social-list">
                                 <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
                                             aria-hidden="true"></i></a></li>
@@ -288,9 +287,8 @@
                                 data-src="{{asset("landing_page/assets/img/ptAgus.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
                             <h3><a href="javascript:void(0);">Agus</a></h3>
-                            <div class="prof">Weightlifting</div>
-                            <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
-                                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
+                            <div class="prof">Calm Guy</div>
+                            <p>Agus adalah instruktur fitness berpengalaman,full power,pendiam tapi selalu memperhatikan membernya & bisa mengajar secara detail sehingga bisa membantu mewujudkan goals yang di inginkan dari para member....</p>
                             <ul class="social-list">
                                 <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
                                             aria-hidden="true"></i></a></li>
@@ -311,9 +309,8 @@
                                 data-src="{{asset("landing_page/assets/img/ptMelky.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
                             <h3><a href="javascript:void(0);">Melky</a></h3>
-                            <div class="prof">Weightlifting</div>
-                            <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
-                                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
+                            <div class="prof">Funny guy</div>
+                            <p>Melky adalah seorang instruktur Fitness yang lucu, menghibur, dan menyenangkan, dan mampu mengajar dengan detail, dan siap membimbing members sampai body goals yang diinginkan.</p>
                             <ul class="social-list">
                                 <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
                                             aria-hidden="true"></i></a></li>
@@ -334,9 +331,9 @@
                             data-src="{{asset("landing_page/assets/img/ptclaus.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
                             <h3><a href="#">Claus</a></h3>
-                            <div class="prof">Weightlifting</div>
-                            <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
-                                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
+                            <div class="prof">Educated Guy</div>
+                            <p>
+                                Claus adalah seorang instruktur fitness yang disiplin, selalu mencari ilmu-ilmu yang bagus, memiliki kemampuan mengajar para member dalam latihan yang benar sesuai dengan body goals mereka.</p>
                             <ul class="social-list">
                                 <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
                                             aria-hidden="true"></i></a></li>
@@ -357,19 +354,10 @@
                                 data-src="{{asset("landing_page/assets/img/anna.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
                             <h3><a href="#">Anna</a></h3>
-                            <div class="prof">Weightlifting</div>
-                            <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
-                                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
-                            <ul class="social-list">
-                                <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://twitter.com/RovadexStudio"><i class="fa fa-twitter"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://www.youtube.com"><i class="fa fa-youtube"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://www.instagram.com/rovadex"><i
-                                            class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            </ul>
+                            <div class="prof">Kind-Hearted</div>
+                            <p>
+                                Anna adalah seorang receptionist yang baik hati, selalu ringan tangan dalam membantu orang-orang di sekitarnnya, mampu mengajari member untuk mencapai body goals member.
+                            </p>
                         </div>
                     </div>
                 </div>

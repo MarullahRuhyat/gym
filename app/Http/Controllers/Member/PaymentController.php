@@ -180,15 +180,12 @@ class PaymentController extends Controller
 
             // Perbarui status pembayaran
             if ($transaction == 'settlement') {
-                $membership = DB::table('memberships')->where('id', $data->membership_id)->first();
-                $user_terkait = DB::table('users')->where('id', $membership->user_id)->pluck('user_terkait')->toArray();
+                $membership = \App\Models\Membership::find($data->membership_id);
                 $data->status = 'paid';
-                DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
-                    'is_active' => 1
-                ]);
-                DB::table('users')->whereIn('id', $user_terkait)->update([
-                    'end_date' => $membership->end_date
-                ]);
+                $test_membership = DB::table('memberships')->where('id', $data->membership_id)
+                ->update(['is_active' => 1]);
+                $test_user_update_end_date = DB::table('users')->where('id', $data->user_id)
+                 ->update(['end_date' => $membership->end_date]);
             } elseif ($transaction == 'cancel' || $transaction == 'deny') {
                 $data->status = 'failed';
             } elseif ($transaction == 'pending') {
@@ -197,36 +194,37 @@ class PaymentController extends Controller
                 $data->status = 'expired';
             }
 
+
             $data->save();
 
             // update status membership
-            $membership = DB::table('memberships')->where('id', $data->membership_id)->first();
-            $user_terkait = DB::table('users')->where('id', $membership->user_id)->pluck('user_terkait')->toArray();
-            if ($transaction == 'settlement') {
+            // $membership = DB::table('memberships')->where('id', $data->membership_id)->first();
+            // $user_terkait = DB::table('users')->where('id', $membership->user_id)->pluck('user_terkait')->toArray();
+            // if ($transaction == 'settlement') {
                 // DB::table('memberships')->where('id', $data->membership_id)->update([
                 // where user_id contain in user terkait, where end date same with membership end date
-                DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
-                    'is_active' => 1
-                ]);
-                DB::table('users')->whereIn('id', $user_terkait)->update([
-                    'end_date' => $membership->end_date
-                ]);
-            } elseif ($transaction == 'cancel' || $transaction == 'deny') {
+                // DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
+                    // 'is_active' => 1
+                // ]);
+                // DB::table('users')->whereIn('id', $user_terkait)->update([
+                   //  'end_date' => $membership->end_date
+                // ]);
+            // } elseif ($transaction == 'cancel' || $transaction == 'deny') {
                 // DB::table('memberships')->where('id', $data->membership_id)->update([
-                DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
-                    'is_active' => 0
-                ]);
-            } elseif ($transaction == 'pending') {
+            //     DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
+             //        'is_active' => 0
+            //     ]);
+           //  } elseif ($transaction == 'pending') {
                 // DB::table('memberships')->where('id', $data->membership_id)->update([
-                DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
-                    'is_active' => 0
-                ]);
-            } elseif ($transaction == 'expire') {
+            //     DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
+            //         'is_active' => 0
+             //    ]);
+          //   } elseif ($transaction == 'expire') {
                 // DB::table('memberships')->where('id', $data->membership_id)->update([
-                DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
-                    'is_active' => 0
-                ]);
-            }
+             //    DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
+               //      'is_active' => 0
+             //    ]);
+           //  }
 
             return response()->json(['status' => 'success', 'message' => 'Notification processed']);
         } catch (\Exception $e) {

@@ -20,7 +20,7 @@
 </head>
 
 <style>
-    .image-carousel {
+   .image-carousel {
         position: relative;
         width: 100%;
         overflow: hidden;
@@ -98,18 +98,20 @@
                         <li><a target="_blank" href="mailto:flozorsgym@gmail.com"><i class="fa fa-envelope-o"
                                     aria-hidden="true"></i></a></li>
                     </ul>
-                    <a href="{{route("member.send-otp")}}" class="btn-login">Login</a>
                 </div>
             </div>
         </div>
         {{-- <div class="header-menu"> --}}
         <div class="container">
-            <div class="header-logo">
+            <div class="header-logo ">
                 <a href="{{route("landing_page")}}" class="logo img-thumbnail">
                     <img src="{{asset("landing_page/assets/img/10.svg")}}" class="card-img-top" alt="logo">
                 </a>
                 <p class="me-5" style="font-size:20px">FLOZOR'S GYM</p>
+                {{-- jika ukuran hp maka ada tombol login --}}
+                <a href="{{route("member.send-otp")}}" class="btn-login">Login</a>
             </div>
+
         </div>
         {{-- </div> --}}
     </header>

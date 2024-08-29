@@ -380,7 +380,7 @@ starter Page
                                 style="font-size:12pt;">Waktu dan kapasitas instruktur untuk menjawab pertanyaan
                                 terbatas pada paket one day pass isidentil. Pelatihan secara privat dan intensif oleh
                                 instruktur harus dengan membeli paket one day pass PBC/PBBC isidentil. Pelatihan secara
-                                privat dan intensif oleh owner harus dengan membeli paket one day pass PBC/PBBC owner
+                                privat dan intensif oleh owner harus dengan membeli paket one day pass PBC/PBBC Gold Single
                                 isidentil.</span></p>
                     </li>
                     <li style="list-style-type:disc;font-size:12pt;">

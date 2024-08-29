@@ -263,6 +263,12 @@ class PackageController extends Controller
             ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as membership_id')
             ->get();
             // dd($packages);
+        $price = DB::table('gym_membership_packages')->where('id', 1)->pluck('price')->first();
+        // append to $packages
+        $packages->transform(function ($item) use ($price) {
+            $item->price = $price;
+            return $item;
+        });
         return view('member.membership.extend-package', compact('packages'));
     }
 

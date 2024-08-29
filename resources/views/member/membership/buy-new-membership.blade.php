@@ -130,7 +130,10 @@ starter Page
                                                     class="card-title mb-3" value="package_name"></h5>
                                                 <p name="stepper2_package_description" id="stepper2_package_description"
                                                     class="card-text" value="package_description"></p>
-                                                <h5 name="stepper2_package_price"></h5>
+                                                <p name="stepper2_package_duration" id="stepper2_package_duration"
+                                                    class="card-text" value="package_duration"></p>
+                                                <h5 name="stepper2_package_price" id="stepper2_package_price"
+                                                    class="card-text"></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -1320,7 +1323,10 @@ starter Page
         $('#package_jumlah_member').val(package_jumlah_member);
         $('#stepper2_package_name').text(package_name);
         $('#stepper2_package_description').text(package_description);
-        $('#stepper2_package_price').text(data.package[0].price);
+        // $('#stepper2_package_price').text(data.package[0].price);
+        // duration
+        $('#stepper2_package_duration').text(data.package[0].duration_in_days + ' Days');
+        $('#stepper2_package_price').text('Rp' + data.package[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
         $('#stepper3_package_id').val(package_id);
     }
 

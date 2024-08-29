@@ -268,7 +268,7 @@
                         <div class="out-trainer-info">
                             <h3><a href="javascript:void(0);">Fadjar</a></h3>
                             <div class="prof">Firm man</div>
-                            <p>Fajar adalah seorang instruktur Fitnes yang tegas, suka bertanya pada member dan bertanggung jawab dalam segala apapun, mampu mengajar dengan baik dan bersemangat dalam mengajar.</p>
+                            <p>Fajar adalah seorang instruktur Fitnes yang tegas, suka bertanya pada member dan bertanggung jawab dalam segala apapun, mampu mengajar dengan baik dan bersemangat dalam mengajar.</p>
                         </div>
                     </div>
                 </div>

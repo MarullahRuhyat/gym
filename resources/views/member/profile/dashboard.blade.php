@@ -106,7 +106,7 @@ starter Page
                             </div>
 
                             <!-- QR Code Image -->
-                            <img id="qr_code_img" src="" class="w-150 rounded h-150" alt="..." style="display:none;">
+                            <img id="qr_code_img" src="" class="w-50 rounded h-50" alt="..." style="display:none;">
                         </div>
                     {{-- </div> --}}
                 </div>

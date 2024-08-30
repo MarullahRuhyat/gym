@@ -49,6 +49,9 @@ starter Page
                         <!-- <button class="btn btn-primary" onclick="onclickPayNow()"> -->
                             Buy Now
                         </button>
+
+                        {{-- button green paycash --}}
+                        <button class="btn btn-success" onclick="showCashPaymentModal('{{ $pkg->price }}')">Pay Cash</button>
                     </div>
                 </div>
             </div>
@@ -119,20 +122,70 @@ starter Page
 </div>
 <!-- end modal payment  -->
 
+<div class="modal fade" id="modalCashPayment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Payment Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda akan melanjutkan pembayaran dengan cash dengan nominal 
+                    <h5 name="payment-total" class="mb-0 fw-bold" id="cash-payment-total"></h5>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                <button type="button" class="btn btn-primary" onclick="submitCashPayment()">Ya</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endforeach
 
 @endsection
 @push('script')
 <script>
+      function showCashPaymentModal(price) {
+        // Set the payment total in the modal
+        document.getElementById('cash-payment-total').innerText = 'Rp.' + price.toLocaleString('id-ID', {minimumFractionDigits: 0});
+        
+        // Show the modal
+        $('#modalCashPayment').modal('show');
+    }
+
+    function submitCashPayment() {
+        $.ajax({
+            url: "{{ route('member.submit-cash-payment') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                package_id: $('#package_id').val(),
+                amount: $('#cash-payment-total').text().replace('Rp.', '').replace(/\./g, '') // Remove Rp. and dots
+            },
+            success: function(data) {
+                if(data.status === true) {
+                    $('#modalCashPayment').modal('hide');
+                    alert(data.message);
+                    // Reload the page or redirect to another page
+                    window.location.reload();
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function(error) {
+                console.log(error);
+                alert('Terjadi kesalahan. Silakan coba lagi.');
+            }
+        });
+    }
+
     function onclickPayNow(){
-        // $('#modalPayment').modal('show');
-        // also redirect to member.submit-extend-package as ajax
         $.ajax({
             url: "{{ route('member.submit-extend-package') }}",
             type: "POST",
             data: {
                 _token: "{{ csrf_token() }}",
-                // price: price
                 'membership_id': $('#membership_id').val(),
                 'package_id': $('#package_id').val(),
             },
@@ -143,8 +196,7 @@ starter Page
                     alert(data.message);
                 }
             }
-        })
-
+        });
     }
 </script>
 

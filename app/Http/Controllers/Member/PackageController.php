@@ -262,7 +262,13 @@ class PackageController extends Controller
             ->where('memberships.is_active', 1)
             ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as membership_id')
             ->get();
-        
+            // dd($packages);
+        $price = DB::table('gym_membership_packages')->where('id', 1)->pluck('price')->first();
+        // append to $packages
+        $packages->transform(function ($item) use ($price) {
+            $item->price = $price;
+            return $item;
+        });
         return view('member.membership.extend-package', compact('packages'));
     }
 
@@ -381,22 +387,26 @@ class PackageController extends Controller
         return response()->json(['status' => true, 'message' => 'Pembayaran berhasil']);
     }
 
-    public function submitCashExtendPayment(Request $request) {
+    public function submitCashPaymentRegister(Request $request)
+    {
         $data = $request->validate([
             'package_id' => 'required',
             'amount' => 'required|numeric',
         ]);
 
+        $membership_id = DB::table('memberships')->latest()->first()->id;
+
         Payment::create([
             'gym_membership_packages' => $data['package_id'],
             'amount' => $data['amount'],
-            'user_id' => auth()->id(),
+            'user_id' => DB::table('memberships')->where('id', $membership_id)->pluck('user_id')->first(),
             'status' => 'pending',
-            'membership_id' => DB::table('memberships')->latest()->first()->id,
+            'membership_id' => $membership_id,
             'payment_method' => 'cash',
             'order_id' => '000' . time(),
 
         ]);
+        return response()->json(['status' => true, 'message' => 'Pembayaran berhasil']);
     }
 
 }

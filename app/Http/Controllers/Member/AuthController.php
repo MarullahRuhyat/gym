@@ -199,7 +199,7 @@ class AuthController extends Controller
             if ($user_registered != null) {
                 $validator = Validator::make($request->form_first, [
                     'name' => ['required', 'string', 'min:3', 'max:255'],
-                    'phone_number' => ['required', 'string', 'min:10', 'unique:users,phone_number'],
+                    // 'phone_number' => ['required', 'string', 'min:10', 'unique:users,phone_number'],
                     'address' => ['required', 'string', 'min:3', 'max:255'],
                     // 'password' => ['required', 'string', 'min:8', 'max:255'],
                 ]);
@@ -208,7 +208,14 @@ class AuthController extends Controller
                     $status = false;
                     $message = $validator->errors()->all();
                 } else {
-                    DB::table('users')->insert($request->form_first);
+                    // DB::table('users')->insert($request->form_first);
+                    // if in table users found (update data), else (insert data)
+                    $user = DB::table('users')->where('phone_number', $request->form_first['phone_number'])->first();
+                    if ($user != null) {
+                        $update = DB::table('users')->where('phone_number', $request->form_first['phone_number'])->update($request->form_first);
+                    } else {
+                        $insert = DB::table('users')->insert($request->form_first);
+                    }
                     $duration = DB::table('gym_membership_packages')->where('id', $request->package_id)->pluck('duration_in_days')->first();
                     $end_date = date('Y-m-d', strtotime($request->start_date . ' + ' . $duration . ' days'));
                     $user_id = DB::table('users')->where('phone_number', $request->form_first['phone_number'])->pluck('id')->first();

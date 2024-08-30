@@ -132,7 +132,9 @@ starter Page
                                                     class="card-title mb-3" value="package_name"></h5>
                                                 <p name="stepper2_package_description" id="stepper2_package_description"
                                                     class="card-text" value="package_description"></p>
-                                                <h5 name="stepper2_package_price"></h5>
+                                                <p name="stepper2_package_duration" id="stepper2_package_duration"></p>
+                                                <h5 name="stepper2_package_price" id="stepper2_package_price"
+                                                    class="card-text" value="package_price"></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -318,6 +320,10 @@ starter Page
                                 <!-- <a type="submit" class="btn btn-grd-primary px-4">Pay<i class='bx bx-right-arrow-alt ms-2'></i></a> -->
                                 <button type="submit" class="btn btn-primary px-4">Pay<i
                                         class='bx bx-right-arrow-alt ms-2'></i></button>
+                                <button type="button" class="btn btn-primary px-4" data-bs-toggle="modal"
+                                    data-bs-target="#cashPaymentModal">
+                                    Cash<i class='bx bx-right-arrow-alt ms-2'></i>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -1234,6 +1240,29 @@ starter Page
     </div>
 </div>
 
+<!-- Modal Cash Payment -->
+<div class="modal fade" id="cashPaymentModal" tabindex="-1" aria-labelledby="cashPaymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cashPaymentModalLabel">Konfirmasi Pembayaran Cash</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda akan melanjutkan pembayaran dengan cash dengan nominal <span id="cash-amount"></span>?
+                </p>
+                <input type="hidden" name="package_id" id="submit_package_id" value="">
+                <input type="hidden" name="phone_number" id="payment_phone_number" value="">
+                <input type="hidden" name="amount" id="payment_amount" value="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                <button type="button" class="btn btn-primary" id="confirm-cash-payment">Ya</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 @push('script')
 <script>
@@ -1290,9 +1319,65 @@ starter Page
         $('#package_jumlah_member').val(package_jumlah_member);
         $('#stepper2_package_name').text(package_name);
         $('#stepper2_package_description').text(package_description);
-        $('#stepper2_package_price').text(data.package[0].price);
+        // $('#stepper2_package_price').text(data.package[0].price);
+        $('#stepper2_package_duration').text(data.package[0].duration_in_days + ' Days');
+        $('#stepper2_package_price').text('Rp' + data.package[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
         $('#stepper3_package_id').val(package_id);
     }
+
+    $(document).ready(function () {
+        $('#cashPaymentModal').on('show.bs.modal', function (event) {
+            var modal = $(this);
+            var totalAmount = $('#payment-total').text();
+            modal.find('#cash-amount').text(totalAmount);
+        });
+    });
+
+    // Saat tombol "Ya" ditekan pada modal
+    $('#cashPaymentModal').on('show.bs.modal', function (event) {
+        var modal = $(this);
+        var totalAmount = $('#payment-total').text(); // Ambil nominal dari elemen total pembayaran
+        modal.find('#cash-amount').text(totalAmount); // Isi nominal di modal
+    });
+
+    // Saat tombol "Ya" ditekan pada modal
+    $('#confirm-cash-payment').on('click', function () {
+        // Ambil data yang dibutuhkan
+        var packageId = $('#submit_package_id').val(); // Pastikan ID paket sudah benar
+        var phoneNumber = $('#payment_phone_number').val(); // Nomor telepon harus sudah terisi
+        var amount = $('#payment-total').text().replace(/[^0-9,-]+/g, ""); // Pastikan nilai ini benar
+        amount = parseInt(amount.replace(',', '')); // Konversi nilai ke integer
+
+        // Buat objek data untuk dikirim ke server
+        var data = {
+            package_id: packageId,
+            phone_number: phoneNumber,
+            payment_method: 'cash', // Metode pembayaran di-set ke 'cash'
+            amount: amount,
+            _token: "{{ csrf_token() }}" // Pastikan CSRF token disertakan
+        };
+        // Lakukan request AJAX
+        $.ajax({
+            url: "{{ route('member.submit-cash-payment-register') }}", // URL ke route yang benar
+            method: 'POST',
+            data: JSON.stringify(data), // Ubah objek data menjadi JSON string
+            contentType: 'application/json', // Tentukan bahwa kamu mengirim JSON
+            success: function (response) {
+                if (response.status === true) {
+                    alert('Pembayaran dengan cash berhasil disimpan!');
+                    // $('#cashPaymentModal').modal('hide'); // Tutup modal
+                    // window.location.href =
+                    // "{{ route('member.subscribed-package') }}"; // Redirect ke halaman pembayaran
+                    window.location.href = "{{ route('member.send-otp') }}";
+                } else {
+                    alert('Gagal menyimpan pembayaran. Silakan coba lagi.');
+                }
+            },
+            error: function (xhr, status, error) {
+                alert('Terjadi kesalahan. Silakan coba lagi.');
+            }
+        });
+    });
 
 </script>
 

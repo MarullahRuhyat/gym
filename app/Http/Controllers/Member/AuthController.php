@@ -150,7 +150,7 @@ class AuthController extends Controller
     public function register_form_process(Request $request)
     {
         // $save = User::create($request->except('password_confirmation'));
-        $save = DB::table('users')->insert($request->all());
+        $save = DB::table('users')->insert($request->except('_token'));
         return redirect()->route('member.send-otp')->with('success', 'Register success.');
 
     }

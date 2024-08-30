@@ -127,6 +127,12 @@ Gaji Trainer
 
 @endsection
 @push('script')
+<script src="{{ URL::asset('build/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+<script src="{{ URL::asset('build/plugins/metismenu/metisMenu.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{{ URL::asset('build/plugins/select2/js/select2-custom.js') }}"></script>
+<script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>
+<script src="{{ URL::asset('build/js/main.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 

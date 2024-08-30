@@ -1,17 +1,6 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light-theme">
+{{-- <!doctype html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title') | Flozor's Gym</title>
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
 
-    @include('personal_training.layouts.head-css')
-</head>
 
 <body>
 
@@ -42,5 +31,59 @@
 <script src="{{ URL::asset('build/plugins/select2/js/select2-custom.js') }}"></script>
 <script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>
 <script src="{{ URL::asset('build/js/main.js') }}"></script>
+
+</html> --}}
+
+
+<!doctype html>
+@php
+$selectedTheme = session('theme', 'light');
+@endphp
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light-theme">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@yield('title') | Flozor's Gym</title>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    @include('personal_training.layouts.head-css')
+</head>
+
+<body>
+    @include('personal_training.layouts.topbar')
+
+    @include('personal_training.layouts.sidebar')
+
+    <!--start main wrapper-->
+    <main class="main-wrapper">
+        <div class="main-content">
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
+            @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
+            @yield('content')
+        </div>
+    </main>
+
+    <!--start overlay-->
+    <div class="overlay btn-toggle"></div>
+    <!--end overlay-->
+
+    @include('admin.layouts.extra')
+
+    @include('admin.layouts.common-scripts')
+    
+    @yield('javascript')
+</body>
 
 </html>

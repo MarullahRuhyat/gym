@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Membership;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +30,15 @@ class MemberController extends Controller
                 if ($edit == 1 && $id) {
                     $user = User::findOrFail($id);
                     $user->update($data);
+                    $membership = Membership::where('user_id', $user->id)
+                        ->orderBy('created_at', 'desc')
+                        ->first();
+                    if ($request->status == "active") {
+                        $membership->is_active = 1;
+                    } else {
+                        $membership->is_active = 0;
+                    }
+                    $membership->save();
                     return redirect()->route('admin_member')->with('success', 'Data berhasil diperbarui!');
                 }
             } catch (Exception $e) {

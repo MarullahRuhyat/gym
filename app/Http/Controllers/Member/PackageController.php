@@ -383,7 +383,7 @@ class PackageController extends Controller
 
         ]);
 
-        
+
         return response()->json(['status' => true, 'message' => 'Pembayaran berhasil']);
     }
 
@@ -407,6 +407,37 @@ class PackageController extends Controller
 
         ]);
         return response()->json(['status' => true, 'message' => 'Pembayaran berhasil']);
+    }
+
+    public function submitCashExtendPayment(Request $request)
+    {
+        $data = $request->validate([
+            'package_id' => 'required',
+            'amount' => 'required|numeric',
+        ]);
+
+        $existing_membership = DB::table('memberships')->where('id', $request->membership_id)->first();
+
+        DB::table('memberships')->insert([
+            'user_id' => auth()->id(),
+            'gym_membership_packages' => $data['package_id'],
+            'start_date' => $existing_membership->end_date,
+            'end_date' => date('Y-m-d', strtotime($existing_membership->end_date . ' + 30 days')),
+            'is_active' => 0,
+            'duration_in_days' => 30,
+            'extend_package' => $existing_membership->extend_package + 1,
+        ]);
+
+        Payment::create([
+            'gym_membership_packages' => $data['package_id'],
+            'amount' => $data['amount'],
+            'user_id' => auth()->id(),
+            'status' => 'pending',
+            'membership_id' => DB::table('memberships')->latest()->first()->id,
+            'payment_method' => 'cash',
+            'order_id' => '000' . time(),
+
+        ]);
     }
 
 }

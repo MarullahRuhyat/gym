@@ -47,7 +47,7 @@ starter Page
                         <!-- button onclick with price as parameter  -->
                         <button class="btn btn-primary" onclick="onclickPayNow('{{ $pkg->price }}')">
                         <!-- <button class="btn btn-primary" onclick="onclickPayNow()"> -->
-                            Buy Now
+                            Pay Now
                         </button>
 
                         {{-- button green paycash --}}
@@ -130,8 +130,8 @@ starter Page
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Apakah Anda akan melanjutkan pembayaran dengan cash dengan nominal 
-                    <h5 name="payment-total" class="mb-0 fw-bold" id="cash-payment-total"></h5>?</p>
+                <p>Apakah Anda akan melanjutkan pembayaran dengan cash dengan nominal <strong style="font-size: 20px;" id="cash-payment-total"></strong></p>
+                    <!-- <h5 name="payment-total" class="mb-0 fw-bold" id="cash-payment-total"></h5>?</span></p> -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
@@ -149,19 +149,20 @@ starter Page
       function showCashPaymentModal(price) {
         // Set the payment total in the modal
         document.getElementById('cash-payment-total').innerText = 'Rp.' + price.toLocaleString('id-ID', {minimumFractionDigits: 0});
-        
+
         // Show the modal
         $('#modalCashPayment').modal('show');
     }
 
     function submitCashPayment() {
         $.ajax({
-            url: "{{ route('member.submit-cash-payment') }}",
+            url: "{{ route('member.submit-cash-extend-payment') }}",
             type: "POST",
             data: {
                 _token: "{{ csrf_token() }}",
                 package_id: $('#package_id').val(),
-                amount: $('#cash-payment-total').text().replace('Rp.', '').replace(/\./g, '') // Remove Rp. and dots
+                amount: $('#cash-payment-total').text().replace('Rp.', '').replace(/\./g, ''), // Remove Rp. and dots
+                membership_id: $('#membership_id').val(),
             },
             success: function(data) {
                 if(data.status === true) {

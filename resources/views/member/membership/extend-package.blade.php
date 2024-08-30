@@ -3,6 +3,17 @@
 starter Page
 @endsection
 @section('content')
+@if($packages->isEmpty())
+<div class="justify-content-center text-center">
+    <!-- you don't have any membership yet -->
+     <div class="col my-5">
+        <p>You don't have any membership yet</p>
+     </div>
+    <div class="col my-5">
+        <a href="{{ route('member.buy-new-package') }}" class="btn btn-grd btn-grd-deep-blue px-5">Buy Membership</a>
+    </div>
+</div>
+@endif
 @foreach($packages as $pkg)
 <!-- notif response  -->
  @if (session('status'))
@@ -25,7 +36,8 @@ starter Page
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <input type="hidden" name="package_id" id="package_id" value="">
+                        <input type="hidden" name="package_id" id="package_id" value="{{ $pkg->id }}">
+                        <input type="hidden" name="membership_id" id="membership_id" value="{{ $pkg->membership_id }}">
                         <h5 class="card-title mb-3">{{ ucwords($pkg->name) }}</h5>
                         <p class="card-text">{{ $pkg->description }}</p>
                         <h5 class="card-title mb-3">Duration: {{ $pkg->duration_in_days }} Days</h5>
@@ -113,16 +125,23 @@ starter Page
 @push('script')
 <script>
     function onclickPayNow(){
-        $('#modalPayment').modal('show');
+        // $('#modalPayment').modal('show');
         // also redirect to member.submit-extend-package as ajax
         $.ajax({
             url: "{{ route('member.submit-extend-package') }}",
-            type: "GET",
+            type: "POST",
             data: {
-                price: price
+                _token: "{{ csrf_token() }}",
+                // price: price
+                'membership_id': $('#membership_id').val(),
+                'package_id': $('#package_id').val(),
             },
             success: function(data){
-                console.log(data);
+                if(data.status == true){
+                    $('#modalPayment').modal('show');
+                } else {
+                    alert(data.message);
+                }
             }
         })
 

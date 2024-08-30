@@ -260,35 +260,47 @@ class PackageController extends Controller
             ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
             ->where('memberships.user_id', auth()->user()->id)
             ->where('memberships.is_active', 1)
+            ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as membership_id')
             ->get();
+            // dd($packages);
         return view('member.membership.extend-package', compact('packages'));
     }
 
     public function submit_extend_package(Request $request)
     {
         $user_id = auth()->user()->id;
-        $package_id = $request->submit_package_id;
-        $end_date = DB::table('memberships')->where('user_id', $user_id)->where('gym_membership_packages', $package_id)->pluck('end_date')->first();
+        $package_id = $request->package_id;
+        $end_date = DB::table('memberships')->where('id', $request->membership_id)->pluck('end_date')->first();
 
         // get field extend in table membership then looping
-        $extend = DB::table('memberships')->where('user_id', $user_id)->where('gym_membership_packages', $package_id)->pluck('extend')->first();
+        $extend = DB::table('memberships')->where('id', $request->membership_id)->pluck('extend_package')->first();
+        // dd($extend);
 
         if($extend >= 2) {
             $status = false;
             $message = "maksimal perpanjang paket sudah habis";
         } else {
+            // dd('masuk');
             $insert_to_membership = DB::table('memberships')->insert([
                 'user_id' => $user_id,
                 'gym_membership_packages' => $package_id,
                 'start_date' => $end_date,
                 'end_date' => date('Y-m-d', strtotime($end_date . ' + 30 days')),
-                'user_terkait' => null,
+                'user_terkait' => $user_id,
                 'duration_in_days' => 30,
                 'is_active' => 0,
-                'extend' => $extend + 1,
+                'extend_package' => $extend + 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+            // dd($request->membership_id);
+            // Ending: 2024-09-25
+            // $update_membership = DB::table('memberships')->where('id', $request->membership_id)->update([
+                // 'end_date' => date('Y-m-d', strtotime($end_date . ' + 30 days')),
+                // 'extend_package' => $extend + 1,
+                // 'updated_at' => now(),
+                // 'is_active' => 0,
+            // ]);
             $status = true;
             $message = "Perpanjang paket berhasil";
         }
@@ -308,12 +320,21 @@ class PackageController extends Controller
         }
 
 
-        $packages_membership_payments = DB::table('payments')
-            ->leftjoin('gym_membership_packages', 'payments.gym_membership_packages', '=', 'gym_membership_packages.id')
-            ->leftjoin('memberships', 'payments.membership_id', '=', 'memberships.id')
-            ->where('payments.user_id', $user->id)
+        // $packages_membership_payments = DB::table('payments')
+        //     ->leftjoin('gym_membership_packages', 'payments.gym_membership_packages', '=', 'gym_membership_packages.id')
+        //     ->join('memberships', 'payments.membership_id', '=', 'memberships.id')
+        //     ->where('payments.user_id', $user->id)
+        //     ->orderBy('payments.id', 'desc')
+        //     ->get();
+        $packages_membership_payments = DB::table('memberships')
+            ->join('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+            ->join('payments', 'memberships.id', '=', 'payments.membership_id')
+            ->where('memberships.user_id', $user->id)
+            // ->where('memberships.is_active', 1)
             ->orderBy('payments.id', 'desc')
             ->get();
+
+            // dd($packages_membership_payments);
 
         $get_available_personal_trainer_quota = DB::table('users')->where('id', $user->id)->pluck('available_personal_trainer_quota')->first();
 

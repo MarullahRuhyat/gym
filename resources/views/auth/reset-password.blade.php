@@ -31,7 +31,7 @@
                                 </div>
                             @endif
 
-                            <h4 class="fw-bold">Genrate New Password</h4>
+                            <h4 class="fw-bold">Generate New Password</h4>
                             <p class="mb-0">We received your reset password request. Please enter your new password!</p>
                             <div class="form-body mt-4">
                                 <form method="POST" action="{{ route('verify.otp.process') }}" class="row g-3">

@@ -20,7 +20,7 @@
 </head>
 
 <style>
-    .image-carousel {
+   .image-carousel {
         position: relative;
         width: 100%;
         overflow: hidden;
@@ -98,18 +98,20 @@
                         <li><a target="_blank" href="mailto:flozorsgym@gmail.com"><i class="fa fa-envelope-o"
                                     aria-hidden="true"></i></a></li>
                     </ul>
-                    <a href="{{route("member.send-otp")}}" class="btn-login">Login</a>
                 </div>
             </div>
         </div>
         {{-- <div class="header-menu"> --}}
         <div class="container">
-            <div class="header-logo">
+            <div class="header-logo ">
                 <a href="{{route("landing_page")}}" class="logo img-thumbnail">
                     <img src="{{asset("landing_page/assets/img/10.svg")}}" class="card-img-top" alt="logo">
                 </a>
                 <p class="me-5" style="font-size:20px">FLOZOR'S GYM</p>
+                {{-- jika ukuran hp maka ada tombol login --}}
+                <a href="{{route("member.send-otp")}}" class="btn-login">Login</a>
             </div>
+
         </div>
         {{-- </div> --}}
     </header>
@@ -265,19 +267,8 @@
                                 data-src="{{asset("landing_page/assets/img/ptFajar.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
                             <h3><a href="javascript:void(0);">Fadjar</a></h3>
-                            <div class="prof">Weightlifting</div>
-                            <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
-                                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
-                            <ul class="social-list">
-                                <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://twitter.com/RovadexStudio"><i class="fa fa-twitter"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://www.youtube.com"><i class="fa fa-youtube"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://www.instagram.com/rovadex"><i
-                                            class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            </ul>
+                            <div class="prof">Firm man</div>
+                            <p>Fajar adalah seorang instruktur Fitnes yang tegas, suka bertanya pada member dan bertanggung jawab dalam segala apapun, mampu mengajar dengan baik dan bersemangat dalam mengajar.</p>
                         </div>
                     </div>
                 </div>
@@ -288,19 +279,8 @@
                                 data-src="{{asset("landing_page/assets/img/ptAgus.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
                             <h3><a href="javascript:void(0);">Agus</a></h3>
-                            <div class="prof">Weightlifting</div>
-                            <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
-                                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
-                            <ul class="social-list">
-                                <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://twitter.com/RovadexStudio"><i class="fa fa-twitter"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://www.youtube.com"><i class="fa fa-youtube"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://www.instagram.com/rovadex"><i
-                                            class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            </ul>
+                            <div class="prof">Calm Guy</div>
+                            <p>Agus adalah instruktur fitness berpengalaman,full power,pendiam tapi selalu memperhatikan membernya & bisa mengajar secara detail sehingga bisa membantu mewujudkan goals yang di inginkan dari para member....</p>
                         </div>
                     </div>
                 </div>
@@ -311,19 +291,8 @@
                                 data-src="{{asset("landing_page/assets/img/ptMelky.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
                             <h3><a href="javascript:void(0);">Melky</a></h3>
-                            <div class="prof">Weightlifting</div>
-                            <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
-                                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
-                            <ul class="social-list">
-                                <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://twitter.com/RovadexStudio"><i class="fa fa-twitter"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://www.youtube.com"><i class="fa fa-youtube"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://www.instagram.com/rovadex"><i
-                                            class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            </ul>
+                            <div class="prof">Funny guy</div>
+                            <p>Melky adalah seorang instruktur Fitness yang lucu, menghibur, dan menyenangkan, dan mampu mengajar dengan detail, dan siap membimbing members sampai body goals yang diinginkan.</p>
                         </div>
                     </div>
                 </div>
@@ -334,19 +303,9 @@
                             data-src="{{asset("landing_page/assets/img/ptclaus.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
                             <h3><a href="#">Claus</a></h3>
-                            <div class="prof">Weightlifting</div>
-                            <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
-                                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
-                            <ul class="social-list">
-                                <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://twitter.com/RovadexStudio"><i class="fa fa-twitter"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://www.youtube.com"><i class="fa fa-youtube"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://www.instagram.com/rovadex"><i
-                                            class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            </ul>
+                            <div class="prof">Educated Guy</div>
+                            <p>
+                                Claus adalah seorang instruktur fitness yang disiplin, selalu mencari ilmu-ilmu yang bagus, memiliki kemampuan mengajar para member dalam latihan yang benar sesuai dengan body goals mereka.</p>
                         </div>
                     </div>
                 </div>
@@ -357,19 +316,10 @@
                                 data-src="{{asset("landing_page/assets/img/anna.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
                             <h3><a href="#">Anna</a></h3>
-                            <div class="prof">Weightlifting</div>
-                            <p>Maecenas consequat ex id lobortis venenatis. Mauris id erat enim. Morbi dolor dolor,
-                                auctor tincidunt lorem ut, venenatis dapibus miq.</p>
-                            <ul class="social-list">
-                                <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://twitter.com/RovadexStudio"><i class="fa fa-twitter"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://www.youtube.com"><i class="fa fa-youtube"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://www.instagram.com/rovadex"><i
-                                            class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            </ul>
+                            <div class="prof">Kind-Hearted</div>
+                            <p>
+                                Anna adalah seorang receptionist yang baik hati, selalu ringan tangan dalam membantu orang-orang di sekitarnnya, mampu mengajari member untuk mencapai body goals member.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -428,10 +378,6 @@
 
                         </div>
                         <div class="post-content">
-                            <div class="meta">
-                                <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i>August 25,
-                                    2024</span>
-                            </div>
                             <h3 class="title">Jus Dada Ayam</h3>
                             <div class="text">
                                 <p>Jus Dada Ayam untuk sumber protein (kandungan 1 botol : 80 gr protein), menguatkan
@@ -469,10 +415,6 @@
 
                         </div>
                         <div class="post-content">
-                            <div class="meta">
-                                <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i>October 31,
-                                    2019</span>
-                            </div>
                             <h3 class="title">Green Juice and Smoothies</h3>
                             <div class="text">
                                 <p>Membantu badan tetap fit, menjaga berat badan, kaya akan vitamin, mineral, serat, dan
@@ -511,10 +453,6 @@
 
                         </div>
                         <div class="post-content">
-                            <div class="meta">
-                                <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i>October 31,
-                                    2019</span>
-                            </div>
                             <h3 class="title">Camilan Sehat</h3>
                             <div class="text">
                                 <p>Beraneka macam camilan diet yang merupakan sumber protein dan lemak sehat, membantu
@@ -551,10 +489,6 @@
 
                         </div>
                         <div class="post-content">
-                            <div class="meta">
-                                <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i>November 15,
-                                    2019</span>
-                            </div>
                             <h3 class="title">Healthy Food</h3>
                             <div class="text">
                                 <p>Solusi praktis untuk kamu yang ingin menjalani hidup sehat, menjaga kondisi tubuh,

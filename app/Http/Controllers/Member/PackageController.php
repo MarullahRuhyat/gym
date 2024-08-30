@@ -385,4 +385,26 @@ class PackageController extends Controller
         return response()->json(['status' => true, 'message' => 'Pembayaran berhasil']);
     }
 
+    public function submitCashPaymentRegister(Request $request)
+    {
+        $data = $request->validate([
+            'package_id' => 'required',
+            'amount' => 'required|numeric',
+        ]);
+
+        $membership_id = DB::table('memberships')->latest()->first()->id;
+
+        Payment::create([
+            'gym_membership_packages' => $data['package_id'],
+            'amount' => $data['amount'],
+            'user_id' => DB::table('memberships')->where('id', $membership_id)->pluck('user_id')->first(),
+            'status' => 'pending',
+            'membership_id' => $membership_id,
+            'payment_method' => 'cash',
+            'order_id' => '000' . time(),
+
+        ]);
+        return response()->json(['status' => true, 'message' => 'Pembayaran berhasil']);
+    }
+
 }

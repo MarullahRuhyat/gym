@@ -94,6 +94,8 @@ Route::prefix('member')->group(function () {
     Route::post('/register/check-member-terkait', [MemberAuthController::class, 'check_member_terkait'])->name('member.check-member-terkait');
 
     Route::get('/payment', [PaymentController::class, 'payment'])->name('member.payment');
+    // Route::post('/submit-cash-payment-register', [PackageController::class, 'submitCashPaymentRegister'])->name('member.submit-cash-payment-register');
+    Route::post('/submit-cash-payment-register', [PackageController::class, 'submitCashPaymentRegister'])->name('member.submit-cash-payment-register');
 
     Route::get('/login', [MemberAuthController::class, 'send_otp'])->name('member.send-otp');
     Route::post('/get-otp', [MemberAuthController::class, 'get_otp'])->name('member.get-otp');

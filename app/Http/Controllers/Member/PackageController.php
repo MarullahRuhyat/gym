@@ -262,7 +262,7 @@ class PackageController extends Controller
             ->where('memberships.is_active', 1)
             ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as membership_id')
             ->get();
-            // dd($packages);
+        
         return view('member.membership.extend-package', compact('packages'));
     }
 
@@ -376,7 +376,27 @@ class PackageController extends Controller
             'order_id' => '000' . time(),
 
         ]);
+
+        
         return response()->json(['status' => true, 'message' => 'Pembayaran berhasil']);
+    }
+
+    public function submitCashExtendPayment(Request $request) {
+        $data = $request->validate([
+            'package_id' => 'required',
+            'amount' => 'required|numeric',
+        ]);
+
+        Payment::create([
+            'gym_membership_packages' => $data['package_id'],
+            'amount' => $data['amount'],
+            'user_id' => auth()->id(),
+            'status' => 'pending',
+            'membership_id' => DB::table('memberships')->latest()->first()->id,
+            'payment_method' => 'cash',
+            'order_id' => '000' . time(),
+
+        ]);
     }
 
 }

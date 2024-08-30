@@ -24,10 +24,10 @@ class ScanByPTController extends Controller
                     $user_terkait = array_map('intval', explode(',', $membersip->user_terkait));
                     User::whereIn('id',  $user_terkait)->decrement('available_personal_trainer_quota', 1);
                 }
-                return redirect()->route('admin_scan')->with('success', 'Data berhasil disimpan!');
+                return redirect()->route('pt_scan')->with('success', 'Data berhasil disimpan!');
             } catch (\Throwable $th) {
                 //throw $th;
-                return redirect()->route('admin_scan')->with('error', 'Gagal menambah personal trainer!');
+                return redirect()->route('pt_scan')->with('error', 'Gagal menambah personal trainer!');
             }
         }
         $personal_trainers = User::where('role', 'personal trainer')->where('status', 'active')->get();

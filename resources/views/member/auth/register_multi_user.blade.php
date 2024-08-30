@@ -1368,16 +1368,7 @@ starter Page
                     // $('#cashPaymentModal').modal('hide'); // Tutup modal
                     // window.location.href =
                     // "{{ route('member.subscribed-package') }}"; // Redirect ke halaman pembayaran
-                    // show alert success with sweetalert
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Pembayaran berhasil disimpan!',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }).then(function () {
-                        // redirect to member/login
-                        window.location.href = "{{ route('member.send-otp') }}";
-                    });
+                    window.location.href = "{{ route('member.send-otp') }}";
                 } else {
                     alert('Gagal menyimpan pembayaran. Silakan coba lagi.');
                 }

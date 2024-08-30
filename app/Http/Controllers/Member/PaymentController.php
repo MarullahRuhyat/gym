@@ -182,27 +182,21 @@ class PaymentController extends Controller
             if ($transaction == 'settlement') {
                 $membership = \App\Models\Membership::find($data->membership_id);
                 $data->status = 'paid';
-                DB::table('memberships')->whereIn('user_id', $user_terkait)->where('end_date', $membership->end_date)->update([
-                    'is_active' => 1
-                ]);
-                DB::table('users')->whereIn('id', $user_terkait)->update([
-                    'end_date' => $membership->end_date
-                ]);
-
-                // handle payment extend
-                $check_extend = DB::table('memberships')->where('user_id', $membership->user_id)->where('is_active', 1)->pluck('id')->toArray();
+                $test_membership = DB::table('memberships')->where('id', $data->membership_id)
+                ->update(['is_active' => 1]);
+                    DB::table('users')->where('id', $data->user_id)
+                 ->update(['end_date' => $membership->end_date]);
+                                 $check_extend = DB::table('memberships')->where('user_id', $membership->user_id)->where('is_active', 1)->pluck('id')->toArray();
                 if (count($check_extend) >= 1) {
                     // update latest membership is_active to 1 where user_id = membership user_id
-                    DB::table('memberships')->where('id', end($check_extend))->update([
+                     DB::table('memberships')->where('id', end($check_extend))->update([
                         'is_active' => 1
                     ]);
                     // change another membership is_active to 0 where user_id = membership user_id
-                    DB::table('memberships')->where('id', '!=', end($check_extend))->where('user_id', $membership->user_id)->update([
+                    $test_user_update_end_date = DB::table('memberships')->where('id', '!=', end($check_extend))->where('user_id', $membership->user_id)->update([
                         'is_active' => 0
                     ]);
                 }
-
-
             } elseif ($transaction == 'cancel' || $transaction == 'deny') {
                 $data->status = 'failed';
             } elseif ($transaction == 'pending') {

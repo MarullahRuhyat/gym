@@ -139,7 +139,7 @@
 							<div class="date"><span>Single</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 1.900.000</li>
+							<li>Rp. 1.910.000</li>
 							<li>45 hari dengan 12x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -151,7 +151,7 @@
 							<div class="date"><span>Couple </span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 1.500.000 /person</li>
+							<li>Rp. 1.510.000 /person</li>
 							<li>45 hari dengan 12x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -163,7 +163,7 @@
 							<div class="date"><span>Group (3-6 person)</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 1.075.000 /person</li>
+							<li>Rp. 1.085.000 /person</li>
 							<li>30 hari dengan 10x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -181,7 +181,7 @@
 							<div class="date"><span>Class (6-12 person)</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 775.000 /person</li>
+							<li>Rp. 785.000 /person</li>
 							<li>Berlatih di Flozor's Gym dengan orang-orang yang dipilih secara acak oleh kami pada saat yang sama. 30 hari dengan 10x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>

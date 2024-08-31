@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'merchant_id' => env('MIDTRANS_MERCHANT_ID'),
-    'client_key' => env('MIDTRANS_CLIENT_KEY'),
-    'server_key' => env('MIDTRANS_SERVER_KEY'),
-    'is_production' => env('MIDTRANS_IS_PRODUCTION'),
+    'merchant_id' => 'G425362811',
+    'client_key' => 'Mid-client-wMJpUxtO3cbG92Xu',
+    'server_key' => 'Mid-server-V-bEr95obm6MKzobJoEmY18l',
+    'is_production' => true,
 ];

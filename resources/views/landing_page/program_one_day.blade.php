@@ -142,7 +142,7 @@
 							<div class="date"><span>Isidentil</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 75.000</li>
+							<li>Rp. 65.000</li>
 							<li>1x datang tanpa Personal Trainer.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -154,7 +154,7 @@
 							<div class="date"><span>PBC/PBBC Single</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 225.000</li>
+							<li>Rp. 235.000</li>
 							<li>45 hari dengan 12x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -166,7 +166,7 @@
 							<div class="date"><span>PBC/PBBC Couple</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 400.000 /person</li>
+							<li>Rp. 410.000 /person</li>
 							<li>30 hari dengan 10x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -181,7 +181,7 @@
 							<div class="date"><span> PBC/PBBC Gold Single</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 350.000</li>
+							<li>Rp. 360.000</li>
 							<li>1x datang dengan bimbingan Personal Trainer Mr. Frans Lee</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -194,7 +194,7 @@
 							<div class="date"><span>PBC/PBBC Gold Couple</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 650.000 /person</li>
+							<li>Rp. 660.000 /person</li>
 							<li>1x datang dengan bimbingan Personal Trainer Mr. Frans Lee</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>

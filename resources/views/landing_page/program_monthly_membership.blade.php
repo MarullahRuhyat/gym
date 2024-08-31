@@ -151,7 +151,7 @@
 							<div class="date"><span>2 months</span></div>
 						</div>
 						<ul class="list">
-							<li><s style="opacity: 50%">Rp. 650.000</s> Rp.550.000</li>
+							<li><s style="opacity: 50%">Rp. 660.000</s> Rp.560.000</li>
 							<li>Masa berlaku 62 hari dihitung sejak tanggal lunas pembayaran.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -163,7 +163,7 @@
 							<div class="date"><span>3 months</span></div>
 						</div>
 						<ul class="list">
-							<li><s style="opacity: 50%">Rp.975.000</s> Rp.750.000</li>
+							<li><s style="opacity: 50%">Rp.985.000</s> Rp.760.000</li>
 							<li>Masa berlaku 93 hari dihitung sejak tanggal lunas pembayaran.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -178,7 +178,7 @@
 							<div class="date"><span>6  months</span></div>
 						</div>
 						<ul class="list">
-							<li><s style="opacity: 50%">Rp.1.950.000</s> Rp.1.250.000</li>
+							<li><s style="opacity: 50%">Rp.1.960.000</s> Rp.1.260.000</li>
 							<li>Masa berlaku 186 hari dihitung sejak tanggal lunas pembayaran.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -191,7 +191,7 @@
 							<div class="date"><span>1 Year</span></div>
 						</div>
 						<ul class="list">
-							<li><s style="opacity: 50%">Rp.3.900.000</s> Rp.2.000.000</li>
+							<li><s style="opacity: 50%">Rp.3.910.000</s> Rp.2.010.000</li>
 							<li>Masa berlaku 372 hari dihitung sejak tanggal lunas pembayaran.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>

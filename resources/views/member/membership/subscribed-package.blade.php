@@ -67,14 +67,18 @@ Subscribed Package
 
 @endsection
 @push('script')
-<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="YOUR_CLIENT_KEY"></script>
-<script type="text/javascript">
+<script type="text/javascript" src="https://app.midtrans.com/snap/snap.js"
+    data-client-key="Mid-client-wMJpUxtO3cbG92Xu"></script>
+    
+    <script type="text/javascript">
     document.querySelectorAll('.checkPaymentBtn').forEach(button => {
         button.addEventListener('click', function () {
 
             const orderId = this.getAttribute('data-id');
             // alert(orderId);
+            alert('{{ config('services.midtrans.client_key') }}');
 
+            // alert service.midtrans.client_key
             fetch('{{ route("member.check_payment_status") }}', {
                 method: 'POST',
                 headers: {

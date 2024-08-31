@@ -7,8 +7,8 @@ starter Page
 @endsection
 @push('script')
 <!-- custom script  -->
-<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
-    data-client-key="{{ config('services.midtrans.client_key') }}"></script>
+<script type="text/javascript" src="https://app.midtrans.com/snap/snap.js"
+    data-client-key="Mid-client-wMJpUxtO3cbG92Xu"></script>
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
         pay();

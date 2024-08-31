@@ -39,7 +39,7 @@
                 <div class="header-left">
                     <ul class="header-cont">
                         <li><i class="fa fa-phone" aria-hidden="true"></i><a
-                                href="https://wa.me/+628170706999">08170706999</a></li>
+                                href="https://wa.me/+6285184741788">085184741788</a></li>
                         <li><i class="fa fa-clock-o" aria-hidden="true"></i>Mon to Fri : 6:00 AM to 8:00 PM | Sat 6:00
                             AM to 6:00 PM | Sun:
                             Closed </li>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="header-right">
                     <ul class="social-list">
-                        <li><a target="_blank" href="https://wa.me/+628170706999"><i class="fa fa-whatsapp"
+                        <li><a target="_blank" href="https://wa.me/+6285184741788"><i class="fa fa-whatsapp"
                                     aria-hidden="true"></i></a></li>
                         <li><a target="_blank" href="https://www.instagram.com/flozorsgym/"><i class="fa fa-instagram"
                                     aria-hidden="true"></i></a></li>
@@ -108,11 +108,11 @@
 						<p>Experience personalized fitness with our PBC/PBBC (Personal Body Care/Personal Beauty Body Care) plans. Receive expert training from our experienced personal trainers in 10 to 12 sessions over 30 to 45 days, including a 1-month gym membership. Perfect for those seeking focused, guided workouts tailored to your goals. Start transforming your fitness today!</p>
 					</div>
 					<ul class="about-cont">
-						<li><i class="fa fa-phone" aria-hidden="true"></i><a  href="https://wa.me/+628170706999">08170706999</a></li>
+						<li><i class="fa fa-phone" aria-hidden="true"></i><a  href="https://wa.me/+6285184741788">085184741788</a></li>
 						<li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:flozorsgym@gmail.com">flozorsgym@gmail.com</a></li>
 					</ul>
 					<ul class="social-list">
-						<li><a target="_blank" href="https://wa.me/+628170706999"><i class="fa fa-whatsapp"
+						<li><a target="_blank" href="https://wa.me/+6285184741788"><i class="fa fa-whatsapp"
                             aria-hidden="true"></i></a></li>
                 <li><a target="_blank" href="https://www.instagram.com/flozorsgym/"><i class="fa fa-instagram"
                             aria-hidden="true"></i></a></li>
@@ -209,7 +209,7 @@
 						</div>
 						<div class="contact-item-right">
 							<ul class="contact-item-list">
-								<li><a href="https://wa.me/+628170706999">08170706999</a></li>
+								<li><a href="https://wa.me/+6285184741788">085184741788</a></li>
 							</ul>
 						</div>
 					</div>
@@ -293,7 +293,7 @@
                 <div class="col-sm-6 col-lg-4 footer-item">
                     <h3>Contact us</h3>
                     <ul class="footer-cont">
-                        <li><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wa.me/+628170706999">08170706999</a>
+                        <li><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wa.me/+6285184741788">085184741788</a>
                         </li>
                         <li><i class="fa fa-envelope" aria-hidden="true"></i><a
                                 href="mailto:flozorsgym@gmail.com">flozorsgym@gmail.com</a></li>

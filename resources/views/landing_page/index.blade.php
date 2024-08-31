@@ -81,7 +81,7 @@
                 <div class="header-left">
                     <ul class="header-cont">
                         <li><i class="fa fa-phone" aria-hidden="true"></i><a
-                                href="https://wa.me/+628170706999">08170706999</a></li>
+                                href="https://wa.me/+6285184741788">085184741788</a></li>
                         <li><i class="fa fa-clock-o" aria-hidden="true"></i>Mon to Fri : 6:00 AM to 8:00 PM | Sat 6:00
                             AM to 6:00 PM | Sun:
                             Closed </li>
@@ -89,9 +89,9 @@
                 </div>
                 <div class="header-right">
                     <ul class="social-list">
-                        <li><a target="_blank" href="https://wa.me/+628170706999"><i class="fa fa-whatsapp"
+                        <li><a target="_blank" href="https://wa.me/+6285184741788"><i class="fa fa-whatsapp"
                                     aria-hidden="true"></i></a></li>
-                        <li><a target="_blank" href="https://www.instagram.com/flozorsgym/"><i class="fa fa-instagram"
+                        <li><a target="_blank" href="https://www.instagram.com/flozorsgym?igsh=cWZzeWRycXkxYjB4"><i class="fa fa-instagram"
                                     aria-hidden="true"></i></a></li>
                         <li><a target="_blank" href="https://maps.app.goo.gl/r6iY1YkYoXq7tNkt6"><i
                                     class="fa fa-map-marker" aria-hidden="true"></i></a></li>
@@ -299,8 +299,8 @@
                 <div class="col-md-6 out-trainer-col">
                     <div class="out-trainer-item">
                         <a href="#" class="out-trainer-img"><img class="rx-lazy"
-                            src="{{asset("landing_page/assets/img/ptclaus.jpg")}}"
-                            data-src="{{asset("landing_page/assets/img/ptclaus.jpg")}}" alt="img"></a>
+                            src="{{asset("landing_page/assets/img/ptClaus.jpg")}}"
+                            data-src="{{asset("landing_page/assets/img/ptClaus.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
                             <h3><a href="#">Claus</a></h3>
                             <div class="prof">Educated Guy</div>
@@ -312,8 +312,8 @@
                 <div class="col-md-6 out-trainer-col">
                     <div class="out-trainer-item">
                         <a href="#" class="out-trainer-img"><img class="rx-lazy"
-                                src="{{asset("landing_page/assets/img/anna.jpg")}}"
-                                data-src="{{asset("landing_page/assets/img/anna.jpg")}}" alt="img"></a>
+                                src="{{asset("landing_page/assets/img/Anna.jpg")}}"
+                                data-src="{{asset("landing_page/assets/img/Anna.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">
                             <h3><a href="#">Anna</a></h3>
                             <div class="prof">Kind-Hearted</div>
@@ -546,13 +546,7 @@
                     <p>Flozors Gym, founded in 2002 by Frans Lee, offers top service and a welcoming atmosphere for
                         fitness enthusiasts.</p>
                     <ul class="social-list">
-                        <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook"
-                                    aria-hidden="true"></i></a></li>
-                        <li><a target="_blank" href="https://twitter.com/RovadexStudio"><i class="fa fa-twitter"
-                                    aria-hidden="true"></i></a></li>
-                        <li><a target="_blank" href="https://www.youtube.com"><i class="fa fa-youtube"
-                                    aria-hidden="true"></i></a></li>
-                        <li><a target="_blank" href="https://www.instagram.com/rovadex"><i class="fa fa-instagram"
+                        <li><a target="_blank" href="https://www.instagram.com/flozorsgym?igsh=cWZzeWRycXkxYjB4"><i class="fa fa-instagram"
                                     aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
@@ -560,7 +554,7 @@
                     <h3>Contact us</h3>
                     <ul class="footer-cont">
                         <li><i class="fa fa-whatsapp" aria-hidden="true"></i><a
-                                href="https://wa.me/+628170706999">08170706999</a>
+                                href="https://wa.me/+6285184741788">085184741788</a>
                         </li>
                         <li><i class="fa fa-envelope" aria-hidden="true"></i><a
                                 href="mailto:flozorsgym@gmail.com">flozorsgym@gmail.com</a></li>

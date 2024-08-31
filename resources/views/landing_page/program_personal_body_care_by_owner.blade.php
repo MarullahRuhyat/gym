@@ -39,7 +39,7 @@
                 <div class="header-left">
                     <ul class="header-cont">
                         <li><i class="fa fa-phone" aria-hidden="true"></i><a
-                                href="https://wa.me/+628170706999">08170706999</a></li>
+                                href="https://wa.me/+6285184741788">085184741788</a></li>
                         <li><i class="fa fa-clock-o" aria-hidden="true"></i>Mon to Fri : 6:00 AM to 8:00 PM | Sat 6:00
                             AM to 6:00 PM | Sun:
                             Closed </li>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="header-right">
                     <ul class="social-list">
-                        <li><a target="_blank" href="https://wa.me/+628170706999"><i class="fa fa-whatsapp"
+                        <li><a target="_blank" href="https://wa.me/+6285184741788"><i class="fa fa-whatsapp"
                                     aria-hidden="true"></i></a></li>
                         <li><a target="_blank" href="https://www.instagram.com/flozorsgym/"><i class="fa fa-instagram"
                                     aria-hidden="true"></i></a></li>
@@ -108,11 +108,11 @@
 						<p>Upgrade your fitness journey with our exclusive PBC/PBBC (Personal Body Care/Personal Beauty Body Care) Gold plans. Enjoy 10 to 12 sessions with Mr. Frans Lee (Owner) personally over 30 to 45 days, including a 1-month gym membership. Ideal for those seeking unparalleled, bespoke training to achieve their ultimate fitness goals. Begin your elite transformation today!</p>
 					</div>
 					<ul class="about-cont">
-						<li><i class="fa fa-phone" aria-hidden="true"></i><a  href="https://wa.me/+628170706999">08170706999</a></li>
+						<li><i class="fa fa-phone" aria-hidden="true"></i><a  href="https://wa.me/+6285184741788">085184741788</a></li>
 						<li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:flozorsgym@gmail.com">flozorsgym@gmail.com</a></li>
 					</ul>
 					<ul class="social-list">
-						<li><a target="_blank" href="https://wa.me/+628170706999"><i class="fa fa-whatsapp"
+						<li><a target="_blank" href="https://wa.me/+6285184741788"><i class="fa fa-whatsapp"
                             aria-hidden="true"></i></a></li>
                 <li><a target="_blank" href="https://www.instagram.com/flozorsgym/"><i class="fa fa-instagram"
                             aria-hidden="true"></i></a></li>
@@ -151,7 +151,7 @@
 							<div class="date"><span>Couple </span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 3.010.000 /person</li>
+							<li>Rp. 3.010.000</li>
 							<li>45 hari dengan 12x bimbingan Mr. Frans Lee, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -163,7 +163,7 @@
 							<div class="date"><span>Group (3-6 person)</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 1.510.000 /person</li>
+							<li>Rp. 1.510.000</li>
 							<li>30 hari dengan 10x bimbingan Mr. Frans Lee, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -191,7 +191,7 @@
 						</div>
 						<div class="contact-item-right">
 							<ul class="contact-item-list">
-								<li><a href="https://wa.me/+628170706999">08170706999</a></li>
+								<li><a href="https://wa.me/+6285184741788">085184741788</a></li>
 							</ul>
 						</div>
 					</div>
@@ -275,7 +275,7 @@
                 <div class="col-sm-6 col-lg-4 footer-item">
                     <h3>Contact us</h3>
                     <ul class="footer-cont">
-                        <li><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wa.me/+628170706999">08170706999</a>
+                        <li><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wa.me/+6285184741788">085184741788</a>
                         </li>
                         <li><i class="fa fa-envelope" aria-hidden="true"></i><a
                                 href="mailto:flozorsgym@gmail.com">flozorsgym@gmail.com</a></li>

@@ -39,7 +39,7 @@
                 <div class="header-left">
                     <ul class="header-cont">
                         <li><i class="fa fa-phone" aria-hidden="true"></i><a
-                                href="https://wa.me/+628170706999">08170706999</a></li>
+                                href="https://wa.me/+6285184741788">085184741788</a></li>
                         <li><i class="fa fa-clock-o" aria-hidden="true"></i>Mon to Fri : 6:00 AM to 8:00 PM | Sat 6:00
                             AM to 6:00 PM | Sun:
                             Closed </li>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="header-right">
                     <ul class="social-list">
-                        <li><a target="_blank" href="https://wa.me/+628170706999"><i class="fa fa-whatsapp"
+                        <li><a target="_blank" href="https://wa.me/+6285184741788"><i class="fa fa-whatsapp"
                                     aria-hidden="true"></i></a></li>
                         <li><a target="_blank" href="https://www.instagram.com/flozorsgym/"><i class="fa fa-instagram"
                                     aria-hidden="true"></i></a></li>
@@ -110,11 +110,11 @@
 						</p>
 					</div>
 					<ul class="about-cont">
-						<li><i class="fa fa-phone" aria-hidden="true"></i><a  href="https://wa.me/+628170706999">08170706999</a></li>
+						<li><i class="fa fa-phone" aria-hidden="true"></i><a  href="https://wa.me/+6285184741788">085184741788</a></li>
 						<li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:flozorsgym@gmail.com">flozorsgym@gmail.com</a></li>
 					</ul>
 					<ul class="social-list">
-						<li><a target="_blank" href="https://wa.me/+628170706999"><i class="fa fa-whatsapp"
+						<li><a target="_blank" href="https://wa.me/+6285184741788"><i class="fa fa-whatsapp"
                             aria-hidden="true"></i></a></li>
                 <li><a target="_blank" href="https://www.instagram.com/flozorsgym/"><i class="fa fa-instagram"
                             aria-hidden="true"></i></a></li>
@@ -142,7 +142,7 @@
 							<div class="date"><span>Isidentil</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 65.000</li>
+							<li>Rp. 75.000</li>
 							<li>1x datang tanpa Personal Trainer.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -155,7 +155,7 @@
 						</div>
 						<ul class="list">
 							<li>Rp. 235.000</li>
-							<li>45 hari dengan 12x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
+							<li>1 hari dengan bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
@@ -166,8 +166,8 @@
 							<div class="date"><span>PBC/PBBC Couple</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 410.000 /person</li>
-							<li>30 hari dengan 10x bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
+							<li>Rp. 410.000</li>
+							<li>1x hari dengan bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
@@ -222,7 +222,7 @@
 						</div>
 						<div class="contact-item-right">
 							<ul class="contact-item-list">
-								<li><a href="https://wa.me/+628170706999">08170706999</a></li>
+								<li><a href="https://wa.me/+6285184741788">085184741788</a></li>
 							</ul>
 						</div>
 					</div>
@@ -306,7 +306,7 @@
                 <div class="col-sm-6 col-lg-4 footer-item">
                     <h3>Contact us</h3>
                     <ul class="footer-cont">
-                        <li><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wa.me/+628170706999">08170706999</a>
+                        <li><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wa.me/+6285184741788">085184741788</a>
                         </li>
                         <li><i class="fa fa-envelope" aria-hidden="true"></i><a
                                 href="mailto:flozorsgym@gmail.com">flozorsgym@gmail.com</a></li>

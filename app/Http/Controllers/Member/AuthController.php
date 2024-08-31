@@ -212,9 +212,27 @@ class AuthController extends Controller
                     // if in table users found (update data), else (insert data)
                     $user = DB::table('users')->where('phone_number', $request->form_first['phone_number'])->first();
                     if ($user != null) {
-                        $update = DB::table('users')->where('phone_number', $request->form_first['phone_number'])->update($request->form_first);
+                        // $update = DB::table('users')->where('phone_number', $request->form_first['phone_number'])->update($request->form_first);
+                        $update = DB::table('users')->where('phone_number', $request->form_first['phone_number'])->update([
+                            'name' => $request->form_first['name'],
+                            'phone_number' => $request->form_first['phone_number'],
+                            'address' => $request->form_first['address'],
+                            'password' => bcrypt($request->form_first['password']),
+                            'status' => 'unregistered',
+                            'updated_at' => now(),
+                        ]);
                     } else {
-                        $insert = DB::table('users')->insert($request->form_first);
+                        // $insert = DB::table('users')->insert($request->form_first);
+                        // insert all with hash password and created_at, updated_at
+                        $insert = DB::table('users')->insert([
+                            'name' => $request->form_first['name'],
+                            'phone_number' => $request->form_first['phone_number'],
+                            'address' => $request->form_first['address'],
+                            'password' => bcrypt($request->form_first['password']),
+                            'status' => 'unregistered',
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]);
                     }
                     $duration = DB::table('gym_membership_packages')->where('id', $request->package_id)->pluck('duration_in_days')->first();
                     $end_date = date('Y-m-d', strtotime($request->start_date . ' + ' . $duration . ' days'));

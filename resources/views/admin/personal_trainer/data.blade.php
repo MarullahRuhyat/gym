@@ -57,6 +57,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0">desc gaji</h6>
+                        </div>
+                        <div class="">
+                            <h5 class="mb-0 rupiah">{{ $user->desc_gaji }}</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

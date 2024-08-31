@@ -62,7 +62,7 @@
                             <h6 class="mb-0">desc gaji</h6>
                         </div>
                         <div class="">
-                            <h5 class="mb-0 rupiah">{{ $user->desc_gaji }}</h5>
+                            <h5 class="mb-0">{{ $user->desc_gaji }}</h5>
                         </div>
                     </div>
                 </div>

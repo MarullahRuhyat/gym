@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Member;
 
-use App\Helper\sendNotif;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
+use App\Helper\sendNotif;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -336,10 +337,17 @@ class AuthController extends Controller
 
     public function login_with_password(Request $request)
     {
+        $remember = $request->has('remember_me') ? true : false;
         $credentials = $request->only('phone_number', 'password');
         if (Auth::attempt($credentials)) {
-                return redirect()->route('member.dashboard');
+            if ($remember == true) {
+                Cookie::queue('phone_number', $request->phone_number, 60 * 24 * 30);
+                Cookie::queue('password', $request->password, 60 * 24 * 30);
+            } elseif ($remember == false) {
+                Cookie::queue(Cookie::forget('phone_number'));
+                Cookie::queue(Cookie::forget('password'));
+            }
         }
+        return redirect()->back()->with('error', 'The provided credentials do not match our records.');
     }
-
 }

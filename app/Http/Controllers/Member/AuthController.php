@@ -347,6 +347,7 @@ class AuthController extends Controller
                 Cookie::queue(Cookie::forget('phone_number'));
                 Cookie::queue(Cookie::forget('password'));
             }
+            return redirect()->route('member.dashboard');
         }
         return redirect()->back()->with('error', 'The provided credentials do not match our records.');
     }

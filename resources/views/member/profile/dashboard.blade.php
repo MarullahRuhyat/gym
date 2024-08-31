@@ -48,7 +48,7 @@ starter Page
                     <div>
                         <div class="d-flex justify-content-between">
                             <p class="fw-semi-bold">Membership :</p>
-                            <p id="" class="fw-bold">{{ $membership->name }}</p>
+                            <p id="" class="fw-bold">{{ $membership->membership_name }}</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <p class="fw-semi-bold">Membership Period :</p>

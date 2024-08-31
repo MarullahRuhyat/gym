@@ -32,15 +32,18 @@ class ProfileController extends Controller
         // $qr_code = DB::table('absent_members')->where('member_id', $user->id)->pluck('path_qr_code')->first();
         $membership = DB::table('memberships')
             ->leftjoin('users', 'memberships.user_id', '=', 'users.id')
-            ->where(function ($query) use ($user) {
-                $query->where('memberships.user_id', $user->id)
-                    ->orWhere('memberships.user_terkait', 'like', '%' . $user->id . '%');
-            })
+            ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+            ->where('memberships.user_id', $user->id)
+            //->where(function ($query) use ($user) {
+            //    $query->where('memberships.user_id', $user->id)
+            //        ->orWhere('memberships.user_terkait', 'like', '%' . $user->id . '%');
+            // })
             ->where('memberships.is_active', 1)
-            ->select('memberships.*', 'users.*', 'memberships.id as id')
+            ->select('memberships.*', 'users.*', 'memberships.id as id', 'gym_membership_packages.name as membership_name')
             ->orderBy('memberships.created_at', 'desc')
             ->first();
 
+        // dd($membership);
         if ($membership) {
             $startDate = Carbon::parse($membership->start_date);
             $endDate = Carbon::parse($membership->end_date);

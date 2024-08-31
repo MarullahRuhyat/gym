@@ -63,6 +63,11 @@ starter Page
                             <option value="inactive">inactive</option>
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="salary_desc" class="form-label">Salary Description</label>
+                        <textarea class="form-control" id="salary_desc" name="salary_description" required></textarea>
+                    </div>
+                    
 
                 </div>
                 <div class="modal-footer">
@@ -107,9 +112,10 @@ starter Page
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="desc" class="form-label">Desc</label>
-                        <textarea  class="form-control" id="desc" name="desc">
+                        <label for="salary_desc" class="form-label">Salary Description</label>
+                        <textarea class="form-control" id="salary_desc" name="salary_description" required></textarea>
                     </div>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -157,6 +163,7 @@ starter Page
             let phone = $(this).data('phone');
             let status = $(this).data('status');
             let salary = $(this).data('salary');
+            let salary_desc = $(this).data('salary_desc');
             salary = formatRupiah(`${salary}`, false)
 
             $('#name_edit').val(name);
@@ -164,7 +171,7 @@ starter Page
             $('#id_edit').val(id);
             $('#status_edit').val(status);
             $('#salary_edit').val(salary);
-            $('#desc').val(desc);
+            $('#salary_desc').val(salary_desc);
         });
 
         // Populate Delete Modal

@@ -108,7 +108,7 @@ starter Page
                     </div>
                     <div class="mb-3">
                         <label for="desc" class="form-label">Desc</label>
-                        <textarea type="desc" class="form-control" id="desc" name="desc">
+                        <textarea  class="form-control" id="desc" name="desc">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -164,6 +164,7 @@ starter Page
             $('#id_edit').val(id);
             $('#status_edit').val(status);
             $('#salary_edit').val(salary);
+            $('#desc').val(desc);
         });
 
         // Populate Delete Modal

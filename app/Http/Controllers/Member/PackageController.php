@@ -426,6 +426,8 @@ class PackageController extends Controller
             'is_active' => 0,
             'duration_in_days' => 30,
             'extend_package' => $existing_membership->extend_package + 1,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         Payment::create([
@@ -436,8 +438,11 @@ class PackageController extends Controller
             'membership_id' => DB::table('memberships')->latest()->first()->id,
             'payment_method' => 'cash',
             'order_id' => '000' . time(),
-
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
+
+        return response()->json(['status' => true, 'message' => 'Extend membership berhasil']);
     }
 
 }

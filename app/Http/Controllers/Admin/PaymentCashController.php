@@ -40,8 +40,6 @@ class PaymentCashController extends Controller
         $enddate = $request->input('end_date');
         $startdate = $request->input('start_date');
 
-
-
         // update start date
         $date = Carbon::now();
 
@@ -49,12 +47,13 @@ class PaymentCashController extends Controller
             ->where('id', $paymentId)
             ->update(['status' => 'paid']);
 
-        $check_extend = DB::table('memberships')->where('user_id', $membership->user_id)->where('is_active', 1)->pluck('id')->toArray();
+        $check_extend = DB::table('memberships')->where('user_id', $userId)->where('is_active', 1)->pluck('id')->toArray();
         if (count($check_extend) >= 1) {
-            DB::table('memberships')->where('id', end($check_extend))->update([
+            // dd($request->all());
+            DB::table('memberships')->where('id', $membershipId)->update([
                 'is_active' => 1
             ]);
-            DB::table('memberships')->where('user_id', $membership->user_id)->whereNotIn('id', $check_extend)->update([
+            DB::table('memberships')->where('user_id', $userId)->where('id', '!=', $membershipId)->update([
                 'is_active' => 0
             ]);
 

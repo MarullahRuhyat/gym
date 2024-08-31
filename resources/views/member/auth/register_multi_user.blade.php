@@ -216,23 +216,20 @@ starter Page
                                                         Please fill address.
                                                     </div>
                                                 </div>
-                                                <!-- <div class="col-md-12">
+                                                <div class="col-md-12">
                                                     <label for="bsValidation5" class="form-label">Password</label>
-                                                    <input type="password" class="form-control" id="bsValidation5"
-                                                        name="password" required>
+                                                    <input type="password" class="form-control" id="bsValidation5" name="password" required>
                                                     <div class="invalid-feedback">
                                                         Please fill your password.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <label for="bsValidation6" class="form-label">Confirm
-                                                        Password</label>
-                                                    <input type="password" class="form-control" id="bsValidation6"
-                                                        name="password_confirmation" required>
+                                                    <label for="bsValidation6" class="form-label">Confirm Password</label>
+                                                    <input type="password" class="form-control" id="bsValidation6" name="password_confirmation" required>
                                                     <div class="invalid-feedback">
                                                         Confirmation password is required and must be same as password.
                                                     </div>
-                                                </div> -->
+                                                </div>
 
                                             </form>
                                         </div>
@@ -1453,18 +1450,26 @@ starter Page
             return;
         }
 
+        // password and confirm password
+        var password = $('#bsValidation5').val();
+        var confirmPassword = $('#bsValidation6').val();
+        if (password != confirmPassword) {
+            alert('Password and Confirm Password must be the same');
+            return;
+        }
+
         // get data from form 1
         var name_form_first = $('#bsValidation1').val();
         var phone_form_first = $('#bsValidation2').val();
         var gender_form_first = $('#bsValidation3').val();
         var address_form_first = $('#bsValidation4').val();
-        // var password_form_first = $('#bsValidation5').val();
+        var password_form_first = $('#bsValidation5').val();
         var form_first = {
             name: name_form_first,
             phone_number: phone_form_first,
             gender: gender_form_first,
             address: address_form_first,
-            // password: password_form_first
+            password: password_form_first
         };
 
         // only get data phone number from dynamic form
@@ -1538,6 +1543,33 @@ starter Page
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Error saving forms');
+            }
+        });
+    });
+
+    // check password and confirm password
+    $(document).ready(function() {
+        $('#bsValidation5').keyup(function() {
+            var password = $('#bsValidation5').val();
+            var confirmPassword = $('#bsValidation6').val();
+            if (password != confirmPassword) {
+                $('#bsValidation6').addClass('is-invalid');
+                $('#bsValidation6').removeClass('is-valid');
+            } else {
+                $('#bsValidation6').addClass('is-valid');
+                $('#bsValidation6').removeClass('is-invalid ');
+            }
+        });
+
+        $('#bsValidation6').keyup(function() {
+            var password = $('#bsValidation5').val();
+            var confirmPassword = $('#bsValidation6').val();
+            if (password != confirmPassword) {
+                $('#bsValidation6').addClass('is-invalid');
+                $('#bsValidation6').removeClass('is-valid');
+            } else {
+                $('#bsValidation6').addClass('is-valid');
+                $('#bsValidation6').removeClass('is-invalid');
             }
         });
     });

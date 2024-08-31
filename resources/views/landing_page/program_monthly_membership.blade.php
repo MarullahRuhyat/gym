@@ -139,7 +139,7 @@
 							<div class="date"><span>1 months</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp.325.000</li>
+							<li>Rp.335.000</li>
 							<li>Masa berlaku 31 hari dihitung sejak tanggal lunas pembayaran.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>

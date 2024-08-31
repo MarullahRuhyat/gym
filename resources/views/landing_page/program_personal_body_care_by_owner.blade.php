@@ -139,7 +139,7 @@
 							<div class="date"><span>Single</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 3.500.000</li>
+							<li>Rp. 3.510.000</li>
 							<li>45 hari dengan 12x bimbingan Mr.Frans Lee, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -151,7 +151,7 @@
 							<div class="date"><span>Couple </span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 3.000.000 /person</li>
+							<li>Rp. 3.010.000 /person</li>
 							<li>45 hari dengan 12x bimbingan Mr. Frans Lee, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -163,7 +163,7 @@
 							<div class="date"><span>Group (3-6 person)</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 1.500.000 /person</li>
+							<li>Rp. 1.510.000 /person</li>
 							<li>30 hari dengan 10x bimbingan Mr. Frans Lee, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>

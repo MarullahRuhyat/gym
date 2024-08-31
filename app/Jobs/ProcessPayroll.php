@@ -68,7 +68,7 @@ class ProcessPayroll implements ShouldQueue
 
                 foreach ($absents as $absent) {
                     $bonus = new PersonalTrainingBonus();
-                    $bonus->description = $ absent->package_name . ' (' . $absent->type_count . ')';
+                    $bonus->description = $absent->package_name . ' (' . $absent->type_count . ')';
                     $bonus->amount = intval($absent->type_count) * intval($absent->bonus);
                     $bonus->gaji_personal_trainers_id = $gaji->id;
                     $bonus->save();

@@ -106,10 +106,10 @@ starter Page
                             <option value="inactive">inactive</option>
                         </select>
                     </div>
-                    {{-- <div class="mb-3">
+                    <div class="mb-3">
                         <label for="desc" class="form-label">Desc</label>
                         <textarea type="desc" class="form-control" id="desc" name="desc">
-                    </div> --}}
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

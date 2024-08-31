@@ -14,11 +14,11 @@ class PaymentCashController extends Controller
             $data_cash = DB::table('payments')
                 ->join('users', 'payments.user_id', '=', 'users.id')
                 ->leftJoin('memberships', 'payments.membership_id', '=', 'memberships.id') // Menggunakan memberships
-                ->select('payments.id as payment_id', 
-                        'payments.amount', 
-                        'payments.status', 
-                        'payments.payment_method', 
-                        'payments.created_at', 
+                ->select('payments.id as payment_id',
+                        'payments.amount',
+                        'payments.status',
+                        'payments.payment_method',
+                        'payments.created_at',
                         'users.name as user_name',
                         'users.id as user_id',
                         'users.phone_number as user_phone',
@@ -40,23 +40,34 @@ class PaymentCashController extends Controller
         $enddate = $request->input('end_date');
         $startdate = $request->input('start_date');
 
-        
 
-        // update start date 
+
+        // update start date
         $date = Carbon::now();
 
         DB::table('payments')
             ->where('id', $paymentId)
             ->update(['status' => 'paid']);
-        
-        DB::table('memberships')
+
+        $check_extend = DB::table('memberships')->where('user_id', $membership->user_id)->where('is_active', 1)->pluck('id')->toArray();
+        if (count($check_extend) >= 1) {
+            DB::table('memberships')->where('id', end($check_extend))->update([
+                'is_active' => 1
+            ]);
+            DB::table('memberships')->where('user_id', $membership->user_id)->whereNotIn('id', $check_extend)->update([
+                'is_active' => 0
+            ]);
+
+        } else {
+            DB::table('memberships')
             ->where('id', $membershipId)
             ->update(['is_active' => 1]);
-        
+        }
+
         DB::table('users')
             ->where('id', $userId)
             ->update(['status' => 'active']);
-        
+
         DB::table('users')
             ->where('id', $userId)
             ->update(['start_date' => $date]);

@@ -93,8 +93,8 @@ Route::prefix('member')->group(function () {
     Route::post('/get-package-detail', [MemberAuthController::class, 'get_package_detail'])->name('member.get-package-detail');
     Route::post('/register/check-member-terkait', [MemberAuthController::class, 'check_member_terkait'])->name('member.check-member-terkait');
 
-    Route::get('/forgot-password', [MemberAuthController::class, 'forgotPassword'])->name('auth.forgot_password');
-    Route::post('/forgot-password', [MemberAuthController::class, 'forgotPasswordProcess'])->name('auth.forgot_password.process');
+    Route::get('/forgot-password', [MemberAuthController::class, 'forgotPassword'])->name('member.forgot_password');
+    Route::post('/forgot-password', [MemberAuthController::class, 'forgotPasswordProcess'])->name('member.forgot_password.process');
 
     Route::get('/verify-otp', [MemberAuthController::class, 'verifyOtp'])->name('verify.otp');
     Route::post('/verify-otp', [MemberAuthController::class, 'verifyOtpProcess'])->name('verify.otp.process');

@@ -54,6 +54,13 @@
                                         <a href="{{ route('member.with_password')}}">forgot bring phone? <span><strong>With Password</strong></span></a>
                                     </div>
                                 </div>
+
+                                <div class="col-12">
+                                    {{-- forgot password --}}
+                                    <div class="d-grid">
+                                        <a href="{{ route('member.forgot_password')}}">forgot password? <span><strong>Forgot Password</strong></span></a>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>

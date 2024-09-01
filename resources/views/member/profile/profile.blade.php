@@ -143,6 +143,45 @@ starter Page
                             <p class="mb-0">Berat Badan: {{ $profile->berat_badan }} kg </p>
                         </div>
                         <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Leher: {{ $profile->leher }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Bahu: {{ $profile->bahu }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Dada: {{ $profile->dada }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Lengan Kanan: {{ $profile->lengan_kanan }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Lengan Kiri: {{ $profile->lengan_kiri }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Fore Arm Kanan: {{ $profile->fore_arm_kanan }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Fore Arm Kiri: {{ $profile->fore_arm_kiri }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Perut: {{ $profile->perut }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Pinggang: {{ $profile->pinggang }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Paha Kanan: {{ $profile->paha_kanan }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Paha Kiri: {{ $profile->paha_kiri }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Betis Kanan: {{ $profile->betis_kanan }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Betis Kiri: {{ $profile->betis_kiri }} cm </p>
+                        </div>
+                        <!-- <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
                             <p class="mb-0">Massa Otot: {{ $profile->massa_otot }} cm </p>
                         </div>
                         <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
@@ -153,7 +192,7 @@ starter Page
                         </div>
                         <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
                             <p class="mb-0">Intoleransi Latihan atau Alergi: {{ $profile->intoleransi_latihan_atau_alergi }} </p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

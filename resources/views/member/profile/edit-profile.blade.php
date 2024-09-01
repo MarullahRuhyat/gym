@@ -135,7 +135,7 @@ starter Page
                     <div class="col-md-12">
                         <label for="input6" class="form-label">Jenis Kelamin</label>
                         <select class="form-select" id="user_gender" name="user-gender">
-                            <option selected>Pilih Jenis Kelamin</option>
+                            <option value="" selected>Pilih Jenis Kelamin</option>
                             <option value="L" {{ $profile->gender == 'L' ? 'selected' : '' }}>Laki-laki</option>
                             <option value="P" {{ $profile->gender == 'P' ? 'selected' : '' }}>Perempuan</option>
                         </select>
@@ -181,6 +181,59 @@ starter Page
                         <input type="text" class="form-control" id="berat_badan" name="berat_badan" placeholder="Berat Badan" value="{{ $profile->berat_badan ?? '' }}">
                     </div>
                     <div class="col-md-12">
+                        <label for="leher" class="form-label">Leher</label>
+                        <input type="text" class="form-control" id="leher" name="leher" placeholder="Leher" value="{{ $profile->leher ?? '' }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="bahu" class="form-label">Bahu</label>
+                        <input type="text" class="form-control" id="bahu" name="bahu" placeholder="Bahu" value="{{ $profile->bahu ?? '' }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="dada" class="form-label">Dada</label>
+                        <input type="text" class="form-control" id="dada" name="dada" placeholder="Dada" value="{{ $profile->dada ?? '' }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="lengan_kanan" class="form-label ">Lengan Kanan</label>
+                        <input type="text" class="form-control" id="lengan_kanan" name="lengan_kanan" placeholder="Lengan Kanan" value="{{ $profile->lengan_kanan ?? '' }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="lengan_kiri" class="form-label" >Lengan Kiri</label>
+                        <input type="text" class="form-control" id="lengan_kiri" name="lengan_kiri" placeholder="Lengan Kiri" value="{{ $profile->lengan_kiri ?? '' }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="fore_arm_kanan" class="form-label">Fore Arm Kanan</label>
+                        <input type="text" class="form-control" id="fore_arm_kanan" name="fore_arm_kanan" placeholder="Fore Arm Kanan" value="{{ $profile->fore_arm_kanan ?? '' }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="fore_arm_kiri" class="form-label" >Fore Arm Kiri</label>
+                        <input type="text" class="form-control" id="fore_arm_kiri" name="fore_arm_kiri" placeholder="Fore Arm Kiri" value="{{ $profile->fore_arm_kiri ?? '' }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="perut" class="form-label">Perut</label>
+                        <input type="text" class="form-control" id="perut" name="perut" placeholder="Perut" value="{{ $profile->perut ?? '' }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="pinggang" class="form-label">Pinggang</label>
+                        <input type="text" class="form-control" id="pinggang" name="pinggang" placeholder="Pinggang" value="{{ $profile->pinggang ?? '' }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="paha_kanan" class="form-label">Paha Kanan</label>
+                        <input type="text" class="form-control" id="paha_kanan" name="paha_kanan" placeholder="Paha Kanan" value="{{ $profile->paha_kanan ?? '' }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="paha_kiri" class="form-label">Paha Kiri</label>
+                        <input type="text" class="form-control" id="paha_kiri" name="paha_kiri" placeholder="Paha Kiri" value="{{ $profile->paha_kiri ?? '' }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="betis_kanan" class="form-label" >Betis Kanan</label>
+                        <input type="text" class="form-control" id="betis_kanan" name="betis_kanan" placeholder="Betis Kanan" value="{{ $profile->betis_kanan ?? '' }}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="betis_kiri" class="form-label">Betis Kiri</label>
+                        <input type="text" class="form-control" id="betis_kiri" name="betis_kiri" placeholder="Betis Kiri" value="{{ $profile->betis_kiri ?? '' }}">
+                    </div>
+
+                    <!-- <div class="col-md-12">
                         <label for="massa_otot" class="form-label">Massa Otot</label>
                         <input type="text" class="form-control" id="massa_otot" name="massa_otot" placeholder="Massa Otot" value="{{ $profile->massa_otot ?? '' }}">
                     </div>
@@ -195,7 +248,7 @@ starter Page
                     <div class="col-md-12">
                         <label for="intoleransi_latihan_atau_alergi" class="form-label">Intoleransi Latihan atau Alergi</label>
                         <input type="text" class="form-control" id="intoleransi_latihan_atau_alergi" name="intoleransi_latihan_atau_alergi" value="{{ $profile->intoleransi_latihan_atau_alergi ?? '' }}">
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>
@@ -220,6 +273,7 @@ starter Page
 <script>
     $(document).ready(function() {
         $('#submit-update-profile').click(function(e) {
+            // dd('test');
             e.preventDefault();
             var formData = new FormData();
             formData.append('_token', "{{ csrf_token() }}");
@@ -234,10 +288,23 @@ starter Page
             formData.append('user_password', $('#user_password').val());
             formData.append('tinggi_badan', $('#tinggi_badan').val());
             formData.append('berat_badan', $('#berat_badan').val());
-            formData.append('massa_otot', $('#massa_otot').val());
-            formData.append('massa_tulang', $('#massa_tulang').val());
-            formData.append('persentase_lemak_tubuh', $('#persentase_lemak_tubuh').val());
-            formData.append('intoleransi_latihan_atau_alergi', $('#intoleransi_latihan_atau_alergi').val());
+            formData.append('leher', $('#leher').val());
+            formData.append('bahu', $('#bahu').val());
+            formData.append('dada', $('#dada').val());
+            formData.append('lengan_kanan', $('#lengan_kanan').val());
+            formData.append('lengan_kiri', $('#lengan_kiri').val());
+            formData.append('fore_arm_kanan', $('#fore_arm_kanan').val());
+            formData.append('fore_arm_kiri', $('#fore_arm_kiri').val());
+            formData.append('perut', $('#perut').val());
+            formData.append('pinggang', $('#pinggang').val());
+            formData.append('paha_kanan', $('#paha_kanan').val());
+            formData.append('paha_kiri', $('#paha_kiri').val());
+            formData.append('betis_kanan', $('#betis_kanan').val());
+            formData.append('betis_kiri', $('#betis_kiri').val());
+            // formData.append('massa_otot', $('#massa_otot').val());
+            // formData.append('massa_tulang', $('#massa_tulang').val());
+            // formData.append('persentase_lemak_tubuh', $('#persentase_lemak_tubuh').val());
+            // formData.append('intoleransi_latihan_atau_alergi', $('#intoleransi_latihan_atau_alergi').val());
 
             // Send the AJAX request with the updated form data
             $.ajax({

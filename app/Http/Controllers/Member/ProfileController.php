@@ -149,14 +149,17 @@ class ProfileController extends Controller
             $membership->duration_in_days = $membership->duration_in_days;
         }
 
+        // join users with informasi_fisik and informasi_fisik_tambahan
         $profile = DB::table('users')
-            ->leftJoin('informasi_fisik', 'users.id', '=', 'informasi_fisik.user_id')
+            ->leftjoin('informasi_fisik', 'users.id', '=', 'informasi_fisik.user_id')
+            ->leftjoin('informasi_fisik_tambahan', 'users.id', '=', 'informasi_fisik_tambahan.user_id')
             ->where('users.id', $auth->id)
-            ->select('users.*', 'informasi_fisik.*', 'users.id as id')
+            ->select('users.*', 'informasi_fisik.*', 'informasi_fisik_tambahan.*', 'users.id as id')
             ->get();
 
         // insert photo_profile to profile array
         $profile[0]->photo_profile = $photo_profile;
+        // dd($profile_tambahan);
 
         // dd($membership);
 
@@ -179,11 +182,12 @@ class ProfileController extends Controller
 
     public function edit_profile_process(Request $request)
     {
+        // dd($request->all());
         $user = auth()->user();
         $user = DB::table('users')->where('id', $user->id)->get();
         $validate = $request->validate([
             'user_name' => ['required'],
-            'user_phone_number' => ['required', 'min:10', 'unique:users,phone_number,' . $user[0]->id],
+            'user_phone_number' => ['required', 'min:10', 'unique:users,phone_number,' . $request->user_id],
         ]);
 
         if (!$validate) {
@@ -196,7 +200,7 @@ class ProfileController extends Controller
             $file->move('build/images/member/photo_profile', $file_name);
         }
 
-        $update_data_user = DB::table('users')->where('id', $user[0]->id)->update([
+        $update_data_user = DB::table('users')->where('id', $request->user_id)->update([
             'photo_profile' => $file_name ?? null,
             'name' => $request->user_name,
             'address' => $request->user_address,
@@ -207,14 +211,78 @@ class ProfileController extends Controller
             // 'password' => bcrypt($request->user_password),
         ]);
 
-        $update_informasi_fisik = DB::table('informasi_fisik')->where('user_id', $user[0]->id)->update([
-            'tinggi_badan' => $request->tinggi_badan ?? null,
-            'berat_badan' => $request->berat_badan ?? null,
-            'massa_otot' => $request->massa_otot ?? null,
-            'massa_tulang' => $request->massa_tulang ?? null,
-            'persentase_lemak_tubuh' => $request->persentase_lemak_tubuh ?? null,
-            'intoleransi_latihan_atau_alergi' => $request->intoleransi_latihan_atau_alergi ?? null,
-        ]);
+        // $update_informasi_fisik = DB::table('informasi_fisik')->where('user_id', $request->user_id)->update([
+        //     'tinggi_badan' => $request->tinggi_badan,
+        //     'berat_badan' => $request->berat_badan,
+        //     // 'massa_otot' => $request->massa_otot ?? null,
+        //     // 'massa_tulang' => $request->massa_tulang ?? null,
+        //     // 'persentase_lemak_tubuh' => $request->persentase_lemak_tubuh ?? null,
+        //     // 'intoleransi_latihan_atau_alergi' => $request->intoleransi_latihan_atau_alergi ?? null,
+        // ]);
+
+        // $update_informasi_fisik_tambahan = DB::table('informasi_fisik_tambahan')->where('user_id', $request->user_id)->update([
+        //     'leher' => $request->leher,
+        //     'bahu' => $request->bahu,
+        //     'dada' => $request->dada,
+        //     'lengan_kanan' => $request->lengan_kanan,
+        //     'lengan_kiri' => $request->lengan_kiri,
+        //     'fore_arm_kanan' => $request->fore_arm_kanan,
+        //     'fore_arm_kiri' => $request->fore_arm_kiri,
+        //     'perut' => $request->perut,
+        //     'pinggang' => $request->pinggang,
+        //     'paha_kanan' => $request->paha_kanan,
+        //     'paha_kiri' => $request->paha_kiri,
+        //     'betis_kanan' => $request->betis_kanan,
+        //     'betis_kiri' => $request->betis_kiri,
+        // ]);
+
+        if (DB::table('informasi_fisik')->where('user_id', $request->user_id)->exists()) {
+            $update_data_informasi_fisik = DB::table('informasi_fisik')->where('user_id', $request->user_id)->update([
+                'tinggi_badan' => $request->tinggi_badan,
+                'berat_badan' => $request->berat_badan,
+            ]);
+        } else {
+            $update_data_informasi_fisik = DB::table('informasi_fisik')->insert([
+                'user_id' => $request->user_id,
+                'tinggi_badan' => $request->tinggi_badan,
+                'berat_badan' => $request->berat_badan,
+            ]);
+        }
+
+        if (DB::table('informasi_fisik_tambahan')->where('user_id', $request->user_id)->exists()) {
+            $update_data_informasi_fisik_tambahan = DB::table('informasi_fisik_tambahan')->where('user_id', $request->user_id)->update([
+                'leher' => $request->leher,
+                'bahu' => $request->bahu,
+                'dada' => $request->dada,
+                'lengan_kanan' => $request->lengan_kanan,
+                'lengan_kiri' => $request->lengan_kiri,
+                'fore_arm_kanan' => $request->fore_arm_kanan,
+                'fore_arm_kiri' => $request->fore_arm_kiri,
+                'perut' => $request->perut,
+                'pinggang' => $request->pinggang,
+                'paha_kanan' => $request->paha_kanan,
+                'paha_kiri' => $request->paha_kiri,
+                'betis_kanan' => $request->betis_kanan,
+                'betis_kiri' => $request->betis_kiri,
+            ]);
+        } else {
+            $update_data_informasi_fisik_tambahan = DB::table('informasi_fisik_tambahan')->insert([
+                'user_id' => $request->user_id,
+                'leher' => $request->leher,
+                'bahu' => $request->bahu,
+                'dada' => $request->dada,
+                'lengan_kanan' => $request->lengan_kanan,
+                'lengan_kiri' => $request->lengan_kiri,
+                'fore_arm_kanan' => $request->fore_arm_kanan,
+                'fore_arm_kiri' => $request->fore_arm_kiri,
+                'perut' => $request->perut,
+                'pinggang' => $request->pinggang,
+                'paha_kanan' => $request->paha_kanan,
+                'paha_kiri' => $request->paha_kiri,
+                'betis_kanan' => $request->betis_kanan,
+                'betis_kiri' => $request->betis_kiri,
+            ]);
+        }
 
         return response()->json(['status' => 'success', 'message' => 'Data berhasil diupdate']);
     }

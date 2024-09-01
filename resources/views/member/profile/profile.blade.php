@@ -32,6 +32,56 @@ starter Page
             <div class="card-body">
                 <div class="d-flex align-items-start justify-content-between mb-3">
                     <div class="">
+                        <h5 class="mb-0 fw-bold">Membership Details</h5>
+                    </div>
+                </div>
+                <!-- tampilkan paket membership  -->
+                @if ($membership == null)
+                <div class="justify-content-center text-center">
+                    <div class="col my-5">
+                        <a href="{{ route('member.buy-new-package') }}" class="btn btn-grd btn-grd-deep-blue px-5">Buy Membership</a>
+                    </div>
+                </div>
+                <div class="justify-content-center text-center">
+                    <div class="card" style="margin:auto; padding-bottom:50px; padding:30px;">
+                        <p id="" class="mb-0 fw-bold">You don't have any membership yet</p>
+                    </div>
+                </div>
+                @else
+                <div class="justify-content-center text-center">
+                    <div class="card" style="margin:auto; padding-bottom:50px; padding:5px;">
+                        <div>
+                            <div class="d-flex justify-content-between">
+                                <p class="fw-semi-bold">Membership :</p>
+                                <p id="" class="fw-bold">{{ $membership->name }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p class="fw-semi-bold">Membership Period :</p>
+                                <p id="" class="text-danger fw-bold">{{ $membership->duration_in_days }} days</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p class="fw-semi-bold">Starting Date :</p>
+                                <p id="" class="fw-bold">{{ $membership->start_date }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p class="fw-semi-bold">Ending Date :</p>
+                                <p id="" class="fw-bold">{{ $membership->end_date }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div><!--end row-->
+
+<div class="row justify-content-center">
+    <div class="col-12 col-xl-4">
+        <div class="card rounded-4">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between mb-3">
+                    <div class="">
                         <h5 class="mb-0 fw-bold">About</h5>
                     </div>
                 </div>

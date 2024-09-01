@@ -135,6 +135,20 @@ class ProfileController extends Controller
         $auth = auth()->user();
         $photo_profile = $this->photo_profile();
 
+        $membership = DB::table('memberships')
+            ->leftjoin('users', 'memberships.user_id', '=', 'users.id')
+            ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+            ->where('memberships.user_id', $auth->id)
+            ->where('memberships.is_active', 1)
+            ->select('memberships.*', 'users.*', 'memberships.id as id', 'gym_membership_packages.name as membership_name')
+            ->orderBy('memberships.created_at', 'desc')
+            ->first();
+        if ($membership) {
+            $startDate = Carbon::parse($membership->start_date);
+            $endDate = Carbon::parse($membership->end_date);
+            $membership->duration_in_days = $membership->duration_in_days;
+        }
+
         $profile = DB::table('users')
             ->leftJoin('informasi_fisik', 'users.id', '=', 'informasi_fisik.user_id')
             ->where('users.id', $auth->id)
@@ -144,7 +158,9 @@ class ProfileController extends Controller
         // insert photo_profile to profile array
         $profile[0]->photo_profile = $photo_profile;
 
-        return view('member.profile.profile', compact('profile'));
+        // dd($membership);
+
+        return view('member.profile.profile', compact('profile', 'membership'));
     }
 
     public function edit_profile()

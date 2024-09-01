@@ -31,7 +31,7 @@
 		</div>
 	</div>
 	<!--============== PRELOADER END ==============-->
-	
+
 	<!-- ================= HEADER ================= -->
 	<header class="header">
         <div class="top-panel">
@@ -47,7 +47,7 @@
                 </div>
                 <div class="header-right">
                     <ul class="social-list">
-                        <li><a target="_blank" href="https://wa.me/+628170706999"><i class="fa fa-whatsapp"
+                        <li><a target="_blank" href="https://wa.me/+6285184741788"><i class="fa fa-whatsapp"
                                     aria-hidden="true"></i></a></li>
                         <li><a target="_blank" href="https://www.instagram.com/flozorsgym/"><i class="fa fa-instagram"
                                     aria-hidden="true"></i></a></li>
@@ -112,7 +112,7 @@
 						<li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:flozorsgym@gmail.com">flozorsgym@gmail.com</a></li>
 					</ul>
 					<ul class="social-list">
-						<li><a target="_blank" href="https://wa.me/+628170706999"><i class="fa fa-whatsapp"
+						<li><a target="_blank" href="https://wa.me/+6285184741788"><i class="fa fa-whatsapp"
                             aria-hidden="true"></i></a></li>
                 <li><a target="_blank" href="https://www.instagram.com/flozorsgym/"><i class="fa fa-instagram"
                             aria-hidden="true"></i></a></li>
@@ -151,7 +151,7 @@
 							<div class="date"><span>Couple </span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 3.010.000 /person</li>
+							<li>Rp. 3.010.000</li>
 							<li>45 hari dengan 12x bimbingan Mr. Frans Lee, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
@@ -163,13 +163,13 @@
 							<div class="date"><span>Group (3-6 person)</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 1.510.000 /person</li>
+							<li>Rp. 1.510.000</li>
 							<li>30 hari dengan 10x bimbingan Mr. Frans Lee, sudah termasuk biaya paket monthly membership.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
 				</div>
-                
+
 			</div>
 		</div>
 	</section>
@@ -196,7 +196,7 @@
 						</div>
 					</div>
                     <div class="mb-5">
-						
+
 					</div>
 					<div class="contact-item mt-5">
 						<div class="contact-item-left">

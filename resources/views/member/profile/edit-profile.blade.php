@@ -171,79 +171,100 @@ starter Page
                     </div>
                 </div>
                 <form class="row g-4">
-                    <!-- handle null with ternary operator  -->
+                    @php
+                        // Define a function to format the number or return an empty string if null
+                        function formatNumber($value) {
+                            return number_format($value ?? 0, 1, '.', ',');
+                        }
+                    @endphp
+
                     <div class="col-md-12">
                         <label for="tinggi_badan" class="form-label">Tinggi Badan</label>
-                        <input type="text" class="form-control" id="tinggi_badan" name="tinggi_badan" placeholder="Tinggi Badan" value="{{ $profile->tinggi_badan ?? '' }}">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="berat_badan" class="form-label">Berat Badan</label>
-                        <input type="text" class="form-control" id="berat_badan" name="berat_badan" placeholder="Berat Badan" value="{{ $profile->berat_badan ?? '' }}">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="leher" class="form-label">Leher</label>
-                        <input type="text" class="form-control" id="leher" name="leher" placeholder="Leher" value="{{ $profile->leher ?? '' }}">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="bahu" class="form-label">Bahu</label>
-                        <input type="text" class="form-control" id="bahu" name="bahu" placeholder="Bahu" value="{{ $profile->bahu ?? '' }}">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="dada" class="form-label">Dada</label>
-                        <input type="text" class="form-control" id="dada" name="dada" placeholder="Dada" value="{{ $profile->dada ?? '' }}">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="lengan_kanan" class="form-label ">Lengan Kanan</label>
-                        <input type="text" class="form-control" id="lengan_kanan" name="lengan_kanan" placeholder="Lengan Kanan" value="{{ $profile->lengan_kanan ?? '' }}">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="lengan_kiri" class="form-label" >Lengan Kiri</label>
-                        <input type="text" class="form-control" id="lengan_kiri" name="lengan_kiri" placeholder="Lengan Kiri" value="{{ $profile->lengan_kiri ?? '' }}">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="fore_arm_kanan" class="form-label">Fore Arm Kanan</label>
-                        <input type="text" class="form-control" id="fore_arm_kanan" name="fore_arm_kanan" placeholder="Fore Arm Kanan" value="{{ $profile->fore_arm_kanan ?? '' }}">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="fore_arm_kiri" class="form-label" >Fore Arm Kiri</label>
-                        <input type="text" class="form-control" id="fore_arm_kiri" name="fore_arm_kiri" placeholder="Fore Arm Kiri" value="{{ $profile->fore_arm_kiri ?? '' }}">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="perut" class="form-label">Perut</label>
-                        <input type="text" class="form-control" id="perut" name="perut" placeholder="Perut" value="{{ $profile->perut ?? '' }}">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="pinggang" class="form-label">Pinggang</label>
-                        <input type="text" class="form-control" id="pinggang" name="pinggang" placeholder="Pinggang" value="{{ $profile->pinggang ?? '' }}">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="paha_kanan" class="form-label">Paha Kanan</label>
-                        <input type="text" class="form-control" id="paha_kanan" name="paha_kanan" placeholder="Paha Kanan" value="{{ $profile->paha_kanan ?? '' }}">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="paha_kiri" class="form-label">Paha Kiri</label>
-                        <input type="text" class="form-control" id="paha_kiri" name="paha_kiri" placeholder="Paha Kiri" value="{{ $profile->paha_kiri ?? '' }}">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="betis_kanan" class="form-label" >Betis Kanan</label>
-                        <input type="text" class="form-control" id="betis_kanan" name="betis_kanan" placeholder="Betis Kanan" value="{{ $profile->betis_kanan ?? '' }}">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="betis_kiri" class="form-label">Betis Kiri</label>
-                        <input type="text" class="form-control" id="betis_kiri" name="betis_kiri" placeholder="Betis Kiri" value="{{ $profile->betis_kiri ?? '' }}">
+                        <input type="text" class="form-control" id="tinggi_badan" name="tinggi_badan" placeholder="Tinggi Badan" value="{{ formatNumber($profile->tinggi_badan) }}">
                     </div>
 
+                    <div class="col-md-12">
+                        <label for="berat_badan" class="form-label">Berat Badan</label>
+                        <input type="text" class="form-control" id="berat_badan" name="berat_badan" placeholder="Berat Badan" value="{{ formatNumber($profile->berat_badan) }}">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="leher" class="form-label">Leher</label>
+                        <input type="text" class="form-control" id="leher" name="leher" placeholder="Leher" value="{{ formatNumber($profile->leher) }}">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="bahu" class="form-label">Bahu</label>
+                        <input type="text" class="form-control" id="bahu" name="bahu" placeholder="Bahu" value="{{ formatNumber($profile->bahu) }}">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="dada" class="form-label">Dada</label>
+                        <input type="text" class="form-control" id="dada" name="dada" placeholder="Dada" value="{{ formatNumber($profile->dada) }}">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="lengan_kanan" class="form-label">Lengan Kanan</label>
+                        <input type="text" class="form-control" id="lengan_kanan" name="lengan_kanan" placeholder="Lengan Kanan" value="{{ formatNumber($profile->lengan_kanan) }}">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="lengan_kiri" class="form-label">Lengan Kiri</label>
+                        <input type="text" class="form-control" id="lengan_kiri" name="lengan_kiri" placeholder="Lengan Kiri" value="{{ formatNumber($profile->lengan_kiri) }}">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="fore_arm_kanan" class="form-label">Fore Arm Kanan</label>
+                        <input type="text" class="form-control" id="fore_arm_kanan" name="fore_arm_kanan" placeholder="Fore Arm Kanan" value="{{ formatNumber($profile->fore_arm_kanan) }}">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="fore_arm_kiri" class="form-label">Fore Arm Kiri</label>
+                        <input type="text" class="form-control" id="fore_arm_kiri" name="fore_arm_kiri" placeholder="Fore Arm Kiri" value="{{ formatNumber($profile->fore_arm_kiri) }}">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="perut" class="form-label">Perut</label>
+                        <input type="text" class="form-control" id="perut" name="perut" placeholder="Perut" value="{{ formatNumber($profile->perut) }}">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="pinggang" class="form-label">Pinggang</label>
+                        <input type="text" class="form-control" id="pinggang" name="pinggang" placeholder="Pinggang" value="{{ formatNumber($profile->pinggang) }}">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="paha_kanan" class="form-label">Paha Kanan</label>
+                        <input type="text" class="form-control" id="paha_kanan" name="paha_kanan" placeholder="Paha Kanan" value="{{ formatNumber($profile->paha_kanan) }}">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="paha_kiri" class="form-label">Paha Kiri</label>
+                        <input type="text" class="form-control" id="paha_kiri" name="paha_kiri" placeholder="Paha Kiri" value="{{ formatNumber($profile->paha_kiri) }}">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="betis_kanan" class="form-label">Betis Kanan</label>
+                        <input type="text" class="form-control" id="betis_kanan" name="betis_kanan" placeholder="Betis Kanan" value="{{ formatNumber($profile->betis_kanan) }}">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="betis_kiri" class="form-label">Betis Kiri</label>
+                        <input type="text" class="form-control" id="betis_kiri" name="betis_kiri" placeholder="Betis Kiri" value="{{ formatNumber($profile->betis_kiri) }}">
+                    </div>
+
+                    <!-- Commented out fields -->
                     <!-- <div class="col-md-12">
                         <label for="massa_otot" class="form-label">Massa Otot</label>
-                        <input type="text" class="form-control" id="massa_otot" name="massa_otot" placeholder="Massa Otot" value="{{ $profile->massa_otot ?? '' }}">
+                        <input type="text" class="form-control" id="massa_otot" name="massa_otot" placeholder="Massa Otot" value="{{ formatNumber($profile->massa_otot) }}">
                     </div>
                     <div class="col-md-12">
                         <label for="massa_tulang" class="form-label">Massa Tulang</label>
-                        <input type="text" class="form-control" id="massa_tulang" name="massa_tulang" placeholder="Massa Tulang" value="{{ $profile->massa_tulang ?? '' }}">
+                        <input type="text" class="form-control" id="massa_tulang" name="massa_tulang" placeholder="Massa Tulang" value="{{ formatNumber($profile->massa_tulang) }}">
                     </div>
                     <div class="col-md-12">
                         <label for="persentase_lemak_tubuh" class="form-label">Persentase Lemak Tubuh</label>
-                        <input type="text" class="form-control" id="persentase_lemak_tubuh" name="persentase_lemak_tubuh" value="{{ $profile->persentase_lemak_tubuh ?? '' }}">
+                        <input type="text" class="form-control" id="persentase_lemak_tubuh" name="persentase_lemak_tubuh" value="{{ formatNumber($profile->persentase_lemak_tubuh) }}">
                     </div>
                     <div class="col-md-12">
                         <label for="intoleransi_latihan_atau_alergi" class="form-label">Intoleransi Latihan atau Alergi</label>
@@ -318,7 +339,8 @@ starter Page
                         alert(response.message);
                         window.location.href = "{{ route('member.profile') }}";
                     } else {
-                        alert(response.message);
+                        // alert(response.message);
+                        alert('Gagal Update Profile');
                     }
                 }
             });

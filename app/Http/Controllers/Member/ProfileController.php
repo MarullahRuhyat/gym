@@ -172,9 +172,11 @@ class ProfileController extends Controller
         $photo_profile = $this->photo_profile();
         $profile = DB::table('users')
             ->leftjoin('informasi_fisik', 'users.id', '=', 'informasi_fisik.user_id')
+            ->leftjoin('informasi_fisik_tambahan', 'users.id', '=', 'informasi_fisik_tambahan.user_id')
             ->where('users.id', $auth->id)
-            ->select('users.*', 'informasi_fisik.*', 'users.id as id')
+            ->select('users.*', 'informasi_fisik.*', 'users.id as id', 'informasi_fisik_tambahan.*')
             ->get();
+
         $profile[0]->photo_profile = $photo_profile;
 
         return view('member.profile.edit-profile', compact('profile'));
@@ -187,7 +189,7 @@ class ProfileController extends Controller
         $user = DB::table('users')->where('id', $user->id)->get();
         $validate = $request->validate([
             'user_name' => ['required'],
-            'user_phone_number' => ['required', 'min:10', 'unique:users,phone_number,' . $request->user_id],
+            // 'user_phone_number' => ['required', 'min:10', 'unique:users,phone_number,' . $request->user_id],
         ]);
 
         if (!$validate) {
@@ -200,16 +202,21 @@ class ProfileController extends Controller
             $file->move('build/images/member/photo_profile', $file_name);
         }
 
-        $update_data_user = DB::table('users')->where('id', $request->user_id)->update([
-            'photo_profile' => $file_name ?? null,
-            'name' => $request->user_name,
-            'address' => $request->user_address,
-            'phone_number' => $request->user_phone_number,
-            'email' => $request->user_email,
-            'date_of_birth' => $request->user_date_of_birth,
-            'gender' => $request->user_gender,
-            // 'password' => bcrypt($request->user_password),
-        ]);
+        $user_exist = DB::table('users')->where('id', $user[0]->id)->exists();
+        if ($user_exist) {
+            $update_data_user = DB::table('users')->where('id', $user[0]->id)->update([
+                'photo_profile' => $file_name ?? null,
+                'name' => $request->user_name,
+                'address' => $request->user_address,
+                'phone_number' => $request->user_phone_number,
+                'email' => $request->user_email,
+                'date_of_birth' => $request->user_date_of_birth,
+                'gender' => $request->user_gender,
+                // 'password' => bcrypt($request->user_password),
+            ]);
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Data tidak ditemukan']);
+        }
 
         // $update_informasi_fisik = DB::table('informasi_fisik')->where('user_id', $request->user_id)->update([
         //     'tinggi_badan' => $request->tinggi_badan,
@@ -236,8 +243,8 @@ class ProfileController extends Controller
         //     'betis_kiri' => $request->betis_kiri,
         // ]);
 
-        if (DB::table('informasi_fisik')->where('user_id', $request->user_id)->exists()) {
-            $update_data_informasi_fisik = DB::table('informasi_fisik')->where('user_id', $request->user_id)->update([
+        if (DB::table('informasi_fisik')->where('user_id', $user[0]->id)->exists()) {
+            $update_data_informasi_fisik = DB::table('informasi_fisik')->where('user_id', $user[0]->id)->update([
                 'tinggi_badan' => $request->tinggi_badan,
                 'berat_badan' => $request->berat_badan,
             ]);
@@ -250,7 +257,7 @@ class ProfileController extends Controller
         }
 
         if (DB::table('informasi_fisik_tambahan')->where('user_id', $request->user_id)->exists()) {
-            $update_data_informasi_fisik_tambahan = DB::table('informasi_fisik_tambahan')->where('user_id', $request->user_id)->update([
+            $update_data_informasi_fisik_tambahan = DB::table('informasi_fisik_tambahan')->where('user_id', $user[0]->id)->update([
                 'leher' => $request->leher,
                 'bahu' => $request->bahu,
                 'dada' => $request->dada,

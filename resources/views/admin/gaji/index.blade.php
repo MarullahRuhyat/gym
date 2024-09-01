@@ -168,7 +168,7 @@ starter Page
                         </div>
                          <div class="mb-3 col-md-6">
                             <label for="amount_${row.id}" class="form-label">Amount</label>
-                            <input type="text" id="amount_${row.id}" name="amount_${row.id}" class="form-control angka-rupiah" value="${formatRupiah(`${row.amount}`,false)}" required>
+                            <input type="text" id="amount_${row.id}" name="amount_${row.id}" class="form-control" value="${formatRupiah(`${row.amount}`,false)}" required>
                         </div>
                         <hr>
                         `

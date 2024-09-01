@@ -17,6 +17,7 @@ $selectedTheme = session('theme', 'light');
         .gray-color {
             color: #a2a2a2;
         }
+
     </style>
     @yield('css')
 </head>
@@ -53,10 +54,18 @@ $selectedTheme = session('theme', 'light');
     @include('admin.layouts.common-scripts')
     <script>
         // format rupiah
+        // format rupiah
         function formatRupiah(angka, prefix) {
             // Jika input adalah string kosong, kembalikan 'Rp. 0' atau '0'
             if (angka.trim() === '' && prefix) {
                 return prefix ? 'Rp. 0' : '0';
+            }
+
+            // Mengecek apakah angka memiliki tanda minus
+            let negative = false;
+            if (angka[0] === '-') {
+                negative = true;
+                angka = angka.substr(1); // Menghapus tanda minus sementara
             }
 
             var numberString = angka.replace(/[^,\d]/g, '').toString(),
@@ -71,7 +80,9 @@ $selectedTheme = session('theme', 'light');
             }
 
             rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-            return prefix ? 'Rp. ' + rupiah : rupiah;
+
+            // Menambahkan kembali tanda minus jika diperlukan
+            return (negative ? '-' : '') + (prefix ? 'Rp. ' + rupiah : rupiah);
         }
 
 
@@ -83,16 +94,16 @@ $selectedTheme = session('theme', 'light');
             }
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             updateRupiahElements();
 
-            $(document).on('input', '.angka-rupiah', function() {
+            $(document).on('input', '.angka-rupiah', function () {
                 let nilai = $(this).val()
                 nilai = formatRupiah(nilai, false)
                 $(this).val(nilai)
             });
 
-            $('.theme').click(function() {
+            $('.theme').click(function () {
                 let color = $(this).data('color')
                 var formData = {
                     color: color,
@@ -103,15 +114,16 @@ $selectedTheme = session('theme', 'light');
                     url: `{{ route('admin_custom_template')}}`,
                     type: 'POST',
                     data: formData,
-                    success: function(response) {
+                    success: function (response) {
                         console.log(response);
                     },
-                    error: function(error) {
+                    error: function (error) {
                         console.log(error);
                     }
                 });
             });
         });
+
     </script>
     @yield('javascript')
 </body>

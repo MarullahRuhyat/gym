@@ -60,13 +60,75 @@ class ProfileController extends Controller
         $user = auth()->user();
         $data = DB::table('memberships')
             ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
-            ->where(function ($query) use ($user) {
-                $query->where('memberships.user_id', $user->id)
-                    ->orWhere('memberships.user_terkait', 'like', '%' . $user->id . '%');
-            })
+            ->where('memberships.user_id', $user->id)
             ->where('memberships.is_active', 1)
-            ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as id', 'gym_membership_packages.id as gym_membership_packages_id', 'gym_membership_packages.type_packages_id as type_packages_id', 'memberships.created_at as membership_created_at')
-            ->orderBy('membership_created_at', 'desc')
+            ->select('gym_membership_packages.type_packages_id as type_packages_id')
+            ->get();
+
+        if ($data->isEmpty()) {
+            return response()->json(['status' => 'error', 'message' => 'No active membership found.']);
+        }
+
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $length = 10;
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        // Generate QR code
+        $generate_image_from_qr_code = QrCode::format('png')->size(400)->generate($randomString);
+        $string_qr_code = $randomString;
+        $qr_code = $string_qr_code . '.png';
+        $path = public_path('build/images/member/qr_code/' . $qr_code);
+
+        DB::beginTransaction();
+
+        try {
+            // Save QR code information to database
+            $absent_member = new AbsentMember();
+            $absent_member->qr_code = $randomString;
+            $absent_member->path_qr_code = 'build/images/member/qr_code/' . $qr_code;
+            $absent_member->member_id = $user->id;
+            $absent_member->is_using_pt = $is_using_pt;
+            $absent_member->type_packages_id = $data[0]->type_packages_id;
+            $absent_member->save();
+
+            $save_qr_code_image = file_put_contents($path, $generate_image_from_qr_code);
+            // $save_qr_code_image = false;
+
+            // Attempt to save the QR code image to the file system
+            if (!$save_qr_code_image) {
+                // Rollback database changes if file saving fails
+                DB::rollBack();
+                // Delete the database record as part of cleanup
+                $absent_member->delete();
+                return response()->json(['status' => false, 'message' => 'Failed to save QR code image.', 'qr_code' => null]);
+            }
+
+            DB::commit();
+            return response()->json(['status' => true, 'message' => 'Berhasil mendapatkan QR', 'qr_code' => $string_qr_code]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['status' => false, 'message' => $e->getMessage(), 'qr_code' => null]);
+        }
+    }
+
+
+    public function generate_qr_code_backup($is_using_pt)
+    {
+        $user = auth()->user();
+        $data = DB::table('memberships')
+            ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+            ->where('memberships.user_id', $user->id)
+            // ->where(function ($query) use ($user) {
+            //     $query->where('memberships.user_id', $user->id)
+            //         ->orWhere('memberships.user_terkait', 'like', '%' . $user->id . '%');
+            // })
+            ->where('memberships.is_active', 1)
+            // ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as id', 'gym_membership_packages.id as gym_membership_packages_id', 'gym_membership_packages.type_packages_id as type_packages_id', 'memberships.created_at as membership_created_at')
+            ->select('gym_membership_packages.type_packages_id as type_packages_id')
+            // ->orderBy('membership_created_at', 'desc')
             ->get();
 
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -82,17 +144,24 @@ class ProfileController extends Controller
         file_put_contents(public_path('build/images/member/qr_code/' . $qr_code), $generate_image_from_qr_code);
         $path_qr_code = 'build/images/member/qr_code/' . $qr_code;
 
-        $absent_member = new AbsentMember();
-        $absent_member->qr_code = $randomString;
-        $absent_member->path_qr_code = $path_qr_code;
-        $absent_member->member_id = $user->id;
-        $absent_member->is_using_pt = $is_using_pt;
-        $absent_member->type_packages_id  = $data[0]->type_packages_id;
-        // $absent_member->id_paket_member = $data[0]->gym_membership_packages_id;
-        $absent_member->save();
+        // using try catch to check file saved or not in public path
+        try {
+            $absent_member = new AbsentMember();
+            $absent_member->qr_code = $randomString;
+            $absent_member->path_qr_code = $path_qr_code;
+            $absent_member->member_id = $user->id;
+            $absent_member->is_using_pt = $is_using_pt;
+            $absent_member->type_packages_id  = $data[0]->type_packages_id;
+            // $absent_member->id_paket_member = $data[0]->gym_membership_packages_id;
+            $absent_member->save();
+            // return $string_qr_code;
+            return response()->json(['status' => 'success', 'qr_code' => $string_qr_code]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
 
         // $path_qr_code = 'build/images/member/qr_code/' . $qr_code;
-        return $string_qr_code;
+
     }
 
     public function qr_code(Request $request)
@@ -114,7 +183,7 @@ class ProfileController extends Controller
                     return response()->json(['status' => 'success', 'qr_code' => $qr_data[0]->qr_code]);
                 } else {
                     $qr_code = $this->generate_qr_code($request->is_using_pt);
-                    return response()->json(['status' => 'success', 'qr_code' => $qr_code]);
+                    return response()->json(['status' => 'success', 'message' => $qr_code->original['message'], 'qr_code' => $qr_code->original['qr_code']]);
 
                 }
             } if ($request->is_using_pt == 1) {
@@ -122,7 +191,7 @@ class ProfileController extends Controller
                     return response()->json(['status' => 'success', 'qr_code' => $qr_data[0]->qr_code]);
                 } else {
                     $qr_code = $this->generate_qr_code($request->is_using_pt);
-                    return response()->json(['status' => 'success', 'qr_code' => $qr_code]);
+                    return response()->json(['status' => 'success', 'message' => $qr_code->original['message'], 'qr_code' => $qr_code->original['qr_code']]);
                 }
             }
         } else {

@@ -336,9 +336,15 @@ class AuthController extends Controller
         return redirect()->route('member.send-otp');
     }
 
-    public function withPassword()
+    public function withPassword(Request $request)
     {
-        return view('member.auth.loginpassword');
+        $phone_number = $request->cookie('phone_number');
+        $password = $request->cookie('password');
+        $remember = $request->cookie('remember_me');
+        if ($remember == '1') {
+            $remember = $request->has('remember_me');
+        }
+        return view('member.auth.loginpassword', compact('phone_number', 'password', 'remember'));
     }
 
     public function login_with_password(Request $request)

@@ -140,6 +140,11 @@ starter Page
         }).done(function (data) {
             // Hide the loading spinner and show the QR code image
             $('#loadingSpinner').hide();
+            if (data.qr_code == null) {
+                    alert('Please generate your QR code again');
+                    $('#ScrollableModal').modal('hide');
+                    return;
+                }
             $('#qr_code_img').attr('src',
                 '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code + '.png');
             $('#qr_code_img').show();
@@ -172,6 +177,11 @@ starter Page
             }).done(function (data) {
                 // Hide the loading spinner and show the QR code image
                 $('#loadingSpinner').hide();
+                if (data.qr_code == null) {
+                    alert('Please generate your QR code again');
+                    $('#ScrollableModal').modal('hide');
+                    return;
+                }
                 $('#qr_code_img').attr('src',
                     '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code + '.png');
                 $('#qr_code_img').show();

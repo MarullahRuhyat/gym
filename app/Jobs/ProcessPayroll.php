@@ -62,7 +62,7 @@ class ProcessPayroll implements ShouldQueue
                     ->leftJoin('type_packages', 'type_packages.id', '=', 'absent_members.type_packages_id')
                     ->where('absent_members.personal_trainer_id', $user->id)
                     ->whereBetween('absent_members.date', [$this->startDate, $this->endDate])
-                    ->groupBy('users.id', 'type_packages.id' , 'type_packages.bonus', 'type_packages.name')
+                    ->groupBy('users.id', 'type_packages.id', 'type_packages.bonus', 'type_packages.name')
                     ->orderBy('type_packages.id')
                     ->get();
 

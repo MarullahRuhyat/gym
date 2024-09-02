@@ -49,8 +49,7 @@ starter Page
                             <h5 class="mb-0">
                                 @if ($item->jenis_latihan == null)
                                 <button type="button" class="badge bg-danger" style="border: none"
-                                    data-id="{{ $item->id }}" data-bs-toggle="modal"
-                                    data-bs-target="#addJenisLatihanModal">Belum Memilih</button>
+                                    data-id="{{ $item->id }}">Belum Memilih</button>
                                 @elseif (count(explode(',', $item->jenis_latihan)) > 2)
                                 <button type="button" class="badge bg-success open-multiple-jenis-latihan"
                                     style="border: none" data-id="{{ $item->id }}" data data-bs-toggle="modal"
@@ -131,38 +130,6 @@ starter Page
     @endforeach
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="addJenisLatihanModal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header border-bottom-0 py-2">
-                <h5 class="modal-title">Tambah Jenis Latihan</h5>
-                <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="modal">
-                    <i class="material-icons-outlined">close</i>
-                </a>
-            </div>
-            <form id="updateJenisLatihanForm" method="post">
-                @csrf
-                <div class="modal-body">
-                    <div class="form-group mb-3">
-                        <label for="multiple-select-field" class="form-label">Jenis Latihan</label>
-                        <select class="form-select" id="multiple-select-field" name="jenis_latihan[]"
-                            data-placeholder="Pilih Jenis Latihan" multiple>
-                            <option value="">Pilih Jenis Latihan</option>
-                            @foreach ($dataLatihan as $item)
-                            <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer border-top-0">
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- Modal -->
 <div class="modal fade" id="openMultipleJenisLatihan">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -192,7 +159,7 @@ starter Page
 
 
 <script>
-    $('#memberContainer').on('click', '.open-multiple-jenis-latihan', function () {
+    $('#memberContainer').on('click', '.open-multiple-jenis-latihan', function() {
         const memberId = $(this).data('id');
         const jenisLatihan = $(this).data('jenislatihan');
         const dataMember = @json($data_member); // Pass your data from PHP to JavaScript
@@ -223,9 +190,9 @@ starter Page
     });
 
 
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const modal = document.getElementById('addJenisLatihanModal');
-        modal.addEventListener('show.bs.modal', function (event) {
+        modal.addEventListener('show.bs.modal', function(event) {
             const button = event.relatedTarget;
             const id = button.getAttribute('data-id');
             const form = document.getElementById('updateJenisLatihanForm');
@@ -233,7 +200,7 @@ starter Page
         });
     });
 
-    document.getElementById('searchForm').addEventListener('submit', function (e) {
+    document.getElementById('searchForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const searchName = document.getElementById('searchName').value;
         const searchDate = document.getElementById('searchDate').value;
@@ -336,6 +303,5 @@ starter Page
             })
             .catch(error => console.error('Error:', error));
     });
-
 </script>
 @endpush

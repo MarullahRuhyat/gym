@@ -15,11 +15,21 @@ class AbsenController extends Controller
     {
         $today = Carbon::today()->toDateString();
         $dataLatihan = JenisLatihan::all();
-        $data_member = AbsentMember::join('users', 'absent_members.member_id', '=', 'users.id')
-            // ->where('personal_trainer_id', auth()->user()->id)
+        // $data_member = AbsentMember::join('users', 'absent_members.member_id', '=', 'users.id')
+        //     ->whereDate('absent_members.date', $today)
+        //     ->select('users.name',  'users.phone_number', 'absent_members.*')
+        //     ->get();
+
+        $data_member = AbsentMember::join('users as member', 'absent_members.member_id', '=', 'member.id')
+            ->leftJoin('users as trainer', 'absent_members.personal_trainer_id', '=', 'trainer.id')
             ->whereDate('absent_members.date', $today)
-            ->select('users.name',  'users.phone_number', 'absent_members.*')
+            ->select('member.name as member_name', 
+                     'member.phone_number', 
+                     'absent_members.*', 
+                     'trainer.name as trainer_name')
             ->get();
+            // dd($data_member);
+
         return view('admin.absen', compact('data_member', 'dataLatihan'));
     }
     public function search(Request $request)

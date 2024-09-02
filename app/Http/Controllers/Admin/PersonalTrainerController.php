@@ -22,11 +22,7 @@ class PersonalTrainerController extends Controller
                     'phone_number' => 'nullable|string|max:20',
                     'status' => 'required|string',
                     'salary_pt' => 'required|string',
-<<<<<<< HEAD
                     'salary_description' => 'string',
-=======
-                    'salary_description' => 'required|string|default:-',
->>>>>>> 292d0b2 (update salary)
                 ]);
             }
 

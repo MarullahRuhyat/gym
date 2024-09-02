@@ -45,7 +45,7 @@ starter Page
                     </div>
                     <div class="card-footer">
                         <!-- button onclick with price as parameter  -->
-                        <button class="btn btn-primary" onclick="onclickPayNow('{{ $pkg->price }}')">
+                        <button class="btn btn-primary disabled" onclick="onclickPayNow('{{ $pkg->price }}')">
                         <!-- <button class="btn btn-primary" onclick="onclickPayNow()"> -->
                             Pay Now
                         </button>

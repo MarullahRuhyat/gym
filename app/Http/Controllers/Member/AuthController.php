@@ -36,6 +36,10 @@ class AuthController extends Controller
         if ($user_id == null) {
             $status = false;
             $message = 'Phone number not found.';
+            // jika user role != member
+        } elseif ($user_id != null && User::where('id', $user_id)->pluck('role')->first() != 'member') {
+            $status = false;
+            $message = 'Your Not member';
         } else {
             $otp = rand(1000, 9999);
             // $expired_at = now()->addMinutes(5);

@@ -29,7 +29,7 @@ starter Page
     <div class="col-md-6">
         <div class="card rounded-4">
             <div class="card-header">
-                <h3>{{ $item->name }}</h3>
+                <h3>{{ $item->member_name }}</h3>
             </div>
             <div class="card-body">
                 <div class="d-flex flex-column gap-3 me-3">
@@ -100,6 +100,19 @@ starter Page
                             </h5>
                         </div>
                     </div>
+
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0">Nama PT</h6>
+                        </div>
+                        <div class="">
+                            <h5 class="mb-0">
+                                {{ $item->trainer_name }}
+                            </h5>
+                        </div>
+                    </div>
+
+
                     <div class="d-flex align-items-center gap-3">
                         <div class="flex-grow-1">
                             <h6 class="mb-0">Status</h6>
@@ -241,7 +254,7 @@ starter Page
                             <div class="col-md-6">
                                 <div class="card rounded-4">
                                     <div class="card-header">
-                                        <h3>${item.name}</h3>
+                                        <h3>${item.member_name}</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="d-flex flex-column gap-3 me-3">
@@ -288,6 +301,16 @@ starter Page
                                                 <div class="">
                                                     <h5 class="mb-0">
                                                         ${item.end_time === null ? '<span class="badge bg-danger">Belum Pulang</span>' : item.end_time.split('-').join(':')}
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-0">Nama PT</h6>
+                                                </div>
+                                                <div class="">
+                                                    <h5 class="mb-0">
+                                                        ${item.trainer_name}
                                                     </h5>
                                                 </div>
                                             </div>

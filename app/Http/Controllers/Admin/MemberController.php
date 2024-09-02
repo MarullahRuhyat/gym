@@ -8,6 +8,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class MemberController extends Controller
 {
@@ -83,14 +84,39 @@ class MemberController extends Controller
         }
 
         $profile = DB::table('users')
-            ->leftJoin('informasi_fisik', 'users.id', '=', 'informasi_fisik.user_id')
-            ->where('users.id', $user->id)
-            ->select('users.*', 'informasi_fisik.*', 'users.id as id')
-            ->get();
+        ->leftjoin('informasi_fisik', 'users.id', '=', 'informasi_fisik.user_id')
+        ->leftjoin('informasi_fisik_tambahan', 'users.id', '=', 'informasi_fisik_tambahan.user_id')
+        ->where('users.id', $user->id)
+        ->select('users.*', 'informasi_fisik.*', 'informasi_fisik_tambahan.*', 'users.id as id')
+        ->get();
+
+        $membership = DB::table('memberships')
+        ->leftjoin('users', 'memberships.user_id', '=', 'users.id')
+        ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+        ->where('memberships.user_id', $user->id)
+        ->where('memberships.is_active', 1)
+        ->select('memberships.*', 'users.*', 'memberships.id as id', 'gym_membership_packages.name as membership_name')
+        ->orderBy('memberships.created_at', 'desc')
+        ->first();
+        if ($membership) {
+            $startDate = Carbon::parse($membership->start_date);
+            $endDate = Carbon::parse($membership->end_date);
+            $membership->duration_in_days = $membership->duration_in_days;
+        }
+
+        // check di table absent_members data user_id yang sama dengan user_id di table users yang is_using_pt = 1 dan check siapa saja nama pt nya dan kapan kapan saja dia menggunakan pt
+        $absent_members = DB::table('absent_members')
+                ->leftjoin('users', 'absent_members.member_id', '=', 'users.id')
+                ->leftjoin('users as personal_trainers', 'absent_members.personal_trainer_id', '=', 'personal_trainers.id')
+                ->where('absent_members.member_id', $user->id)
+                ->where('absent_members.is_using_pt', 1)
+                ->select('absent_members.*', 'users.name as member_name', 'personal_trainers.name as pt_name')
+                ->get();
+        
 
         // insert photo_profile to profile array
         $profile[0]->photo_profile = $photo_profile;
 
-        return view('admin.member.detail', compact('profile'));
+        return view('admin.member.detail', compact('profile', 'membership', 'absent_members'));
     }
 }

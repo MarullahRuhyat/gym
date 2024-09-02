@@ -24,11 +24,10 @@ class AbsenController extends Controller
             ->leftJoin('users as trainer', 'absent_members.personal_trainer_id', '=', 'trainer.id')
             ->whereDate('absent_members.date', $today)
             ->select('member.name as member_name', 
-                     'member.phone_number', 
-                     'absent_members.*', 
-                     'trainer.name as trainer_name')
+                        'member.phone_number', 
+                        'absent_members.*', 
+                        'trainer.name as trainer_name')
             ->get();
-            // dd($data_member);
 
         return view('admin.absen', compact('data_member', 'dataLatihan'));
     }
@@ -36,7 +35,12 @@ class AbsenController extends Controller
     {
         $searchName = $request->input('searchName');
         $searchDate = $request->input('searchDate');
-        $query = AbsentMember::join('users', 'absent_members.member_id', '=', 'users.id');
+        $query = AbsentMember::join('users as member', 'absent_members.member_id', '=', 'member.id')
+        ->leftJoin('users as trainer', 'absent_members.personal_trainer_id', '=', 'trainer.id')
+        ->select('member.name as member_name', 
+                    'member.phone_number', 
+                    'absent_members.*', 
+                    'trainer.name as trainer_name');
 
         if ($searchName) {
             $query->where('users.name', 'like', '%' . $searchName . '%');

@@ -31,7 +31,7 @@
 		</div>
 	</div>
 	<!--============== PRELOADER END ==============-->
-	
+
 	<!-- ================= HEADER ================= -->
 	<header class="header">
         <div class="top-panel">
@@ -169,7 +169,7 @@
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
 				</div>
-                
+
 			</div>
 		</div>
 	</section>
@@ -196,7 +196,7 @@
 						</div>
 					</div>
                     <div class="mb-5">
-						
+
 					</div>
 					<div class="contact-item mt-5">
 						<div class="contact-item-left">

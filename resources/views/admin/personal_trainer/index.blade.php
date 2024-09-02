@@ -68,7 +68,6 @@ starter Page
                         <textarea class="form-control" id="salary_desc" name="salary_description" required></textarea>
                     </div>
 
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -115,7 +114,6 @@ starter Page
                         <label for="salary_desc" class="form-label">Salary Description</label>
                         <textarea class="form-control" id="salary_desc" name="salary_description" required></textarea>
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

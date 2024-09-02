@@ -19,10 +19,7 @@ class UpdateInactiveMembers implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct()
-    {
-
-    }
+    public function __construct() {}
 
     /**
      * Execute the job.
@@ -38,6 +35,6 @@ class UpdateInactiveMembers implements ShouldQueue
             ->where('is_active', 1)
             ->update(['is_active' => 0]);
 
-        Log::info('process_inactive_member', []);
+        Log::info('process_inactive_member', [$tanggal_sekarang, $tanggal_target]);
     }
 }

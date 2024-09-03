@@ -188,7 +188,7 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
         Route::get('/search', [GajiPersonalTrainerController::class, 'search'])->name('personal_trainer.payment.search');
     });
 
-// scan
+    // scan
     Route::match(['get', 'post'], '/scan', [ScanByPTController::class, 'index'])->name('pt_scan');
     Route::post('/ajax-post-attendance', [ScanByPTController::class, 'post_attendance'])->name('pt_scan_ajax_post_attendance');
 });
@@ -210,6 +210,7 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::prefix('attendance-member')->group(function () {
         Route::get('/', [AbsenController::class, 'index'])->name('admin_absen');
         Route::get('/search', [AbsenController::class, 'search'])->name('admin_search');
+        Route::post('/ajax-detail-members', [AbsenController::class, 'ajax_detail_members'])->name('admin_ajax_detail_members');
     });
     // salary page
     Route::match(['get', 'post'], '/salary', [GajiController::class, 'index'])->name('admin_gaji');
@@ -233,4 +234,4 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
 });
 
 // masukin user ke database
-Route::get('/test',[MemberAuthController::class, 'test']);
+Route::get('/test', [MemberAuthController::class, 'test']);

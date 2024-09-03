@@ -7,6 +7,8 @@ use App\Models\AbsentMember;
 use App\Models\JenisLatihan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Membership;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class AbsenController extends Controller
@@ -23,12 +25,14 @@ class AbsenController extends Controller
         $data_member = AbsentMember::join('users as member', 'absent_members.member_id', '=', 'member.id')
             ->leftJoin('users as trainer', 'absent_members.personal_trainer_id', '=', 'trainer.id')
             ->whereDate('absent_members.date', $today)
-            ->select('member.name as member_name', 
-                     'member.phone_number', 
-                     'absent_members.*', 
-                     'trainer.name as trainer_name')
+            ->select(
+                'member.name as member_name',
+                'member.phone_number',
+                'absent_members.*',
+                'trainer.name as trainer_name'
+            )
             ->get();
-            // dd($data_member);
+        // dd($data_member);
 
         return view('admin.absen', compact('data_member', 'dataLatihan'));
     }
@@ -58,5 +62,47 @@ class AbsenController extends Controller
 
         $dataLatihan = JenisLatihan::all();
         return view('admin.absen', compact('data_member', 'dataLatihan'));
+    }
+
+    function ajax_detail_members(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required|string|max:255',
+        ]);
+        try {
+            $id = $request->id;
+            $absent = AbsentMember::find($id);
+            if ($absent) {
+
+                $user = null;
+                if ($absent->is_using_pt == 1) {
+                    $membersip = Membership::where('user_id', $absent->member_id)->where('is_active', 1)->select('user_terkait')->first();
+                    $user_terkait = array_map('intval', explode(',', $membersip->user_terkait));
+                    $user = User::whereIn('id',  $user_terkait)->select('name')->get();
+                }
+
+                // Do something with the validated data, e.g., save to the database
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Berhasil Proses',
+                    'qr' => $request->qr_code,
+                    'absen' => $absent,
+                    'time' => config('app.timezone'),
+                    'user' => $user
+                ]);
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => 'QR tidak ditemukan',
+                'qr' => $request->qr_code,
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Gagal memproses data',
+                'qr' => $request->qr_code,
+            ]);
+        }
     }
 }

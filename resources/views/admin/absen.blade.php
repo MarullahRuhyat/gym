@@ -123,6 +123,11 @@ starter Page
                             </div>
                         </div>
                     </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="flex-grow-1">
+                            <button class="btn btn-primary members" data-id="{{$item->id}}" data-bs-toggle="modal" data-bs-target="#membersModal">Members</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -149,6 +154,25 @@ starter Page
     </div>
 </div>
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="membersModal" tabindex="-1" aria-labelledby="membersModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="membersModalLabel">Detail Members</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal_body_membersModal">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @push('script')
 <!--plugins-->
@@ -302,6 +326,59 @@ starter Page
                 }
             })
             .catch(error => console.error('Error:', error));
+    });
+    $(document).on('click', '.members', function() {
+        let id = $(this).data('id');
+        var formData = {
+            id: id,
+            _token: '{{ csrf_token() }}' // Ensure you include the CSRF token
+        };
+
+        $.ajax({
+            url: `{{ route('admin_ajax_detail_members')}}`, // The route to your controller
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                if (response.status == true) {
+                    console.log(response.status);
+
+                    let data = response.absen.end_time;
+                    let nilai_end_time = data ? data : '-';
+                    let pt_disabled = '';
+                    let option = `<option value=''>--select--</option>`
+
+
+                    let html = `
+        <input type="hidden" class="form-control" name="id"  value="${response.absen.id}">
+      `
+
+
+                    if (response.absen.is_using_pt != 1) {
+                        html += `<div class="mb-3">
+            <label for="name" class="form-label">Member</label>
+            <input type="text" class="form-control" id="name" name="name" disabled value="${response.absen.member.name}">
+        </div>`
+                    } else {
+                        let member = response.user.map(e => e.name).join(', ');
+                        html += `<div class="mb-3">
+           <label for="exampleFormControlTextarea1">Members</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" disabled rows="3">${member}</textarea>
+        </div>`
+                    }
+
+                    $('#modal_body_membersModal').html(html)
+                    $('#btn_simpan').show();
+                } else {
+                    $('#modal_body_membersModal').html(response.message)
+                    $('#btn_close').show();
+                }
+
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+
+            }
+        });
     });
 </script>
 @endpush

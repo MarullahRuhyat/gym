@@ -123,11 +123,11 @@ starter Page
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-3">
+                    {{-- <div class="d-flex align-items-center gap-3">
                         <div class="flex-grow-1">
                             <button class="btn btn-primary members" data-id="{{$item->id}}" data-bs-toggle="modal" data-bs-target="#membersModal">Members</button>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

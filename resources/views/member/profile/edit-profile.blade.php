@@ -292,6 +292,28 @@ starter Page
 @push('script')
 <!-- custom script  -->
 <script>
+    // Function to format input value
+    function formatInput(event) {
+        let input = event.target;
+        let value = input.value;
+
+        // Replace comma with period
+        value = value.replace(',', '.');
+
+        // Update input value
+        input.value = value;
+    }
+
+    // Attach event listeners after DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        let inputs = document.querySelectorAll('input[type="text"]');
+        inputs.forEach(input => {
+            input.addEventListener('input', formatInput);
+        });
+    });
+</script>
+
+<script>
     $(document).ready(function() {
         $('#submit-update-profile').click(function(e) {
             // dd('test');

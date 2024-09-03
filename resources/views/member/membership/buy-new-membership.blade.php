@@ -253,7 +253,7 @@ starter Page
                                 <button class="btn btn-outline-secondary px-4" onclick="stepper1.previous()"><i
                                         class='bx bx-left-arrow-alt me-2'></i>Previous</button>
                                 <!-- <a type="submit" class="btn btn-grd-primary px-4">Pay<i class='bx bx-right-arrow-alt ms-2'></i></a> -->
-                                <button type="submit" class="btn btn-primary px-4">Pay<i
+                                <button type="submit" class="btn btn-primary px-4 disabled">Pay<i
                                         class='bx bx-right-arrow-alt ms-2'></i></button>
 
                                 <button type="button" class="btn btn-primary px-4" data-bs-toggle="modal"

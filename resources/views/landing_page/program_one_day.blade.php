@@ -142,7 +142,7 @@
 							<div class="date"><span>Isidentil</span></div>
 						</div>
 						<ul class="list">
-							<li>Rp. 75.000</li>
+							<li>Rp. 65.000</li>
 							<li>1x datang tanpa Personal Trainer.</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>

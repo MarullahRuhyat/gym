@@ -93,21 +93,115 @@ starter Page
                             <p class="mb-0">Berat Badan: {{ $profile->berat_badan }} kg </p>
                         </div>
                         <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
-                            <p class="mb-0">Massa Otot: {{ $profile->massa_otot }} cm </p>
+                            <p class="mb-0">Leher: {{ $profile->leher }} cm </p>
                         </div>
                         <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
-                            <p class="mb-0">Massa Tulang: {{ $profile->massa_tulang }} </p>
+                            <p class="mb-0">Bahu: {{ $profile->bahu }} cm </p>
                         </div>
                         <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
-                            <p class="mb-0">Persentase Lemak Tubuh: {{ $profile->persentase_lemak_tubuh }} % </p>
+                            <p class="mb-0">Dada: {{ $profile->dada }} cm </p>
                         </div>
                         <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
-                            <p class="mb-0">Intoleransi Latihan atau Alergi: {{ $profile->intoleransi_latihan_atau_alergi }} </p>
+                            <p class="mb-0">Lengan Kanan: {{ $profile->lengan_kanan }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Lengan Kiri: {{ $profile->lengan_kiri }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Fore Arm Kanan: {{ $profile->fore_arm_kanan }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Fore Arm Kiri: {{ $profile->fore_arm_kiri }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Perut: {{ $profile->perut }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Pinggang: {{ $profile->pinggang }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Paha Kanan: {{ $profile->paha_kanan }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Paha Kiri: {{ $profile->paha_kiri }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Betis Kanan: {{ $profile->betis_kanan }} cm </p>
+                        </div>
+                        <div class="info-list-item d-flex align-items-center gap-3"><span class="material-icons-outlined">done</span>
+                            <p class="mb-0">Betis Kiri: {{ $profile->betis_kiri }} cm </p>
                         </div>
                     </div>
                 </div>
             </div>
 
+        </div>
+    </div>
+</div><!--end row-->
+
+<div class="row justify-content-center">
+    <div class="col-12 col-xl-4">
+        <div class="card rounded-4">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between mb-3">
+                    <div class="">
+                        <h5 class="mb-0 fw-bold">Membership Details</h5>
+                    </div>
+                </div>
+                <!-- tampilkan paket membership  -->
+                @if ($membership == null)
+                <div class="justify-content-center text-center">
+                    <div class="card" style="margin:auto; padding-bottom:50px; padding:30px;">
+                        <p id="" class="mb-0 fw-bold">You don't have any membership yet</p>
+                    </div>
+                </div>
+                @else
+                <div class="justify-content-center text-center">
+                    <div class="card" style="margin:auto; padding-bottom:50px; padding:5px;">
+                        <div>
+                            <div class="d-flex justify-content-between">
+                                <p class="fw-semi-bold">Membership :</p>
+                                <p id="" class="fw-bold">{{ $membership->name }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p class="fw-semi-bold">Membership Period :</p>
+                                <p id="" class="text-danger fw-bold">{{ $membership->duration_in_days }} days</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p class="fw-semi-bold">Starting Date :</p>
+                                <p id="" class="fw-bold">{{ $membership->start_date }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p class="fw-semi-bold">Ending Date :</p>
+                                <p id="" class="fw-bold">{{ $membership->end_date }}</p>
+                            </div>
+
+                            <h5>History Member With PT</h5>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nama PT</th>
+                                        <th scope="col">Jam Mulai</th>
+                                        <th scope="col">Jam Selesai</th>
+                                        <th scope="col">Tanggal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($absent_members as $key => $history)
+                                    <tr>
+                                        <td>{{ $history->pt_name }}</td>
+                                        <td>{{ $history->start_time }}</td>
+                                        <td>{{ $history->end_time }}</td>
+                                        <td>{{ $history->date }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                @endif
+            </div>
         </div>
     </div>
 </div><!--end row-->

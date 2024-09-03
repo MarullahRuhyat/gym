@@ -99,17 +99,35 @@ starter Page
             <div class="modal-body" style="background-color : #fff">
                 <div class="order-summary">
                     {{-- <div class="card mb-0"> --}}
-                        <div class="card-body d-flex justify-content-center align-items-center">
-                            <!-- Loading Spinner -->
-                            <div id="loadingSpinner" style="display:none;">
-                                <span>Loading...</span> <!-- You can replace this with an actual spinner -->
-                            </div>
-
-                            <!-- QR Code Image -->
-                            <img id="qr_code_img" src="" class="w-50 rounded h-50" alt="..." style="display:none;">
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                        <!-- Loading Spinner -->
+                        <div id="loadingSpinner" style="display:none;">
+                            <span>Loading...</span> <!-- You can replace this with an actual spinner -->
                         </div>
+
+                        <!-- QR Code Image -->
+                        <img id="qr_code_img" src="" class="w-50 rounded h-50" alt="..." style="display:none;">
+                    </div>
                     {{-- </div> --}}
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ConfirmationModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Konfirmasi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin menampilkan QR Code?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" id="confirmShowQR" class="btn btn-primary">Ya, Tampilkan</button>
             </div>
         </div>
     </div>
@@ -120,42 +138,10 @@ starter Page
 @endsection
 @push('script')
 <script>
-   $(document).ready(function () {
-    $('#show_qr_member').click(function () {
-        $('#ScrollableModal').modal('show');
-        var is_using_pt = 0;
-
-        $.ajax({
-            url: "{{ route('member.qr_code') }}",
-            type: "POST",
-            data: {
-                is_using_pt: is_using_pt,
-                _token: "{{ csrf_token() }}",
-            },
-            beforeSend: function() {
-                // Show the loading spinner inside the modal
-                $('#loadingSpinner').show();
-                $('#qr_code_img').hide(); // Hide the QR code image while loading
-            }
-        }).done(function (data) {
-            // Hide the loading spinner and show the QR code image
-            $('#loadingSpinner').hide();
-            $('#qr_code_img').attr('src',
-                '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code + '.png');
-            $('#qr_code_img').show();
-        }).fail(function () {
-            // Hide the loading spinner if there was an error
-            $('#loadingSpinner').hide();
-            alert('An error occurred. Please try again.');
-        });
-    });
-});
-
-
     $(document).ready(function () {
-        $('#show_pt_member').click(function () {
+        $('#show_qr_member').click(function () {
             $('#ScrollableModal').modal('show');
-            var is_using_pt = 1;
+            var is_using_pt = 0;
 
             $.ajax({
                 url: "{{ route('member.qr_code') }}",
@@ -172,11 +158,63 @@ starter Page
             }).done(function (data) {
                 // Hide the loading spinner and show the QR code image
                 $('#loadingSpinner').hide();
+                if (data.qr_code == null) {
+                    alert('Please generate your QR code again');
+                    $('#ScrollableModal').modal('hide');
+                    return;
+                }
                 $('#qr_code_img').attr('src',
-                    '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data.qr_code + '.png');
+                    '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data
+                    .qr_code + '.png');
                 $('#qr_code_img').show();
             }).fail(function () {
                 // Hide the loading spinner if there was an error
+                $('#loadingSpinner').hide();
+                alert('An error occurred. Please try again.');
+            });
+        });
+    });
+
+
+    $(document).ready(function () {
+        // Ketika tombol untuk menampilkan QR Code ditekan
+        $('#show_pt_member').click(function () {
+            $('#ConfirmationModal').modal('show'); // Tampilkan modal konfirmasi
+        });
+
+        // Ketika pengguna mengonfirmasi untuk menampilkan QR Code
+        $('#confirmShowQR').click(function () {
+            $('#ConfirmationModal').modal('hide'); // Sembunyikan modal konfirmasi
+            $('#ScrollableModal').modal('show'); // Tampilkan modal QR
+
+            var is_using_pt = 1;
+
+            $.ajax({
+                url: "{{ route('member.qr_code') }}",
+                type: "POST",
+                data: {
+                    is_using_pt: is_using_pt,
+                    _token: "{{ csrf_token() }}",
+                },
+                beforeSend: function () {
+                    // Tampilkan spinner loading
+                    $('#loadingSpinner').show();
+                    $('#qr_code_img').hide(); // Sembunyikan gambar QR Code saat loading
+                }
+            }).done(function (data) {
+                // Sembunyikan spinner loading dan tampilkan gambar QR Code
+                $('#loadingSpinner').hide();
+                if (data.qr_code == null) {
+                    alert('Please generate your QR code again');
+                    $('#ScrollableModal').modal('hide');
+                    return;
+                }
+                $('#qr_code_img').attr('src',
+                    '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data
+                    .qr_code + '.png');
+                $('#qr_code_img').show();
+            }).fail(function () {
+                // Sembunyikan spinner loading jika ada kesalahan
                 $('#loadingSpinner').hide();
                 alert('An error occurred. Please try again.');
             });

@@ -333,8 +333,8 @@ class PackageController extends Controller
         //     ->orderBy('payments.id', 'desc')
         //     ->get();
         $packages_membership_payments = DB::table('memberships')
-            ->join('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
-            ->join('payments', 'memberships.id', '=', 'payments.membership_id')
+            ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+            ->leftjoin('payments', 'memberships.id', '=', 'payments.membership_id')
             ->where('memberships.user_id', $user->id)
             // ->where('memberships.is_active', 1)
             ->orderBy('payments.id', 'desc')

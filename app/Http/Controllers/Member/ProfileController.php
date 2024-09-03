@@ -55,7 +55,64 @@ class ProfileController extends Controller
         return view('member.profile.dashboard', ['membership' => $membership]);
     }
 
+
+
     public function generate_qr_code($is_using_pt)
+    {
+        $user = auth()->user();
+        $data = DB::table('memberships')
+            ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
+            ->where('memberships.user_id', $user->id)
+            ->where('memberships.is_active', 1)
+            ->select('gym_membership_packages.type_packages_id as type_packages_id')
+            ->get();
+
+        // Generate random string with current date, month, and seconds
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $length = 10;
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        // Append date, seconds, and month to the random string
+        $dateTimeString = date('dmHis'); // Day, Month, Hour, Minute, Second
+        $randomString .= $dateTimeString;
+
+        $generate_image_from_qr_code = QrCode::format('png')->size(400)->generate($randomString);
+        $string_qr_code = $randomString;
+        $qr_code = $string_qr_code . '.png';
+        $qr_code_path = public_path('build/images/member/qr_code/' . $qr_code);
+
+        // Simpan QR code ke dalam file
+        if (file_put_contents($qr_code_path, $generate_image_from_qr_code)) {
+            // Cek apakah file QR code berhasil dibuat
+            if (file_exists($qr_code_path)) {
+                try {
+                    $absent_member = new AbsentMember();
+                    $absent_member->qr_code = $randomString;
+                    $absent_member->path_qr_code = 'build/images/member/qr_code/' . $qr_code;
+                    $absent_member->member_id = $user->id;
+                    $absent_member->is_using_pt = $is_using_pt;
+                    $absent_member->type_packages_id = $data[0]->type_packages_id;
+                    $absent_member->save();
+
+                    return response()->json(['status' => 'success', 'qr_code' => $string_qr_code]);
+                } catch (\Exception $e) {
+                    // Hapus file QR code jika terjadi error saat menyimpan ke database
+                    unlink($qr_code_path);
+                    return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+                }
+            } else {
+                return response()->json(['status' => 'error', 'message' => 'Failed to create QR code file.']);
+            }
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Failed to save QR code file.']);
+        }
+    }
+
+
+    public function testQrcodeHenny($is_using_pt)
     {
         $user = auth()->user();
         $data = DB::table('memberships')
@@ -151,7 +208,7 @@ class ProfileController extends Controller
             $absent_member->path_qr_code = $path_qr_code;
             $absent_member->member_id = $user->id;
             $absent_member->is_using_pt = $is_using_pt;
-            $absent_member->type_packages_id  = $data[0]->type_packages_id;
+            $absent_member->type_packages_id = $data[0]->type_packages_id;
             // $absent_member->id_paket_member = $data[0]->gym_membership_packages_id;
             $absent_member->save();
             // return $string_qr_code;
@@ -173,12 +230,12 @@ class ProfileController extends Controller
             ->first();
 
         $qr_data = AbsentMember::where('member_id', $user->id)
-                ->where('end_time', null)
-                ->where('is_using_pt', $request->is_using_pt)
-                ->get();
+            ->where('end_time', null)
+            ->where('is_using_pt', $request->is_using_pt)
+            ->get();
 
         if ($membership_exist != null) {
-            if ($request->is_using_pt == 0){
+            if ($request->is_using_pt == 0) {
                 if (!$qr_data->isEmpty()) {
                     return response()->json(['status' => 'success', 'qr_code' => $qr_data[0]->qr_code]);
                 } else {
@@ -186,7 +243,8 @@ class ProfileController extends Controller
                     return response()->json(['status' => 'success', 'message' => $qr_code->original['message'], 'qr_code' => $qr_code->original['qr_code']]);
 
                 }
-            } if ($request->is_using_pt == 1) {
+            }
+            if ($request->is_using_pt == 1) {
                 if (!$qr_data->isEmpty()) {
                     return response()->json(['status' => 'success', 'qr_code' => $qr_data[0]->qr_code]);
                 } else {

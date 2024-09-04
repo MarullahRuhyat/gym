@@ -146,7 +146,7 @@ starter Page
             // Panggil server untuk mendapatkan informasi apakah QR datang atau pulang
             $.ajax({
                 url: "{{ route('member.check_qr_status') }}", // Endpoint baru untuk memeriksa status QR
-                type: "GET",
+                type: "POST",
                 data: {
                     is_using_pt: is_using_pt,
                 },

@@ -420,4 +420,18 @@ class ProfileController extends Controller
 
         return response()->json(['status' => 'success', 'message' => 'Data berhasil diupdate']);
     }
+
+    public function check_qr_status() {
+        $user = auth()->user();
+        $checking_absent_today = DB::table('absent_members')
+            ->where('member_id', $user->id)
+            ->where('date', Carbon::today())
+            ->where('end_time', null)
+            ->get(); 
+        if ($checking_absent_today->isEmpty()) {
+            return response()->json(['qr_type' => 'datang']);
+        } else {
+            return response()->json(['qr_type' => 'pulang']);
+        }
+    }
 }

@@ -141,7 +141,35 @@ starter Page
     $(document).ready(function () {
         // Ketika tombol Show QR Member ditekan
         $('#show_qr_member').click(function () {
-            $('#ConfirmationModal').modal('show'); // Tampilkan modal konfirmasi
+            var is_using_pt = 0; // Set to 0 since this is for Member QR
+
+            // Panggil server untuk mendapatkan informasi apakah QR datang atau pulang
+            $.ajax({
+                url: "{{ route('member.check_qr_status') }}", // Endpoint baru untuk memeriksa status QR
+                type: "GET",
+                data: {
+                    is_using_pt: is_using_pt,
+                },
+                success: function (response) {
+                    // Tentukan apakah QR "datang" atau "pulang" berdasarkan data yang dikembalikan server
+                    var qrType = response.qr_type; // 'datang' atau 'pulang'
+
+                    // Ubah isi modal konfirmasi berdasarkan status QR
+                    if (qrType === 'datang') {
+                        $('#ConfirmationModal .modal-body p').text(
+                            'Apakah Anda yakin ingin menampilkan QR Code Datang?');
+                    } else if (qrType === 'pulang') {
+                        $('#ConfirmationModal .modal-body p').text(
+                            'Apakah Anda yakin ingin menampilkan QR Code Pulang?');
+                    }
+
+                    // Tampilkan modal konfirmasi setelah mendapatkan data
+                    $('#ConfirmationModal').modal('show');
+                },
+                error: function () {
+                    alert('Gagal memeriksa status QR. Silakan coba lagi.');
+                }
+            });
         });
 
         // Ketika pengguna mengonfirmasi untuk menampilkan QR Code Member
@@ -153,7 +181,7 @@ starter Page
 
             $.ajax({
                 url: "{{ route('member.qr_code') }}",
-                type: "POST",
+                type: "GET",
                 data: {
                     is_using_pt: is_using_pt,
                     _token: "{{ csrf_token() }}",
@@ -182,6 +210,7 @@ starter Page
             });
         });
     });
+
 
 
     $(document).ready(function () {

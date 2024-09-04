@@ -29,7 +29,8 @@ class AbsenController extends Controller
                 'member.name as member_name',
                 'member.phone_number',
                 'absent_members.*',
-                'trainer.name as trainer_name'
+                'trainer.name as trainer_name',
+                'absent_members.id as id_absent'
             )
             ->get();
 
@@ -58,7 +59,8 @@ class AbsenController extends Controller
             'member.name as member_name',
             'member.phone_number',
             'absent_members.*',
-            'trainer.name as trainer_name'
+            'trainer.name as trainer_name',
+            'absent_members.id as id_absent'
         )
             ->get();
 
@@ -77,7 +79,7 @@ class AbsenController extends Controller
         ]);
         try {
             $id = $request->id;
-            $absent = AbsentMember::find($id);
+            $absent = AbsentMember::with('member')->find($id);
             if ($absent) {
 
                 $user = null;

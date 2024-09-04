@@ -125,7 +125,7 @@ starter Page
                     </div>
                     {{-- <div class="d-flex align-items-center gap-3">
                         <div class="flex-grow-1">
-                            <button class="btn btn-primary members" data-id="{{$item->id}}" data-bs-toggle="modal" data-bs-target="#membersModal">Members</button>
+                            <button class="btn btn-primary members" data-id="{{$item->id_absent}}" data-bs-toggle="modal" data-bs-target="#membersModal">Members</button>
                         </div>
                     </div> --}}
                 </div>
@@ -316,6 +316,11 @@ starter Page
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="flex-grow-1">
+                                                    <button class="btn btn-primary members" data-id="${item.id_absent}" data-bs-toggle="modal" data-bs-target="#membersModal">Members</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -329,6 +334,8 @@ starter Page
     });
     $(document).on('click', '.members', function() {
         let id = $(this).data('id');
+        console.log(id);
+
         var formData = {
             id: id,
             _token: '{{ csrf_token() }}' // Ensure you include the CSRF token
@@ -340,7 +347,6 @@ starter Page
             data: formData,
             success: function(response) {
                 if (response.status == true) {
-                    console.log(response.status);
 
                     let data = response.absen.end_time;
                     let nilai_end_time = data ? data : '-';

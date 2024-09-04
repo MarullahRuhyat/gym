@@ -32,13 +32,6 @@ class ProcessNotifMemberActive implements ShouldQueue
         // Mendapatkan tanggal hari ini
         $today = Carbon::today();
 
-        // Mendapatkan data dengan end_date lebih dari 4 hari dari hari ini
-        // $users = DB::table('users')
-        //     ->select('name', 'phone_number', 'end_date')
-        //     ->where('end_date', '=', $today->addDays(4))
-        //     ->where('role', 'member')
-        //     ->get();
-
         $end_date_membership = DB::table('memberships')
             ->select('memberships.user_id', 'users.name as user_name', 'users.phone_number', 'memberships.end_date as end_date')
             ->join('users', 'memberships.user_id', '=', 'users.id')
@@ -50,7 +43,6 @@ class ProcessNotifMemberActive implements ShouldQueue
         // foreach ($users as $user) {
         foreach ($end_date_membership as $user) {
             // Buat pesan yang dipersonalisasi
-            Log::info('process_notif_member_inactive queue', [$user->name]);
 
             // $message = "Hallo {$user->name}, selamat siang\n\n";
             $message = "Hallo {$user->user_name}, selamat siang\n\n";

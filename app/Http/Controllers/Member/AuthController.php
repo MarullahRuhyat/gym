@@ -453,4 +453,30 @@ class AuthController extends Controller
         return redirect()->back()->with('error', 'Failed to reset password. OTP is invalid or has expired.');
         
     }
+
+    public function testabsenttime() {
+        $time = Carbon::now()->format('H:i:s');
+        $today = Carbon::today();
+    
+        DB::table('absent_members')
+            ->whereNull('date')
+            ->update([
+                'date' => $today,
+            ]);
+    
+        DB::table('absent_members')
+            ->whereNotNull('date')
+            ->whereNull('start_time')
+            ->update([
+                'start_time' => $time,
+            ]);
+    
+        DB::table('absent_members')
+            ->whereNotNull('date')
+            ->whereNotNull('start_time')
+            ->whereNull('end_time')
+            ->update([
+                'end_time' => $time,
+            ]);
+    }
 }

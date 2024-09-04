@@ -120,7 +120,7 @@ Route::prefix('member')->group(function () {
     Route::middleware(Member::class)->group(function () {
         Route::get('/dashboard', [ProfileController::class, 'dashboard'])->name('member.dashboard');
         Route::post('/qr-code', [ProfileController::class, 'qr_code'])->name('member.qr_code');
-        Route::get('/check_qr_status', [ProfileController::class, 'check_qr_status'])->name('member.check_qr_status');
+        Route::post('/check_qr_status', [ProfileController::class, 'check_qr_status'])->name('member.check_qr_status');
         Route::prefix('profile')->group(function () {
             Route::get('/', [ProfileController::class, 'profile'])->name('member.profile');
             Route::get('/edit-profile', [ProfileController::class, 'edit_profile'])->name('member.edit_profile');

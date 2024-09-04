@@ -12,7 +12,7 @@ class ScheduleEndTimeAbsentMember extends Command
      *
      * @var string
      */
-    protected $signature = 'app:schedule-end-time-absent-member';
+    protected $signature = 'run:schedule-end-time-absent-member';
 
     /**
      * The console command description.

@@ -43,6 +43,7 @@ class ProcessNotifMemberActive implements ShouldQueue
         // foreach ($users as $user) {
         foreach ($end_date_membership as $user) {
             // Buat pesan yang dipersonalisasi
+            Log::info('process_notif_member_inactive queue', [$user->name]);
 
             // $message = "Hallo {$user->name}, selamat siang\n\n";
             $message = "Hallo {$user->user_name}, selamat siang\n\n";

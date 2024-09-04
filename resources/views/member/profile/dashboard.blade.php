@@ -182,7 +182,7 @@ starter Page
 
             $.ajax({
                 url: "{{ route('member.qr_code') }}",
-                type: "GET",
+                type: "POST",
                 data: {
                     is_using_pt: is_using_pt,
                     _token: "{{ csrf_token() }}",

@@ -139,9 +139,17 @@ starter Page
 @push('script')
 <script>
     $(document).ready(function () {
+        // Ketika tombol Show QR Member ditekan
         $('#show_qr_member').click(function () {
-            $('#ScrollableModal').modal('show');
-            var is_using_pt = 0;
+            $('#ConfirmationModal').modal('show'); // Tampilkan modal konfirmasi
+        });
+
+        // Ketika pengguna mengonfirmasi untuk menampilkan QR Code Member
+        $('#confirmShowQR').click(function () {
+            $('#ConfirmationModal').modal('hide'); // Sembunyikan modal konfirmasi
+            $('#ScrollableModal').modal('show'); // Tampilkan modal QR
+
+            var is_using_pt = 0; // Set to 0 since this is for Member QR
 
             $.ajax({
                 url: "{{ route('member.qr_code') }}",
@@ -151,12 +159,12 @@ starter Page
                     _token: "{{ csrf_token() }}",
                 },
                 beforeSend: function () {
-                    // Show the loading spinner inside the modal
+                    // Tampilkan spinner loading
                     $('#loadingSpinner').show();
-                    $('#qr_code_img').hide(); // Hide the QR code image while loading
+                    $('#qr_code_img').hide(); // Sembunyikan gambar QR Code saat loading
                 }
             }).done(function (data) {
-                // Hide the loading spinner and show the QR code image
+                // Sembunyikan spinner loading dan tampilkan gambar QR Code
                 $('#loadingSpinner').hide();
                 if (data.qr_code == null) {
                     alert('Please generate your QR code again');
@@ -168,7 +176,7 @@ starter Page
                     .qr_code + '.png');
                 $('#qr_code_img').show();
             }).fail(function () {
-                // Hide the loading spinner if there was an error
+                // Sembunyikan spinner loading jika ada kesalahan
                 $('#loadingSpinner').hide();
                 alert('An error occurred. Please try again.');
             });

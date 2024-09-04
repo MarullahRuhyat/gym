@@ -30,16 +30,28 @@ class EndTimeAbsent implements ShouldQueue
     public function handle(): void
     {
         $time = Carbon::now()->format('H:i:s');
-
-        // Memeriksa apakah waktu saat ini adalah 23:59:59
-        if ($time == '23:59:59') {
-            // Mengupdate semua member yang start_date atau end_date kosong
-            AbsentMember::whereNull('start_date')
-                ->orWhereNull('end_date')
-                ->update([
-                    'start_date' => Carbon::now()->format('H:i:s'), // Mengisi dengan format waktu saja
-                    'end_date' => Carbon::now()->format('H:i:s')    // Mengisi dengan format waktu saja
-                ]);
-        }
+        $today = Carbon::today();
+    
+        DB::table('absent_members')
+            ->whereNull('date')
+            ->update([
+                'date' => $today,
+            ]);
+    
+        DB::table('absent_members')
+            ->whereNotNull('date')
+            ->whereNull('start_time')
+            ->update([
+                'start_time' => $time,
+            ]);
+    
+        DB::table('absent_members')
+            ->whereNotNull('date')
+            ->whereNotNull('start_time')
+            ->whereNull('end_time')
+            ->update([
+                'end_time' => $time,
+            ]);
+            
     }
 }

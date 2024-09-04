@@ -149,6 +149,7 @@ starter Page
                 type: "POST",
                 data: {
                     is_using_pt: is_using_pt,
+                    _token: "{{ csrf_token() }}",
                 },
                 success: function (response) {
                     // Tentukan apakah QR "datang" atau "pulang" berdasarkan data yang dikembalikan server

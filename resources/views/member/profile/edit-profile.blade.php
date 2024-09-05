@@ -352,7 +352,7 @@ starter Page
             // Send the AJAX request with the updated form data
             $.ajax({
                 type: "POST",
-                url: "{{ route('member.edit-profile.process', $profile->id) }}",
+                url: "{{ route('member.edit-profile.process') }}",
                 data: formData,
                 processData: false,
                 contentType: false,

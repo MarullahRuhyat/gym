@@ -124,7 +124,7 @@ Route::prefix('member')->group(function () {
         Route::prefix('profile')->group(function () {
             Route::get('/', [ProfileController::class, 'profile'])->name('member.profile');
             Route::get('/edit-profile', [ProfileController::class, 'edit_profile'])->name('member.edit_profile');
-            Route::post('/edit-profile', [ProfileController::class, 'edit_profile_process'])->name('member.edit-profile.process');
+            Route::post('/edit-profile-profile', [ProfileController::class, 'edit_profile_process'])->name('member.edit-profile.process');
         });
         Route::prefix('payment')->group(function () {
             // Route::get('/', [PaymentController::class, 'payment'])->name('member.payment');

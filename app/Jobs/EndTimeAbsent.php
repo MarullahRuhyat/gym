@@ -29,7 +29,7 @@ class EndTimeAbsent implements ShouldQueue
      */
     public function handle(): void
     {
-        $time = Carbon::now()->format('H:i:s');
+        $time = "23:59:59";
         $today = Carbon::today();
     
         DB::table('absent_members')

@@ -50,7 +50,7 @@ Login
                                 <div class="form-check form-switch">
                                     {{-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="{{$remember ?? ''}}" checked name="remember_me"> --}}
                                     {{-- cehck box if checked value 1 if not value 0 --}}
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="1" name="remember_me">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="1" name="remember_me" checked>
                                     <label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
                                 </div>
                             </div>

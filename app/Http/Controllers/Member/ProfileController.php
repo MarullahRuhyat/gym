@@ -345,31 +345,6 @@ class ProfileController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Data tidak ditemukan']);
         }
 
-        // $update_informasi_fisik = DB::table('informasi_fisik')->where('user_id', $request->user_id)->update([
-        //     'tinggi_badan' => $request->tinggi_badan,
-        //     'berat_badan' => $request->berat_badan,
-        //     // 'massa_otot' => $request->massa_otot ?? null,
-        //     // 'massa_tulang' => $request->massa_tulang ?? null,
-        //     // 'persentase_lemak_tubuh' => $request->persentase_lemak_tubuh ?? null,
-        //     // 'intoleransi_latihan_atau_alergi' => $request->intoleransi_latihan_atau_alergi ?? null,
-        // ]);
-
-        // $update_informasi_fisik_tambahan = DB::table('informasi_fisik_tambahan')->where('user_id', $request->user_id)->update([
-        //     'leher' => $request->leher,
-        //     'bahu' => $request->bahu,
-        //     'dada' => $request->dada,
-        //     'lengan_kanan' => $request->lengan_kanan,
-        //     'lengan_kiri' => $request->lengan_kiri,
-        //     'fore_arm_kanan' => $request->fore_arm_kanan,
-        //     'fore_arm_kiri' => $request->fore_arm_kiri,
-        //     'perut' => $request->perut,
-        //     'pinggang' => $request->pinggang,
-        //     'paha_kanan' => $request->paha_kanan,
-        //     'paha_kiri' => $request->paha_kiri,
-        //     'betis_kanan' => $request->betis_kanan,
-        //     'betis_kiri' => $request->betis_kiri,
-        // ]);
-
         if (DB::table('informasi_fisik')->where('user_id', $user[0]->id)->exists()) {
             $update_data_informasi_fisik = DB::table('informasi_fisik')->where('user_id', $user[0]->id)->update([
                 'tinggi_badan' => $request->tinggi_badan,

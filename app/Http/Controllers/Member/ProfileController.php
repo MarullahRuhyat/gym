@@ -309,11 +309,12 @@ class ProfileController extends Controller
         return view('member.profile.edit-profile', compact('profile'));
     }
 
-    public function edit_profile_process(Request $request)
+    public function edit_profile_process(Request $request, $id)
     {
         // dd($request->all());
-        $user = auth()->user();
-        $user = DB::table('users')->where('id', $user->id)->get();
+        // $user = auth()->user();
+        // $user = DB::table('users')->where('id', $user->id)->get();
+        $user = DB::table('users')->where('id', $id)->get();
         $validate = $request->validate([
             'user_name' => ['required'],
             // 'user_phone_number' => ['required', 'min:10', 'unique:users,phone_number,' . $request->user_id],

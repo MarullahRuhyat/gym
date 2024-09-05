@@ -352,7 +352,7 @@ class ProfileController extends Controller
             ]);
         } else {
             $update_data_informasi_fisik = DB::table('informasi_fisik')->insert([
-                'user_id' => $request->user_id,
+                'user_id' => $user[0]->id, // Fix user_id reference
                 'tinggi_badan' => $request->tinggi_badan,
                 'berat_badan' => $request->berat_badan,
             ]);

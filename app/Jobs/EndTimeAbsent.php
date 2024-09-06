@@ -36,6 +36,7 @@ class EndTimeAbsent implements ShouldQueue
             ->whereNull('date')
             ->update([
                 'date' => $today,
+                'updated_at' => Carbon::now(),
             ]);
     
         DB::table('absent_members')
@@ -43,6 +44,7 @@ class EndTimeAbsent implements ShouldQueue
             ->whereNull('start_time')
             ->update([
                 'start_time' => $time,
+                'updated_at' => Carbon::now(),
             ]);
     
         DB::table('absent_members')
@@ -51,6 +53,7 @@ class EndTimeAbsent implements ShouldQueue
             ->whereNull('end_time')
             ->update([
                 'end_time' => $time,
+                'updated_at' => Carbon::now(),
             ]);
             
     }

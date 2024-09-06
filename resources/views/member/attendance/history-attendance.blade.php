@@ -41,7 +41,7 @@ Absensi Member
         </div>
         <button type="submit" class="btn btn-primary">Cari</button>
     </form>
-    <button type="button" class="btn btn-success w-100 w-md-auto ms-md-1">Export</button>
+    <button type="button" class="btn btn-success w-100 w-md-auto ms-md-1" id="export">Export</button>
 </div>
 <hr>
 
@@ -55,7 +55,7 @@ Absensi Member
     @else
     @foreach ($data_member as $item)
     <div class="col-md-6">
-        <div class="card rounded-4">
+        <div class="card rounded-4" id="attendanceTable">
             <div class="card-header">
                 <h3>{{ $item->name }}</h3>                
             </div>
@@ -148,4 +148,45 @@ Absensi Member
 <script src="{{ URL::asset('build/plugins/metismenu/metisMenu.min.js') }}"></script>
 <script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>
 <script src="{{ URL::asset('build/js/main.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
+<script>
+document.getElementById('export').addEventListener('click', function() {
+    // Siapkan array untuk menampung data
+    var data = [];
+
+    // Ambil semua card
+    var cards = document.querySelectorAll('#memberContainer .card');
+
+    // Loop melalui setiap card dan ambil data
+    cards.forEach(function(card) {
+        var name = card.querySelector('.card-header h3').innerText;
+        var phone = card.querySelector('.card-body .d-flex:nth-child(1) h5').innerText;
+        var jenisLatihan = card.querySelector('.card-body .d-flex:nth-child(2) h5').innerText.trim();
+        var startTime = card.querySelector('.card-body .d-flex:nth-child(3) h5').innerText.trim();
+        var endTime = card.querySelector('.card-body .d-flex:nth-child(4) h5').innerText.trim();
+        var status = card.querySelector('.form-check-label b').innerText.trim();
+
+        // Push data ke dalam array
+        data.push({
+            'Name': name,
+            'Phone Number': phone,
+            'Jenis Latihan': jenisLatihan,
+            'Start Time': startTime,
+            'End Time': endTime,
+            'Status': status
+        });
+    });
+
+    // Convert data ke format Excel menggunakan SheetJS
+    var worksheet = XLSX.utils.json_to_sheet(data);
+    var workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Attendance");
+
+    // Simpan file Excel
+    XLSX.writeFile(workbook, 'attendance_history.xlsx');
+});
+
+</script>
+
 @endpush

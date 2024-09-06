@@ -219,17 +219,32 @@ starter Page
                                                 </div>
                                                 <div class="col-md-12">
                                                     <label for="bsValidation5" class="form-label">Password</label>
-                                                    <input type="password" class="form-control" id="bsValidation5"
-                                                        name="password" required>
+                                                    <div class="input-group">
+                                                        <input id="bsValidation5" type="password" class="form-control" name="password" required
+                                                            autocomplete="new-password">
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn btn-outline-secondary" id="toggle-password">
+                                                                <i class="bi-eye-slash-fill"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                     <div class="invalid-feedback">
                                                         Please fill your password.
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="col-md-12">
-                                                    <label for="bsValidation6" class="form-label">Confirm
-                                                        Password</label>
-                                                    <input type="password" class="form-control" id="bsValidation6"
-                                                        name="password_confirmation" required>
+                                                    <label for="bsValidation6" class="form-label">Confirm Password</label>
+                                                    <div class="input-group">
+                                                        <input id="bsValidation6" type="password" class="form-control"
+                                                            name="password_confirmation" required autocomplete="new-password">
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn btn-outline-secondary"
+                                                                id="toggle-password-confirm">
+                                                                <i class="bi-eye-slash-fill"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                     <div class="invalid-feedback">
                                                         Confirmation password is required and must be same as password.
                                                     </div>
@@ -1582,6 +1597,35 @@ starter Page
                 $('#bsValidation6').removeClass('is-invalid');
             }
         });
+    });
+
+
+    document.getElementById('toggle-password').addEventListener('click', function () {
+        var passwordInput = document.getElementById('bsValidation5');
+        var passwordIcon = this.querySelector('i');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            passwordIcon.classList.remove('bi-eye-slash-fill');
+            passwordIcon.classList.add('bi-eye-fill');
+        } else {
+            passwordInput.type = 'password';
+            passwordIcon.classList.remove('bi-eye-fill');
+            passwordIcon.classList.add('bi-eye-slash-fill');
+        }
+    });
+
+    document.getElementById('toggle-password-confirm').addEventListener('click', function () {
+        var confirmPasswordInput = document.getElementById('bsValidation6');
+        var confirmPasswordIcon = this.querySelector('i');
+        if (confirmPasswordInput.type === 'password') {
+            confirmPasswordInput.type = 'text';
+            confirmPasswordIcon.classList.remove('bi-eye-slash-fill');
+            confirmPasswordIcon.classList.add('bi-eye-fill');
+        } else {
+            confirmPasswordInput.type = 'password';
+            confirmPasswordIcon.classList.remove('bi-eye-fill');
+            confirmPasswordIcon.classList.add('bi-eye-slash-fill');
+        }
     });
 
 </script>

@@ -121,7 +121,7 @@ starter Page
                     </div>
                     <div class="col-md-12">
                         <label for="input3" class="form-label">Nomor HP</label>
-                        <input type="text" class="form-control" id="user_phone_number" name="user_phone_number" placeholder="Phone Number" value="{{ $profile->phone_number }}">
+                        <input type="text" class="form-control" id="user_phone_number" name="user_phone_number" placeholder="Phone Number" value="{{ $profile->phone_number }}" oninput="this.value = this.value.replace(/\+62/, '0').replace(/[^0-9]/g, '');">
                     </div>
                     <div class="col-md-12">
                         <label for="input4" class="form-label">Email</label>

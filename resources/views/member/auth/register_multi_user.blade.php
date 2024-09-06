@@ -87,9 +87,9 @@ starter Page
                                                                 <p class="card-text">{{ $pkg->description }}</p>
                                                                 <p class="card-text">Duration:
                                                                     {{ $pkg->duration_in_days }} Days</p>
-                                                                    <h5>Price:
-                                                                        Rp.{{ number_format($pkg->price, 0, ',', '.') }}
-                                                                    </h5>
+                                                                <h5>Price:
+                                                                    Rp.{{ number_format($pkg->price, 0, ',', '.') }}
+                                                                </h5>
                                                                 <div
                                                                     class="mt-3 d-flex align-items-center justify-content-between">
                                                                     <button style="color:white;"
@@ -191,6 +191,7 @@ starter Page
                                                 <div class="col-md-12">
                                                     <label for="bsValidation2" class="form-label">Phone Number</label>
                                                     <input type="text" class="form-control" id="bsValidation2"
+                                                        oninput="this.value = this.value.replace(/\+62/, '0').replace(/[^0-9]/g, '');"
                                                         placeholder="Phone Number" name="phone_number" required>
                                                     <div class="invalid-feedback">
                                                         Please fill a phone number.
@@ -218,14 +219,17 @@ starter Page
                                                 </div>
                                                 <div class="col-md-12">
                                                     <label for="bsValidation5" class="form-label">Password</label>
-                                                    <input type="password" class="form-control" id="bsValidation5" name="password" required>
+                                                    <input type="password" class="form-control" id="bsValidation5"
+                                                        name="password" required>
                                                     <div class="invalid-feedback">
                                                         Please fill your password.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <label for="bsValidation6" class="form-label">Confirm Password</label>
-                                                    <input type="password" class="form-control" id="bsValidation6" name="password_confirmation" required>
+                                                    <label for="bsValidation6" class="form-label">Confirm
+                                                        Password</label>
+                                                    <input type="password" class="form-control" id="bsValidation6"
+                                                        name="password_confirmation" required>
                                                     <div class="invalid-feedback">
                                                         Confirmation password is required and must be same as password.
                                                     </div>
@@ -383,7 +387,8 @@ starter Page
                                 style="font-size:12pt;">Waktu dan kapasitas instruktur untuk menjawab pertanyaan
                                 terbatas pada paket one day pass isidentil. Pelatihan secara privat dan intensif oleh
                                 instruktur harus dengan membeli paket one day pass PBC/PBBC isidentil. Pelatihan secara
-                                privat dan intensif oleh owner harus dengan membeli paket one day pass PBC/PBBC Gold Single
+                                privat dan intensif oleh owner harus dengan membeli paket one day pass PBC/PBBC Gold
+                                Single
                                 isidentil.</span></p>
                     </li>
                     <li style="list-style-type:disc;font-size:12pt;">
@@ -1318,7 +1323,8 @@ starter Page
         $('#stepper2_package_description').text(package_description);
         // $('#stepper2_package_price').text(data.package[0].price);
         $('#stepper2_package_duration').text(data.package[0].duration_in_days + ' Days');
-        $('#stepper2_package_price').text('Rp' + data.package[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+        $('#stepper2_package_price').text('Rp' + data.package[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,
+        "."));
         $('#stepper3_package_id').val(package_id);
     }
 
@@ -1418,7 +1424,8 @@ starter Page
                                     <input type="hidden" name="stepper3_package_id" id="stepper3_package_id_${formCount}" value="" disabled>
                                     <div class="col-md-12">
                                         <label for="bsValidation2_${formCount}" class="form-label">Phone Number</label>
-                                        <input type="text" class="form-control" id="bsValidation2_${formCount}" name="phone[]" placeholder="Phone" required>
+                                        <input type="text" class="form-control" id="bsValidation2_${formCount}" name="phone[]" 
+                                            placeholder="Phone" oninput="this.value = this.value.replace(/^\\+62/, '0').replace(/[^0-9]/g, '');" required>
                                         <div class="invalid-feedback">
                                             Please provide a valid phone number.
                                         </div>
@@ -1532,9 +1539,12 @@ starter Page
                     var payment_item_total = response.data.payment_item_total;
                     var user_registered = response.data.user_registered;
                     var total = response.data.total;
-                    $('#payment-item-total').text('Rp.' + payment_item_total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-                    $('#payment-user-registered').text('Rp.' + user_registered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-                    $('#payment-total').text('Rp.' + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                    $('#payment-item-total').text('Rp.' + payment_item_total.toString().replace(
+                        /\B(?=(\d{3})+(?!\d))/g, "."));
+                    $('#payment-user-registered').text('Rp.' + user_registered.toString().replace(
+                        /\B(?=(\d{3})+(?!\d))/g, "."));
+                    $('#payment-total').text('Rp.' + total.toString().replace(
+                        /\B(?=(\d{3})+(?!\d))/g, "."));
                     $('#payment_phone_number').val(response.data.user_phone_number);
                     $('#payment_amount').val(total);
                 } else {
@@ -1548,8 +1558,8 @@ starter Page
     });
 
     // check password and confirm password
-    $(document).ready(function() {
-        $('#bsValidation5').keyup(function() {
+    $(document).ready(function () {
+        $('#bsValidation5').keyup(function () {
             var password = $('#bsValidation5').val();
             var confirmPassword = $('#bsValidation6').val();
             if (password != confirmPassword) {
@@ -1561,7 +1571,7 @@ starter Page
             }
         });
 
-        $('#bsValidation6').keyup(function() {
+        $('#bsValidation6').keyup(function () {
             var password = $('#bsValidation5').val();
             var confirmPassword = $('#bsValidation6').val();
             if (password != confirmPassword) {
@@ -1575,6 +1585,7 @@ starter Page
     });
 
 </script>
+
 <!--bootstrap js-->
 <script src="{{ URL::asset('build/js/bootstrap.bundle.min.js') }}"></script>
 <!--plugins-->

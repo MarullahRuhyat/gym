@@ -48,7 +48,7 @@
                                                 class="text-danger">*</span></label>
                                         <input id="phone_number" type="phone_number"
                                             class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
-                                            value="{{ old('phone_number') }}" required autocomplete="phone_number" autofocus
+                                            value="{{ old('phone_number') }}" required autocomplete="phone_number" autofocus oninput="this.value = this.value.replace(/\+62/, '0').replace(/[^0-9]/g, '');"
                                             placeholder="Enter your Phone number">
 
                                         @error('phone_number')

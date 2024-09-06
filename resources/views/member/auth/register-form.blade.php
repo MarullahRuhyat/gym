@@ -24,7 +24,7 @@ starter Page
                         </div>
                         <div class="col-md-12">
                             <label for="bsValidation2" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" id="bsValidation2" placeholder="Phone Number" name="phone_number" required>
+                            <input type="text" class="form-control" id="bsValidation2" placeholder="Phone Number" name="phone_number" oninput="this.value = this.value.replace(/\+62/, '0').replace(/[^0-9]/g, '');" required>
                             <div class="invalid-feedback">
                                 Please fill a phone number.
                                 </div>

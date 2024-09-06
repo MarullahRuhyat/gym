@@ -20,7 +20,7 @@ starter Page
         </div>
         <button type="submit" class="btn btn-primary">Cari</button>
     </form>
-    <button type="button" class="btn btn-success w-100 w-md-auto ms-md-1">Export</button>
+    <button type="button" class="btn btn-success w-100 w-md-auto ms-md-1" id="export">Export</button>
 </div>
 <hr>
 
@@ -125,14 +125,15 @@ starter Page
                     </div>
                     {{-- <div class="d-flex align-items-center gap-3">
                         <div class="flex-grow-1">
-                            <button class="btn btn-primary members" data-id="{{$item->id_absent}}" data-bs-toggle="modal" data-bs-target="#membersModal">Members</button>
-                        </div>
-                    </div> --}}
+                            <button class="btn btn-primary members" data-id="{{$item->id_absent}}"
+                    data-bs-toggle="modal" data-bs-target="#membersModal">Members</button>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
-    @endforeach
+</div>
+</div>
+@endforeach
 </div>
 
 <div class="modal fade" id="openMultipleJenisLatihan">
@@ -181,9 +182,10 @@ starter Page
 <script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>
 <script src="{{ URL::asset('build/js/main.js') }}"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
 
 <script>
-    $('#memberContainer').on('click', '.open-multiple-jenis-latihan', function() {
+    $('#memberContainer').on('click', '.open-multiple-jenis-latihan', function () {
         const memberId = $(this).data('id');
         const jenisLatihan = $(this).data('jenislatihan');
         const dataMember = @json($data_member); // Pass your data from PHP to JavaScript
@@ -214,9 +216,9 @@ starter Page
     });
 
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const modal = document.getElementById('addJenisLatihanModal');
-        modal.addEventListener('show.bs.modal', function(event) {
+        modal.addEventListener('show.bs.modal', function (event) {
             const button = event.relatedTarget;
             const id = button.getAttribute('data-id');
             const form = document.getElementById('updateJenisLatihanForm');
@@ -224,7 +226,7 @@ starter Page
         });
     });
 
-    document.getElementById('searchForm').addEventListener('submit', function(e) {
+    document.getElementById('searchForm').addEventListener('submit', function (e) {
         e.preventDefault();
         const searchName = document.getElementById('searchName').value;
         const searchDate = document.getElementById('searchDate').value;
@@ -332,7 +334,7 @@ starter Page
             })
             .catch(error => console.error('Error:', error));
     });
-    $(document).on('click', '.members', function() {
+    $(document).on('click', '.members', function () {
         let id = $(this).data('id');
         console.log(id);
 
@@ -345,7 +347,7 @@ starter Page
             url: `{{ route('admin_ajax_detail_members')}}`, // The route to your controller
             type: 'POST',
             data: formData,
-            success: function(response) {
+            success: function (response) {
                 if (response.status == true) {
 
                     let data = response.absen.end_time;
@@ -380,11 +382,48 @@ starter Page
                 }
 
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.log(error);
 
             }
         });
     });
+    document.getElementById('export').addEventListener('click', function () {
+        // Siapkan array untuk menampung data
+        var data = [];
+
+        // Ambil semua card
+        var cards = document.querySelectorAll('#memberContainer .card');
+
+        // Loop melalui setiap card dan ambil data
+        cards.forEach(function (card) {
+            var name = card.querySelector('.card-header h3').innerText;
+            var phone = card.querySelector('.card-body .d-flex:nth-child(1) h5').innerText;
+            var jenisLatihan = card.querySelector('.card-body .d-flex:nth-child(2) h5').innerText
+        .trim();
+            var startTime = card.querySelector('.card-body .d-flex:nth-child(3) h5').innerText.trim();
+            var endTime = card.querySelector('.card-body .d-flex:nth-child(4) h5').innerText.trim();
+            var status = card.querySelector('.form-check-label b').innerText.trim();
+
+            // Push data ke dalam array
+            data.push({
+                'Name': name,
+                'Phone Number': phone,
+                'Jenis Latihan': jenisLatihan,
+                'Start Time': startTime,
+                'End Time': endTime,
+                'Status': status
+            });
+        });
+
+        // Convert data ke format Excel menggunakan SheetJS
+        var worksheet = XLSX.utils.json_to_sheet(data);
+        var workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Attendance");
+
+        // Simpan file Excel
+        XLSX.writeFile(workbook, 'attendance_history.xlsx');
+    });
+
 </script>
 @endpush

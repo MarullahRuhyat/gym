@@ -216,7 +216,10 @@ starter Page
             }).fail(function () {
                 // Sembunyikan spinner loading jika ada kesalahan
                 $('#loadingSpinner').hide();
-                alert('An error occurred. Please try again.');
+                console.error("Error details:", jqXHR.responseText); // Untuk debugging di console
+                alert('Failed to retrieve QR Code. Error: ' + textStatus + ', ' + errorThrown);
+
+                $('#ScrollableModal').modal('hide');
             });
         });
     });

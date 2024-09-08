@@ -151,24 +151,23 @@ starter Page
                     _token: "{{ csrf_token() }}",
                 },
                 beforeSend: function () {
-                    // Show the loading spinner inside the modal
+                    
                     $('#loadingSpinner').show();
-                    $('#qr_code_img').hide(); // Hide the QR code image while loading
+                    $('#qr_code_img').hide(); 
                 }
             }).done(function (data) {
-                // Hide the loading spinner and show the QR code image
+                
                 $('#loadingSpinner').hide();
                 if (data.qr_code == null) {
                     alert('Please generate your QR code again');
                     $('#ScrollableModal').modal('hide');
                     return;
                 }
-                $('#qr_code_img').attr('src',
-                    '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data
-                    .qr_code + '.png');
+                $('#qr_code_img').attr('src', 'data:image/png;base64,' + data.qr_code);
+
                 $('#qr_code_img').show();
             }).fail(function () {
-                // Hide the loading spinner if there was an error
+                
                 $('#loadingSpinner').hide();
                 alert('An error occurred. Please try again.');
             });
@@ -177,15 +176,15 @@ starter Page
 
 
     $(document).ready(function () {
-        // Ketika tombol untuk menampilkan QR Code ditekan
+        
         $('#show_pt_member').click(function () {
-            $('#ConfirmationModal').modal('show'); // Tampilkan modal konfirmasi
+            $('#ConfirmationModal').modal('show'); 
         });
 
-        // Ketika pengguna mengonfirmasi untuk menampilkan QR Code
+        
         $('#confirmShowQR').click(function () {
-            $('#ConfirmationModal').modal('hide'); // Sembunyikan modal konfirmasi
-            $('#ScrollableModal').modal('show'); // Tampilkan modal QR
+            $('#ConfirmationModal').modal('hide'); 
+            $('#ScrollableModal').modal('show'); 
 
             var is_using_pt = 1;
 
@@ -197,28 +196,26 @@ starter Page
                     _token: "{{ csrf_token() }}",
                 },
                 beforeSend: function () {
-                    // Tampilkan spinner loading
+                    
                     $('#loadingSpinner').show();
-                    $('#qr_code_img').hide(); // Sembunyikan gambar QR Code saat loading
+                    $('#qr_code_img').hide(); 
                 }
             }).done(function (data) {
-                // Sembunyikan spinner loading dan tampilkan gambar QR Code
+                
                 $('#loadingSpinner').hide();
+                console.log(data);
                 if (data.qr_code == null) {
                     alert('Please generate your QR code again');
                     $('#ScrollableModal').modal('hide');
                     return;
                 }
-                $('#qr_code_img').attr('src',
-                    '{{ URL::asset("build/images/member/qr_code/") }}' + '/' + data
-                    .qr_code + '.png');
+                $('#qr_code_img').attr('src', 'data:image/png;base64,' + data.qr_code);
                 $('#qr_code_img').show();
             }).fail(function () {
-                // Sembunyikan spinner loading jika ada kesalahan
+                
                 $('#loadingSpinner').hide();
-                console.error("Error details:", jqXHR.responseText); // Untuk debugging di console
+                console.error("Error details:", jqXHR.responseText); 
                 alert('Failed to retrieve QR Code. Error: ' + textStatus + ', ' + errorThrown);
-
                 $('#ScrollableModal').modal('hide');
             });
         });

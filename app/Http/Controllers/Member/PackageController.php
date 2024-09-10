@@ -97,23 +97,25 @@ class PackageController extends Controller
                     'is_active' => 0,
                 ]);
 
-                $personal_trainer_in_table_user_first = DB::table('users')->where('phone_number', $request->form_first['phone_number'])->pluck('available_personal_trainer_quota')->first();
-                $personal_trainer_in_table_user_registered = DB::table('users')->whereIn('phone_number', $request->form_dynamic)->pluck('available_personal_trainer_quota')->first();
-                $personal_trainer_quota_from_membership = DB::table('gym_membership_packages')->where('id', $request->package_id)->pluck('personal_trainer_quota')->first();
+                // // (gw nambah ini) => uncomment
+                // $personal_trainer_in_table_user_first = DB::table('users')->where('phone_number', $request->form_first['phone_number'])->pluck('available_personal_trainer_quota')->first();
+                // $personal_trainer_in_table_user_registered = DB::table('users')->whereIn('phone_number', $request->form_dynamic)->pluck('available_personal_trainer_quota')->first();
+                // $personal_trainer_quota_from_membership = DB::table('gym_membership_packages')->where('id', $request->package_id)->pluck('personal_trainer_quota')->first();
 
-                // update end_date using duration_in_days for each user_registered
-                foreach ($list_user_terkait as $user) {
-                    $end_date = date('Y-m-d', strtotime($request->start_date . ' + ' . $duration . ' days'));
-                    DB::table('users')->where('id', $user->id)->update([
-                        'end_date' => $end_date,
-                        'available_personal_trainer_quota' => $personal_trainer_quota_from_membership + $personal_trainer_in_table_user_registered,
-                    ]);
-                }
-                // also update end_date for user_id
-                DB::table('users')->where('id', $user_id)->update([
-                    'end_date' => $end_date,
-                    'available_personal_trainer_quota' => $personal_trainer_quota_from_membership + $personal_trainer_in_table_user_first,
-                ]);
+                // // update end_date using duration_in_days for each user_registered
+                // foreach ($list_user_terkait as $user) {
+                //     $end_date = date('Y-m-d', strtotime($request->start_date . ' + ' . $duration . ' days'));
+                //     DB::table('users')->where('id', $user->id)->update([
+                //         'end_date' => $end_date,
+                //         'available_personal_trainer_quota' => $personal_trainer_quota_from_membership + $personal_trainer_in_table_user_registered,
+                //     ]);
+                // }
+                // // also update end_date for user_id
+                // DB::table('users')->where('id', $user_id)->update([
+                //     'end_date' => $end_date,
+                //     'available_personal_trainer_quota' => $personal_trainer_quota_from_membership + $personal_trainer_in_table_user_first,
+                // ]);
+                // // end
 
                 $status = true;
                 $message = 'Register success.';

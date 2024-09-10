@@ -39,6 +39,28 @@ class PaymentCashController extends Controller
         $userId = $request->input('user_id');
         $enddate = $request->input('end_date');
         $startdate = $request->input('start_date');
+        $package_id = DB::table('memberships')->where('id', $membershipId)->pluck('gym_membership_packages')->first();
+
+        // update end date dan personal trainer (gw nambah ini)
+        $personal_trainer_user = DB::table('users')->where('id', $userId)->pluck('available_personal_trainer_quota')->first();
+        $personal_trainer_package = DB::table('gym_membership_packages')->where('id', $package_id)->pluck('personal_trainer_quota')->first();
+        $user_terkait = DB::table('memberships')->where('id', $membershipId)->pluck('user_terkait')->first();
+
+        // strpos($user_terkait, '1') !== false
+        if(strpos($user_terkait, '1') !== false){
+            $personal_trainer_user = $personal_trainer_user + $personal_trainer_package;
+            DB::table('users')->where('id', $userId)->update([
+                'end_date' => $enddate,
+                'available_personal_trainer_quota' => $personal_trainer_user
+            ]);
+        } else {
+            $personal_trainer_user = $personal_trainer_user + $personal_trainer_package;
+            DB::table('users')->where('id', $userId)->update([
+                'end_date' => $enddate,
+                'available_personal_trainer_quota' => $personal_trainer_user
+            ]);
+        }
+        //end
 
         // update start date
         $date = Carbon::now();
@@ -56,6 +78,11 @@ class PaymentCashController extends Controller
             DB::table('memberships')->where('user_id', $userId)->where('id', '!=', $membershipId)->update([
                 'is_active' => 0
             ]);
+            // update end date users (gw nambah ini)
+            DB::table('users')->where('id', $userId)->update([
+                'end_date' => $enddate
+            ]);
+            // end
 
         } else {
             DB::table('memberships')

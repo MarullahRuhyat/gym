@@ -182,10 +182,35 @@ class PaymentController extends Controller
             if ($transaction == 'settlement') {
                 $membership = \App\Models\Membership::find($data->membership_id);
                 $data->status = 'paid';
-                $test_membership = DB::table('memberships')->where('id', $data->membership_id)
-                    ->update(['is_active' => 1]);
-                DB::table('users')->where('id', $data->user_id)
-                    ->update(['end_date' => $membership->end_date]);
+                $test_membership = DB::table('memberships')->where('id', $data->membership_id)->update(['is_active' => 1]);
+
+                // disini buat nambah personal trainer quota (gw nambah ini)
+                $personal_trainer_quota_user = DB::table('users')->where('id', $membership->user_id)->pluck('available_personal_trainer_quota')->first();
+                $get_package_id_from_membership = DB::table('memberships')->where('id', $data->membership_id)->pluck('gym_membership_packages')->first();
+                $personal_trainer_quota_package = DB::table('gym_membership_packages')->where('id', $get_package_id_from_membership)->pluck('personal_trainer_quota')->first();
+                $total_personal_trainer_quota = $personal_trainer_quota_user + $personal_trainer_quota_package;
+
+
+                DB::table('users')->where('id', $data->user_id)->update([
+                    'end_date' => $membership->end_date,
+                    'available_personal_trainer_quota' => $total_personal_trainer_quota
+                ]);
+
+                // update user terkait dari table membership, update di table user
+                $user_terkait = DB::table('memberships')->where('id', $data->membership_id)->pluck('user_terkait')->first();
+                // if user terkait tidak 1 user
+                if(strpos($user_terkait, ',') !== false){
+                    $user_terkait = explode(',', $user_terkait);
+                    foreach ($user_terkait as $key => $value) {
+                        $personal_trainer_quota_user = DB::table('users')->where('id', $value)->pluck('available_personal_trainer_quota')->first();
+                        $total_personal_trainer_quota = $personal_trainer_quota_user + $personal_trainer_quota_package;
+                        DB::table('users')->where('id', $value)->update([
+                            'end_date' => $membership->end_date,
+                            'available_personal_trainer_quota' => $total_personal_trainer_quota
+                        ]);
+                    }
+                //end
+
                 $check_extend = DB::table('memberships')->where('user_id', $membership->user_id)->where('is_active', 1)->pluck('id')->toArray();
                 if (count($check_extend) >= 1) {
                     // update latest membership is_active to 1 where user_id = membership user_id
@@ -196,6 +221,11 @@ class PaymentController extends Controller
                     $test_user_update_end_date = DB::table('memberships')->where('id', '!=', end($check_extend))->where('user_id', $membership->user_id)->update([
                         'is_active' => 0
                     ]);
+                    // update user end_date (gw nambah ini)
+                    DB::table('users')->where('id', $membership->user_id)->update([
+                        'end_date' => DB::table('memberships')->where('id', end($check_extend))->pluck('end_date')->first()
+                    ]);
+                    // end
                 }
             } elseif ($transaction == 'cancel' || $transaction == 'deny') {
                 $data->status = 'failed';

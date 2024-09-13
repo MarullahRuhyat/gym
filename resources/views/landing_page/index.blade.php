@@ -337,7 +337,7 @@
             @foreach($testimonials as $testimonial)
             <div class="testimonial-slide">
                 <p>“{{ $testimonial['text'] }}”</p>
-                <img src="{{ $testimonial['image'] }}" alt="img" class="rx-lazy">
+                <img src="{{ $testimonial['image'] }}" alt="img">
                 <a href="{{ $testimonial['instagram_url'] }}" class="name">{{ $testimonial['name'] }}</a>
                 <div class="prof">our client</div>
             </div>

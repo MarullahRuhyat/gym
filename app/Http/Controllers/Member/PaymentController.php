@@ -184,16 +184,16 @@ class PaymentController extends Controller
                 $data->status = 'paid';
                 $test_membership = DB::table('memberships')->where('id', $data->membership_id)->update(['is_active' => 1]);
 
-                // disini buat nambah personal trainer quota (gw nambah ini)
-                $personal_trainer_quota_user = DB::table('users')->where('id', $membership->user_id)->pluck('available_personal_trainer_quota')->first();
+                // disini buat nambah personal trainer quota (gw nambah ini) yang ini beb
+                // $personal_trainer_quota_user = DB::table('users')->where('id', $membership->user_id)->pluck('available_personal_trainer_quota')->first();
                 $get_package_id_from_membership = DB::table('memberships')->where('id', $data->membership_id)->pluck('gym_membership_packages')->first();
                 $personal_trainer_quota_package = DB::table('gym_membership_packages')->where('id', $get_package_id_from_membership)->pluck('personal_trainer_quota')->first();
-                $total_personal_trainer_quota = $personal_trainer_quota_user + $personal_trainer_quota_package;
+                // $total_personal_trainer_quota = $personal_trainer_quota_user + $personal_trainer_quota_package;
 
 
                 DB::table('users')->where('id', $data->user_id)->update([
                     'end_date' => $membership->end_date,
-                    'available_personal_trainer_quota' => $total_personal_trainer_quota
+                    'available_personal_trainer_quota' => $personal_trainer_quota_package
                 ]);
 
                 // update user terkait dari table membership, update di table user
@@ -202,11 +202,11 @@ class PaymentController extends Controller
                 if(strpos($user_terkait, ',') !== false){
                     $user_terkait = explode(',', $user_terkait);
                     foreach ($user_terkait as $key => $value) {
-                        $personal_trainer_quota_user = DB::table('users')->where('id', $value)->pluck('available_personal_trainer_quota')->first();
-                        $total_personal_trainer_quota = $personal_trainer_quota_user + $personal_trainer_quota_package;
+                        // $personal_trainer_quota_user = DB::table('users')->where('id', $value)->pluck('available_personal_trainer_quota')->first();
+                        // $total_personal_trainer_quota = $personal_trainer_quota_user + $personal_trainer_quota_package;
                         DB::table('users')->where('id', $value)->update([
                             'end_date' => $membership->end_date,
-                            'available_personal_trainer_quota' => $total_personal_trainer_quota
+                            'available_personal_trainer_quota' => $personal_trainer_quota_package
                         ]);
                     }
                 //end

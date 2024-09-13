@@ -34,7 +34,15 @@ starter Page
                         data-bs-toggle="modal" data-bs-target="">Show QR Member</button>
                 </div>
 
-                @if (auth()->user()->available_personal_trainer_quota != 0)
+                @php
+                // Cek jika personal trainer quota adalah 0 tapi masih ada member absent dengan end_date null
+                    $absentMember = \App\Models\AbsentMember::where('member_id', auth()->user()->id)
+                    ->whereNull('end_time')
+                    ->whereNotNull('start_time')
+                    ->first();
+                @endphp
+
+                @if (auth()->user()->available_personal_trainer_quota != 0 || $absentMember)
                 <div class="col" style="margin-top:30px;">
                     <button id="show_pt_member" type="button" class="btn btn-grd btn-grd-deep-blue px-5"
                         data-bs-toggle="modal" data-bs-target="">Show QR PT</button>
@@ -151,12 +159,12 @@ starter Page
                     _token: "{{ csrf_token() }}",
                 },
                 beforeSend: function () {
-                    
+
                     $('#loadingSpinner').show();
-                    $('#qr_code_img').hide(); 
+                    $('#qr_code_img').hide();
                 }
             }).done(function (data) {
-                
+
                 $('#loadingSpinner').hide();
                 if (data.qr_code == null) {
                     alert('Please generate your QR code again');
@@ -167,7 +175,7 @@ starter Page
 
                 $('#qr_code_img').show();
             }).fail(function () {
-                
+
                 $('#loadingSpinner').hide();
                 alert('An error occurred. Please try again.');
             });
@@ -176,15 +184,15 @@ starter Page
 
 
     $(document).ready(function () {
-        
+
         $('#show_pt_member').click(function () {
-            $('#ConfirmationModal').modal('show'); 
+            $('#ConfirmationModal').modal('show');
         });
 
-        
+
         $('#confirmShowQR').click(function () {
-            $('#ConfirmationModal').modal('hide'); 
-            $('#ScrollableModal').modal('show'); 
+            $('#ConfirmationModal').modal('hide');
+            $('#ScrollableModal').modal('show');
 
             var is_using_pt = 1;
 
@@ -196,12 +204,12 @@ starter Page
                     _token: "{{ csrf_token() }}",
                 },
                 beforeSend: function () {
-                    
+
                     $('#loadingSpinner').show();
-                    $('#qr_code_img').hide(); 
+                    $('#qr_code_img').hide();
                 }
             }).done(function (data) {
-                
+
                 $('#loadingSpinner').hide();
                 console.log(data);
                 if (data.qr_code == null) {
@@ -212,9 +220,9 @@ starter Page
                 $('#qr_code_img').attr('src', 'data:image/png;base64,' + data.qr_code);
                 $('#qr_code_img').show();
             }).fail(function () {
-                
+
                 $('#loadingSpinner').hide();
-                console.error("Error details:", jqXHR.responseText); 
+                console.error("Error details:", jqXHR.responseText);
                 alert('Failed to retrieve QR Code. Error: ' + textStatus + ', ' + errorThrown);
                 $('#ScrollableModal').modal('hide');
             });

@@ -39,6 +39,7 @@ starter Page
                     $absentMember = \App\Models\AbsentMember::where('member_id', auth()->user()->id)
                     ->whereNull('end_time')
                     ->whereNotNull('start_time')
+                    ->where('is_using_pt', 1)
                     ->first();
                 @endphp
 

@@ -105,9 +105,16 @@ starter Page
                             <h6 class="mb-0">Nama PT</h6>
                         </div>
                         <div class="">
+
+                            @if ($item->is_using_pt == 1 && $item->personal_trainer_id == null)
+                            <button type="button" class="badge bg-danger" data-bs-toggle="modal" data-id="{{ $item->id_absent }}" style="border: none" data-bs-target="#addPtManual">
+                                Pilih PT Manual
+                            </button>
+                            @else
                             <h5 class="mb-0">
                                 {{ $item->trainer_name }}
                             </h5>
+                            @endif
                         </div>
                     </div>
 
@@ -155,6 +162,35 @@ starter Page
     </div>
 </div>
 
+{{-- add pt manual --}}
+<div class="modal fade" id="addPtManual" tabindex="-1" aria-labelledby="addPtManualLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addPtManualLabel">Pilih Personal Trainer</h1>
+            </div>
+            <form id="membershipFormAdd" method="POST" action="{{ route('admin_add_pt_manual') }}">
+                @csrf
+                <input type="hidden" name="id_absent" id="id_absent">
+                <div class="form-group my-2">
+                    <label for="personal_trainer_id">Nama PT</label>
+                    <select class="form-select" id="personal_trainer_id" name="personal_trainer_id" required>
+                        <option value="">-- Pilih PT --</option>
+                        @foreach($personal_trainers as $row)
+                            <option value="{{ $row->id }}">{{ $row->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
 
 
 <!-- Modal -->
@@ -185,6 +221,14 @@ starter Page
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
 
 <script>
+    $('#addPtManual').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var idAbsent = button.data('id'); // Extract info from data-id attribute
+
+    var modal = $(this);
+    modal.find('#id_absent').val(idAbsent); // Set the id_absent input value in the modal
+});
+
     $('#memberContainer').on('click', '.open-multiple-jenis-latihan', function () {
         const memberId = $(this).data('id');
         const jenisLatihan = $(this).data('jenislatihan');
@@ -301,10 +345,15 @@ starter Page
                                                 <div class="flex-grow-1">
                                                     <h6 class="mb-0">Nama PT</h6>
                                                 </div>
+
                                                 <div class="">
-                                                    <h5 class="mb-0">
-                                                        ${item.trainer_name}
-                                                    </h5>
+                                                    ${item.is_using_pt == 1 && item.personal_trainer_id == null ? `
+                                                    <button type="button" class="badge bg-danger" data-bs-toggle="modal" data-id="${item.id_absent}" style="border: none" data-bs-target="#addPtManual">
+                                                        Pilih PT Manual 
+                                                    </button>
+                                                    ` : 
+                                                    `<h5 class="mb-0">${item.trainer_name}</h5>`
+                                                    }
                                                 </div>
                                             </div>
                                             <div class="d-flex align-items-center gap-3">
@@ -400,7 +449,7 @@ starter Page
             var name = card.querySelector('.card-header h3').innerText;
             var phone = card.querySelector('.card-body .d-flex:nth-child(1) h5').innerText;
             var jenisLatihan = card.querySelector('.card-body .d-flex:nth-child(2) h5').innerText
-        .trim();
+                .trim();
             var startTime = card.querySelector('.card-body .d-flex:nth-child(3) h5').innerText.trim();
             var endTime = card.querySelector('.card-body .d-flex:nth-child(4) h5').innerText.trim();
             var status = card.querySelector('.form-check-label b').innerText.trim();

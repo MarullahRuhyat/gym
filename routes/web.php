@@ -211,6 +211,7 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::prefix('attendance-member')->group(function () {
         Route::get('/', [AbsenController::class, 'index'])->name('admin_absen');
         Route::get('/search', [AbsenController::class, 'search'])->name('admin_search');
+        Route::post('add-pt-manual', [AbsenController::class, 'add_pt_manual'])->name('admin_add_pt_manual');
         Route::post('/ajax-detail-members', [AbsenController::class, 'ajax_detail_members'])->name('admin_ajax_detail_members');
     });
     // salary page

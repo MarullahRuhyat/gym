@@ -17,10 +17,6 @@ class AbsenController extends Controller
     {
         $today = Carbon::today()->toDateString();
         $dataLatihan = JenisLatihan::all();
-        // $data_member = AbsentMember::join('users', 'absent_members.member_id', '=', 'users.id')
-        //     ->whereDate('absent_members.date', $today)
-        //     ->select('users.name',  'users.phone_number', 'absent_members.*')
-        //     ->get();
 
         $data_member = AbsentMember::join('users as member', 'absent_members.member_id', '=', 'member.id')
             ->leftJoin('users as trainer', 'absent_members.personal_trainer_id', '=', 'trainer.id')
@@ -33,8 +29,10 @@ class AbsenController extends Controller
                 'absent_members.id as id_absent'
             )
             ->get();
+            // dd($data_member);
 
-        return view('admin.absen', compact('data_member', 'dataLatihan'));
+        $personal_trainers = User::where('role', 'personal trainer')->get();
+        return view('admin.absen', compact('data_member', 'dataLatihan', 'personal_trainers'));
     }
     public function search(Request $request)
     {
@@ -69,6 +67,8 @@ class AbsenController extends Controller
         }
 
         $dataLatihan = JenisLatihan::all();
+
+        dd($data_member);
         return view('admin.absen', compact('data_member', 'dataLatihan'));
     }
 
@@ -113,4 +113,15 @@ class AbsenController extends Controller
             ]);
         }
     }
+
+
+    public function add_pt_manual(Request $request) {
+        $absentMember = AbsentMember::find($request->id_absent);
+        $absentMember->personal_trainer_id = $request->personal_trainer_id;
+        $absentMember->save();
+
+        return redirect()->back()->with('success', 'Personal trainer successfully assigned.');
+    }
+
+
 }

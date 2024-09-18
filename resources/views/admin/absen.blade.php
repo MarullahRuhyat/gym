@@ -48,7 +48,7 @@ starter Page
                         <div class="">
                             <h5 class="mb-0">
                                 @if ($item->jenis_latihan == null)
-                                <button type="button" class="badge bg-danger" style="border: none"
+                                <button type="button" class="badge bg-danger" disabled style="border: none"
                                     data-id="{{ $item->id }}">Belum Memilih</button>
                                 @elseif (count(explode(',', $item->jenis_latihan)) > 2)
                                 <button type="button" class="badge bg-success open-multiple-jenis-latihan"
@@ -310,7 +310,7 @@ starter Page
                                                 <div class="">
                                                     <h5 class="mb-0">
                                                         ${item.jenis_latihan == null ? `
-                                                        <button type="button" class="badge bg-danger" style="border: none"
+                                                        <button type="button" class="badge bg-danger" disabled style="border: none"
                                                             data-id="${item.id}" data-bs-toggle="modal"
                                                             data-bs-target="#addJenisLatihanModal">Belum Memilih</button>
                                                         ` : item.jenis_latihan.split(',').length > 2 ? `

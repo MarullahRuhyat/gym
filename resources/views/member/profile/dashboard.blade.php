@@ -8,7 +8,7 @@ starter Page
         <div class="col row-cols-auto g-3 justify-content-center">
             <h1 class="text-center">Welcome, {{ ucwords(auth()->user()->name) }}</h1>
             <!-- <h1 style="padding-bottom:50px; font-size:60px"> </h1> -->
-            @if ($membership == null)
+            @if ($membership == null || $enddateformprofile < date('Y-m-d'))
             <div class="justify-content-center text-center">
                 <div class="col my-5">
                     <a href="{{ route('member.buy-new-package') }}" class="btn btn-grd btn-grd-deep-blue px-5">Buy

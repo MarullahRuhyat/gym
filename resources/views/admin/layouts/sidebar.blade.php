@@ -88,6 +88,9 @@
                     <li>
                         <a href="{{ route('admin_type_package')}}"><i class="material-icons-outlined">category</i>Tipe Paket</a>
                     </li>
+                    <li>
+                        <a href="https://jogja.wablas.com/api/device/scan?token=SujEXjKi5MEvVWebuRK17sG4H69mKzZwFD4Uca7HPrPwNiQawGLJ4ShA5uCCaUtv"><i class="material-icons-outlined">devices</i>Connecting Wa Blast</a>
+                    </li>
                 </ul>
             </li>
 

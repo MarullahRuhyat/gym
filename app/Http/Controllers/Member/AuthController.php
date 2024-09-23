@@ -36,19 +36,35 @@ class AuthController extends Controller
         if ($user_id == null) {
             $status = false;
             $message = 'Phone number not found.';
-            // jika user role != member
         } elseif ($user_id != null && User::where('id', $user_id)->pluck('role')->first() != 'member') {
             $status = false;
             $message = 'Your Not member';
         } else {
+            // Cek apakah device Wablas terhubung
+            $deviceStatus = $this->checkDevice();
+            
+            if (!$deviceStatus) {
+                // Jika device Wablas tidak terhubung, beri alert
+                $status = false;
+                $message = 'WA disconnected, kasih tau admin.';
+            }
+
+            // Jika perangkat terhubung, lanjutkan proses OTP
             $otp = rand(1000, 9999);
-            // $expired_at = now()->addMinutes(5);
             $expired_at = now()->addMinutes(5)->setTimezone('Asia/Jakarta');
             $insert_otp = DB::table('users')->where('id', $user_id)->update([
                 'otp' => $otp,
                 'otp_expired_at' => $expired_at,
             ]);
-            $curl = $this->sendWA($phone_number, 'Flozors Gym: Gunakan kode OTP ' . $otp . ', UNTUK LOGIN KE AKUN ANDA. Berlaku selama 5 menit. JANGAN pernah membagikan kode ini kepada orang lain, termasuk staf Flozors Gym.');
+
+            // Mengirimkan pesan WA dan menangani response
+            $waResponse = $this->sendWA($phone_number, 'Flozors Gym: Gunakan kode OTP ' . $otp . ', UNTUK LOGIN KE AKUN ANDA. Berlaku selama 5 menit. JANGAN pernah membagikan kode ini kepada orang lain, termasuk staf Flozors Gym.');
+
+            if (!$waResponse['success']) {
+                // Jika device Wablas disconnect atau terjadi error, beri alert
+                $status = false;
+                $message = 'WA diskonek, sampaikan ke admin. Error: ' . $waResponse['message'];
+            }
         }
 
         $data = [
@@ -56,46 +72,85 @@ class AuthController extends Controller
             'message' => $message ?? 'OTP has been sent.',
             'data' => [
                 'otp' => $otp ?? null,
-                'wablas' => $curl ?? null,
+                'wablas' => $waResponse['success'] ?? null,
             ]
         ];
 
         return response()->json($data, 200);
     }
 
+
+
     private function sendWA($mobileNumber, $message)
     {
-
         $url = "https://jogja.wablas.com";
         $token = "SujEXjKi5MEvVWebuRK17sG4H69mKzZwFD4Uca7HPrPwNiQawGLJ4ShA5uCCaUtv";
 
         $client = new \GuzzleHttp\Client([
             'base_uri' => $url,
         ]);
-        $response = $client->post('/api/send-message', [
-            'form_params' => [
-                'phone' => $mobileNumber,
-                'message' => $message
-            ],
-            'headers' => [
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/x-www-form-urlencoded',
-                'Authorization' => $token
-            ]
-        ]);
 
-        $body = json_decode($response->getBody(), true);
-        if ($body['status'] == true) {
-            // return true;
-            if ($response->getStatusCode() != 200) {
-                return false;
+        try {
+            // Mengirim request ke API Wablas
+            $response = $client->post('/api/send-message', [
+                'form_params' => [
+                    'phone' => $mobileNumber,
+                    'message' => $message
+                ],
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                    'Authorization' => $token
+                ]
+            ]);
+
+            $body = json_decode($response->getBody(), true);
+
+            // Cek status dari API response
+            if (isset($body['status']) && $body['status'] == true) {
+                // Jika status sukses
+                if ($response->getStatusCode() == 200) {
+                    return ['success' => true];
+                } else {
+                    return ['success' => false, 'message' => 'WA connection failed'];
+                }
             } else {
-                return true;
+                // Jika Wablas memberikan error dalam response
+                return ['success' => false, 'message' => $body['message'] ?? 'Unknown error'];
             }
+        } catch (\Exception $e) {
+            // Tangani jika terjadi error saat koneksi ke API Wablas (misalnya, device disconnect)
+            return ['success' => false, 'message' => 'Device disconnected or API error'];
         }
-        return false;
-
     }
+
+    private function checkDevice()
+    {
+        $phones = "6285184741788";
+        $token = "SujEXjKi5MEvVWebuRK17sG4H69mKzZwFD4Uca7HPrPwNiQawGLJ4ShA5uCCaUtv";
+        $curl = curl_init();
+        curl_setopt(
+            $curl,
+            CURLOPT_HTTPHEADER,
+            array(
+                "Authorization: $token",
+                "url: https://jogja.wablas.com",
+            )
+        );
+        curl_setopt($curl, CURLOPT_URL, "https://phone.wablas.com/check-phone-number?phones=$phones");
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+
+        $result = curl_exec($curl);
+        $response = json_decode($result, true);
+        if (isset($response['status']) && $response['status'] === 'failed') {
+            return false;
+        }
+        return true;
+    }
+
 
     public function verify_otp($phone_number)
     {
@@ -435,7 +490,7 @@ class AuthController extends Controller
             'otp' => 'required',
             'password' => 'required|confirmed',
         ]);
-        
+
         $otp = $request->otp;
         $password = $request->password;
 
@@ -451,26 +506,27 @@ class AuthController extends Controller
         }
 
         return redirect()->back()->with('error', 'Failed to reset password. OTP is invalid or has expired.');
-        
+
     }
 
-    public function testabsenttime() {
+    public function testabsenttime()
+    {
         $time = Carbon::now()->format('H:i:s');
         $today = Carbon::today();
-    
+
         DB::table('absent_members')
             ->whereNull('date')
             ->update([
                 'date' => $today,
             ]);
-    
+
         DB::table('absent_members')
             ->whereNotNull('date')
             ->whereNull('start_time')
             ->update([
                 'start_time' => $time,
             ]);
-    
+
         DB::table('absent_members')
             ->whereNotNull('date')
             ->whereNotNull('start_time')

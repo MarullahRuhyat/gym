@@ -47,9 +47,9 @@ class ProfileController extends Controller
 
         if ($membership == null) {
             $enddateformprofile = null;
+        } else {
+            $enddateformprofile = Carbon::parse($membership->end_date);
         }
-        
-        $enddateformprofile = Carbon::parse($membership->end_date);
 
        
 

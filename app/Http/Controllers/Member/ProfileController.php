@@ -45,7 +45,13 @@ class ProfileController extends Controller
             $membership->duration_in_days = $membership->duration_in_days;
         }
 
+        if ($membership == null) {
+            $enddateformprofile = null;
+        }
+        
         $enddateformprofile = Carbon::parse($membership->end_date);
+
+       
 
 
         return view('member.profile.dashboard', ['membership' => $membership, 'enddateformprofile' => $enddateformprofile]);

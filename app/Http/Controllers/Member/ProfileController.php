@@ -44,13 +44,11 @@ class ProfileController extends Controller
             $endDate = Carbon::parse($membership->end_date);
             $membership->duration_in_days = $membership->duration_in_days;
         }
-
-        $enddateformprofile = Carbon::parse($membership->end_date);
-
-        if ($enddateformprofile = null) {
+        if($membership->end_date == null){
             $enddateformprofile = "2023-09-13";
+        }else{
+            $enddateformprofile = Carbon::parse($membership->end_date)->format('d F Y');
         }
-
 
         return view('member.profile.dashboard', ['membership' => $membership, 'enddateformprofile' => $enddateformprofile]);
     }

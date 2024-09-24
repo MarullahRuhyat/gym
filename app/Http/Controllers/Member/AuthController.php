@@ -211,8 +211,15 @@ class AuthController extends Controller
 
     public function register_form_process(Request $request)
     {
+        // check phone number is unique
+        $validator = Validator::make($request->all(), [
+            'phone_number' => ['unique:users,phone_number'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator->errors()->all());
+        }
         $save = User::create($request->except('password_confirmation'));
-        // $save = DB::table('users')->insert($request->except('_token'));
         return redirect()->route('member.send-otp')->with('success', 'Register success.');
 
     }

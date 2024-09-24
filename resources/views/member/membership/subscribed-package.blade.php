@@ -7,7 +7,6 @@ Subscribed Package
     <div class="col-12 col">
         <a href="{{ route('member.buy-new-package') }}" class="btn btn-grd-deep-blue">Buy New Membership</a>
         <a href="{{ route('member.extend-package') }}" class="btn btn-grd-deep-blue">Extend Membership</a>
-
     </div>
 </div>
 <div class="row">

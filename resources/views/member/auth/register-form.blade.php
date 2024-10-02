@@ -11,6 +11,15 @@ starter Page
                 <div class="card-header px-4 py-3">
                     <h5 class="mb-1">Account Details</h5>
                     <p class="mb-4">Enter Your Account Details.</p>
+                    @if(session('error'))
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach(session('error') as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                 </div>
                 <div class="card-body p-4">
                     <form class="row g-3 needs-validation" novalidate

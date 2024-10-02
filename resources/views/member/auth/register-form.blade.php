@@ -35,13 +35,22 @@ starter Page
                         </div>
                         <div class="col-md-12">
                             <label for="bsValidation2" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" id="bsValidation2" placeholder="Phone Number"
-                                name="phone_number"
+                            <input type="text" class="form-control @error('phone_number') is-invalid @enderror"
+                                id="bsValidation2" placeholder="Phone Number" name="phone_number"
+                                value="{{ old('phone_number') }}"
                                 oninput="this.value = this.value.replace(/\+62/, '0').replace(/[^0-9]/g, '');" required>
+
+                            @error('phone_number')
                             <div class="invalid-feedback">
-                                Please fill a phone number.
+                                {{ $message }}
                             </div>
+                            @else
+                            <div class="invalid-feedback">
+                                Please fill a valid phone number.
+                            </div>
+                            @enderror
                         </div>
+
                         <div class="col-md-12">
                             <label for="bsValidation3" class="form-label">Gender</label>
                             <select class="form-select" id="bsValidation3" name="gender" required>

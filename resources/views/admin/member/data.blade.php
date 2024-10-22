@@ -16,7 +16,7 @@
                                 <span class="visually-hidden">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
-                                <a class="dropdown-item button_edit" href="javascript:;" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ $user->id }}" data-name="{{ $user->name }}" data-phone="{{ $user->phone_number }}" data-status="{{$user->status}}">Edit</a>
+                                <a class="dropdown-item button_edit" href="javascript:;" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ $user->id }}" data-name="{{ $user->name }}" data-phone="{{ $user->phone_number }}" data-sisa_pt="{{ $user->available_personal_trainer_quota }}" data-status="{{$user->status}}">Edit</a>
                                 <a class="dropdown-item button_edit" href="{{ route('admin_member_detail', ['id' => $user->id]) }}">detail</a>
                             </div>
                         </div>

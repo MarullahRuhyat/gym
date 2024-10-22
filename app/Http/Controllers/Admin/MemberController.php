@@ -22,24 +22,28 @@ class MemberController extends Controller
                 'name' => 'required|string|max:255',
                 'phone_number' => 'required|string|max:20',
                 'status' => 'required|string|max:20',
+                'available_personal_trainer_quota' => 'required|integer',
             ]);
-            $data = $request->only('name', 'phone_number', 'status');
+            $data = $request->only('name', 'phone_number', 'status', 'available_personal_trainer_quota');
 
             try {
                 $id = $request->input('id', 0);
-
                 if ($edit == 1 && $id) {
                     $user = User::findOrFail($id);
                     $user->update($data);
                     $membership = Membership::where('user_id', $user->id)
                         ->orderBy('created_at', 'desc')
                         ->first();
-                    if ($request->status == "active") {
-                        $membership->is_active = 1;
+                    if ($membership) {
+                        if ($request->status == "active") {
+                            $membership->is_active = 1;
+                        } else {
+                            $membership->is_active = 0;
+                        }
+                        $membership->save();
                     } else {
-                        $membership->is_active = 0;
+                        return redirect()->route('admin_member')->with('error', 'Membership not found for the user!');
                     }
-                    $membership->save();
                     return redirect()->route('admin_member')->with('success', 'Data berhasil diperbarui!');
                 }
             } catch (Exception $e) {
@@ -64,9 +68,6 @@ class MemberController extends Controller
 
     public function store(Request $request)
     {
-        // response [{}, {}];
-        // save all data inside the object request
-
         foreach ($request->all() as $data) {
             $user = User::create($data);
         }

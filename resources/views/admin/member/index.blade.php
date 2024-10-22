@@ -39,8 +39,12 @@ starter Page
                     <div class="mb-3">
                         <label for="phone_edit" class="form-label">Status</label>
                         <div id="status_edit">
-
                         </div>
+                    </div>
+                    {{-- sisa pt --}}
+                    <div class="mb-3">
+                        <label for="sisa_pt" class="form-label">Sisa PT</label>
+                        <input type="number" class="form-control" id="sisa_pt" name="available_personal_trainer_quota" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -60,52 +64,55 @@ starter Page
 <script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>
 <script src="{{ URL::asset('build/js/main.js') }}"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Populate Edit Modal
-        $(document).on('click', '.button_edit', function() {
+        $(document).on('click', '.button_edit', function () {
             let id = $(this).data('id');
             let name = $(this).data('name');
             let phone = $(this).data('phone');
             let status = $(this).data('status');
+            let sisa_pt = $(this).data('sisa_pt');
+            // alert(sisa_pt);
             $('#name_edit').val(name);
             $('#phone_edit').val(phone);
             $('#id_edit').val(id);
+            $('#sisa_pt').val(sisa_pt);
             if (status == "active") {
                 $('#status_edit').html(`
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="status" value="active" id="statusActive" checked>
-            <label class="form-check-label" for="statusActive">
-                Active
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="status" value="inactive" id="statusInactive">
-            <label class="form-check-label" for="statusInactive">
-                Inactive
-            </label>
-        </div>
-    `);
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status" value="active" id="statusActive" checked>
+                        <label class="form-check-label" for="statusActive">
+                            Active
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status" value="inactive" id="statusInactive">
+                        <label class="form-check-label" for="statusInactive">
+                            Inactive
+                        </label>
+                    </div>
+                `);
             } else {
                 $('#status_edit').html(`
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="status" value="active" id="statusActive">
-            <label class="form-check-label" for="statusActive">
-                Active
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="status" value="inactive" id="statusInactive" checked>
-            <label class="form-check-label" for="statusInactive">
-                Inactive
-            </label>
-        </div>
-    `);
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status" value="active" id="statusActive">
+                        <label class="form-check-label" for="statusActive">
+                            Active
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status" value="inactive" id="statusInactive" checked>
+                        <label class="form-check-label" for="statusInactive">
+                            Inactive
+                        </label>
+                    </div>
+                `);
             }
 
         });
 
         // Populate Delete Modal
-        $(document).on('click', '.button_delete', function() {
+        $(document).on('click', '.button_delete', function () {
             let id = $(this).data('id');
             let name = $(this).data('name');
             $('#id_delete').val(id);
@@ -116,19 +123,19 @@ starter Page
         function fetch_data(page, query) {
             $.ajax({
                 url: `{{ route('admin_member')}}?page=` + page + "&name=" + query,
-                success: function(data) {
+                success: function (data) {
                     $('#data_member').html(data);
                 }
             });
         }
 
         // Handle input event
-        $('#search_name').on('input', function() {
+        $('#search_name').on('input', function () {
             let searchQuery = $(this).val();
             fetch_data(1, searchQuery); // Fetch data for the first page with search query
         });
 
-        $(document).on('click', '.pagination a', function(event) {
+        $(document).on('click', '.pagination a', function (event) {
             event.preventDefault();
             let page = $(this).attr('href').split('page=')[1];
             let searchQuery = $('#search_name').val();
@@ -137,5 +144,6 @@ starter Page
 
 
     });
+
 </script>
 @endpush

@@ -11,6 +11,15 @@ starter Page
                 <div class="card-header px-4 py-3">
                     <h5 class="mb-1">Account Details</h5>
                     <p class="mb-4">Enter Your Account Details.</p>
+                    @if(session('error'))
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach(session('error') as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                 </div>
                 <div class="card-body p-4">
                     <form class="row g-3 needs-validation" novalidate
@@ -26,13 +35,22 @@ starter Page
                         </div>
                         <div class="col-md-12">
                             <label for="bsValidation2" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" id="bsValidation2" placeholder="Phone Number"
-                                name="phone_number"
+                            <input type="text" class="form-control @error('phone_number') is-invalid @enderror"
+                                id="bsValidation2" placeholder="Phone Number" name="phone_number"
+                                value="{{ old('phone_number') }}"
                                 oninput="this.value = this.value.replace(/\+62/, '0').replace(/[^0-9]/g, '');" required>
+
+                            @error('phone_number')
                             <div class="invalid-feedback">
-                                Please fill a phone number.
+                                {{ $message }}
                             </div>
+                            @else
+                            <div class="invalid-feedback">
+                                Please fill a valid phone number.
+                            </div>
+                            @enderror
                         </div>
+
                         <div class="col-md-12">
                             <label for="bsValidation3" class="form-label">Gender</label>
                             <select class="form-select" id="bsValidation3" name="gender" required>

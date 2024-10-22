@@ -213,11 +213,14 @@ class AuthController extends Controller
     {
         // check phone number is unique
         $validator = Validator::make($request->all(), [
-            'phone_number' => ['unique:users,phone_number'],
+            'phone_number' => ['required', 'unique:users,phone_number'],
+        ], [
+            'phone_number.unique' => 'Nomor telepon sudah digunakan, silakan gunakan nomor lain.',
+            'phone_number.required' => 'Nomor telepon wajib diisi.'
         ]);
-
+    
         if ($validator->fails()) {
-            return redirect()->back()->with('error', $validator->errors()->all());
+            return redirect()->back()->withErrors($validator)->withInput();
         }
         $save = User::create($request->except('password_confirmation'));
         return redirect()->route('member.send-otp')->with('success', 'Register success.');

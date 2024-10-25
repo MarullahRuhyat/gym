@@ -164,7 +164,7 @@ starter Page
                         html += `
                         <div class="mb-3 col-md-6">
                             <label for="description_${row.id}" class="form-label">Description</label>
-                            <input type="text" id="description_${row.id}"  name="description_${row.id}" class="form-control" value="${row.description}" disabled>
+                            <input type="text" id="description_${row.id}"  name="description_${row.id}" class="form-control" value="${row.description}">
                         </div>
                          <div class="mb-3 col-md-6">
                             <label for="amount_${row.id}" class="form-label">Amount</label>

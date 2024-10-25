@@ -114,20 +114,28 @@ class GajiController extends Controller
         $gaji_id = $request->gaji_personal_trainers_id;
         $amounts = $request->amounts;
         $descriptions = $request->descriptions;
+
         $bonuses = PersonalTrainingBonus::where('gaji_personal_trainers_id', $gaji_id)->get();
+
         try {
+            // Update existing bonuses
             foreach ($bonuses as $row) {
-                // Memperbaiki format amount
                 $amount = $request->input('amount_' . $row->id);
-                $amount = str_replace('.', '', $amount);
-                $row->amount = $amount;
-                $row->save();
+                $description = $request->input('description_' . $row->id);
+
+                if ($amount !== null && $description !== null) {
+                    $amount = (int) str_replace('.', '', $amount);
+                    $row->amount = $amount;
+                    $row->description = $description;
+                    $row->save();
+                }
             }
+
+            // Insert new bonuses
             $i = 0;
             if ($amounts != null) {
                 foreach ($amounts as $row) {
-                    // Memperbaiki format amount
-                    $row = str_replace('.', '', $row);
+                    $row = (int) str_replace('.', '', $row);
                     $bonus = new PersonalTrainingBonus();
                     $bonus->gaji_personal_trainers_id = $gaji_id;
                     $bonus->amount = $row;
@@ -142,9 +150,11 @@ class GajiController extends Controller
                 'year' => explode("-", $month)[0],
             ])->with('success', 'Data berhasil disimpan');
         } catch (\Throwable $th) {
+            \Log::error('Error Saving Bonus: ', ['error' => $th->getMessage()]);
             return redirect()->route('admin_gaji')->with('error', 'Data gagal disimpan!');
         }
     }
+
 
     function generate(Request $request)
     {

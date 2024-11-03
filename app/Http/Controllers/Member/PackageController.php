@@ -327,6 +327,7 @@ class PackageController extends Controller
             return redirect()->route('member.send-otp');
         }
 
+        $membership = DB::table('memberships')->where('user_id', $user->id)->latest()->first();
 
         // $packages_membership_payments = DB::table('payments')
         //     ->leftjoin('gym_membership_packages', 'payments.gym_membership_packages', '=', 'gym_membership_packages.id')
@@ -358,7 +359,7 @@ class PackageController extends Controller
             return $item;
         });
 
-        return view('member.membership.subscribed-package', compact('packages_membership_payments'));
+        return view('member.membership.subscribed-package', compact('packages_membership_payments', 'membership'));
     }
 
     public function selected_package_detail($id)

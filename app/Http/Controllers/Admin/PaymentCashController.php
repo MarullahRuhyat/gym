@@ -57,7 +57,6 @@ class PaymentCashController extends Controller
             $personal_trainer_user = $personal_trainer_user + $personal_trainer_package;
             DB::table('users')->where('id', $userId)->update([
                 'end_date' => $enddate,
-                'available_personal_trainer_quota' => $personal_trainer_user
             ]);
         }
         //end

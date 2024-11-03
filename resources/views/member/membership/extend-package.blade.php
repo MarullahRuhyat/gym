@@ -168,8 +168,8 @@ starter Page
                 if(data.status === true) {
                     $('#modalCashPayment').modal('hide');
                     alert(data.message);
-                    // Reload the page or redirect to another page
-                    window.location.reload();
+                    // redirect to another page
+                    window.location.href = "{{ route('member.dashboard') }}";
                 } else {
                     alert(data.message);
                 }

@@ -45,19 +45,21 @@ class PaymentCashController extends Controller
         $personal_trainer_user = DB::table('users')->where('id', $userId)->pluck('available_personal_trainer_quota')->first();
         $personal_trainer_package = DB::table('gym_membership_packages')->where('id', $package_id)->pluck('personal_trainer_quota')->first();
         $user_terkait = DB::table('memberships')->where('id', $membershipId)->pluck('user_terkait')->first();
-
-        if(strpos($user_terkait, '1') == false){
+        
+        if(strpos($user_terkait, '1') != false){
             DB::table('users')->where('id', $userId)->update([
                 'end_date' => $enddate,
                 'available_personal_trainer_quota' => $personal_trainer_package + $personal_trainer_user
             ]);
-        } else {
-            DB::table('users')->where('id', $userId)->update([
-                'end_date' => $enddate,
+        }
+
+        $checking_user_extend = DB::table('memberships')->where('user_id', $userId)->where('is_active', 1)->pluck('id')->toArray();
+        if(count($checking_user_extend) >= 1){
+            DB::table('memberships')->where('id', $membershipId)->update([
+                'is_active' => 1
             ]);
         }
 
-        // update start date
         $date = Carbon::now();
 
         DB::table('payments')

@@ -21,6 +21,7 @@ use App\Http\Controllers\Member\AttendanceController;
 use App\Http\Controllers\Admin\JenisLatihanController;
 use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\PersonalTrainer\ScanByPTController;
+use App\Http\Controllers\admin\InputManualAttendanceController;
 use App\Http\Controllers\PersonalTraining\ProfilePersonalTraining;
 use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
 use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
@@ -233,6 +234,11 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::get('/cash', [PaymentCashController::class, 'index'])->name('admin_cash');
     Route::post('/cash-acc', [PaymentCashController::class, 'cash_acc'])->name('admin_cash_acc');
     Route::post('/cash-reject', [PaymentCashController::class, 'cash_rej'])->name('admin_cash_rej');
+
+
+    // input manual attendance
+    Route::get('/input-manual-attendance', [InputManualAttendanceController::class, 'index'])->name('admin_input_manual_attendance');
+    Route::post('/input-manual-attendance', [InputManualAttendanceController::class, 'store'])->name('admin_input_manual_attendance_store');
 });
 
 // test wa jalan apa kagak 

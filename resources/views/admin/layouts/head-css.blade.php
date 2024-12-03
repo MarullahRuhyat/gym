@@ -12,6 +12,8 @@
 <link href="{{ URL::asset('build/css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
 @stack('css')
 

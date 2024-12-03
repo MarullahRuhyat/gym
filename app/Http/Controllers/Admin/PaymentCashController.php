@@ -42,22 +42,34 @@ class PaymentCashController extends Controller
         $package_id = DB::table('memberships')->where('id', $membershipId)->pluck('gym_membership_packages')->first();
 
         // update end date dan personal trainer (gw nambah ini)
-        // $personal_trainer_user = DB::table('users')->where('id', $userId)->pluck('available_personal_trainer_quota')->first();
+        $personal_trainer_user = DB::table('users')->where('id', $userId)->pluck('available_personal_trainer_quota')->first();
         $personal_trainer_package = DB::table('gym_membership_packages')->where('id', $package_id)->pluck('personal_trainer_quota')->first();
         $user_terkait = DB::table('memberships')->where('id', $membershipId)->pluck('user_terkait')->first();
-        // dd($personal_trainer_package);
+        $check_extend = DB::table('memberships')->where('user_id', $userId)->where('is_active', 1)->pluck('id')->toArray();
 
+        // dd($user_terkait, $personal_trainer_user, $personal_trainer_package, $check_extend);
         // strpos($user_terkait, '1') !== false
-        if(strpos($user_terkait, '1') !== false){
-            // $personal_trainer_user = $personal_trainer_user + $personal_trainer_package;
-            DB::table('users')->where('id', $userId)->update([
-                'end_date' => $enddate,
-                'available_personal_trainer_quota' => $personal_trainer_package
-            ]);
+        // check user apakah membayar membership baru atau extend
+        // jika hasil dari check_extend adalah [] maka user membayar membership baru
+        if(count($check_extend) == 0){
+            if(strpos($user_terkait, '1') !== false){
+                $personal_trainer_user = $personal_trainer_package;
+                    DB::table('users')->where('id', $userId)->update([
+                        'end_date' => $enddate,
+                        'available_personal_trainer_quota' => $personal_trainer_user
+                    ]);
+            } else {
+                $personal_trainer_user =  $personal_trainer_package;
+                DB::table('users')->where('id', $userId)->update([
+                    'end_date' => $enddate,
+                    'available_personal_trainer_quota' => $personal_trainer_user
+                ]);
+            }
         } else {
-            // $personal_trainer_user = $personal_trainer_user + $personal_trainer_package;
-            DB::table('users')->where('id', $userId)->update([
+            // jika extend maka update end date dan is_active
+            DB::table('memberships')->where('id', $membershipId)->update([
                 'end_date' => $enddate,
+                'is_active' => 1
             ]);
         }
         //end
@@ -69,9 +81,7 @@ class PaymentCashController extends Controller
             ->where('id', $paymentId)
             ->update(['status' => 'paid']);
 
-        $check_extend = DB::table('memberships')->where('user_id', $userId)->where('is_active', 1)->pluck('id')->toArray();
         if (count($check_extend) >= 1) {
-            // dd($request->all());
             DB::table('memberships')->where('id', $membershipId)->update([
                 'is_active' => 1
             ]);

@@ -155,7 +155,7 @@
 						</div>
 						<ul class="list">
 							<li>Rp. 235.000</li>
-							<li>1 hari dengan bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership. (Tidak termasuk biaya paket monthly membership)</li>
+							<li>1 hari dengan bimbingan Team Personal Trainer kami. (Tidak termasuk biaya paket monthly membership)</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>
@@ -167,7 +167,7 @@
 						</div>
 						<ul class="list">
 							<li>Rp. 410.000</li>
-							<li>1x hari dengan bimbingan Team Personal Trainer kami, sudah termasuk biaya paket monthly membership.</li>
+							<li>1x hari dengan bimbingan Team Personal Trainer kami. (Tidak termasuk biaya paket monthly membership)</li>
 						</ul>
 						<a href="{{route("member.register-get-package")}}" class="btn">order now</a>
 					</div>

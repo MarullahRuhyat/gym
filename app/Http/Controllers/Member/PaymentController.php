@@ -199,7 +199,7 @@ class PaymentController extends Controller
                 // update user terkait dari table membership, update di table user
                 $user_terkait = DB::table('memberships')->where('id', $data->membership_id)->pluck('user_terkait')->first();
                 // if user terkait tidak 1 user
-                if(strpos($user_terkait, ',') !== false){
+                if (strpos($user_terkait, ',') !== false) {
                     $user_terkait = explode(',', $user_terkait);
                     foreach ($user_terkait as $key => $value) {
                         // $personal_trainer_quota_user = DB::table('users')->where('id', $value)->pluck('available_personal_trainer_quota')->first();
@@ -209,30 +209,31 @@ class PaymentController extends Controller
                             'available_personal_trainer_quota' => $personal_trainer_quota_package
                         ]);
                     }
-                //end
+                    //end
 
-                $check_extend = DB::table('memberships')->where('user_id', $membership->user_id)->where('is_active', 1)->pluck('id')->toArray();
-                if (count($check_extend) >= 1) {
-                    // update latest membership is_active to 1 where user_id = membership user_id
-                    DB::table('memberships')->where('id', end($check_extend))->update([
-                        'is_active' => 1
-                    ]);
-                    // change another membership is_active to 0 where user_id = membership user_id
-                    $test_user_update_end_date = DB::table('memberships')->where('id', '!=', end($check_extend))->where('user_id', $membership->user_id)->update([
-                        'is_active' => 0
-                    ]);
-                    // update user end_date (gw nambah ini)
-                    DB::table('users')->where('id', $membership->user_id)->update([
-                        'end_date' => DB::table('memberships')->where('id', end($check_extend))->pluck('end_date')->first()
-                    ]);
-                    // end
+                    $check_extend = DB::table('memberships')->where('user_id', $membership->user_id)->where('is_active', 1)->pluck('id')->toArray();
+                    if (count($check_extend) >= 1) {
+                        // update latest membership is_active to 1 where user_id = membership user_id
+                        DB::table('memberships')->where('id', end($check_extend))->update([
+                            'is_active' => 1
+                        ]);
+                        // change another membership is_active to 0 where user_id = membership user_id
+                        $test_user_update_end_date = DB::table('memberships')->where('id', '!=', end($check_extend))->where('user_id', $membership->user_id)->update([
+                            'is_active' => 0
+                        ]);
+                        // update user end_date (gw nambah ini)
+                        DB::table('users')->where('id', $membership->user_id)->update([
+                            'end_date' => DB::table('memberships')->where('id', end($check_extend))->pluck('end_date')->first()
+                        ]);
+                        // end
+                    }
+                } elseif ($transaction == 'cancel' || $transaction == 'deny') {
+                    $data->status = 'failed';
+                } elseif ($transaction == 'pending') {
+                    $data->status = 'pending';
+                } elseif ($transaction == 'expire') {
+                    $data->status = 'expired';
                 }
-            } elseif ($transaction == 'cancel' || $transaction == 'deny') {
-                $data->status = 'failed';
-            } elseif ($transaction == 'pending') {
-                $data->status = 'pending';
-            } elseif ($transaction == 'expire') {
-                $data->status = 'expired';
             }
 
 
@@ -272,6 +273,7 @@ class PaymentController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
         }
     }
+
 
 
     public function check_payment_status(Request $request)

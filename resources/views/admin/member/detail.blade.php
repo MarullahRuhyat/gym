@@ -184,6 +184,7 @@ starter Page
                                         <th scope="col">Jam Mulai</th>
                                         <th scope="col">Jam Selesai</th>
                                         <th scope="col">Tanggal</th>
+                                        <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -193,10 +194,22 @@ starter Page
                                         <td>{{ $history->start_time }}</td>
                                         <td>{{ $history->end_time }}</td>
                                         <td>{{ $history->date }}</td>
+                                        <td>
+                                            <a href="{{ route('admin_absen_delete', $history->id) }}" class="btn btn-danger">Delete</a>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+
+                            <form action="{{ route('admin_update_available_personal_trainer_quota', $profile->id) }}" method="post">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="available_personal_trainer_quota" class="form-label">Available Personal Trainer Quota</label>
+                                    <input type="number" class="form-control" id="available_personal_trainer_quota" aria-describedby="available_personal_trainer_quota" name="available_personal_trainer_quota" value="{{ $available_personal_trainer_quota }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </form>
                         </div>
                     </div>
                 </div>

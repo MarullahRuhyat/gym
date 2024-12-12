@@ -208,6 +208,7 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     // member page
     Route::match(['get', 'post'], '/member', [MemberController::class, 'index'])->name('admin_member');
     Route::get('/member/{id}', [MemberController::class, 'detail'])->name('admin_member_detail');
+    Route::get('/member/{id}/delete', [MemberController::class, 'delete'])->name('admin_absen_delete');
     // Attendance page
     Route::prefix('attendance-member')->group(function () {
         Route::get('/', [AbsenController::class, 'index'])->name('admin_absen');
@@ -215,11 +216,14 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
         Route::post('add-pt-manual', [AbsenController::class, 'add_pt_manual'])->name('admin_add_pt_manual');
         Route::post('/ajax-detail-members', [AbsenController::class, 'ajax_detail_members'])->name('admin_ajax_detail_members');
     });
+
+    // ubah nominal available_personal_trainer_quota
+    Route::post('/member/{id}/update-available-personal-trainer-quota', [MemberController::class, 'update_available_personal_trainer_quota'])->name('admin_update_available_personal_trainer_quota');
     // salary page
     Route::match(['get', 'post'], '/salary', [GajiController::class, 'index'])->name('admin_gaji');
     Route::get('/ajax-get-bonus', [GajiController::class, 'ajax_get_bonus'])->name('admin_ajax_get_bonus');
     Route::post('/bonus', [GajiController::class, 'bonus'])->name('admin_bonus');
-    Route::post('/generate-gaji', [GajiController::class, 'generate'])->name('admin_generate_gaji');
+    Route::post( '/generate-gaji', [GajiController::class, 'generate'])->name('admin_generate_gaji');
     // scan page
     Route::match(['get', 'post'], '/scan', [ScanController::class, 'index'])->name('admin_scan');
     Route::post('/ajax-post-attendance', [ScanController::class, 'post_attendance'])->name('admin_ajax_post_attendance');

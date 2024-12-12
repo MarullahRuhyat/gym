@@ -105,6 +105,8 @@ class MemberController extends Controller
             $membership->duration_in_days = $membership->duration_in_days;
         }
 
+        $available_personal_trainer_quota = $user->available_personal_trainer_quota;
+
         // check di table absent_members data user_id yang sama dengan user_id di table users yang is_using_pt = 1 dan check siapa saja nama pt nya dan kapan kapan saja dia menggunakan pt
         $absent_members = DB::table('absent_members')
                 ->leftjoin('users', 'absent_members.member_id', '=', 'users.id')
@@ -118,6 +120,35 @@ class MemberController extends Controller
         // insert photo_profile to profile array
         $profile[0]->photo_profile = $photo_profile;
 
-        return view('admin.member.detail', compact('profile', 'membership', 'absent_members'));
+        return view('admin.member.detail', compact('profile', 'membership', 'absent_members', 'available_personal_trainer_quota'));
+    }
+
+    public function delete($id)
+    {
+        // ambil member_id dari table absent_members
+        $member_id = DB::table('absent_members')
+        ->where('id', $id)
+        ->select('member_id')
+        ->first();
+
+        // hapus data dari table absent_members
+        $absent_members = DB::table('absent_members')
+        ->where('id', $id)
+        ->delete();
+
+        // tambah 1 available_personal_trainer_quota di table users
+        $user = User::find($member_id->member_id);
+        $user->available_personal_trainer_quota += 1;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Data berhasil dihapus!');
+    }
+
+    public function update_available_personal_trainer_quota(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->available_personal_trainer_quota = $request->available_personal_trainer_quota;
+        $user->save();
+        return redirect()->back()->with('success', 'Data berhasil diupdate!');
     }
 }

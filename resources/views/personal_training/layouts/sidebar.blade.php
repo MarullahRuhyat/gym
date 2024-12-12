@@ -44,7 +44,14 @@
                 </div>
                 <div class="menu-title">Scan</div>
             </a>
+        </li>
 
+        <li>
+            <a href="{{ route('personal_trainer.profile')}}">
+                <div class="parent-icon"><i class="material-icons-outlined">person</i>
+                </div>
+                <div class="menu-title">Profile</div>
+            </a>
         </li>
     </ul>
     <!--end navigation-->

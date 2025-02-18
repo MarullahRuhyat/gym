@@ -492,7 +492,7 @@
     </section>
 
     <!-- ================== FOOTER ================== -->
-    <section class="s-counter" style="background-image: url(assets/img/bg-2.jpg);">
+    {{-- <section class="s-counter" style="background-image: url(assets/img/bg-2.jpg);">
         <div class="mask"></div>
         <div class="container">
             <h2 class="title-decor">Flozor's <span>Certification</span></h2>
@@ -520,7 +520,7 @@
                 <button type="submit" class="btn">Subscribe</button>
             </form>
         </div>
-    </section>
+    </section> --}}
     <!-- ================== FOOTER ================== -->
 
     <!-- ================== FOOTER ================== -->

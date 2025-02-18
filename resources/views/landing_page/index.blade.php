@@ -299,19 +299,6 @@
                 <div class="col-md-6 out-trainer-col">
                     <div class="out-trainer-item">
                         <a href="#" class="out-trainer-img"><img class="rx-lazy"
-                            src="{{asset("landing_page/assets/img/ptClaus.jpg")}}"
-                            data-src="{{asset("landing_page/assets/img/ptClaus.jpg")}}" alt="img"></a>
-                        <div class="out-trainer-info">
-                            <h3><a href="#">Claus</a></h3>
-                            <div class="prof">Educated Guy</div>
-                            <p>
-                                Claus adalah seorang instruktur fitness yang disiplin, selalu mencari ilmu-ilmu yang bagus, memiliki kemampuan mengajar para member dalam latihan yang benar sesuai dengan body goals mereka.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 out-trainer-col">
-                    <div class="out-trainer-item">
-                        <a href="#" class="out-trainer-img"><img class="rx-lazy"
                                 src="{{asset("landing_page/assets/img/Anna.jpg")}}"
                                 data-src="{{asset("landing_page/assets/img/Anna.jpg")}}" alt="img"></a>
                         <div class="out-trainer-info">

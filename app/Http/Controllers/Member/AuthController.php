@@ -84,7 +84,7 @@ class AuthController extends Controller
     private function sendWA($mobileNumber, $message)
     {
         $url = "https://jogja.wablas.com";
-        $token = "SujEXjKi5MEvVWebuRK17sG4H69mKzZwFD4Uca7HPrPwNiQawGLJ4ShA5uCCaUtv";
+        $token = "zX8x2FOfZW203UptysmQsDccJHyQofZyrN6JWRSZc55qK6uBf6S7ZSdLkMq07YFN.hchaKui4";
 
         $client = new \GuzzleHttp\Client([
             'base_uri' => $url,

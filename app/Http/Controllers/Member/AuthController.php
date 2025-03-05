@@ -127,7 +127,7 @@ class AuthController extends Controller
     private function checkDevice()
     {
         $phones = "6285184741788";
-        $token = "zX8x2FOfZW203UptysmQsDccJHyQofZyrN6JWRSZc55qK6uBf6S7ZSdLkMq07YFN.afcch63i";
+        $token = "zX8x2FOfZW203UptysmQsDccJHyQofZyrN6JWRSZc55qK6uBf6S7ZSdLkMq07YFN";
         $curl = curl_init();
         curl_setopt(
             $curl,

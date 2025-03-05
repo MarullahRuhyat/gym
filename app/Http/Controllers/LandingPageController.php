@@ -30,7 +30,7 @@ class LandingPageController extends Controller
 
     public function post_question(Request $request)
     {
-        $token = "SujEXjKi5MEvVWebuRK17sG4H69mKzZwFD4Uca7HPrPwNiQawGLJ4ShA5uCCaUtv";
+        $token = "zX8x2FOfZW203UptysmQsDccJHyQofZyrN6JWRSZc55qK6uBf6S7ZSdLkMq07YFN.afcch63i";
 
         // Cek status perangkat sebelum mengirim pesan
         if ($this->checkDeviceStatus($token)) {

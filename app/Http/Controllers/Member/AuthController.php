@@ -127,7 +127,7 @@ class AuthController extends Controller
     private function checkDevice()
     {
         $phones = "6285184741788";
-        $token = "SujEXjKi5MEvVWebuRK17sG4H69mKzZwFD4Uca7HPrPwNiQawGLJ4ShA5uCCaUtv";
+        $token = "zX8x2FOfZW203UptysmQsDccJHyQofZyrN6JWRSZc55qK6uBf6S7ZSdLkMq07YFN.afcch63i";
         $curl = curl_init();
         curl_setopt(
             $curl,
@@ -450,7 +450,7 @@ class AuthController extends Controller
 
             // Mengirim OTP melalui WhatsApp menggunakan Guzzle dan Wablas API
             $url = "https://jogja.wablas.com";
-            $token = "SujEXjKi5MEvVWebuRK17sG4H69mKzZwFD4Uca7HPrPwNiQawGLJ4ShA5uCCaUtv"; // Ganti dengan token Wablas yang valid
+            $token = "zX8x2FOfZW203UptysmQsDccJHyQofZyrN6JWRSZc55qK6uBf6S7ZSdLkMq07YFN.afcch63i"; // Ganti dengan token Wablas yang valid
             $mobileNumber = $user->phone_number;
             $message = "Your OTP code is: https://flozorsgym.com/member/verify-otp?otp=$otp .This code will expire in 10 minutes.";
 

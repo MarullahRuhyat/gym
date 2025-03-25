@@ -21,7 +21,7 @@ use App\Http\Controllers\Member\AttendanceController;
 use App\Http\Controllers\Admin\JenisLatihanController;
 use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\PersonalTrainer\ScanByPTController;
-use App\Http\Controllers\admin\InputManualAttendanceController;
+use App\Http\Controllers\Admin\InputManualAttendanceController;
 use App\Http\Controllers\PersonalTraining\ProfilePersonalTraining;
 use App\Http\Controllers\PersonalTraining\PersonalTrainerController;
 use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
@@ -223,7 +223,7 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::match(['get', 'post'], '/salary', [GajiController::class, 'index'])->name('admin_gaji');
     Route::get('/ajax-get-bonus', [GajiController::class, 'ajax_get_bonus'])->name('admin_ajax_get_bonus');
     Route::post('/bonus', [GajiController::class, 'bonus'])->name('admin_bonus');
-    Route::post( '/generate-gaji', [GajiController::class, 'generate'])->name('admin_generate_gaji');
+    Route::post('/generate-gaji', [GajiController::class, 'generate'])->name('admin_generate_gaji');
     // scan page
     Route::match(['get', 'post'], '/scan', [ScanController::class, 'index'])->name('admin_scan');
     Route::post('/ajax-post-attendance', [ScanController::class, 'post_attendance'])->name('admin_ajax_post_attendance');
@@ -241,9 +241,9 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
 
 
     // input manual attendance
-   
+    Route::get('/input-manual-attendance', [InputManualAttendanceController::class, 'index'])->name('admin_input_manual_attendance');
+    Route::post('/input-manual-attendance', [InputManualAttendanceController::class, 'store'])->name('admin_input_manual_attendance_store');
 });
-Route::get('/input-manual-attendance', [InputManualAttendanceController::class, 'index'])->name('admin_input_manual_attendance');
-Route::post('/input-manual-attendance', [InputManualAttendanceController::class, 'store'])->name('admin_input_manual_attendance_store');
+
 // test wa jalan apa kagak 
 Route::get('/testabsenttime', [MemberAuthController::class, 'testabsenttime']);

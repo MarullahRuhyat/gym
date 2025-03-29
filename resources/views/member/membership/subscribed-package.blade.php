@@ -6,7 +6,7 @@ Subscribed Package
 <div class="row justify-content-center" style="margin-bottom:20px;">
     <div class="col-12 col">
         <a href="{{ route('member.buy-new-package') }}" class="btn btn-grd-deep-blue">Buy New Membership</a>
-        @if($membership->is_active == 1 && $membership->extend_package < 2)
+        @if($membership->extend_package < 2)
             <a href="{{ route('member.extend-package') }}" class="btn btn-grd-deep-blue">Extend Membership</a>
         @endif
     </div>

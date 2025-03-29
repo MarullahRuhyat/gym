@@ -22,7 +22,7 @@ class ScanController extends Controller
                     $absent->save();
                     $membersip = Membership::where('user_id', $absent->member_id)->where('is_active', 1)->select('user_terkait')->first();
                     $user_terkait = array_map('intval', explode(',', $membersip->user_terkait));
-                    User::whereIn('id',  $user_terkait)->decrement('available_personal_trainer_quota', 1);
+                    User::whereIn('id', $user_terkait)->decrement('available_personal_trainer_quota', 1);
                 }
                 return redirect()->route('admin_scan')->with('success', 'Data berhasil disimpan!');
             } catch (\Throwable $th) {
@@ -50,7 +50,7 @@ class ScanController extends Controller
                     $absent->start_time = Carbon::now();
                     $absent->date = Carbon::now()->format('Y-m-d');
                     $absent->save();
-                } elseif ($absent->start_time != null  && ($absent->end_time == null || $absent->start_time == '')) {
+                } elseif ($absent->start_time != null && ($absent->end_time == null || $absent->start_time == '')) {
                     $absent->end_time = Carbon::now();
                     $absent->save();
                 } else {
@@ -63,9 +63,41 @@ class ScanController extends Controller
                 }
                 $user = null;
                 if ($absent->is_using_pt == 1) {
-                    $membersip = Membership::where('user_id', $absent->member_id)->where('is_active', 1)->select('user_terkait')->first();
-                    $user_terkait = array_map('intval', explode(',', $membersip->user_terkait));
-                    $user = User::whereIn('id',  $user_terkait)->select('name')->get();
+                    $membersip = Membership::where('user_id', $absent->member_id)
+                        ->where('is_active', 1)
+                        ->first(); // Removed select() to get the full object
+
+                    // Pastikan data ditemukan
+                    if ($membersip) {
+                        // Cek apakah 'user_terkait' kosong atau null
+                        if (empty($membersip->user_terkait)) {
+                            // Jika kosong, isi dengan ID user terkait (misalnya $absent->member_id)
+                            $user_terkait = [$absent->member_id];
+
+                            // Update kolom user_terkait di tabel membership
+                            $updated = $membersip->update([
+                                'user_terkait' => implode(',', $user_terkait)
+                            ]);
+
+                            // Cek apakah update berhasil
+                            if (!$updated) {
+                                return response()->json([
+                                    'status' => false,
+                                    'message' => 'Gagal mengupdate user_terkait di membership.'
+                                ]);
+                            }
+                        } else {
+                            // Jika tidak kosong, proses seperti biasa
+                            $user_terkait = array_map('intval', explode(',', $membersip->user_terkait));
+                        }
+
+                        $user = User::whereIn('id', $user_terkait)->select('name')->get();
+                    } else {
+                        return response()->json([
+                            'status' => false,
+                            'message' => 'Data membership tidak ditemukan.'
+                        ]);
+                    }
                 }
 
                 // Do something with the validated data, e.g., save to the database
@@ -77,6 +109,9 @@ class ScanController extends Controller
                     'time' => config('app.timezone'),
                     'user' => $user
                 ]);
+
+
+
             }
 
             return response()->json([

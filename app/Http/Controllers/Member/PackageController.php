@@ -261,8 +261,10 @@ class PackageController extends Controller
         $packages = DB::table('memberships')
             ->leftjoin('gym_membership_packages', 'memberships.gym_membership_packages', '=', 'gym_membership_packages.id')
             ->where('memberships.user_id', auth()->user()->id)
-            ->where('memberships.is_active', 1)
+            // ->where('memberships.is_active', 1)
             ->select('memberships.*', 'gym_membership_packages.*', 'memberships.id as membership_id')
+            ->orderBy('memberships.id', 'desc')
+            ->limit(1)
             ->get();
             // dd($packages);
         $price = DB::table('gym_membership_packages')->where('id', 1)->pluck('price')->first();

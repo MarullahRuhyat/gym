@@ -244,7 +244,7 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::get('/input-manual-attendance', [InputManualAttendanceController::class, 'index'])->name('admin_input_manual_attendance');
     Route::post('/input-manual-attendance', [InputManualAttendanceController::class, 'store'])->name('admin_input_manual_attendance_store');
 
-    Route::get('/otp-member', [PaymentCashController::class, 'index'])->name('admin_otp_member');
+    Route::get('/otp-member', [MemberController::class, 'otp_member'])->name('admin_otp_member');
 });
 
 // test wa jalan apa kagak 

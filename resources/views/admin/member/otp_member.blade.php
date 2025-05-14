@@ -1,4 +1,4 @@
-{{-- @extends('admin.layouts.app')
+@extends('admin.layouts.app')
 
 @section('title')
 Starter Page
@@ -60,4 +60,4 @@ Starter Page
     });
 </script>
 
-@endpush --}}
+@endpush

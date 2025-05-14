@@ -151,4 +151,14 @@ class MemberController extends Controller
         $user->save();
         return redirect()->back()->with('success', 'Data berhasil diupdate!');
     }
+
+    public function otp_member()
+    {
+        $otp_member = DB::table('users')
+        ->where('otp_expired_at', '>', now())
+        ->select('phone_number', 'otp', 'name', 'otp_expired_at')
+        ->orderBy('otp_expired_at', 'desc')
+        ->get();
+        return view('admin.member.otp_member', compact('otp_member'));
+    }
 }

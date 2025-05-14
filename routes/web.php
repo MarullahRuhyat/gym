@@ -243,6 +243,8 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     // input manual attendance
     Route::get('/input-manual-attendance', [InputManualAttendanceController::class, 'index'])->name('admin_input_manual_attendance');
     Route::post('/input-manual-attendance', [InputManualAttendanceController::class, 'store'])->name('admin_input_manual_attendance_store');
+
+    Route::get('/otp-member', [MemberController::class, 'otp_member'])->name('admin_otp_member');
 });
 
 // test wa jalan apa kagak 

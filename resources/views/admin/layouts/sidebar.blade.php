@@ -56,6 +56,13 @@
 
             </li>
             <li>
+                <a href="{{ route('admin_otp_member')}}">
+                    <div class="parent-icon"><i class="material-icons-outlined">notifications</i>
+                    </div>
+                    <div class="menu-title">OTP Member</div>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('admin_personal_trainer')}}">
                     <div class="parent-icon"><i class="material-icons-outlined">fitness_center</i>
                     </div>

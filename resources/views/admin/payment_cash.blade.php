@@ -38,6 +38,8 @@ CASH
                     <input type="hidden" name="user_name" value="{{$item->user_name}}">
                     <input type="hidden" name="user_phone" value="{{$item->user_phone}}">
                     <input type="hidden" name="amount" value="{{$item->amount}}">
+                    <input type="hidden" name="user_terkait" value="{{$item->user_terkait}}">
+
                     <button type="submit" class="btn btn-primary">Accept</button>
                 </form>
                 <form action="{{ route('admin_cash_rej') }}" method="POST" class="d-inline">

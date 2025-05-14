@@ -28,9 +28,9 @@ class PackageController extends Controller
     public function buy_new_package()
     {
         $packages = DB::table('gym_membership_packages')
-        ->leftJoin('type_packages', 'gym_membership_packages.type_packages_id', '=', 'type_packages.id')
-        ->select('gym_membership_packages.*', 'type_packages.name as type_name')
-        ->get();
+            ->leftJoin('type_packages', 'gym_membership_packages.type_packages_id', '=', 'type_packages.id')
+            ->select('gym_membership_packages.*', 'type_packages.name as type_name')
+            ->get();
 
         $groupedPackages = $packages->groupBy('type_name');
 
@@ -60,7 +60,7 @@ class PackageController extends Controller
         if (count($phone_number_user_terkait) !== $list_user_terkait->count()) {
             $status = false;
             $message = 'Cek kembali data user yang Anda masukkan.';
-        }  else {
+        } else {
             $user_terkait = User::whereIn('phone_number', $phone_number_user_terkait)->pluck('id');
             if ($list_user_terkait != null) {
                 $duration = DB::table('gym_membership_packages')->where('id', $request->package_id)->pluck('duration_in_days')->first();
@@ -121,7 +121,7 @@ class PackageController extends Controller
                 $message = 'Register success.';
             } else {
                 $status = false;
-                $message =  'Phone number not found.';
+                $message = 'Phone number not found.';
             }
         }
 
@@ -159,7 +159,7 @@ class PackageController extends Controller
         // $personal_trainer_quota_from_membership = DB::table('gym_membership_packages')->where('id', $request->package_id)->pluck('personal_trainer_quota')->first();
         $phone_number = $request->form_dynamic;
         $user_registered = User::whereIn('phone_number', $phone_number)->get(); // ini harus di cek semua phone number yang di inputkan
-        if($user_registered == null) {
+        if ($user_registered == null) {
             $user_registered = [];
         }
 
@@ -206,23 +206,23 @@ class PackageController extends Controller
 
                 // update end_date using duration_in_days for each user_registered
                 // foreach ($user_registered as $user) {
-                    // $end_date = date('Y-m-d', strtotime($request->start_date . ' + ' . $duration . ' days'));
-                    // DB::table('users')->where('id', $user->id)->update([
-                        // 'end_date' => $end_date,
-                        // 'available_personal_trainer_quota' => $personal_trainer_quota_from_membership + $personal_trainer_in_table_user_registered,
-                    // ]);
+                // $end_date = date('Y-m-d', strtotime($request->start_date . ' + ' . $duration . ' days'));
+                // DB::table('users')->where('id', $user->id)->update([
+                // 'end_date' => $end_date,
+                // 'available_personal_trainer_quota' => $personal_trainer_quota_from_membership + $personal_trainer_in_table_user_registered,
+                // ]);
                 // }
                 // also update end_date for user_id
                 // DB::table('users')->where('id', $user_id)->update([
-                    // 'end_date' => $end_date,
-                    // 'available_personal_trainer_quota' => $personal_trainer_quota_from_membership + $personal_trainer_in_table_user_first,
+                // 'end_date' => $end_date,
+                // 'available_personal_trainer_quota' => $personal_trainer_quota_from_membership + $personal_trainer_in_table_user_first,
                 // ]);
 
                 $status = true;
                 $message = 'Register success.';
             } else {
                 $status = false;
-                $message =  'Phone number not found.';
+                $message = 'Phone number not found.';
             }
         }
 
@@ -266,7 +266,7 @@ class PackageController extends Controller
             ->orderBy('memberships.id', 'desc')
             ->limit(1)
             ->get();
-            // dd($packages);
+        // dd($packages);
         $price = DB::table('gym_membership_packages')->where('id', 1)->pluck('price')->first();
         // append to $packages
         $packages->transform(function ($item) use ($price) {
@@ -286,7 +286,7 @@ class PackageController extends Controller
         $extend = DB::table('memberships')->where('id', $request->membership_id)->pluck('extend_package')->first();
         // dd($extend);
 
-        if($extend >= 2) {
+        if ($extend >= 2) {
             $status = false;
             $message = "maksimal perpanjang paket sudah habis";
         } else {
@@ -306,10 +306,10 @@ class PackageController extends Controller
             // dd($request->membership_id);
             // Ending: 2024-09-25
             // $update_membership = DB::table('memberships')->where('id', $request->membership_id)->update([
-                // 'end_date' => date('Y-m-d', strtotime($end_date . ' + 30 days')),
-                // 'extend_package' => $extend + 1,
-                // 'updated_at' => now(),
-                // 'is_active' => 0,
+            // 'end_date' => date('Y-m-d', strtotime($end_date . ' + 30 days')),
+            // 'extend_package' => $extend + 1,
+            // 'updated_at' => now(),
+            // 'is_active' => 0,
             // ]);
             $status = true;
             $message = "Perpanjang paket berhasil";
@@ -345,7 +345,7 @@ class PackageController extends Controller
             ->orderBy('payments.id', 'desc')
             ->get();
 
-            // dd($packages_membership_payments);
+        // dd($packages_membership_payments);
 
         $get_available_personal_trainer_quota = DB::table('users')->where('id', $user->id)->pluck('available_personal_trainer_quota')->first();
 
@@ -416,38 +416,57 @@ class PackageController extends Controller
 
     public function submitCashExtendPayment(Request $request)
     {
+        // Validasi input
         $data = $request->validate([
             'package_id' => 'required',
             'amount' => 'required|numeric',
         ]);
 
+        // Ambil membership yang ada berdasarkan ID
         $existing_membership = DB::table('memberships')->where('id', $request->membership_id)->first();
 
-        DB::table('memberships')->insert([
+        // Tentukan start_date dan end_date untuk membership baru
+        $start_date = $existing_membership->end_date;
+        $end_date = date('Y-m-d', strtotime($existing_membership->end_date . ' + 30 days'));
+
+        // Ambil nilai user_terkait dari membership yang ada
+        $user_terkait = $existing_membership->user_terkait;
+
+        // Membuat membership baru untuk perpanjangan
+        $new_membership_id = DB::table('memberships')->insertGetId([
             'user_id' => auth()->id(),
             'gym_membership_packages' => $data['package_id'],
-            'start_date' => $existing_membership->end_date,
-            'end_date' => date('Y-m-d', strtotime($existing_membership->end_date . ' + 30 days')),
-            'is_active' => 0,
-            'duration_in_days' => 30,
-            'extend_package' => $existing_membership->extend_package + 1,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'is_active' => 0,  // Membership baru masih belum aktif
+            'duration_in_days' => 30,  // Durasi perpanjangan
+            'extend_package' => $existing_membership->extend_package + 1,  // Perpanjangan keberapa
+            'user_terkait' => $user_terkait,  // Isi kolom user_terkait dengan nilai dari membership lama
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
+        // Update membership sebelumnya menjadi non-aktif
+        DB::table('memberships')->where('id', $existing_membership->id)->update([
+            'is_active' => 0,  // Menandakan membership lama tidak aktif lagi
+        ]);
+
+        // Membuat entri pembayaran untuk membership yang baru
         Payment::create([
             'gym_membership_packages' => $data['package_id'],
             'amount' => $data['amount'],
             'user_id' => auth()->id(),
-            'status' => 'pending',
-            'membership_id' => DB::table('memberships')->latest()->first()->id,
-            'payment_method' => 'cash',
-            'order_id' => '000' . time(),
+            'status' => 'pending',  // Status pembayaran masih pending
+            'membership_id' => $new_membership_id,  // ID membership baru yang baru dibuat
+            'payment_method' => 'cash',  // Metode pembayaran cash
+            'order_id' => '000' . time(),  // ID order unik
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         return response()->json(['status' => true, 'message' => 'Extend membership berhasil']);
     }
+
+
 
 }

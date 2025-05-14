@@ -154,6 +154,7 @@ class MemberController extends Controller
 
     public function otp_member()
     {
+        dd("aman");
         $otp_member = DB::table('users')
         ->where('otp_expired_at', '>', now())
         ->select('phone_number', 'otp', 'name', 'otp_expired_at')

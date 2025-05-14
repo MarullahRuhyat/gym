@@ -68,7 +68,8 @@ Login
                             </div>
                             <div class="col-12">
                                 <div class="d-grid">
-                                    <button id="submit-otp-code" type="submit" class="btn btn-grd-deep-blue ">Login</button>
+                                    <button id="submit-otp-code" type="submit"
+                                        class="btn btn-grd-deep-blue ">Login</button>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -97,7 +98,7 @@ Login
 <!-- custom script  -->
 <script>
     // resend-otp
-    $(document).on('click', '#resend-otp', function(e) {
+    $(document).on('click', '#resend-otp', function (e) {
         e.preventDefault();
         var phone_number = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
         $.ajax({
@@ -107,12 +108,12 @@ Login
                 phone_number: phone_number,
                 _token: "{{ csrf_token() }}"
             },
-            success: function(response) {
+            success: function (response) {
                 $('.alert').addClass('alert-success').html(
                     '<button type="button" class="btn-close me-3" data-bs-dismiss="alert" aria-label="Close"></button>' +
                     response.message);
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 var response = JSON.parse(xhr.responseText);
                 $('.alert').addClass('alert-danger').html(
                     '<button type="button" class="btn-close me-3" data-bs-dismiss="alert" aria-label="Close"></button>' +
@@ -136,19 +137,24 @@ Login
         });
 
         input.addEventListener('keydown', (e) => {
-            if (e.key === "Backspace" && !input.value && index > 0) {
-                // Move focus to previous input on backspace if current is empty
-                const prevInput = inputs[index - 1];
-                prevInput.focus();
+            if (e.key === "Backspace") {
+                if (!input.value && index > 0) {
+                    // Move focus to previous input on backspace if current is empty
+                    const prevInput = inputs[index - 1];
+                    prevInput.focus();
+                    prevInput.value = ''; // Clear the previous input field as well
+                } else if (input.value) {
+                    // Allow user to delete the character
+                    input.value = '';
+                }
             }
         });
     });
 
-
     $(document).on('click', '#submit-otp-code', function (e) {
         e.preventDefault();
         var otp = $('#otp1').val() + $('#otp2').val() + $('#otp3').val() + $('#otp4')
-    .val(); // Concatenate all OTP parts
+            .val(); // Concatenate all OTP parts
 
         if (otp.length < 4) { // Check if the OTP is complete
             $('.alert').addClass('alert-danger').text('Please enter a complete OTP.');

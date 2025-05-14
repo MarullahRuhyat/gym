@@ -162,7 +162,7 @@ class MemberController extends Controller
             ->get();
         return view(
             'admin.member.otp_member',
-            // compact('otp_member')
+            compact('otp_member')
         );
     }
 }

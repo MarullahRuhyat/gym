@@ -116,7 +116,7 @@ Login
                         // Check if error message is "WA diskonek, sampaikan ke admin"
                         if (errorMessage.includes('WA diskonek, sampaikan ke admin')) {
                             errorMessage += '<br><a href="/member/verify-otp/' + phone_number +
-                                '" class="btn btn-link">Tetap Lanjutkan</a>';
+                                '" class="btn btn-link" style="color: white;">Tetap Lanjutkan</a>';
                         }
 
                         // Display the error message with or without the link

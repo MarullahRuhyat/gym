@@ -160,6 +160,9 @@ class MemberController extends Controller
             ->select('phone_number', 'otp', 'name', 'otp_expired_at')
             ->orderBy('otp_expired_at', 'desc')
             ->get();
-        return view('admin.member.otp_member', compact('otp_member'));
+        return view(
+            'admin.member.otp_member',
+            // compact('otp_member')
+        );
     }
 }

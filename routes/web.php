@@ -199,7 +199,7 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
     Route::post('/ajax-post-attendance', [ScanByPTController::class, 'post_attendance'])->name('pt_scan_ajax_post_attendance');
 
     // otp member
-    Route::get('/otp-member', [MemberController::class, 'otp_member'])->name('personal_trainer_otp_member');
+    Route::get('/otp-member', [PersonalTrainerController::class, 'otp_member_index'])->name('personal_trainer_otp_member');
 });
 
 

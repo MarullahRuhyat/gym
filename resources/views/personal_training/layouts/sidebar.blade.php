@@ -53,6 +53,13 @@
                 <div class="menu-title">Profile</div>
             </a>
         </li>
+        <li>
+                <a href="{{ route('personal_trainer_otp_member')}}">
+                    <div class="parent-icon"><i class="material-icons-outlined">notifications</i>
+                    </div>  
+                    <div class="menu-title">OTP Member</div>
+                </a>
+            </li>
     </ul>
     <!--end navigation-->
 </div>

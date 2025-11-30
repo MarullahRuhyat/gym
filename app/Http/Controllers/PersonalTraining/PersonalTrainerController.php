@@ -5,6 +5,8 @@ namespace App\Http\Controllers\PersonalTraining;
 use App\Models\Membership;
 use App\Http\Controllers\Controller;
 use App\Models\GymMembershipPackage;
+use Illuminate\Support\Facades\DB;
+
 
 class PersonalTrainerController extends Controller
 {
@@ -45,6 +47,19 @@ class PersonalTrainerController extends Controller
             'series' => $series
         ]);
 
+    }
+
+    public function otp_member_index(){
+
+        $otp_member = DB::table('users')
+            ->where('otp_expired_at', '>', now())
+            ->select('phone_number', 'otp', 'name', 'otp_expired_at')
+            ->orderBy('otp_expired_at', 'desc')
+            ->get();
+        return view(
+            'admin.member.otp_member',
+            compact('otp_member')
+        );
     }
 
 }

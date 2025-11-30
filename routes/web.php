@@ -193,6 +193,9 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
     // scan
     Route::match(['get', 'post'], '/scan', [ScanByPTController::class, 'index'])->name('pt_scan');
     Route::post('/ajax-post-attendance', [ScanByPTController::class, 'post_attendance'])->name('pt_scan_ajax_post_attendance');
+
+    // otp member
+    Route::get('/otp-member', [MemberController::class, 'otp_member'])->name('personal_trainer_otp_member');
 });
 
 

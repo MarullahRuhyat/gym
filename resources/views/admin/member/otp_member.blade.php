@@ -1,7 +1,10 @@
-@extends('admin.layouts.app')
+@php
+    $layout = auth()->user()->role === 'admin' ? 'admin.layouts.app' : 'personal_training.layouts.app';
+@endphp
+@extends($layout)
 
 @section('title')
-Starter Page
+OTP MEMBER
 @endsection
 
 @section('content')

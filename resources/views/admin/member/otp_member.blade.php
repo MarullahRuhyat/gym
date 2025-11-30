@@ -7,7 +7,7 @@
 OTP MEMBER
 @endsection
 
-@section('content')
+@section('content') 
 @push('style')
 <!-- Add DataTables CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/2.3.0/css/dataTables.bootstrap5.css">

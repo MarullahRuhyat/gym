@@ -71,6 +71,10 @@ Route::prefix('auth')->group(function () {
     // login admin dan personal trainer
     Route::get('/login', [AuthController::class, 'loginAdminIndex'])->name('auth.login');
     Route::post('/login', [AuthController::class, 'loginAdminProcess'])->name('auth.login.process');
+    // otp login for admin and personal trainer
+    Route::post('/get-otp', [AuthController::class, 'get_otp_admin'])->name('auth.get-otp');
+    Route::get('/verify-otp/{phone_number}', [AuthController::class, 'verify_otp_admin'])->name('auth.verify-otp');
+    Route::post('/login-otp', [AuthController::class, 'login_otp_admin'])->name('auth.login.otp');
     // otp
     Route::get('/otp', [AuthController::class, 'otpIndex'])->name('auth.otp');
     Route::post('/otp', [AuthController::class, 'otpProcess'])->name('auth.otp.process');

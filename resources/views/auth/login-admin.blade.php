@@ -21,6 +21,7 @@ Login
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
+    <div class="alert-container"></div>
     <div class="card my-5 col-xl-9 col-xxl-8 mx-auto rounded-4 overflow-hidden p-4">
         <div class="row g-4">
             <div class="col-lg-6 d-flex">
@@ -57,6 +58,12 @@ Login
 
                             <div class="col-md-6 text-end">
                                 <a href="{{ route('auth.forgot_password') }}" class="text-primary">Forgot Password?</a>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="d-grid">
+                                    <button type="button" id="submit-otp-login" class="btn btn-primary ">OTP Login</button>
+                                </div>
                             </div>
 
                             <div class="col-12">
@@ -110,6 +117,61 @@ Login
                     alert.style.display = 'none';
                 }, 500); // Match this duration with the fade-out animation duration
             }, 5000); // 5 seconds
+        }
+    });
+
+    // OTP Login handler
+    $(document).on('click', '#submit-otp-login', function (e) {
+        e.preventDefault();
+        var phone_number = $('#inputPhoneNumber').val();
+        if (phone_number == '') {
+            $('#inputPhoneNumber').addClass('border border-danger');
+            $('#inputPhoneNumber').focus();
+            return false;
+        } else {
+            $('#inputPhoneNumber').removeClass('border border-danger');
+            // ajax request
+            $.ajax({
+                url: "{{ route('auth.get-otp') }}",
+                type: "POST",
+                data: {
+                    phone_number: phone_number,
+                    _token: $('input[name="_token"]').val()
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        console.log(response);
+                        $phone_number = phone_number;
+                        window.location.href = '/auth/verify-otp/' + $phone_number;
+                    } else {
+                        let errorMessage = response.message;
+
+                        // Check if error message is "WA diskonek, sampaikan ke admin"
+                        if (errorMessage.includes('WA diskonek') || errorMessage.includes('WA disconnected')) {
+                            errorMessage += '<br><a href="/auth/verify-otp/' + phone_number +
+                                '" class="btn btn-link" style="color: black;">Tetap Lanjutkan</a>';
+                        }
+
+                        // Display the error message
+                        $('.alert-container').html(
+                            '<div class="alert alert-danger alert-dismissible fade show my-5 col-xl-9 col-xxl-8 mx-auto overflow-hidden p-4" role="alert"><div><strong>Error!</strong> ' +
+                            errorMessage +
+                            '</div><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+                        );
+                    }
+                },
+                error: function (response) {
+                    var errorMsg = 'Something went wrong';
+                    if (response.responseJSON && response.responseJSON.message) {
+                        errorMsg = response.responseJSON.message;
+                    }
+                    $('.alert-container').html(
+                        '<div class="alert alert-danger alert-dismissible fade show my-5 col-xl-9 col-xxl-8 mx-auto overflow-hidden p-4" role="alert"><div><strong>Error!</strong> ' +
+                        errorMsg +
+                        '</div><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+                    );
+                }
+            });
         }
     });
 

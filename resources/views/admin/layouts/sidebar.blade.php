@@ -78,6 +78,14 @@
                 </a>
 
             </li>
+            <li>
+                <a href="{{ route('admin_change_password')}}">
+                    <div class="parent-icon"><i class="material-icons-outlined">lock</i>
+                    </div>
+                    <div class="menu-title">Change Password</div>
+                </a>
+
+            </li>
             <li class="menu-label">Master</li>
             <li>
                 <a href="javascript:;" class="has-arrow">

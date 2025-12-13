@@ -54,6 +54,13 @@
             </a>
         </li>
         <li>
+            <a href="{{ route('personal_trainer.change_password_user')}}">
+                <div class="parent-icon"><i class="material-icons-outlined">lock</i>
+                </div>
+                <div class="menu-title">Change Password</div>
+            </a>
+        </li>
+        <li>
                 <a href="{{ route('personal_trainer_otp_member')}}">
                     <div class="parent-icon"><i class="material-icons-outlined">notifications</i>
                     </div>  

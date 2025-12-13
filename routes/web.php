@@ -28,6 +28,8 @@ use App\Http\Controllers\PersonalTraining\AttendanceMemberController;
 use App\Http\Controllers\Member\AuthController as MemberAuthController;
 use App\Http\Controllers\PersonalTraining\GajiPersonalTrainerController;
 use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
+use App\Http\Controllers\Admin\ChangePasswordController as AdminChangePasswordController;
+use App\Http\Controllers\PersonalTraining\ChangePasswordController as PersonalTrainerChangePasswordController;
 
 Route::get('test', fn() => phpinfo());
 
@@ -200,6 +202,10 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
 
     // otp member
     Route::get('/otp-member', [PersonalTrainerController::class, 'otp_member_index'])->name('personal_trainer_otp_member');
+
+    // change password user
+    Route::get('/change-password-user', [PersonalTrainerChangePasswordController::class, 'index'])->name('personal_trainer.change_password_user');
+    Route::post('/change-password-user', [PersonalTrainerChangePasswordController::class, 'updatePassword'])->name('personal_trainer.change_password_user.update');
 });
 
 
@@ -252,6 +258,10 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     Route::post('/input-manual-attendance', [InputManualAttendanceController::class, 'store'])->name('admin_input_manual_attendance_store');
 
     Route::get('/otp-member', [MemberController::class, 'otp_member'])->name('admin_otp_member');
+
+    // change password
+    Route::get('/change-password', [AdminChangePasswordController::class, 'index'])->name('admin_change_password');
+    Route::post('/change-password', [AdminChangePasswordController::class, 'updatePassword'])->name('admin_change_password.update');
 });
 
 // test wa jalan apa kagak 

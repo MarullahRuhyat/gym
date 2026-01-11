@@ -45,6 +45,13 @@
                 <div class="menu-title">Scan</div>
             </a>
         </li>
+        <li>
+            <a href="{{ route('pt_edit_subscription')}}">
+                <div class="parent-icon"><i class="material-icons-outlined">edit_calendar</i>
+                </div>
+                <div class="menu-title">Edit Subscription</div>
+            </a>
+        </li>
 
         <li>
             <a href="{{ route('personal_trainer.profile')}}">

@@ -63,6 +63,13 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('admin_edit_subscription')}}">
+                    <div class="parent-icon"><i class="material-icons-outlined">edit_calendar</i>
+                    </div>
+                    <div class="menu-title">Edit Subscription</div>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('admin_personal_trainer')}}">
                     <div class="parent-icon"><i class="material-icons-outlined">fitness_center</i>
                     </div>

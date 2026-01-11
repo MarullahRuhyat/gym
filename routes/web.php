@@ -30,6 +30,8 @@ use App\Http\Controllers\PersonalTraining\GajiPersonalTrainerController;
 use App\Http\Controllers\Admin\PersonalTrainerController as PersonalTrainerAdminController;
 use App\Http\Controllers\Admin\ChangePasswordController as AdminChangePasswordController;
 use App\Http\Controllers\PersonalTraining\ChangePasswordController as PersonalTrainerChangePasswordController;
+use App\Http\Controllers\Admin\EditSubscriptionController as AdminEditSubscriptionController;
+use App\Http\Controllers\PersonalTrainer\EditSubscriptionController as PersonalTrainerEditSubscriptionController;
 
 Route::get('test', fn() => phpinfo());
 
@@ -206,6 +208,11 @@ Route::prefix('personal-trainer')->middleware(CheckPersonalTrainer::class)->grou
     // change password user
     Route::get('/change-password-user', [PersonalTrainerChangePasswordController::class, 'index'])->name('personal_trainer.change_password_user');
     Route::post('/change-password-user', [PersonalTrainerChangePasswordController::class, 'updatePassword'])->name('personal_trainer.change_password_user.update');
+    
+    // edit subscription
+    Route::get('/edit-subscription', [PersonalTrainerEditSubscriptionController::class, 'index'])->name('pt_edit_subscription');
+    Route::get('/edit-subscription/{id}/edit', [PersonalTrainerEditSubscriptionController::class, 'edit'])->name('pt_edit_subscription_edit');
+    Route::post('/edit-subscription/{id}/update', [PersonalTrainerEditSubscriptionController::class, 'update'])->name('pt_edit_subscription_update');
 });
 
 
@@ -262,6 +269,11 @@ Route::prefix('admin')->middleware(Admin::class)->group(function () {
     // change password
     Route::get('/change-password', [AdminChangePasswordController::class, 'index'])->name('admin_change_password');
     Route::post('/change-password', [AdminChangePasswordController::class, 'updatePassword'])->name('admin_change_password.update');
+    
+    // edit subscription
+    Route::get('/edit-subscription', [AdminEditSubscriptionController::class, 'index'])->name('admin_edit_subscription');
+    Route::get('/edit-subscription/{id}/edit', [AdminEditSubscriptionController::class, 'edit'])->name('admin_edit_subscription_edit');
+    Route::post('/edit-subscription/{id}/update', [AdminEditSubscriptionController::class, 'update'])->name('admin_edit_subscription_update');
 });
 
 // test wa jalan apa kagak 

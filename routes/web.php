@@ -32,7 +32,7 @@ use App\Http\Controllers\Admin\ChangePasswordController as AdminChangePasswordCo
 use App\Http\Controllers\PersonalTraining\ChangePasswordController as PersonalTrainerChangePasswordController;
 use App\Http\Controllers\Admin\EditSubscriptionController as AdminEditSubscriptionController;
 use App\Http\Controllers\PersonalTrainer\EditSubscriptionController as PersonalTrainerEditSubscriptionController;
-
+ 
 Route::get('test', fn() => phpinfo());
 
 Route::prefix('/')->group(function () {
